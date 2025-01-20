@@ -15,17 +15,12 @@ Include a demo video of your game here (you don't have to wait until the end, yo
 Add a group photo here!
 
 | Group member | name         | email                  |role|
-
+| :---:   | :---:    | :---:   |:---:   |
 | 1            | Qiwei Lian   | vr24936@bristol.ac.uk  |    |
-
 | 2            | Gaochang He  | co24396@bristol.ac.uk  |    |
-
 | 3            | Yi-Chun Chi  | ws24986@bristol.ac.uk  |    |
-
 | 4            | Xu Hu        | ty24832@bristol.ac.uk  |    |
-
 | 5            | Wenqi Xue    | qh24128@bristol.ac.uk  |    |
-
 | 6            | Hao Jen Shih | qf24044@bristol.ac.uk  |    |
 
 ## Project Report
