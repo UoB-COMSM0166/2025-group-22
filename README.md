@@ -14,7 +14,7 @@ Include a demo video of your game here (you don't have to wait until the end, yo
 
 Add a group photo here!
 | 左对齐 | 居中对齐 | 右对齐 |
-| :---   | :---:    | ---:   |
+| :---:   | :---:    | :---:   |
 | 数据1  | 数据2    | 数据3  |
 | 数据4  | 数据5    | 数据6  |
 | 数据7  | 数据8    | 数据9  |
