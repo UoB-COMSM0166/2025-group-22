@@ -14,6 +14,7 @@ Include a demo video of your game here (you don't have to wait until the end, yo
 
 Add a group photo here!
 | Group member | name         | email                  |role|
+
 | 1            | Qiwei Lian   | vr24936@bristol.ac.uk  |    |
 
 | 2            | Gaochang He  | co24396@bristol.ac.uk  |    |
@@ -25,14 +26,6 @@ Add a group photo here!
 | 5            | Wenqi Xue    | qh24128@bristol.ac.uk  |    |
 
 | 6            | Hao Jen Shih | qf24044@bristol.ac.uk  |    |
-
-
-- Group member 1, Wenqi Xue, email, role
-- Group member 2, name, email, role
-- Group member 3, name, email, role
-- Group member 4, name, email, role
-- Group member 5, Xu Hu, email, role
-- Group member 6, name, email, role
 
 ## Project Report
 
