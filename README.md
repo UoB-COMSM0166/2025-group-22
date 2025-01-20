@@ -31,7 +31,16 @@ Add a group photo here!
 ## Game Research
 | Game | Introduction         | Challenges                  |
 | :---:   | :---:   |:---:   |
-| Portal            | Qiwei Lian   | vr24936@bristol.ac.uk  |
+| Portal            | The players would play as a matchstick man who equips two powerful guns. They are going to use them to open portals on walls to teleport to wherever they want and the ultimate goal is to arrive the destination.
+**Destinaion:** yellow portal, the goal.
+**Red gun/ red portal:** to open a red portal which is connected to the blue portal
+**Blue gun/ blue portal:** similar to the Red gun/ red portal
+Motivation:
+I love the game - Portal 2 made by Valve so I think if we could make a 2D version of it would be interesting.
+**Features:** 
+1. Open portals on the specific walls
+2. Using portals to arrive at the place where we can’t arrive easily.
+   | vr24936@bristol.ac.uk  |
 | Papers, Please    | Gaochang He  | co24396@bristol.ac.uk  |
 | Hotline Miami     | Yi-Chun Chi  | ws24986@bristol.ac.uk  |
 
