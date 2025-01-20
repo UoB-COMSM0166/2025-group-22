@@ -25,6 +25,14 @@ Add a group photo here!
 | 5            | Wenqi Xue    | qh24128@bristol.ac.uk  |    |
 | 6            | Hao Jen Shih | qf24044@bristol.ac.uk  |    |
 </div>
+
+## Game Research
+| Game | Introduction         | Challenges                  |
+| :---:   | :---:   | :---:   |:---:   |
+| Portal            | Qiwei Lian   | vr24936@bristol.ac.uk  |
+| Papers, Please    | Gaochang He  | co24396@bristol.ac.uk  |
+| Hotline Miami     | Yi-Chun Chi  | ws24986@bristol.ac.uk  |
+
 ## Project Report
 
 ### Introduction
