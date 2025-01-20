@@ -20,6 +20,14 @@ Add a group photo here!
 - Group member 5, name, email, role
 - Group member 6, name, email, role
 
+| GROUP MEMBER | NAME | EMAIL | ROLE | CONTRIBUTIONS |
+| :----: | :----: | :----: | :----: | :----: |
+| 01 | CAILING YANG   | rl24638@bristol.ac.uk | TEST | TEST |
+| 02 | JUNJIE YAN   | am24166@bristol.ac.uk | TEST | TEST |
+| 03 | SHUAO ZHANG   | qk24065@bristol.ac.uk | TEST | TEST |
+| 04 | KEXIN ZHANG   | hy24895@bristol.ac.uk | TEST | TEST |
+| 05 | RUI XIONG   | yy24937@bristol.ac.uk | TEST | TEST |
+
 ## Project Report
 
 ### Introduction
