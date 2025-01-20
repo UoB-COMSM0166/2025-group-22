@@ -13,11 +13,14 @@ Include a demo video of your game here (you don't have to wait until the end, yo
 ## Your Group
 
 Add a group photo here!
-| 左对齐 | 居中对齐 | 右对齐 |
-| :---:   | :---:    | :---:   |
-| 数据1  | 数据2    | 数据3  |
-| 数据4  | 数据5    | 数据6  |
-| 数据7  | 数据8    | 数据9  |
+| Group member | name         | email                  |role|
+| 1            | Qiwei Lian   | vr24936@bristol.ac.uk  |    |
+| 2            | Gaochang He  | co24396@bristol.ac.uk  |    |
+| 3            | Yi-Chun Chi  | ws24986@bristol.ac.uk  |    |
+| 4            | Xu Hu        | ty24832@bristol.ac.uk  |    |
+| 5            | Wenqi Xue    | qh24128@bristol.ac.uk  |    |
+| 6            | Hao Jen Shih | qf24044@bristol.ac.uk  |    |
+
 
 - Group member 1, Wenqi Xue, email, role
 - Group member 2, name, email, role
