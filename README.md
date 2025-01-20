@@ -30,7 +30,7 @@ Add a group photo here!
 
 ## Game Research
 | Game | Introduction         | Challenges                  |
-| :---:   | :---:   | :---:   |:---:   |
+| :---:   | :---:   |:---:   |
 | Portal            | Qiwei Lian   | vr24936@bristol.ac.uk  |
 | Papers, Please    | Gaochang He  | co24396@bristol.ac.uk  |
 | Hotline Miami     | Yi-Chun Chi  | ws24986@bristol.ac.uk  |
