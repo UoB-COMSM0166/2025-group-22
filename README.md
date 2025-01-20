@@ -13,7 +13,6 @@ Include a demo video of your game here (you don't have to wait until the end, yo
 ## Your Group
 
 Add a group photo here!
-![image](https://github.com/user-attachments/assets/be006b31-8afb-4e29-9ccc-a35c8a9c4d23)
 
 - Group member 1, Wenqi Xue, email, role
 - Group member 2, name, email, role
