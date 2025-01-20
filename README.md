@@ -13,6 +13,7 @@ Include a demo video of your game here (you don't have to wait until the end, yo
 ## Your Group
 
 Add a group photo here!
+
 | Group member | name         | email                  |role|
 
 | 1            | Qiwei Lian   | vr24936@bristol.ac.uk  |    |
