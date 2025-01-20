@@ -14,6 +14,8 @@ Include a demo video of your game here (you don't have to wait until the end, yo
 
 Add a group photo here!
 
+<div align="center">
+
 | Group member | name         | email                  |role|
 | :---:   | :---:    | :---:   |:---:   |
 | 1            | Qiwei Lian   | vr24936@bristol.ac.uk  |    |
@@ -22,7 +24,7 @@ Add a group photo here!
 | 4            | Xu Hu        | ty24832@bristol.ac.uk  |    |
 | 5            | Wenqi Xue    | qh24128@bristol.ac.uk  |    |
 | 6            | Hao Jen Shih | qf24044@bristol.ac.uk  |    |
-
+</div>
 ## Project Report
 
 ### Introduction
