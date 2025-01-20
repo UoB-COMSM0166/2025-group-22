@@ -23,7 +23,7 @@ Add a group photo here!
 - Group member 2, name, email, role
 - Group member 3, name, email, role
 - Group member 4, name, email, role
-- Group member 5, name, email, role
+- Group member 5, Xu Hu, email, role
 - Group member 6, name, email, role
 
 ## Project Report
