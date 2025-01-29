@@ -12,7 +12,7 @@ Include a demo video of your game here (you don't have to wait until the end, yo
 
 ## Your Group
 
-<img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/Group-22.jpg" width="850">
+<img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/Group-22.jpg" width="650" style="display: block; margin: auto;">
 
 <div align="center">
 
