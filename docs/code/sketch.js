@@ -31,7 +31,9 @@ function setup() {
   createCanvas(800, 600);
   player_injured_image.filter(THRESHOLD);
   player = new Player();
+  crosshair = new Crosshair([8, 0]);
   map1 = new Map(level1);
+  noCursor();
 }
 
 function draw() {
@@ -49,10 +51,17 @@ function draw() {
   pop();
   */
   map1.draw();
+  crosshair.draw();
   player.draw();
   player.update();
 }
 
 function keyPressed() {
   player.processInput(key);
+}
+
+function mousePressed() {
+  if(mouseButton === LEFT) {
+    player.processInput('left click');
+  }
 }

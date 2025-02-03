@@ -13,6 +13,7 @@ class Player {
     // items/keys/etc...
     this.keys = 0;
     this.movingState = 0;
+    this.bullet = 0;
     this.endingMessage = "GAME OVER";
   }
 
@@ -191,6 +192,8 @@ class Player {
     return false;
   }
 
+  
+
 //懂了
   processInput(key) {
     if (keyIsDown(LEFT_ARROW)) {
@@ -245,6 +248,12 @@ class Player {
         }
       }
     }
+
+
+    if(key == 'left click'){
+      console.log("left button");
+      this.bullet = new Bullet(this.pos.x, this.pos.y, mouseX, mouseY, [7,3]);
+    }
   }
   
   draw() {
@@ -258,6 +267,9 @@ class Player {
     else{
     image(player_image, this.pos.x, this.pos.y, this.size, this.size, 0, 0, 
 this.spriteSize, this.spriteSize);
+    }
+    if(this.bullet != 0){
+      this.bullet.draw(map1.offset,0);
     }
   }
 
