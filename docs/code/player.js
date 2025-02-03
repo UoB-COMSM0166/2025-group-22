@@ -1,6 +1,6 @@
 class Player {
   constructor() {
-    this.pos = createVector(200, 200);
+    this.pos = createVector(50, 300);
     this.velocity = createVector(0, 0);
     this.gravity = 10;
     this.size = 50;
@@ -82,12 +82,13 @@ class Player {
   }
 
 
-
+//懂了
   getBlockType(offX = 0, offY = 0) {
     var z = this.getLoc(this.pos.x + offX, this.pos.y + offY);
     return map1.blocks[z[1]][z[0]].constructor.name;
   }
 
+//懂了
   getLoc(x = this.pos.x, y = this.pos.y) {
     var location = [floor((x + map1.offset) / 50), floor(y / 50)];
     return location;
@@ -137,6 +138,30 @@ class Player {
     return false;
   }
 
+  //傳送
+  onPortalSolid() {
+    if (this.getBlockType(0, this.size) == "PortalSolid") {
+      this.pos.y = this.getLoc()[1] * 50
+      return "bottom";
+    }
+    // checking bottom right
+    if (this.getBlockType(this.size - 1, this.size) == "PortalSolid") {
+      this.pos.y = this.getLoc()[1] * 50
+      return "bottom";
+    }
+    // checking top left
+    if (this.getBlockType() == "PortalSolid") {
+      this.pos.y = this.getLoc()[1] * 50 + 50
+      return "top";
+    }
+    // checking top right
+    if (this.getBlockType(this.size - 1, 0) == "PortalSolid") {
+      this.pos.y = this.getLoc()[1] * 50 + 50
+      return "top";
+    }
+    return false;
+  }
+
   updateGravity() {
     this.pos.add(this.velocity);
 
@@ -161,15 +186,18 @@ class Player {
 
   isFalling() {
     // console.log(this.getBlockType());
-    if (this.onSolid() != "bottom")
+    if (this.onSolid() != "bottom" && this.onPortalSolid() != "bottom")
       return true;
     return false;
   }
 
-  processInput() {
+//懂了
+  processInput(key) {
     if (keyIsDown(LEFT_ARROW)) {
-      if (this.getBlockType(-1, 25) != "Solid") {
-        if (this.pos.x < width / 4) {
+      console.log(this.pos.x);
+      console.log(this.pos.y);
+      if (this.getBlockType(-1, 25) != "Solid" && this.getBlockType(-1, 25) != "PortalSolid") {
+        if (this.pos.x < width / 8) {
           this.pos.x -= 5;
         } else {
           map1.offset -= 5
@@ -178,8 +206,8 @@ class Player {
       }
     }
     if (keyIsDown(RIGHT_ARROW)) {
-      if (this.getBlockType(this.size, 25) != "Solid") {
-        if (this.pos.x < width / 2) {
+      if (this.getBlockType(this.size, 25) != "Solid" && this.getBlockType(this.size, 25) != "PortalSolid") {
+        if (this.pos.x < width / 4) {
           this.pos.x += 5;
         } else {
           map1.offset += 5
@@ -189,8 +217,33 @@ class Player {
     }
     if (keyIsDown(UP_ARROW)) {
       this.jump();
-
-      
+    }
+    
+    //press 'E' to teleport
+    if(key == 'e' || key == 'E'){
+      if(this.getBlockType(-1, 25) == "PortalSolid"){
+        var current_x = Number(this.pos.x/50 -1);
+        var current_y = Number(this.pos.y/50);
+        // console.log(this.pos.x/50 -1);
+        // console.log(this.pos.y/50);
+        // console.log(map1.blocks[10][0]);
+        for (var row = 0; row < map1.blocks.length; row++) {
+          for (var col = 0; col < map1.blocks[row].length; col++) {
+            if(map1.blocks[row][col].constructor.name == "PortalSolid") {
+              if(col != current_x && row != current_y) {
+                // console.log((col != (this.pos.x/50 -1)));
+                // console.log(row != this.pos.y/50);
+                // console.log(this.pos.x/50 -1);
+                // console.log(this.pos.y/50);
+                // console.log(row);
+                // console.log(col);
+                this.pos.x = 50 * col + 50;
+                this.pos.y = 50* row;
+              }
+            }
+          }
+        }
+      }
     }
   }
   
@@ -201,9 +254,11 @@ class Player {
     }
     if(this.injured && this.injuryTimer % 6 == 0){
       image(player_injured_image, this.pos.x, this.pos.y, this.size, this.size, 0, 0, this.spriteSize, this.spriteSize);
-    }else{
+    }
+    else{
     image(player_image, this.pos.x, this.pos.y, this.size, this.size, 0, 0, 
 this.spriteSize, this.spriteSize);
     }
   }
+
 }

@@ -47,6 +47,14 @@ class Map {
           this.blocks[row][col] = new Enemy(col * 50, row * 50, [1, 5], true);
         this.enemyList.push(this.blocks[row][col])
         }
+        //portal blue
+        if (this.blocks[row][col] == 10) {
+          this.blocks[row][col] = new PortalSolid(col * 50, row * 50, [6, 0]);
+        }
+        //portal red
+        if (this.blocks[row][col] == 11) {
+          this.blocks[row][col] = new PortalSolid(col * 50, row * 50, [7, 1]);
+        }
       }
     
     }
@@ -59,7 +67,6 @@ class Map {
       for (var col = 0; col < this.blocks[row].length; col++) {
         if (this.blocks[row][col] != 0) {
           this.blocks[row][col].draw(this.offset, 0);
-
         }
       }
 
