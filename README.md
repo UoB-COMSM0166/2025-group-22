@@ -4,7 +4,7 @@
 
 ## Your Game
 
-Link to your game [PLAY HERE](https://uob-comsm0166.github.io/2025-group-22/paint/)
+Link to your game [PLAY HERE](https://uob-comsm0166.github.io/2025-group-22/code/)
 
 Your game lives in the [/docs](/docs) folder, and is published using Github pages to the link above.
 
