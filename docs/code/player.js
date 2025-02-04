@@ -66,8 +66,6 @@ class Player {
     if (this.lives > 0)
       return true;
     return false;
-
-
   }
   updateInjured() {
     if (this.injured) {
@@ -197,8 +195,8 @@ class Player {
 //懂了
   processInput(key) {
     if (keyIsDown(LEFT_ARROW)) {
-      console.log(this.pos.x);
-      console.log(this.pos.y);
+      // console.log(this.pos.x);
+      // console.log(this.pos.y);
       if (this.getBlockType(-1, 25) != "Solid" && this.getBlockType(-1, 25) != "PortalSolid") {
         if (this.pos.x < width / 8) {
           this.pos.x -= 5;
@@ -225,7 +223,7 @@ class Player {
     //press 'E' to teleport
     if(key == 'e' || key == 'E'){
       if(this.getBlockType(-1, 25) == "PortalSolid"){
-        var current_x = Number(this.pos.x/50 -1);
+        var current_x = Number((this.pos.x + map1.offset)/50 -1);
         var current_y = Number(this.pos.y/50);
         // console.log(this.pos.x/50 -1);
         // console.log(this.pos.y/50);
@@ -240,8 +238,10 @@ class Player {
                 // console.log(this.pos.y/50);
                 // console.log(row);
                 // console.log(col);
-                this.pos.x = 50 * col + 50;
+                this.pos.x = 50 * col + 50 - map1.offset;
                 this.pos.y = 50* row;
+                map1.offset += (col - current_x)*50;
+                this.pos.x -= (col - current_x)*50; 
               }
             }
           }
@@ -249,10 +249,9 @@ class Player {
       }
     }
 
-
     if(key == 'left click'){
       console.log("left button");
-      this.bullet = new Bullet(this.pos.x, this.pos.y, mouseX, mouseY, [7,3]);
+      this.bullet = new Bullet(this.pos.x + map1.offset, this.pos.y, mouseX + map1.offset, mouseY, [7,3]);
     }
   }
   
