@@ -1,10 +1,11 @@
 class PortalSolid {
-  constructor(x, y,img) {
+  constructor(x, y, img, type) {
     //this.direction = direction;
     this.pos = createVector(x, y);
     this.img = img
     this.size = 50;
     this.spriteSize = 64;
+    this.type = type;
     //this.sprites
 
   }
