@@ -5,7 +5,7 @@ class Player {
     this.gravity = 10;
     this.size = 50;
     // this.sprite stuff
-    this.spriteSize = 96
+    this.spriteSize = 64
     this.injured = false;
     this.injuryTimer = 0;
     this.animationTimer = 0;
@@ -194,7 +194,7 @@ class Player {
 
 //懂了
   processInput(key) {
-    if (keyIsDown(LEFT_ARROW)) {
+    if (keyIsDown(65)) {
       // console.log(this.pos.x);
       // console.log(this.pos.y);
       if (this.getBlockType(-1, 25) != "Solid" && this.getBlockType(-1, 25) != "PortalSolid") {
@@ -206,7 +206,7 @@ class Player {
         }
       }
     }
-    if (keyIsDown(RIGHT_ARROW)) {
+    if (keyIsDown(68)) {
       if (this.getBlockType(this.size, 25) != "Solid" && this.getBlockType(this.size, 25) != "PortalSolid") {
         if (this.pos.x < width / 4) {
           this.pos.x += 5;
@@ -216,7 +216,7 @@ class Player {
         }
       }
     }
-    if (keyIsDown(UP_ARROW)) {
+    if (keyIsDown(87)) {
       this.jump();
     }
     
@@ -251,7 +251,7 @@ class Player {
 
     if(key == 'left click'){
       console.log("left button");
-      this.bullet = new Bullet(this.pos.x + map1.offset, this.pos.y, mouseX + map1.offset, mouseY, [7,3]);
+      this.bullet = new Bullet(this.pos.x + map1.offset, this.pos.y, mouseX + map1.offset, mouseY, [0,2]);
     }
   }
   
@@ -264,7 +264,7 @@ class Player {
       image(player_injured_image, this.pos.x, this.pos.y, this.size, this.size, 0, 0, this.spriteSize, this.spriteSize);
     }
     else{
-    image(player_image, this.pos.x, this.pos.y, this.size, this.size, 0, 0, 
+    image(player_image, this.pos.x, this.pos.y, this.size, this.size, 0*this.spriteSize, 2*this.spriteSize, 
 this.spriteSize, this.spriteSize);
     }
     if(this.bullet != 0){

@@ -77,11 +77,11 @@ class Bullet {
       for (var row = 0; row < map1.blocks.length; row++) {
         for (var col = 0; col < map1.blocks[row].length; col++) {
           if(map1.blocks[row][col].constructor.name == "PortalSolid" && map1.blocks[row][col].type == "blue") {
-            map1.blocks[row][col] = new Solid(col * 50, row * 50, [3, 0]);
+            map1.blocks[row][col] = new Solid(col * 50, row * 50, [0, 0]);
           }
         }
       }
-      map1.blocks[this.getLoc()[1]][this.getLoc()[0]] = new PortalSolid(this.getLoc()[0] * 50, this.getLoc()[1] * 50, [6, 0], "blue");
+      map1.blocks[this.getLoc()[1]][this.getLoc()[0]] = new PortalSolid(this.getLoc()[0] * 50, this.getLoc()[1] * 50, [2, 1], "blue");
       return "In";
     }
     return false;
