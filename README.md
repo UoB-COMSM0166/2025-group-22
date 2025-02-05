@@ -1,4 +1,4 @@
-# 2025-group-22
+# 2025-group-22 (2D JUMPER)
 2025 COMSM0166 group 22
 
 
@@ -6,9 +6,18 @@
 
 Link to your game [PLAY HERE](https://uob-comsm0166.github.io/2025-group-22/code/)
 
+Link to your game(demo)[PLAY HERE](https://uob-comsm0166.github.io/2025-group-22/code_development/)
+
 Your game lives in the [/docs](/docs) folder, and is published using Github pages to the link above.
 
 Include a demo video of your game here (you don't have to wait until the end, you can insert a work in progress video)
+
+## Your Progress
+- [Week1](https://github.com/UoB-COMSM0166/2025-group-22/tree/main/conference/week01)
+
+- [Week2](https://github.com/UoB-COMSM0166/2025-group-22/tree/main/conference/week02)
+
+- [Week3]()
 
 ## Your Group
 
