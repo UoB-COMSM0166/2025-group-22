@@ -207,9 +207,9 @@ class Player {
       // console.log(this.pos.y);
       if (this.getBlockType(-1, 25) != "Solid" && this.getBlockType(-1, 25) != "PortalSolid") {
         if (this.pos.x < width / 6) {
-          this.pos.x -= 5;
+          this.pos.x -= 1;
         } else {
-          map1.offset -= 5
+          map1.offset -= 1
 
         }
       }
@@ -218,9 +218,9 @@ class Player {
     if (keyIsDown(68)) {
       if (this.getBlockType(this.size, 25) != "Solid" && this.getBlockType(this.size, 25) != "PortalSolid") {
         if (this.pos.x < width / 3) {
-          this.pos.x += 5;
+          this.pos.x += 1;
         } else {
-          map1.offset += 5
+          map1.offset += 1
 
         }
       }
@@ -235,29 +235,34 @@ class Player {
 
       //teleport from the right of the portalsolid
       if(this.getBlockType(-1, 25) === "PortalSolid" && this.getBlockDir(-1, 25) === "right"){
-        var current_x = Number((this.pos.x + map1.offset)/50 -1);
-        var current_y = Number(this.pos.y/50);
+        var current_x = this.getLoc(this.pos.x -1, this.pos.y + 25)[0];
+        var current_y = this.getLoc(this.pos.x -1, this.pos.y + 25)[1];
         // console.log(this.pos.x/50 -1);
         // console.log(this.pos.y/50);
         // console.log(map1.blocks[10][0]);
+        console.log("from right");
         for (var row = 0; row < map1.blocks.length; row++) {
           for (var col = 0; col < map1.blocks[row].length; col++) {
             if(map1.blocks[row][col].constructor.name == "PortalSolid") {
-              if(col != current_x && row != current_y) {
+              console.log("row: "+row);
+              console.log("col: "+col);
+              console.log(map1.blocks[row][col].direction);
+              if(col != current_x || row != current_y) {
                 // console.log((col != (this.pos.x/50 -1)));
                 // console.log(row != this.pos.y/50);
                 // console.log(this.pos.x/50 -1);
                 // console.log(this.pos.y/50);
                 // console.log(row);
                 // console.log(col);
-                console.log(map1.blocks[row][col]);
+                
 
                 //teleport to the right of the portalsolid
                 if(map1.blocks[row][col].direction === "right") {
                   this.pos.x = 50 * col + 50 - map1.offset;
                   this.pos.y = 50* row;
                   map1.offset += (col - current_x)*50;
-                  this.pos.x -= (col - current_x)*50; 
+                  this.pos.x -= (col - current_x)*50;
+                  console.log("from right to right");
                 }
                 //teleport to the left of the portalsolid
                 if(map1.blocks[row][col].direction === "left") {
@@ -265,9 +270,7 @@ class Player {
                   this.pos.y = 50 * row;
                   map1.offset += (col - current_x)*50 - 100;
                   this.pos.x -= (col - current_x)*50 - 100;
-                  console.log("current_x:"+current_x+"current_y:"+current_y);
-                  console.log("col:" + col + "row:" + row);
-                  console.log("right111");
+                  console.log("from right to left");
                 }
 
                 //teleport to the top of the portalsolid
@@ -275,7 +278,8 @@ class Player {
                   this.pos.x = 50 * col - map1.offset;
                   this.pos.y = 50* row - 50;
                   map1.offset += (col - current_x)*50 - 50;
-                  this.pos.x -= (col - current_x)*50 - 50; 
+                  this.pos.x -= (col - current_x)*50 - 50;
+                  console.log("from right to top");
                 }
 
                 //teleport to the bottom of the portalsolid
@@ -284,6 +288,7 @@ class Player {
                   this.pos.y = 50* row + 50;
                   map1.offset += (col - current_x)*50 - 50;
                   this.pos.x -= (col - current_x)*50 - 50; 
+                  console.log("from right to bottom");
                 }
               }
             }
@@ -293,43 +298,53 @@ class Player {
 
       //teleport from the left of the portalsolid
       else if(this.getBlockType(this.size, 25) === "PortalSolid" && this.getBlockDir(this.size, 25) === "left"){
-        var current_x = Number((this.pos.x + map1.offset)/50 +1);
-        var current_y = Number(this.pos.y/50);
+        var current_x = this.getLoc(this.pos.x + this.size, this.pos.y + 25)[0];
+        var current_y = this.getLoc(this.pos.x + this.size, this.pos.y + 25)[1];
+        console.log("from left");
         for (var row = 0; row < map1.blocks.length; row++) {
           for (var col = 0; col < map1.blocks[row].length; col++) {
             if(map1.blocks[row][col].constructor.name == "PortalSolid") {
-              if(col != current_x && row != current_y) {
+              console.log("row: "+row);
+              console.log("col: "+col);
+              console.log(map1.blocks[row][col].direction)
+              console.log("current_x: " + current_x + "current_y: " + current_y);
+              if(col != current_x || row != current_y) {
                 console.log(map1.blocks[row][col]);
-
                 if(map1.blocks[row][col].direction === "right") {
                   this.pos.x = 50 * col + 50 - map1.offset;
                   this.pos.y = 50* row;
                   map1.offset += (col - current_x)*50 +100;
                   this.pos.x -= (col - current_x)*50 + 100;
-                  console.log("current_x:"+current_x+"current_y:"+current_y);
-                  console.log("col:" + col + "row:" + row);
-                  console.log("left110")
+                  console.log("from left to rigt");
+                  break;
                 }
-                if(map1.blocks[row][col].direction === "left") {
+                else if(map1.blocks[row][col].direction === "left") {
+                  console.log("this.pos before : "+this.pos);
+                  console.log("map1.offset before : "+map1.offset);
                   this.pos.x = 50 * col - 50 - map1.offset;
+                  console.log("this.pos after: "+this.pos);
+                  console.log("map1.offset after : "+map1.offset);
                   this.pos.y = 50* row;
                   map1.offset += (col - current_x)*50;
                   this.pos.x -= (col - current_x)*50; 
-                  console.log("current_x:"+current_x+"current_y:"+current_y);
-                  console.log("col:" + col + "row:" + row);
-                  console.log("left111")
+                  console.log("from left to left");
+                  break
                 }
-                if(map1.blocks[row][col].direction === "top") {
+                else if(map1.blocks[row][col].direction === "top") {
                   this.pos.x = 50 * col - map1.offset;
                   this.pos.y = 50* row - 50;
                   map1.offset += (col - current_x)*50 + 50;
-                  this.pos.x -= (col - current_x)*50 + 50; 
+                  this.pos.x -= (col - current_x)*50 + 50;
+                  console.log("from left to top");
+                  break
                 }
-                if(map1.blocks[row][col].direction === "bottom") {
+                else if(map1.blocks[row][col].direction === "bottom") {
                   this.pos.x = 50 * col - map1.offset;
                   this.pos.y = 50* row + 50;
                   map1.offset += (col - current_x)*50 + 50;
-                  this.pos.x -= (col - current_x)*50 + 50; 
+                  this.pos.x -= (col - current_x)*50 + 50;
+                  console.log("from left to bottom");
+                  break
                 }
               }
             }
@@ -338,41 +353,46 @@ class Player {
       }
 
       //teleport from the top of the portalsolid
-      else if(this.getBlockType(25, this.size+1) === "PortalSolid" && this.getBlockDir(25, this.size+1) === "top"){
-        var current_x = Number((this.pos.x + map1.offset)/50);
-        var current_y = Number(this.pos.y/50 +1);
+      else if(this.getBlockType(25, this.size + 1) === "PortalSolid" && this.getBlockDir(25, this.size+1) === "top"){
+        var current_x = this.getLoc(this.pos.x + 25, this.pos.y + this.size + 1)[0];
+        var current_y = this.getLoc(this.pos.x + 25, this.pos.y + this.size + 1)[1];
+        console.log("from top");
         for (var row = 0; row < map1.blocks.length; row++) {
           for (var col = 0; col < map1.blocks[row].length; col++) {
             if(map1.blocks[row][col].constructor.name == "PortalSolid") {
-              if(col != current_x && row != current_y) {
+              console.log("row: "+row);
+              console.log("col: "+col);
+              console.log(map1.blocks[row][col].direction)
+              if(col != current_x || row != current_y) {
                 console.log(map1.blocks[row][col]);
 
                 if(map1.blocks[row][col].direction === "right") {
                   this.pos.x = 50 * col + 50 - map1.offset;
                   this.pos.y = 50* row;
                   map1.offset += (col - current_x)*50 + 50;
-                  this.pos.x -= (col - current_x)*50 + 50; 
+                  this.pos.x -= (col - current_x)*50 + 50;
+                  console.log("from top to right"); 
                 }
                 if(map1.blocks[row][col].direction === "left") {
                   this.pos.x = 50 * col - 50 - map1.offset;
                   this.pos.y = 50* row;
                   map1.offset += (col - current_x)*50 -50;
-                  this.pos.x -= (col - current_x)*50 -50; 
+                  this.pos.x -= (col - current_x)*50 -50;
+                  console.log("from top to left");
                 }
                 if(map1.blocks[row][col].direction === "top") {
                   this.pos.x = 50 * col - map1.offset;
                   this.pos.y = 50* row - 100;
                   map1.offset += (col - current_x)*50;
                   this.pos.x -= (col - current_x)*50;
-                  console.log("current_x:"+current_x+"current_y:"+current_y);
-                  console.log("col:" + col + "row:" + row);
-                  console.log("top111")
+                  console.log("from top to top");
                 }
                 if(map1.blocks[row][col].direction === "bottom") {
                   this.pos.x = 50 * col - map1.offset;
                   this.pos.y = 50* row + 50;
                   map1.offset += (col - current_x)*50;
-                  this.pos.x -= (col - current_x)*50; 
+                  this.pos.x -= (col - current_x)*50;
+                  console.log("from top to bottom");
                 }
               }
             }
@@ -382,12 +402,16 @@ class Player {
 
       //teleport from the bottom of the portalsolid
       else if(this.getBlockType(25, -1) === "PortalSolid" && this.getBlockDir(25, -1) === "bottom"){
-        var current_x = Number((this.pos.x + map1.offset)/50);
-        var current_y = Number(this.pos.y/50 -1);
+        var current_x = this.getLoc(this.pos.x + 25, this.pos.y - 1)[0];
+        var current_y = this.getLoc(this.pos.x + 25, this.pos.y - 1)[1];
+        console.log("from bottom ");
         for (var row = 0; row < map1.blocks.length; row++) {
           for (var col = 0; col < map1.blocks[row].length; col++) {
             if(map1.blocks[row][col].constructor.name == "PortalSolid") {
-              if(col != current_x && row != current_y) {
+              console.log("row: "+row);
+              console.log("col: "+col);
+              console.log(map1.blocks[row][col].direction)
+              if(col != current_x || row != current_y) {
                 console.log(map1.blocks[row][col]);
 
                 if(map1.blocks[row][col].direction === "right") {
@@ -395,24 +419,28 @@ class Player {
                   this.pos.y = 50* row;
                   map1.offset += (col - current_x)*50 +50;
                   this.pos.x -= (col - current_x)*50 +50; 
+                  console.log("from bottom to right");
                 }
                 if(map1.blocks[row][col].direction === "left") {
                   this.pos.x = 50 * col - 50 - map1.offset;
                   this.pos.y = 50* row;
                   map1.offset += (col - current_x)*50 - 50;
                   this.pos.x -= (col - current_x)*50 - 50; 
+                  console.log("from bottom to left");
                 }
                 if(map1.blocks[row][col].direction === "top") {
                   this.pos.x = 50 * col - map1.offset;
                   this.pos.y = 50* row - 50;
                   map1.offset += (col - current_x)*50;
                   this.pos.x -= (col - current_x)*50; 
+                  console.log("from bottom to top");
                 }
                 if(map1.blocks[row][col].direction === "bottom") {
                   this.pos.x = 50 * col - map1.offset;
                   this.pos.y = 50* row + 50;
                   map1.offset += (col - current_x)*50;
                   this.pos.x -= (col - current_x)*50; 
+                  console.log("from bottom to bottom");
                 }
               }
             }
@@ -427,11 +455,13 @@ class Player {
     }
     if(key === 'blue pistol click'){
       console.log("left button");
+      console.log("pos.x: " + this.pos.x + " pos.y" + this.pos.y);
       this.bullet = new Bullet(this.pos.x + map1.offset, this.pos.y, mouseX + map1.offset, mouseY, [7,3], "blue");
     }
 
     if(key === 'red pistol click'){
       console.log("left button");
+      console.log("pos.x: " + this.pos.x + " pos.y" + this.pos.y);
       this.bullet = new Bullet(this.pos.x + map1.offset, this.pos.y, mouseX + map1.offset, mouseY, [10,3], "red");
     }
   }

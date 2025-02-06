@@ -2,7 +2,7 @@ class Map {
   constructor(b) {
 
     this.blocks = b;
-    this.offset = -150
+    this.offset = 0;
     this.enemyList = [];
     this.itemList = [];
 
