@@ -4,7 +4,7 @@
 
 ## Your Game
 
-Link to your game(demo)[PLAY HERE](https://uob-comsm0166.github.io/2025-group-22/code_development/)
+Link to your game(demo)[PLAY HERE](https://uob-comsm0166.github.io/2025-group-22/code_playhere/)
 
 Your game lives in the [/docs](/docs) folder, and is published using Github pages to the link above.
 
