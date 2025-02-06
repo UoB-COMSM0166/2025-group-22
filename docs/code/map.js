@@ -36,7 +36,7 @@ class Map {
           this.itemList.push(this.blocks[row][col])
         }
         if (this.blocks[row][col] == 7) {
-          this.blocks[row][col] = new Item(col * 50, row * 50, [9, 6], "door");
+          this.blocks[row][col] = new Item(col * 50, row * 50, [0, 1], "door");
           this.itemList.push(this.blocks[row][col])
         }
         if (this.blocks[row][col] == 8) {

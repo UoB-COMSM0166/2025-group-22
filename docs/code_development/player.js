@@ -5,7 +5,7 @@ class Player {
     this.gravity = 10;
     this.size = 50;
     // this.sprite stuff
-    this.spriteSize = 96
+    this.spriteSize = 64
     this.injured = false;
     this.injuryTimer = 0;
     this.animationTimer = 0;
@@ -445,7 +445,7 @@ class Player {
       image(player_injured_image, this.pos.x, this.pos.y, this.size, this.size, 0, 0, this.spriteSize, this.spriteSize);
     }
     else{
-      image(player_image, this.pos.x, this.pos.y, this.size, this.size, 0, 0, this.spriteSize, this.spriteSize);
+      image(player_image, this.pos.x, this.pos.y, this.size, this.size, 0*this.spriteSize, 2*this.spriteSize, this.spriteSize, this.spriteSize);
     }
     if(this.bullet != 0){
       this.bullet.draw(map1.offset,0);
