@@ -469,7 +469,6 @@ class Player {
   draw() {
     for (var i = 0; i < this.lives; i++) {
       image(tiles_image, i * 25, 10, 50, 50, 11 * 64, 4 * 64, 64, 64)
-
     }
     if(this.injured && this.injuryTimer % 6 == 0){
       image(player_injured_image, this.pos.x, this.pos.y, this.size, this.size, 0, 0, this.spriteSize, this.spriteSize);
@@ -477,9 +476,9 @@ class Player {
     else{
       image(player_image, this.pos.x, this.pos.y, this.size, this.size, 0, 0, this.spriteSize, this.spriteSize);
     }
-    if(this.bullet != 0){
-      this.bullet.draw(map1.offset,0);
-    }
+    // if(this.bullet != 0){
+    //   this.bullet.draw(map1.offset,0);
+    // }
   }
 
 }
