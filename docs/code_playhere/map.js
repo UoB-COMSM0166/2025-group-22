@@ -2,7 +2,7 @@ class Map {
   constructor(b) {
 
     this.blocks = b;
-    this.offset = 0;
+    this.offset = -150
     this.enemyList = [];
     this.itemList = [];
 
@@ -10,17 +10,19 @@ class Map {
 
     for (var row = 0; row < this.blocks.length; row++) {
       for (var col = 0; col < this.blocks[row].length; col++) {
-        //this.blocks[row][col]
+        //portal wall
         if (this.blocks[row][col] == 1) {
           this.blocks[row][col] = new Solid(col * 50, row * 50, [0, 0]);
 
         }
+        //standard wall
         if (this.blocks[row][col] == 2) {
-          this.blocks[row][col] = new Solid(col * 50, row * 50, [3, 0]);
+          this.blocks[row][col] = new Solid(col * 50, row * 50, [1, 0]);
 
         }
+        //mirror wall
         if (this.blocks[row][col] == 3) {
-          this.blocks[row][col] = new Decor(col * 50, row * 50, [0, 4]);
+          this.blocks[row][col] = new Decor(col * 50, row * 50, [2, 0]);
 
         }
         if (this.blocks[row][col] == 4) {
@@ -32,11 +34,11 @@ class Map {
           this.itemList.push(this.blocks[row][col])
         }
         if (this.blocks[row][col] == 6) {
-          this.blocks[row][col] = new Item(col * 50, row * 50, [10, 4], "key");
+          this.blocks[row][col] = new Item(col * 50, row * 50, [1, 2], "key");
           this.itemList.push(this.blocks[row][col])
         }
         if (this.blocks[row][col] == 7) {
-          this.blocks[row][col] = new Item(col * 50, row * 50, [9, 6], "door");
+          this.blocks[row][col] = new Item(col * 50, row * 50, [0, 1], "door");
           this.itemList.push(this.blocks[row][col])
         }
         if (this.blocks[row][col] == 8) {
@@ -49,11 +51,11 @@ class Map {
         }
         //portal blue
         if (this.blocks[row][col] == 10) {
-          this.blocks[row][col] = new PortalSolid(col * 50, row * 50 [6, 0], "","blue");
+          this.blocks[row][col] = new PortalSolid(col * 50, row * 50 [2, 1], "","blue");
         }
         //portal red
         if (this.blocks[row][col] == 11) {
-          this.blocks[row][col] = new PortalSolid(col * 50, row * 50, [7, 1], "", "red");
+          this.blocks[row][col] = new PortalSolid(col * 50, row * 50, [3, 1], "", "red");
         }
       }
     
