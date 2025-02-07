@@ -1,10 +1,4 @@
-function setup() {
-  createCanvas(800, 450);
-  background(180, 217, 239);
-
-}
-
-function draw() {
+function winUI() {
 
   let width = 150;
   let height = 90;
@@ -15,6 +9,9 @@ function draw() {
 
   textFormat(400, 150, 80, "WIN !!");
 
+  if(mouseIsPressed && mouseX >= 170 && mouseX <= 320 && mouseY >= 320 && mouseY <= 410){
+    gameState = "start";
+  }
 }
 
 function button(x, y, w, h, label){

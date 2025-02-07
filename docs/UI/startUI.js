@@ -1,10 +1,4 @@
-function setup() {
-  createCanvas(800, 450);
-  background(180, 217, 239);
-
-}
-
-function draw() {
+function startUI() {
 
   let width = 150;
   let height = 90;
