@@ -1,19 +1,24 @@
 function levelUI() {
-  background(180, 217, 239);
-  /*let width = 150;
-  let height = 90;
-  let buttonY = 320;//450-60-50*/
+  let width = 150;
+  let height = 70;
+  let buttonX = 325;
 
-  //button(170, buttonY, width, height, "Continue");
-  //button(480, buttonY, width, height, "Exit");
+  button(buttonX, 140, width, height, "1");
+  button(buttonX, 250, width, height, "2");
+  button(buttonX, 360, width, height, "3");
 
-  textFormat(300, 80, 80, "Level");
+  textFormat(400, 80, 80, "Level");
 
   
-  /*if(mouseIsPressed && mouseX >= 170 && mouseX <= 320 && mouseY >= 320 && mouseY <= 410){
+  if(mouseIsPressed && mouseX >= 325 && mouseX <= 475 && mouseY >= 140 && mouseY <= 210){
+    currentLevel = "level1";
     gameState = "playing";
-  }else if(mouseIsPressed && mouseX >= 480 && mouseX <= 630 && mouseY >= 320 && mouseY <= 410){
-    window.close();
-  }*/
+  }else if(mouseIsPressed && mouseX >= 325 && mouseX <= 475 && mouseY >= 250 && mouseY <= 320){
+    currentLevel = "level2";
+    gameState = "playing";
+  }else if(mouseIsPressed && mouseX >= 325 && mouseX <= 475 && mouseY >= 360 && mouseY <= 430){
+    currentLevel = "level3";
+    gameState = "playing";
+  }
 }
 

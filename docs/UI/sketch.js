@@ -11,6 +11,8 @@ function draw() {
 
   if(gameState === "start"){
     startUI();
+  }else if(gameState === "choosingLevel"){
+    levelUI();
   }else if(gameState === "win"){
     winUI();
   }else if(gameState === "gameOver"){
