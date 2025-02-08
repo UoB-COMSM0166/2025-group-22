@@ -1,4 +1,5 @@
 let gameState = "start";
+let currentLevel = "level1";
 
 function setup() {
   createCanvas(800, 450);
@@ -16,6 +17,14 @@ function draw() {
     gameOverUI();
   }else if(gameState === "pause"){
     pauseUI();
+  }else if(gameState === "playing"){
+    if(currentLevel === "level1"){
+      map1();
+    }else if(currentLevel === "level2"){
+      map2();
+    }else if(currentLevel === "level3"){
+      map3();
+    }
   }
 }
 

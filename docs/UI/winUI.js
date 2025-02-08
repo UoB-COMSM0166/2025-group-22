@@ -11,5 +11,7 @@ function winUI() {
 
   if(mouseIsPressed && mouseX >= 170 && mouseX <= 320 && mouseY >= 320 && mouseY <= 410){
     gameState = "start";
+  }else if(mouseIsPressed && mouseX >= 480 && mouseX <= 630 && mouseY >= 320 && mouseY <= 410){
+    window.close();
   }
 }

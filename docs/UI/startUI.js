@@ -10,4 +10,11 @@ function startUI() {
 
   textFormat(400, 150, 80, "2D Jumper");
 
+  if(mouseIsPressed && mouseX >= 80 && mouseX <= 230 && mouseY >= 320 && mouseY <= 410){
+    levelUI();
+  }else if(mouseIsPressed && mouseX >= 330 && mouseX <= 480 && mouseY >= 320 && mouseY <= 410){
+    map1();
+  }else if(mouseIsPressed && mouseX >= 580 && mouseX <= 730 && mouseY >= 320 && mouseY <= 410){
+    window.close();
+  }
 }

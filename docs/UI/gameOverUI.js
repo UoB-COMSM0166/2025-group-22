@@ -9,4 +9,14 @@ function gameOverUI() {
 
   textFormat(400, 150, 80, "Game Over");
 
+  if(mouseIsPressed && mouseX >= 170 && mouseX <= 320 && mouseY >= 320 && mouseY <= 410){
+    gameState === "playing";
+    restartLevel();
+  }else if(mouseIsPressed && mouseX >= 480 && mouseX <= 630 && mouseY >= 320 && mouseY <= 410){
+    window.close();
+  }
 }
+
+/*function restartLevel{
+  player.position(100, 100);
+}*/
