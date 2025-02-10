@@ -175,6 +175,15 @@ class Player {
       this.pos.add(0, this.gravity);
     }
 
+    // 根据玩家的垂直位置调整地图的垂直偏移量
+    if (this.pos.y < height / 3) {
+      map1.yOffset = this.pos.y - height / 3;
+    } else if (this.pos.y > (2 * height) / 3) {
+      map1.yOffset = this.pos.y - (2 * height) / 3;
+    } else {
+      map1.yOffset = 0;
+    }
+
     if (this.isFalling() && this.onSolid() != "top") {
       this.velocity.mult(0.9);
     } else if (this.isFalling() && this.onSolid() == "top") {
@@ -207,9 +216,9 @@ class Player {
       // console.log(this.pos.y);
       if (this.getBlockType(-1, 25) != "Solid" && this.getBlockType(-1, 25) != "PortalSolid") {
         if (this.pos.x < width / 6) {
-          this.pos.x -= 1;
+          this.pos.x -= 5;
         } else {
-          map1.offset -= 1
+          map1.offset -= 5
 
         }
       }
@@ -218,9 +227,9 @@ class Player {
     if (keyIsDown(68)) {
       if (this.getBlockType(this.size, 25) != "Solid" && this.getBlockType(this.size, 25) != "PortalSolid") {
         if (this.pos.x < width / 3) {
-          this.pos.x += 1;
+          this.pos.x += 5;
         } else {
-          map1.offset += 1
+          map1.offset += 5
 
         }
       }
@@ -456,13 +465,13 @@ class Player {
     if(key === 'blue pistol click'){
       console.log("left button");
       console.log("pos.x: " + this.pos.x + " pos.y" + this.pos.y);
-      this.bullet = new Bullet(this.pos.x + map1.offset, this.pos.y, mouseX + map1.offset, mouseY, [7,3], "blue");
+      this.bullet = new Bullet(this.pos.x + map1.offset, this.pos.y, mouseX + map1.offset, mouseY + map1.yOffset, [7,3], "blue");
     }
 
     if(key === 'red pistol click'){
       console.log("left button");
       console.log("pos.x: " + this.pos.x + " pos.y" + this.pos.y);
-      this.bullet = new Bullet(this.pos.x + map1.offset, this.pos.y, mouseX + map1.offset, mouseY, [10,3], "red");
+      this.bullet = new Bullet(this.pos.x + map1.offset, this.pos.y, mouseX + map1.offset, mouseY + map1.yOffset, [10,3], "red");
     }
   }
   
@@ -471,13 +480,13 @@ class Player {
       image(tiles_image, i * 25, 10, 50, 50, 11 * 64, 4 * 64, 64, 64)
     }
     if(this.injured && this.injuryTimer % 6 == 0){
-      image(player_injured_image, this.pos.x, this.pos.y, this.size, this.size, 0, 0, this.spriteSize, this.spriteSize);
+      image(player_injured_image, this.pos.x, this.pos.y - map1.yOffset, this.size, this.size, 0, 0, this.spriteSize, this.spriteSize);
     }
     else{
-      image(player_image, this.pos.x, this.pos.y, this.size, this.size, 0, 0, this.spriteSize, this.spriteSize);
+      image(player_image, this.pos.x, this.pos.y - map1.yOffset, this.size, this.size, 0, 0, this.spriteSize, this.spriteSize);
     }
     // if(this.bullet != 0){
-    //   this.bullet.draw(map1.offset,0);
+    //   this.bullet.draw(map1.offset, map1.yOffset);
     // }
   }
 

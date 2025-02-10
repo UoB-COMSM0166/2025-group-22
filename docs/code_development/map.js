@@ -3,6 +3,7 @@ class Map {
 
     this.blocks = b;
     this.offset = 0;
+    this.yOffset = 0;
     this.enemyList = [];
     this.itemList = [];
 
@@ -60,17 +61,13 @@ class Map {
     }
   }
 
-
-
   draw() {
     for (var row = 0; row < this.blocks.length; row++) {
       for (var col = 0; col < this.blocks[row].length; col++) {
         if (this.blocks[row][col] != 0) {
-          this.blocks[row][col].draw(this.offset, 0);
+          this.blocks[row][col].draw(this.offset, this.yOffset);
         }
       }
-
     }
-
   }
 }

@@ -64,7 +64,7 @@ class Bullet {
 
   getBlockType(offX = 0, offY = 0) {
     var z = this.getLoc(this.pos.x + this.size/2 + offX, this.pos.y + this.size/2 + offY);
-    if(floor((this.pos.x + this.size/2) / 50) < 0 || floor((this.pos.x + this.size/2) / 50) > 29 || floor((this.pos.y + this.size/2) / 50) < 0 || floor((this.pos.y + this.size/2) / 50) > 11) {
+    if(floor((this.pos.x + this.size/2) / 50) < 0 || floor((this.pos.x + this.size/2) / 50) > map1.blocks[0].length - 1 || floor((this.pos.y + this.size/2) / 50) < 0 || floor((this.pos.y + this.size/2) / 50) > map1.blocks.length - 1) {
       console.log("undefined");
       return "undefined";
     }
@@ -76,6 +76,32 @@ class Bullet {
   getLoc(x = this.pos.x + this.size/2, y = this.pos.y + this.size/2) {
     var location = [floor(x / 50), floor(y / 50)];
     return location;
+  }
+
+  getBlockDir() {
+    var block_col = this.getLoc()[0];
+    var block_row = this.getLoc()[1];
+    map1.blocks[block_row][block_col].direction = [];
+    //top has air wall
+    if(block_row - 1 >= 0 && map1.blocks[block_row - 1][block_col] === 0) {
+      map1.blocks[block_row][block_col].direction.push("top");
+    }
+
+    //right has air wall
+    if(block_col + 1 <= map1.blocks[0].length - 1 && map1.blocks[block_row][block_col + 1] === 0) {
+      map1.blocks[block_row][block_col].direction.push("right");
+    }
+
+    //bottom has air wall
+    if(block_row + 1 <= map1.blocks.length - 1 && map1.blocks[block_row + 1][block_col] === 0) {
+      map1.blocks[block_row][block_col].direction.push("bottom");
+    }
+
+    //left has air wall
+    if(block_col - 1 >= 0 && map1.blocks[block_row][block_col - 1] === 0) {
+      map1.blocks[block_row][block_col].direction.push("left");
+    }
+    return map1.blocks[block_row][block_col].direction;
   }
 
   getDir() {
@@ -108,25 +134,25 @@ class Bullet {
       // console.log("bulletx-blockx="+ (bullet_x-block_x));
       // console.log("bullety-blocky="+ (bullet_y-block_y));
       console.log("bottom");
-      return"bottom";
+      return "bottom";
     }
     
     //子彈從上方打入
     if(isIntersecting(C,D,E,F) == true){
       console.log("top");
-      return"top";
+      return "top";
     }
 
     //子彈從左方打入
     if(isIntersecting(D,A,E,F) == true){
       console.log("left");
-      return"left";
+      return "left";
     }
 
     //子彈從右方打入
     if(isIntersecting(B,C,E,F) == true){
       console.log("right");
-      return"right";
+      return "right";
     }
   }
 
@@ -136,7 +162,19 @@ class Bullet {
     
     // checking if the bullet in the "solid"
     if (this.getBlockType(0, 0) == "Solid") {
+      console.log(this.getBlockDir());
+      var dirFlag = 0;
+      var blockDir = this.getBlockDir();
       var direction = this.getDir();
+      for(var col = 0; col < blockDir.length; col++) {
+        if(direction === blockDir[col]) {
+          dirFlag = 1;
+        }
+      }
+
+      if(dirFlag === 0) {
+        return "undefined";
+      }
       this.pos.x = this.getLoc()[0] * 50;
       this.pos.y = this.getLoc()[1] * 50;
       

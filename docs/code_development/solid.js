@@ -4,6 +4,7 @@ class Solid {
     this.img = img
     this.size = 50;
     this.spriteSize = 64;
+    this.direction = [];
     //this.sprites
 
   }
