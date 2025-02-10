@@ -168,6 +168,30 @@ class Player {
     return false;
   }
 
+  onNonPortalSolid() {
+    // checking bottom left
+    if (this.getBlockType(0, this.size) == "NonPortalSolid") {
+      this.pos.y = this.getLoc()[1] * 50
+      return "bottom";
+    }
+    // checking bottom right
+    if (this.getBlockType(this.size - 1, this.size) == "NonPortalSolid") {
+      this.pos.y = this.getLoc()[1] * 50
+      return "bottom";
+    }
+    // checking top left
+    if (this.getBlockType() == "NonPortalSolid") {
+      this.pos.y = this.getLoc()[1] * 50 + 50
+      return "top";
+    }
+    // checking top right
+    if (this.getBlockType(this.size - 1, 0) == "NonPortalSolid") {
+      this.pos.y = this.getLoc()[1] * 50 + 50
+      return "top";
+    }
+    return false;
+  }
+
   updateGravity() {
     this.pos.add(this.velocity);
 
@@ -201,7 +225,7 @@ class Player {
 
   isFalling() {
     // console.log(this.getBlockType());
-    if (this.onSolid() != "bottom" && this.onPortalSolid() != "bottom")
+    if (this.onSolid() != "bottom" && this.onPortalSolid() != "bottom" && this.onNonPortalSolid() != "bottom")
       return true;
     return false;
   }
@@ -322,7 +346,7 @@ class Player {
                 if(map1.blocks[row][col].direction === "right") {
                   this.pos.x = 50 * col + 50 - map1.offset;
                   this.pos.y = 50* row;
-                  map1.offset += (col - current_x)*50 +100;
+                  map1.offset += (col - current_x)*50 + 100;
                   this.pos.x -= (col - current_x)*50 + 100;
                   console.log("from left to rigt");
                   break;

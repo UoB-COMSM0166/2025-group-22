@@ -1,4 +1,4 @@
-class Solid {
+class NonPortalSolid {
   constructor(x, y,img) {
     this.pos = createVector(x, y);
     this.img = img

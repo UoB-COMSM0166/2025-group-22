@@ -24,7 +24,7 @@ class Map {
           this.blocks[row][col] = new Decor(col * 50, row * 50, [0, 4]);
 
         }
-        if (this.blocks[row][col] == 4) {
+        if (this.blocks[row][col] == 12) {
           this.blocks[row][col] = new Decor(col * 50, row * 50, [2, 5]);
 
         }
@@ -55,6 +55,9 @@ class Map {
         //portal red
         if (this.blocks[row][col] == 11) {
           this.blocks[row][col] = new PortalSolid(col * 50, row * 50, [7, 1], "", "red");
+        }
+        if (this.blocks[row][col] == 4) {
+          this.blocks[row][col] = new NonPortalSolid(col * 50, row * 50, [3, 1]);
         }
       }
     
