@@ -192,6 +192,30 @@ class Player {
     return false;
   }
 
+  onReflectSolid() {
+    // checking bottom left
+    if (this.getBlockType(0, this.size) == "ReflectSolid") {
+      this.pos.y = this.getLoc()[1] * 50
+      return "bottom";
+    }
+    // checking bottom right
+    if (this.getBlockType(this.size - 1, this.size) == "ReflectSolid") {
+      this.pos.y = this.getLoc()[1] * 50
+      return "bottom";
+    }
+    // checking top left
+    if (this.getBlockType() == "ReflectSolid") {
+      this.pos.y = this.getLoc()[1] * 50 + 50
+      return "top";
+    }
+    // checking top right
+    if (this.getBlockType(this.size - 1, 0) == "ReflectSolid") {
+      this.pos.y = this.getLoc()[1] * 50 + 50
+      return "top";
+    }
+    return false;
+  }
+
   updateGravity() {
     this.pos.add(this.velocity);
 
@@ -225,12 +249,10 @@ class Player {
 
   isFalling() {
     // console.log(this.getBlockType());
-    if (this.onSolid() != "bottom" && this.onPortalSolid() != "bottom" && this.onNonPortalSolid() != "bottom")
+    if (this.onSolid() != "bottom" && this.onPortalSolid() != "bottom" && this.onNonPortalSolid() != "bottom" && this.onReflectSolid() != "bottom")
       return true;
     return false;
   }
-
-  
 
 //懂了
   processInput(key) {

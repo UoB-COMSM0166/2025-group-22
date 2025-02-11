@@ -20,13 +20,11 @@ class Map {
           this.blocks[row][col] = new Solid(col * 50, row * 50, [3, 0]);
 
         }
-        if (this.blocks[row][col] == 3) {
+        if (this.blocks[row][col] == 13) {
           this.blocks[row][col] = new Decor(col * 50, row * 50, [0, 4]);
-
         }
         if (this.blocks[row][col] == 12) {
           this.blocks[row][col] = new Decor(col * 50, row * 50, [2, 5]);
-
         }
         if (this.blocks[row][col] == 5) {
           this.blocks[row][col] = new Item(col * 50, row * 50, [11, 4], "heart");
@@ -58,6 +56,9 @@ class Map {
         }
         if (this.blocks[row][col] == 4) {
           this.blocks[row][col] = new NonPortalSolid(col * 50, row * 50, [3, 1]);
+        }
+        if (this.blocks[row][col] == 3) {
+          this.blocks[row][col] = new ReflectSolid(col * 50, row * 50, [4, 1], "", "");
         }
       }
     

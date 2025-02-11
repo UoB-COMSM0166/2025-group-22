@@ -26,13 +26,19 @@ class Bullet {
 
   updateGravity() {
     
-    
     this.pos.add(this.velocity);
-
-    if (this.bulletonSolid() == "In") {
+    
+    if (this.bulletonSolid() === "In") {
       this.velocity.mult(0);
     }
-    else if(this.bulletonSolid() == "undefined") {
+    else if(this.bulletonSolid() === "undefined") {
+      return "undefined";
+    }
+
+    // if (this.bulletonReflectSolid() == "In") {
+      
+    // }
+    if(this.bulletonReflectSolid() === "undefined") {
       return "undefined";
     }
   }
@@ -159,7 +165,6 @@ class Bullet {
 
 
   bulletonSolid() {
-    
     // checking if the bullet in the "solid"
     if (this.getBlockType(0, 0) == "Solid") {
       console.log(this.getBlockDir());
@@ -210,43 +215,40 @@ class Bullet {
     return false;
   }
 
-//   crossProduct(ax, ay, bx, by) {
-//     return ax * by - ay * bx;
-//   }
+  bulletonReflectSolid() {
+    // checking if the bullet in the "solid"
+    if (this.getBlockType(0, 0) == "ReflectSolid") {
+      console.log(this.getBlockDir());
+      var dirFlag = 0;
+      var blockDir = this.getBlockDir();
+      var direction = this.getDir();
+      for(var col = 0; col < blockDir.length; col++) {
+        if(direction === blockDir[col]) {
+          dirFlag = 1;
+        }
+      }
 
-// // 计算两个线段是否相交
-//   isIntersecting(A, B, C, D) {
-//     // 计算叉积
-//     function cross(A, B, P) {
-//         return crossProduct(B.x - A.x, B.y - A.y, P.x - A.x, P.y - A.y);
-//     }
+      if(dirFlag === 0) {
+        return "undefined";
+      }
+      
+      //reflect the bullet
+      if(direction === "left" || direction === "right") {
+        this.velocity.x = this.velocity.x * (-1);
+      }
+       
+      else if(direction === "top" || direction === "bottom") {
+        this.velocity.y = this.velocity.y * (-1);
+      }
+      
 
-//     // 计算四次叉积
-//     let cross1 = cross(A, B, C);
-//     let cross2 = cross(A, B, D);
-//     let cross3 = cross(C, D, A);
-//     let cross4 = cross(C, D, B);
-
-//     // 判断是否互相跨过
-//     if (cross1 * cross2 < 0 && cross3 * cross4 < 0) {
-//         return true;
-//     }
-
-//     // 处理共线情况（判断投影是否重叠）
-//     return isCollinearAndOverlapping(A, B, C, D);
-//   }
-
-// // 处理共线的情况：如果两条线段在同一直线上，检查它们是否有重叠部分
-//   isCollinearAndOverlapping(A, B, C, D) {
-//     function isBetween(a, b, c) {
-//         return Math.min(a, b) <= c && c <= Math.max(a, b);
-//     }
-
-//     return (crossProduct(B.x - A.x, B.y - A.y, C.x - A.x, C.y - A.y) === 0 && isBetween(A.x, B.x, C.x) && isBetween(A.y, B.y, C.y)) 
-//           ||(crossProduct(B.x - A.x, B.y - A.y, D.x - A.x, D.y - A.y) === 0 && isBetween(A.x, B.x, D.x) && isBetween(A.y, B.y, D.y))
-//           ||(crossProduct(D.x - C.x, D.y - C.y, A.x - C.x, A.y - C.y) === 0 && isBetween(C.x, D.x, A.x) && isBetween(C.y, D.y, A.y))
-//           ||(crossProduct(D.x - C.x, D.y - C.y, B.x - C.x, B.y - C.y) === 0 && isBetween(C.x, D.x, B.x) && isBetween(C.y, D.y, B.y));
-//   }
+      return "In";
+    }
+    else if(this.getBlockType(0, 0) == "undefined"){
+      return "undefined";
+    }
+    return false;
+  }
 }
 
 function crossProduct(ax, ay, bx, by) {
