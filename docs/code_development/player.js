@@ -260,7 +260,7 @@ class Player {
     if (keyIsDown(65)) {
       // console.log(this.pos.x);
       // console.log(this.pos.y);
-      if (this.getBlockType(-1, 25) != "Solid" && this.getBlockType(-1, 25) != "PortalSolid") {
+      if (this.getBlockType(-1, 25) != "Solid" && this.getBlockType(-1, 25) != "PortalSolid" && this.getBlockType(-1, 25) != "NonPortalSolid" && this.getBlockType(-1, 25) != "ReflectSolid") {
         if (this.pos.x < width / 6) {
           this.pos.x -= 5;
         } else {
@@ -271,7 +271,7 @@ class Player {
     }
     //D
     if (keyIsDown(68)) {
-      if (this.getBlockType(this.size, 25) != "Solid" && this.getBlockType(this.size, 25) != "PortalSolid") {
+      if (this.getBlockType(this.size, 25) != "Solid" && this.getBlockType(this.size, 25) != "PortalSolid" && this.getBlockType(this.size, 25) != "NonPortalSolid" && this.getBlockType(this.size, 25) != "ReflectSolid") {
         if (this.pos.x < width / 3) {
           this.pos.x += 5;
         } else {
