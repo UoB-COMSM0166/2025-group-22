@@ -1,9 +1,16 @@
 let gameState = "start";
 let currentLevel = "level1";
 
+function preload() {
+  //player_image = loadImage("images/player.png");
+  //player_injured_image = loadImage("images/player.png");
+  tiles_image = loadImage("images/tiles.png");
+}
+
+import { level1, level2, level3 } from "./maps";
+
 function setup() {
   createCanvas(800, 450);
-
 }
 
 function draw() {
@@ -21,11 +28,11 @@ function draw() {
     pauseUI();
   }else if(gameState === "playing"){
     if(currentLevel === "level1"){
-      map1();
+      maps1 = new maps(level1);
     }else if(currentLevel === "level2"){
-      map2();
+      maps1 = new maps(level2);
     }else if(currentLevel === "level3"){
-      map3();
+      maps1 = new maps(level3);
     }
   }
 }

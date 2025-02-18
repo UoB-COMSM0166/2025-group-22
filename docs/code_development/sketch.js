@@ -1,6 +1,5 @@
 var level1 = [
   [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 ,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
-  
   [4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2 ,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
   [4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2 ,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
   [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2 ,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
@@ -22,9 +21,6 @@ function preload() {
   player_image = loadImage("images/player.png");
   player_injured_image = loadImage("images/player.png");
   tiles_image = loadImage("images/tiles.png");
-
-
-
 }
 
 function setup() {
@@ -66,7 +62,7 @@ function draw() {
 }
 
 function keyPressed() {
-  console.log(key);
+  //console.log(key);
   player.processInput(key);
 }
 
