@@ -5,10 +5,12 @@ let currentLevel = "level1";
 function preload() {
   //player_image = loadImage("images/player.png");
   tiles_image = loadImage("images/tiles.png");
+  mySound = loadSound('soundtrack/phone.flac');
 }
 
 function setup() {
   createCanvas(800, 450);
+  mySound.play();
 }
 
 function draw() {
