@@ -17,5 +17,6 @@ function startUI() {
     gameState = "playing";
   }else if(mouseIsPressed && mouseX >= 580 && mouseX <= 730 && mouseY >= 320 && mouseY <= 410){
     window.close();
+    alert("请手动关闭页面");
   }
 }
