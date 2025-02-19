@@ -10,7 +10,6 @@ function preload() {
 
 function setup() {
   createCanvas(800, 450);
-  loadLevel();
 }
 
 function draw() {
@@ -27,6 +26,7 @@ function draw() {
   }else if(gameState === "pause"){
     pauseUI();
   }else if(gameState === "playing"){
+    loadLevel();
     currentMap.draw();
   }
 }
