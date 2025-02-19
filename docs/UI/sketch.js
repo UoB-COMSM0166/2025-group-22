@@ -1,6 +1,7 @@
 let gameState = "start";
 let currentMap = null;
 let currentLevel = "level1";
+let mySound,playButton; //音乐
 
 function preload() {
   //player_image = loadImage("images/player.png");
@@ -10,7 +11,21 @@ function preload() {
 
 function setup() {
   createCanvas(800, 450);
-  mySound.play();
+ 
+  playButton = createButton('Play Music'); //音乐
+  playButton.position(20, 20); 
+  playButton.mousePressed(Music);
+
+}
+
+function Music() { //音乐
+  if (mySound.isPlaying()) {
+    mySound.pause(); 
+    playButton.html('Play Music'); 
+  } else {
+    mySound.loop(); 
+    playButton.html('Pause Music'); 
+  }
 }
 
 function draw() {
