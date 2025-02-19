@@ -8,7 +8,7 @@ function startUI() {
   button(330, buttonY, width, height, "Start");
   button(580, buttonY, width, height, "Exit");
 
-  textFormat(400, 150, 80, "2D Jumper");
+  textFormat(400, 150, 80, "Twlight Seeker");
 
   if(mouseIsPressed && mouseX >= 80 && mouseX <= 230 && mouseY >= 320 && mouseY <= 410){
     gameState = "choosingLevel";

@@ -8,18 +8,6 @@ function preload() {
   tiles_image = loadImage("images/tiles.png");
 }
 
-var level1 = [
-  [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
-  [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
-  [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
-  [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
-  [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
-  [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
-  [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
-  [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
-  [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
-];
-
 function setup() {
   createCanvas(800, 450);
   loadLevel();
@@ -64,9 +52,9 @@ function textFormat(x, y, size, label){
 function loadLevel(){
   if(currentLevel === "level1"){
     currentMap = new maps(level1);
-  }/*else if(currentLevel === "level2"){
+  }else if(currentLevel === "level2"){
     currentMap = new maps(level2);
   }else if(currentLevel === "level3"){
     currentMap = new maps(level3);
-  }*/
+  }
 }

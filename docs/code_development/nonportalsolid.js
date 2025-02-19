@@ -18,5 +18,4 @@ class NonPortalSolid {
       this.spriteSize, 
       this.spriteSize);
   }
-
 }
