@@ -16,7 +16,3 @@ function gameOverUI() {
     window.close();
   }
 }
-
-/*function restartLevel{
-  player.position(100, 100);
-}*/

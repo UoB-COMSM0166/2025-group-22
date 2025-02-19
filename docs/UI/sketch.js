@@ -4,7 +4,6 @@ let currentLevel = "level1";
 
 function preload() {
   //player_image = loadImage("images/player.png");
-  //player_injured_image = loadImage("images/player.png");
   tiles_image = loadImage("images/tiles.png");
 }
 
@@ -56,5 +55,25 @@ function loadLevel(){
     currentMap = new maps(level2);
   }else if(currentLevel === "level3"){
     currentMap = new maps(level3);
+  }
+}
+
+function keyPressed() {
+  //player.processInput(key);
+  if(key === "P" || key === "p"){
+    if(gameState === "pause"){
+      gameState = "playing";
+    }else if(gameState === "playing"){
+      gameState = "pause";
+    }
+  }
+}
+
+function mousePressed() {
+  if(mouseButton === LEFT && pistol === 0) {
+    player.processInput('blue pistol click');
+  }
+  else if(mouseButton === LEFT && pistol === 1) {
+    player.processInput('red pistol click');
   }
 }
