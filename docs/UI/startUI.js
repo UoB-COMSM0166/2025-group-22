@@ -14,7 +14,7 @@ function startUI() {
     gameState = "choosingLevel";
   }else if(mouseIsPressed && mouseX >= 330 && mouseX <= 480 && mouseY >= 320 && mouseY <= 410){
     currentLevel = "level1";
-    currentMap.draw();
+    gameState = "playing";
   }else if(mouseIsPressed && mouseX >= 580 && mouseX <= 730 && mouseY >= 320 && mouseY <= 410){
     window.close();
   }
