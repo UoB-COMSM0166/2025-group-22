@@ -1,4 +1,5 @@
 let gameState = "start";
+let currentMap = null;
 let currentLevel = "level1";
 
 function preload() {
@@ -7,10 +8,21 @@ function preload() {
   tiles_image = loadImage("images/tiles.png");
 }
 
-import { level1, level2, level3 } from "./maps";
+var level1 = [
+  [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+  [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
+  [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
+  [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
+  [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
+  [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
+  [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
+  [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
+  [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+];
 
 function setup() {
   createCanvas(800, 450);
+  loadLevel();
 }
 
 function draw() {
@@ -27,13 +39,7 @@ function draw() {
   }else if(gameState === "pause"){
     pauseUI();
   }else if(gameState === "playing"){
-    if(currentLevel === "level1"){
-      maps1 = new maps(level1);
-    }else if(currentLevel === "level2"){
-      maps1 = new maps(level2);
-    }else if(currentLevel === "level3"){
-      maps1 = new maps(level3);
-    }
+    currentMap.draw();
   }
 }
 
@@ -53,4 +59,14 @@ function textFormat(x, y, size, label){
   textFont('Courier New');
   fill(0);
   text(label, x, y)
+}
+
+function loadLevel(){
+  if(currentLevel === "level1"){
+    currentMap = new maps(level1);
+  }/*else if(currentLevel === "level2"){
+    currentMap = new maps(level2);
+  }else if(currentLevel === "level3"){
+    currentMap = new maps(level3);
+  }*/
 }
