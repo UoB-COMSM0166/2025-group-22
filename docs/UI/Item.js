@@ -8,11 +8,11 @@ class Item {
 
 
   }
-  draw(xoffset, yOffset) {
+  draw(xOffset, yOffset) {
     if (this.type === "door") {
       image(
         tiles_image, 
-        this.pos.x - xoffset, 
+        this.pos.x - xOffset,
         this.pos.y - yOffset - 50, 
         this.size, 
         this.size, 
@@ -22,7 +22,7 @@ class Item {
         this.spriteSize)
       image(
         tiles_image, 
-        this.pos.x - xoffset, 
+        this.pos.x - xOffset, 
         this.pos.y - yOffset, 
         this.size, 
         this.size, 
@@ -33,7 +33,7 @@ class Item {
     } else {
       image(
         tiles_image, 
-        this.pos.x - xoffset, 
+        this.pos.x - xOffset, 
         this.pos.y - yOffset, 
         this.size, this.size, 
         this.img[0] * this.spriteSize, 
