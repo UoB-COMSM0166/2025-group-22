@@ -1,17 +1,8 @@
-function winUI() {
-
-  let width = 150;
-  let height = 90;
-  let buttonY = 320;//450-60-50
-
-  button(170, buttonY, width, height, "New");
-  button(480, buttonY, width, height, "Exit");
-
-  textFormat(400, 150, 80, "WIN !!");
-
-  if(mouseIsPressed && mouseX >= 170 && mouseX <= 320 && mouseY >= 320 && mouseY <= 410){
-    gameState = "start";
-  }else if(mouseIsPressed && mouseX >= 480 && mouseX <= 630 && mouseY >= 320 && mouseY <= 410){
-    window.close();
+class WinUI extends UI {
+  constructor() {
+    super("WIN !!", [
+      { x: 170, y: 320, width: 150, height: 90, text: "New", action: () => { gameState = "start"; } },
+      { x: 480, y: 320, width: 150, height: 90, text: "Exit", action: () => { alert("请手动关闭页面"); window.close(); } }
+    ]);
   }
 }

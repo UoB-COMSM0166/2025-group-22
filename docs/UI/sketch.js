@@ -2,6 +2,7 @@ let gameState = "start";
 let currentMap = null;
 let currentLevel = "level1";
 let mySound,playButton; //音乐
+let ui;
 
 function preload() {
   //player_image = loadImage("images/player.png");
@@ -33,19 +34,32 @@ function Music() { //音乐
 function draw() {
   background(180, 217, 239);
 
-  if(gameState === "start"){
-    startUI();
-  }else if(gameState === "choosingLevel"){
-    levelUI();
-  }else if(gameState === "win"){
-    winUI();
-  }else if(gameState === "gameOver"){
-    gameOverUI();
-  }else if(gameState === "pause"){
-    pauseUI();
-  }else if(gameState === "playing"){
-    loadLevel();
-    currentMap.draw();
+  switch (gameState) {
+    case "start":
+      ui = new StartUI();
+      break;
+    case "choosingLevel":
+      ui = new LevelUI();
+      break;
+    case "playing":
+      loadLevel(); // 游戏进行中不渲染 UI
+      currentMap.draw();
+      ui = null;
+      break;
+    case "pause":
+      ui = new PauseUI();
+      break;
+    case "gameOver":
+      ui = new GameOverUI();
+      break;
+    case "win":
+      ui = new WinUI();
+      break;
+  }
+
+  if (ui) {
+    ui.draw();
+    ui.handleMouseClick();
   }
 }
 
