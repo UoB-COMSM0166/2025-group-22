@@ -69,11 +69,11 @@ function textFormat(x, y, size, label){
 
 function loadLevel(){
   if(currentLevel === "level1"){
-    currentMap = new maps(level1);
+    currentMap = new Maps(level1);
   }else if(currentLevel === "level2"){
-    currentMap = new maps(level2);
+    currentMap = new Maps(level2);
   }else if(currentLevel === "level3"){
-    currentMap = new maps(level3);
+    currentMap = new Maps(level3);
   }
 }
 

@@ -167,7 +167,7 @@ class Bullet {
   bulletonSolid() {
     // checking if the bullet in the "solid"
     if (this.getBlockType(0, 0) == "Solid") {
-      console.log(this.getBlockDir());
+      //console.log(this.getBlockDir());
       var dirFlag = 0;
       var blockDir = this.getBlockDir();
       var direction = this.getDir();
