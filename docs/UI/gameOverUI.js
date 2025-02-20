@@ -1,18 +1,8 @@
-function gameOverUI() {
-
-  let width = 150;
-  let height = 90;
-  let buttonY = 320;//450-60-50
-
-  button(170, buttonY, width, height, "Restart");
-  button(480, buttonY, width, height, "Exit");
-
-  textFormat(400, 150, 80, "Game Over");
-
-  if(mouseIsPressed && mouseX >= 170 && mouseX <= 320 && mouseY >= 320 && mouseY <= 410){
-    gameState = "playing";
-    restartLevel();
-  }else if(mouseIsPressed && mouseX >= 480 && mouseX <= 630 && mouseY >= 320 && mouseY <= 410){
-    window.close();
+class GameOverUI extends UI {
+  constructor() {
+    super("Game Over", [
+      { x: 170, y: 320, width: 150, height: 90, text: "Restart", action: () => { gameState = "playing"; restartLevel(); } },
+      { x: 480, y: 320, width: 150, height: 90, text: "Exit", action: () => window.close() }
+    ]);
   }
 }

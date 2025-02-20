@@ -1,22 +1,9 @@
-function startUI() {
-
-  let width = 150;
-  let height = 90;
-  let buttonY = 320;//450-60-50
-
-  button(80, buttonY, width, height, "Level");
-  button(330, buttonY, width, height, "Start");
-  button(580, buttonY, width, height, "Exit");
-
-  textFormat(400, 150, 80, "Twlight Seeker");
-
-  if(mouseIsPressed && mouseX >= 80 && mouseX <= 230 && mouseY >= 320 && mouseY <= 410){
-    gameState = "choosingLevel";
-  }else if(mouseIsPressed && mouseX >= 330 && mouseX <= 480 && mouseY >= 320 && mouseY <= 410){
-    currentLevel = "level1";
-    gameState = "playing";
-  }else if(mouseIsPressed && mouseX >= 580 && mouseX <= 730 && mouseY >= 320 && mouseY <= 410){
-    alert("请手动关闭页面");
-    window.close();
+class StartUI extends UI {
+  constructor() {
+    super("Twilight Seeker", [
+      { x: 80, y: 320, width: 150, height: 90, text: "Level", action: () => { gameState = "choosingLevel"; } },
+      { x: 330, y: 320, width: 150, height: 90, text: "Start", action: () => { currentLevel = "level1"; gameState = "playing"; } },
+      { x: 580, y: 320, width: 150, height: 90, text: "Exit", action: () => { alert("请手动关闭页面"); window.close(); } }
+    ]);
   }
 }
