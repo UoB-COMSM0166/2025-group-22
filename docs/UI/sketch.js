@@ -6,7 +6,7 @@ let mySound,playButton; //音乐
 function preload() {
   //player_image = loadImage("images/player.png");
   tiles_image = loadImage("images/tiles.png");
-  mySound = loadSound('soundtrack/phone.flac');
+  mySound = loadSound('soundtrack/Melody.mp3');
 }
 
 function setup() {
@@ -15,6 +15,8 @@ function setup() {
   playButton = createButton('Play Music'); //音乐
   playButton.position(20, 20); 
   playButton.mousePressed(Music);
+
+  mySound.setVolume(0.05); // 设置音量为0.2（即20%）
 
 }
 
