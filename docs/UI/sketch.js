@@ -7,6 +7,9 @@ let ui;
 function preload() {
   //player_image = loadImage("images/player.png");
   tiles_image = loadImage("images/tiles.png");
+  level1_background = loadImage("images/level1_background.png");
+  level2_background = loadImage("images/level2_background.png");
+  level3_background = loadImage("images/level3_background.png");
   mySound = loadSound('soundtrack/Melody.mp3');
 }
 
@@ -32,7 +35,17 @@ function Music() { //音乐
 }
 
 function draw() {
-  background(180, 217, 239);
+  if(gameState === "playing"){
+    if(currentLevel === "level1"){
+      background(level1_background);
+    }else if(currentLevel === "level2"){
+      background(level2_background)
+    }else{
+      background(level3_background);
+    }
+  }else{
+    background(180, 217, 239)
+  }
 
   switch (gameState) {
     case "start":
