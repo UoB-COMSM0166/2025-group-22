@@ -7,10 +7,10 @@ class Wall {
     this.type = type;
 
   }
-  draw(offset, yOffset) {
+  draw(xOffset, yOffset) {
     image(
       tiles_image, 
-      this.pos.x - offset, //camara offset
+      this.pos.x - xOffset, //camara offset
       this.pos.y - yOffset, 
       this.size, 
       this.size, 
