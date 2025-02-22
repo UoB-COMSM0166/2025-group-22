@@ -1,9 +1,10 @@
 class Enemy {
-  constructor(x, y, img, movement) {
+  constructor(x, y, img, type, movement) {
     this.pos = createVector(x, y);
     this.velocity = createVector(10, 0);
-    this.gravity = 15
-    this.img = img
+    this.gravity = 15;
+    this.img = img;
+    this.type = type;
     this.canMove = movement;
     this.size = 50;
     this.spriteSize = 64;
@@ -17,14 +18,52 @@ class Enemy {
     }
   }
 
-  draw(offset, yOffset) {
-    image(enemies_image, this.pos.x - offset, this.pos.y - yOffset, this.size, this.size, this.img[0] * this.spriteSize, this.img[1] * this.spriteSize, this.spriteSize, this.spriteSize);
+  draw(xOffset, yOffset) {
+    if(this.type == "dragon"){
+      image(
+        enemies_image, 
+        this.pos.x - xOffset, 
+        this.pos.y - yOffset - 50, 
+        this.size, this.size, 
+        this.img[0] * this.spriteSize, 
+        (this.img[1] - 1) * this.spriteSize, 
+        this.spriteSize, 
+        this.spriteSize);
+      image(
+        enemies_image, 
+        this.pos.x - xOffset - 50, 
+        this.pos.y - yOffset, 
+        this.size, this.size, 
+        (this.img[0] - 1) * this.spriteSize, 
+        this.img[1] * this.spriteSize, 
+        this.spriteSize, 
+        this.spriteSize);
+      image(
+        enemies_image, 
+        this.pos.x - xOffset - 50, 
+        this.pos.y - yOffset - 50, 
+        this.size, this.size, 
+        (this.img[0] - 1) * this.spriteSize, 
+        (this.img[1] - 1) * this.spriteSize, 
+        this.spriteSize, 
+        this.spriteSize);
+    }
+
+    image(
+      enemies_image, 
+      this.pos.x - xOffset, 
+      this.pos.y - yOffset, 
+      this.size, this.size, 
+      this.img[0] * this.spriteSize, 
+      this.img[1] * this.spriteSize, 
+      this.spriteSize, 
+      this.spriteSize);
     this.update();
   }
 
   onSolid() {
-    if (this.getBlockType(this.getLoc(this.pos.x - map1.offset, this.pos.y + this.size)) == "Solid") {
-      if (this.getBlockType(this.getLoc(this.pos.x - map1.offset + this.size - 1, this.pos.y + this.size)) == "Solid") {
+    if (this.getBlockType(this.getLoc(this.pos.x - currentMap.xOffset, this.pos.y + this.size)) == "Wall" || this.getBlockType(this.getLoc(this.pos.x - currentMap.xOffset, this.pos.y + this.size)) == "DirectionWall") {
+      if (this.getBlockType(this.getLoc(this.pos.x - currentMap.xOffset + this.size - 1, this.pos.y + this.size)) == "Wall" || this.getBlockType(this.getLoc(this.pos.x - currentMap.xOffset, this.pos.y + this.size)) == "DirectionWall") {
         return true;
       }
     }
@@ -32,20 +71,20 @@ class Enemy {
   }
 
   nextToSolid() {
-    if (this.getBlockType(this.getLoc(this.pos.x - map1.offset - 1, this.pos.y)) == "Solid") {
+    if (this.getBlockType(this.getLoc(this.pos.x - currentMap.xOffset - 1, this.pos.y)) == "Wall" || this.getBlockType(this.getLoc(this.pos.x - currentMap.xOffset, this.pos.y + this.size)) == "DirectionWall") {
       return true;
-    } else if (this.getBlockType(this.getLoc(this.pos.x - map1.offset + this.size, this.pos.y)) == "Solid") {
+    } else if (this.getBlockType(this.getLoc(this.pos.x - currentMap.xOffset + this.size, this.pos.y)) == "Wall" || this.getBlockType(this.getLoc(this.pos.x - currentMap.xOffset, this.pos.y + this.size)) == "DirectionWall") {
       return true;
     }
     return false;
   }
 
   getBlockType(z) {
-    return map1.blocks[z[1]][z[0]].constructor.name;
+    return currentMap.blocks[z[1]][z[0]].constructor.name;
   }
 
   getLoc(x = this.pos.x, y = this.pos.y) {
-    var location = [floor((x + map1.offset) / 50), floor((y) / 50)];
+    var location = [floor((x + currentMap.xOffset) / 50), floor((y) / 50)];
     return location;
   }
 }
