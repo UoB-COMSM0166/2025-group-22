@@ -1,7 +1,7 @@
 class Maps {
-  constructor(b) {
+  constructor(block) {
 
-    this.blocks = b;
+    this.blocks = block;
     this.xOffset = 0;
     this.yOffset = 0;
     this.enemyList = [];

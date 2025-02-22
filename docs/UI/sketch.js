@@ -20,8 +20,9 @@ function setup() {
   playButton = createButton('Play Music'); //音乐
   playButton.position(20, 20); 
   playButton.mousePressed(Music);
-
   mySound.setVolume(0.05); // 设置音量为0.2（即20%）
+
+  crosshair = new Crosshair([0, 5]);
 
 }
 

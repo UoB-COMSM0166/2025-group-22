@@ -47,23 +47,34 @@ class Enemy {
         (this.img[1] - 1) * this.spriteSize, 
         this.spriteSize, 
         this.spriteSize);
+      image(
+        enemies_image, 
+        this.pos.x - xOffset, 
+        this.pos.y - yOffset, 
+        this.size, this.size, 
+        this.img[0] * this.spriteSize, 
+        this.img[1] * this.spriteSize, 
+        this.spriteSize, 
+        this.spriteSize);
+    }else{
+      image(
+        enemies_image, 
+        this.pos.x - xOffset, 
+        this.pos.y - yOffset, 
+        this.size, this.size, 
+        this.img[0] * this.spriteSize, 
+        this.img[1] * this.spriteSize, 
+        this.spriteSize, 
+        this.spriteSize);
     }
-
-    image(
-      enemies_image, 
-      this.pos.x - xOffset, 
-      this.pos.y - yOffset, 
-      this.size, this.size, 
-      this.img[0] * this.spriteSize, 
-      this.img[1] * this.spriteSize, 
-      this.spriteSize, 
-      this.spriteSize);
     this.update();
   }
 
   onSolid() {
-    if (this.getBlockType(this.getLoc(this.pos.x - currentMap.xOffset, this.pos.y + this.size)) == "Wall" || this.getBlockType(this.getLoc(this.pos.x - currentMap.xOffset, this.pos.y + this.size)) == "DirectionWall") {
-      if (this.getBlockType(this.getLoc(this.pos.x - currentMap.xOffset + this.size - 1, this.pos.y + this.size)) == "Wall" || this.getBlockType(this.getLoc(this.pos.x - currentMap.xOffset, this.pos.y + this.size)) == "DirectionWall") {
+    if ( this.getBlockType(this.getLoc(this.pos.x - currentMap.xOffset, this.pos.y + this.size)) == "Wall" ||
+         this.getBlockType(this.getLoc(this.pos.x - currentMap.xOffset, this.pos.y + this.size)) == "DirectionWall") {
+      if (this.getBlockType(this.getLoc(this.pos.x - currentMap.xOffset + this.size - 1, this.pos.y + this.size)) == "Wall" ||
+          this.getBlockType(this.getLoc(this.pos.x - currentMap.xOffset + this.size - 1, this.pos.y + this.size)) == "DirectionWall") {
         return true;
       }
     }
@@ -71,9 +82,11 @@ class Enemy {
   }
 
   nextToSolid() {
-    if (this.getBlockType(this.getLoc(this.pos.x - currentMap.xOffset - 1, this.pos.y)) == "Wall" || this.getBlockType(this.getLoc(this.pos.x - currentMap.xOffset, this.pos.y + this.size)) == "DirectionWall") {
+    if (this.getBlockType(this.getLoc(this.pos.x - currentMap.xOffset - 1, this.pos.y)) == "Wall" ||
+        this.getBlockType(this.getLoc(this.pos.x - currentMap.xOffset - 1, this.pos.y)) == "DirectionWall") {
       return true;
-    } else if (this.getBlockType(this.getLoc(this.pos.x - currentMap.xOffset + this.size, this.pos.y)) == "Wall" || this.getBlockType(this.getLoc(this.pos.x - currentMap.xOffset, this.pos.y + this.size)) == "DirectionWall") {
+    } else if (this.getBlockType(this.getLoc(this.pos.x - currentMap.xOffset + this.size, this.pos.y)) == "Wall" ||
+               this.getBlockType(this.getLoc(this.pos.x - currentMap.xOffset + this.size, this.pos.y)) == "DirectionWall") {
       return true;
     }
     return false;
