@@ -7,6 +7,7 @@ let ui;
 function preload() {
   //player_image = loadImage("images/player.png");
   tiles_image = loadImage("images/tiles.png");
+  enemies_image = loadImage("images/enemies.png");
   level1_background = loadImage("images/level1_background.png");
   level2_background = loadImage("images/level2_background.png");
   level3_background = loadImage("images/level3_background.png");
