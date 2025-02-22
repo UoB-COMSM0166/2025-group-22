@@ -37,6 +37,7 @@ function Music() { //音乐
 }
 
 function draw() {
+
   if(gameState === "playing"){
     if(currentLevel === "level1"){
       background(level1_background);
@@ -59,10 +60,13 @@ function draw() {
     case "playing":
       loadLevel(); // 游戏进行中不渲染 UI
       currentMap.draw();
+      crosshair.draw();
+      noCursor();
       ui = null;
       break;
     case "pause":
       ui = new PauseUI();
+      cursor();
       break;
     case "gameOver":
       ui = new GameOverUI();
