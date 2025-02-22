@@ -86,7 +86,7 @@ class Player {
   }
 
   getLoc(x = this.pos.x, y = this.pos.y) {
-    var location = [floor((x + currentMap.offset) / 50), floor(y / 50)];
+    var location = [floor((x + currentMap.xOffset) / 50), floor(y / 50)];
     return location;
   }
 
@@ -99,7 +99,7 @@ class Player {
 
   touchingEnemy() {
     for (var i = 0; i < currentMap.enemyList.length; i++) {
-      var distance = dist(this.pos.x + currentMap.offset, this.pos.y, currentMap.enemyList[i].pos.x, currentMap.enemyList[i].pos.y)
+      var distance = dist(this.pos.x + currentMap.xOffset, this.pos.y, currentMap.enemyList[i].pos.x, currentMap.enemyList[i].pos.y)
       if (distance < 40) {
         return true;
       }
@@ -109,7 +109,7 @@ class Player {
 
   touchingItem() {
     for (var i = 0; i < currentMap.itemList.length; i++) {
-      var distance = dist(this.pos.x + currentMap.offset, this.pos.y, currentMap.itemList[i].pos.x, currentMap.itemList[i].pos.y)
+      var distance = dist(this.pos.x + currentMap.xOffset, this.pos.y, currentMap.itemList[i].pos.x, currentMap.itemList[i].pos.y)
       if (distance < 40) {
         this.collectItem(i);
       }
@@ -261,7 +261,7 @@ class Player {
         if (this.pos.x < width / 6) {
           this.pos.x -= 5;
         } else {
-          currentMap.offset -= 5
+          currentMap.xOffset -= 5
 
         }
       }
@@ -272,7 +272,7 @@ class Player {
         if (this.pos.x < width / 3) {
           this.pos.x += 5;
         } else {
-          currentMap.offset += 5
+          currentMap.xOffset += 5
 
         }
       }
@@ -310,35 +310,35 @@ class Player {
 
                 //teleport to the right of the portalsolid
                 if(currentMap.blocks[row][col].direction === "right") {
-                  this.pos.x = 50 * col + 50 - currentMap.offset;
+                  this.pos.x = 50 * col + 50 - currentMap.xOffset;
                   this.pos.y = 50* row;
-                  currentMap.offset += (col - current_x)*50;
+                  currentMap.xOffset += (col - current_x)*50;
                   this.pos.x -= (col - current_x)*50;
                   console.log("from right to right");
                 }
                 //teleport to the left of the portalsolid
                 if(currentMap.blocks[row][col].direction === "left") {
-                  this.pos.x = 50 * col - 50 - currentMap.offset;
+                  this.pos.x = 50 * col - 50 - currentMap.xOffset;
                   this.pos.y = 50 * row;
-                  currentMap.offset += (col - current_x)*50 - 100;
+                  currentMap.xOffset += (col - current_x)*50 - 100;
                   this.pos.x -= (col - current_x)*50 - 100;
                   console.log("from right to left");
                 }
 
                 //teleport to the top of the portalsolid
                 if(currentMap.blocks[row][col].direction === "top") {
-                  this.pos.x = 50 * col - currentMap.offset;
+                  this.pos.x = 50 * col - currentMap.xOffset;
                   this.pos.y = 50* row - 50;
-                  currentMap.offset += (col - current_x)*50 - 50;
+                  currentMap.xOffset += (col - current_x)*50 - 50;
                   this.pos.x -= (col - current_x)*50 - 50;
                   console.log("from right to top");
                 }
 
                 //teleport to the bottom of the portalsolid
                 if(currentMap.blocks[row][col].direction === "bottom") {
-                  this.pos.x = 50 * col - currentMap.offset;
+                  this.pos.x = 50 * col - currentMap.xOffset;
                   this.pos.y = 50* row + 50;
-                  currentMap.offset += (col - current_x)*50 - 50;
+                  currentMap.xOffset += (col - current_x)*50 - 50;
                   this.pos.x -= (col - current_x)*50 - 50; 
                   console.log("from right to bottom");
                 }
@@ -363,37 +363,37 @@ class Player {
               if(col != current_x || row != current_y) {
                 console.log(currentMap.blocks[row][col]);
                 if(currentMap.blocks[row][col].direction === "right") {
-                  this.pos.x = 50 * col + 50 - currentMap.offset;
+                  this.pos.x = 50 * col + 50 - currentMap.xOffset;
                   this.pos.y = 50* row;
-                  currentMap.offset += (col - current_x)*50 + 100;
+                  currentMap.xOffset += (col - current_x)*50 + 100;
                   this.pos.x -= (col - current_x)*50 + 100;
                   console.log("from left to rigt");
                   break;
                 }
                 else if(currentMap.blocks[row][col].direction === "left") {
                   console.log("this.pos before : "+this.pos);
-                  console.log("currentMap.offset before : "+currentMap.offset);
-                  this.pos.x = 50 * col - 50 - currentMap.offset;
+                  console.log("currentMap.xOffset before : "+currentMap.xOffset);
+                  this.pos.x = 50 * col - 50 - currentMap.xOffset;
                   console.log("this.pos after: "+this.pos);
-                  console.log("currentMap.offset after : "+currentMap.offset);
+                  console.log("currentMap.xOffset after : "+currentMap.xOffset);
                   this.pos.y = 50* row;
-                  currentMap.offset += (col - current_x)*50;
+                  currentMap.xOffset += (col - current_x)*50;
                   this.pos.x -= (col - current_x)*50; 
                   console.log("from left to left");
                   break
                 }
                 else if(currentMap.blocks[row][col].direction === "top") {
-                  this.pos.x = 50 * col - currentMap.offset;
+                  this.pos.x = 50 * col - currentMap.xOffset;
                   this.pos.y = 50* row - 50;
-                  currentMap.offset += (col - current_x)*50 + 50;
+                  currentMap.xOffset += (col - current_x)*50 + 50;
                   this.pos.x -= (col - current_x)*50 + 50;
                   console.log("from left to top");
                   break
                 }
                 else if(currentMap.blocks[row][col].direction === "bottom") {
-                  this.pos.x = 50 * col - currentMap.offset;
+                  this.pos.x = 50 * col - currentMap.xOffset;
                   this.pos.y = 50* row + 50;
-                  currentMap.offset += (col - current_x)*50 + 50;
+                  currentMap.xOffset += (col - current_x)*50 + 50;
                   this.pos.x -= (col - current_x)*50 + 50;
                   console.log("from left to bottom");
                   break
@@ -419,30 +419,30 @@ class Player {
                 console.log(currentMap.blocks[row][col]);
 
                 if(currentMap.blocks[row][col].direction === "right") {
-                  this.pos.x = 50 * col + 50 - currentMap.offset;
+                  this.pos.x = 50 * col + 50 - currentMap.xOffset;
                   this.pos.y = 50* row;
-                  currentMap.offset += (col - current_x)*50 + 50;
+                  currentMap.xOffset += (col - current_x)*50 + 50;
                   this.pos.x -= (col - current_x)*50 + 50;
                   console.log("from top to right"); 
                 }
                 if(currentMap.blocks[row][col].direction === "left") {
-                  this.pos.x = 50 * col - 50 - currentMap.offset;
+                  this.pos.x = 50 * col - 50 - currentMap.xOffset;
                   this.pos.y = 50* row;
-                  currentMap.offset += (col - current_x)*50 -50;
+                  currentMap.xOffset += (col - current_x)*50 -50;
                   this.pos.x -= (col - current_x)*50 -50;
                   console.log("from top to left");
                 }
                 if(currentMap.blocks[row][col].direction === "top") {
-                  this.pos.x = 50 * col - currentMap.offset;
+                  this.pos.x = 50 * col - currentMap.xOffset;
                   this.pos.y = 50* row - 100;
-                  currentMap.offset += (col - current_x)*50;
+                  currentMap.xOffset += (col - current_x)*50;
                   this.pos.x -= (col - current_x)*50;
                   console.log("from top to top");
                 }
                 if(currentMap.blocks[row][col].direction === "bottom") {
-                  this.pos.x = 50 * col - currentMap.offset;
+                  this.pos.x = 50 * col - currentMap.xOffset;
                   this.pos.y = 50* row + 50;
-                  currentMap.offset += (col - current_x)*50;
+                  currentMap.xOffset += (col - current_x)*50;
                   this.pos.x -= (col - current_x)*50;
                   console.log("from top to bottom");
                 }
@@ -467,30 +467,30 @@ class Player {
                 console.log(currentMap.blocks[row][col]);
 
                 if(currentMap.blocks[row][col].direction === "right") {
-                  this.pos.x = 50 * col + 50 - currentMap.offset;
+                  this.pos.x = 50 * col + 50 - currentMap.xOffset;
                   this.pos.y = 50* row;
-                  currentMap.offset += (col - current_x)*50 +50;
+                  currentMap.xOffset += (col - current_x)*50 +50;
                   this.pos.x -= (col - current_x)*50 +50; 
                   console.log("from bottom to right");
                 }
                 if(currentMap.blocks[row][col].direction === "left") {
-                  this.pos.x = 50 * col - 50 - currentMap.offset;
+                  this.pos.x = 50 * col - 50 - currentMap.xOffset;
                   this.pos.y = 50* row;
-                  currentMap.offset += (col - current_x)*50 - 50;
+                  currentMap.xOffset += (col - current_x)*50 - 50;
                   this.pos.x -= (col - current_x)*50 - 50; 
                   console.log("from bottom to left");
                 }
                 if(currentMap.blocks[row][col].direction === "top") {
-                  this.pos.x = 50 * col - currentMap.offset;
+                  this.pos.x = 50 * col - currentMap.xOffset;
                   this.pos.y = 50* row - 50;
-                  currentMap.offset += (col - current_x)*50;
+                  currentMap.xOffset += (col - current_x)*50;
                   this.pos.x -= (col - current_x)*50; 
                   console.log("from bottom to top");
                 }
                 if(currentMap.blocks[row][col].direction === "bottom") {
-                  this.pos.x = 50 * col - currentMap.offset;
+                  this.pos.x = 50 * col - currentMap.xOffset;
                   this.pos.y = 50* row + 50;
-                  currentMap.offset += (col - current_x)*50;
+                  currentMap.xOffset += (col - current_x)*50;
                   this.pos.x -= (col - current_x)*50; 
                   console.log("from bottom to bottom");
                 }
@@ -508,13 +508,13 @@ class Player {
     if(key === 'blue pistol click'){
       console.log("left button");
       console.log("pos.x: " + this.pos.x + " pos.y" + this.pos.y);
-      this.bullet = new Bullet(this.pos.x + currentMap.offset, this.pos.y, mouseX + currentMap.offset, mouseY + currentMap.yOffset, [7,3], "blue");
+      this.bullet = new Bullet(this.pos.x + currentMap.xOffset, this.pos.y, mouseX + currentMap.xOffset, mouseY + currentMap.yOffset, [7,3], "blue");
     }
 
     if(key === 'red pistol click'){
       console.log("left button");
       console.log("pos.x: " + this.pos.x + " pos.y" + this.pos.y);
-      this.bullet = new Bullet(this.pos.x + currentMap.offset, this.pos.y, mouseX + currentMap.offset, mouseY + currentMap.yOffset, [10,3], "red");
+      this.bullet = new Bullet(this.pos.x + currentMap.xOffset, this.pos.y, mouseX + currentMap.xOffset, mouseY + currentMap.yOffset, [10,3], "red");
     }
   }
   
@@ -529,7 +529,7 @@ class Player {
       image(player_image, this.pos.x, this.pos.y - currentMap.yOffset, this.size, this.size, 0, 0, this.spriteSize, this.spriteSize);
     }
     // if(this.bullet != 0){
-    //   this.bullet.draw(currentMap.offset, currentMap.yOffset);
+    //   this.bullet.draw(currentMap.xOffset, currentMap.yOffset);
     // }
   }
 
