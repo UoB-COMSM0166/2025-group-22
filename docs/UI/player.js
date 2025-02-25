@@ -17,6 +17,7 @@ class Player {
     this.endingMessage = "GAME OVER";
   }
 
+  
   update() {
     if (this.isAlive()) {
       this.updateInjured()
