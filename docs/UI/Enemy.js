@@ -71,10 +71,8 @@ class Enemy {
   }
 
   onSolid() {
-    if ( this.getBlockType(this.getLoc(this.pos.x - currentMap.xOffset, this.pos.y + this.size)) == "Wall" ||
-         this.getBlockType(this.getLoc(this.pos.x - currentMap.xOffset, this.pos.y + this.size)) == "DirectionWall") {
-      if (this.getBlockType(this.getLoc(this.pos.x - currentMap.xOffset + this.size - 1, this.pos.y + this.size)) == "Wall" ||
-          this.getBlockType(this.getLoc(this.pos.x - currentMap.xOffset + this.size - 1, this.pos.y + this.size)) == "DirectionWall") {
+    if (this.getBlockClass(this.getLoc(this.pos.x - currentMap.xOffset, this.pos.y + this.size)) instanceof Wall) {
+      if (this.getBlockClass(this.getLoc(this.pos.x - currentMap.xOffset + this.size - 1, this.pos.y + this.size)) instanceof Wall) {
         return true;
       }
     }
@@ -82,18 +80,16 @@ class Enemy {
   }
 
   nextToSolid() {
-    if (this.getBlockType(this.getLoc(this.pos.x - currentMap.xOffset - 1, this.pos.y)) == "Wall" ||
-        this.getBlockType(this.getLoc(this.pos.x - currentMap.xOffset - 1, this.pos.y)) == "DirectionWall") {
+    if (this.getBlockClass(this.getLoc(this.pos.x - currentMap.xOffset - 1, this.pos.y)) instanceof Wall) {
       return true;
-    } else if (this.getBlockType(this.getLoc(this.pos.x - currentMap.xOffset + this.size, this.pos.y)) == "Wall" ||
-               this.getBlockType(this.getLoc(this.pos.x - currentMap.xOffset + this.size, this.pos.y)) == "DirectionWall") {
+    } else if (this.getBlockClass(this.getLoc(this.pos.x - currentMap.xOffset + this.size, this.pos.y)) instanceof Wall) {
       return true;
     }
     return false;
   }
 
-  getBlockType(z) {
-    return currentMap.blocks[z[1]][z[0]].constructor.name;
+  getBlockClass(gridPos) {
+    return currentMap.blocks[gridPos[1]][gridPos[0]];
   }
 
   getLoc(x = this.pos.x, y = this.pos.y) {
