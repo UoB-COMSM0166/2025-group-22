@@ -46,14 +46,15 @@ class Bullet {
     }
   }
 
-  getBlockType(offX = 0, offY = 0) {
-    var z = this.getLoc(this.pos.x + this.size/2 + offX, this.pos.y + this.size/2 + offY);
+  
+  getBlockClass(offX = 0, offY = 0) {   //CHECK
+    var gridPos = this.getLoc(this.pos.x + this.size/2 + offX, this.pos.y + this.size/2 + offY);    //CHECK
     if(floor((this.pos.x + this.size/2) / 50) < 0 || floor((this.pos.x + this.size/2) / 50) > currentMap.blocks[0].length - 1 || floor((this.pos.y + this.size/2) / 50) < 0 || floor((this.pos.y + this.size/2) / 50) > currentMap.blocks.length - 1) {
       console.log("undefined");
       return "undefined";
     }
     else {
-      return currentMap.blocks[z[1]][z[0]].constructor.name;
+      return currentMap.blocks[gridPos[1]][gridPos[0]];   //CHECK
     }
   }
 
@@ -89,7 +90,7 @@ class Bullet {
   }
 
   getDir() {
-    var solidsize = new Solid();
+    var solidsize = new Wall();   //CHECK
     var block_x = this.getLoc()[0] * 50 + solidsize.size/2;
     var block_y = this.getLoc()[1] * 50 + solidsize.size/2;
     console.log("getDir")
@@ -134,8 +135,8 @@ class Bullet {
 
   bulletonWall() {
     // checking if the bullet in the "solid"
-    if (this.getBlockType(0, 0) == "Solid") {
-      var dirFlag = 0;
+    if (this.getBlockClass(0, 0) == "Wall" || this.getBlockClass(0, 0) == "DirectionWall") {   //CHECK
+      var dirFlag = 0;  
       var blockDir = this.getBlockDir();
       var direction = this.getDir();
       for(var col = 0; col < blockDir.length; col++) {
@@ -154,29 +155,29 @@ class Bullet {
       if(this.bullettype === "blue") {
         for (var row = 0; row < currentMap.blocks.length; row++) {
           for (var col = 0; col < currentMap.blocks[row].length; col++) {
-            if(currentMap.blocks[row][col].constructor.name == "PortalSolid" && currentMap.blocks[row][col].type == "blue") {
-              currentMap.blocks[row][col] = new Solid(col * 50, row * 50, [3, 0]);
+            if(currentMap.blocks[row][col].type == "bluePortal") {  //CHECK
+              currentMap.blocks[row][col] = new DirectionWall(col * 50, row * 50, [1, 0], "standard");  //CHECK
             }
           }
         }
-        currentMap.blocks[this.getLoc()[1]][this.getLoc()[0]] = new PortalSolid(this.getLoc()[0] * 50, this.getLoc()[1] * 50, [6, 0], direction,"blue");
+        currentMap.blocks[this.getLoc()[1]][this.getLoc()[0]] = new Portal(this.getLoc()[0] * 50, this.getLoc()[1] * 50, [0, 1], "bluePortal", direction);  //CHECK
       }
       
       //red bullet generate red portal
       else if(this.bullettype === "red") {
         for (var row = 0; row < currentMap.blocks.length; row++) {
           for (var col = 0; col < currentMap.blocks[row].length; col++) {
-            if(currentMap.blocks[row][col].constructor.name == "PortalSolid" && currentMap.blocks[row][col].type == "red") {
-              currentMap.blocks[row][col] = new Solid(col * 50, row * 50, [3, 0]);
+            if(currentMap.blocks[row][col].type == "redPortal") {   //CHECK
+              currentMap.blocks[row][col] = new DirectionWall(col * 50, row * 50, [1, 0], "standard");  //CHECK
             }
           }
         }
-        currentMap.blocks[this.getLoc()[1]][this.getLoc()[0]] = new PortalSolid(this.getLoc()[0] * 50, this.getLoc()[1] * 50, [7, 1], direction,"red");
+        currentMap.blocks[this.getLoc()[1]][this.getLoc()[0]] = new Portal(this.getLoc()[0] * 50, this.getLoc()[1] * 50, [0, 2], "redPortal", direction);  //CHECK
       }
 
       return "In";
     }
-    else if(this.getBlockType(0, 0) == "undefined"){
+    else if(this.getBlockClass(0, 0) == "undefined"){
       return "undefined";
     }
     return false;
@@ -184,7 +185,10 @@ class Bullet {
 
   bulletonReflectWall() {
     // checking if the bullet in the "solid"
-    if (this.getBlockType(0, 0) == "ReflectSolid") {
+    if (this.getBlockClass(0, 0) == "reflectDown" ||    //CHECK
+        this.getBlockClass(0, 0) == "reflectUp"||     //CHECK
+        this.getBlockClass(0, 0) == "reflectLeft"||    //CHECK
+        this.getBlockClass(0, 0) == "reflectRight") {   //CHECK
       console.log(this.getBlockDir());
       var dirFlag = 0;
       var blockDir = this.getBlockDir();
@@ -211,7 +215,7 @@ class Bullet {
 
       return "In";
     }
-    else if(this.getBlockType(0, 0) == "undefined"){
+    else if(this.getBlockClass(0, 0) == "undefined"){    //CHECK
       return "undefined";
     }
     return false;
