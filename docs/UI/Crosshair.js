@@ -1,7 +1,7 @@
 class Crosshair {
   constructor(img) {
     this.img = img
-    this.size = 50;
+    this.size = 15;
     this.spriteSize = 64;
     //this.sprites
 

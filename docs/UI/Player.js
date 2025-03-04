@@ -14,7 +14,6 @@ class Player {
     this.keys = 0;
     this.movingState = 0;
     this.bullet = 0;
-    this.endingMessage = "GAME OVER";
   }
 
   update() {
@@ -31,9 +30,7 @@ class Player {
       }
       this.touchingItem();
     } else {
-      textSize(50);
-      fill(255);
-      text(this.endingMessage, 250, 200);
+      gameState = "gameOver";
     }
 
   }
@@ -53,19 +50,27 @@ class Player {
       } else if (currentMap.itemList[item].type == "door") {
         // switch to the next level!!!!!
         if (this.keys > 0) {
-          this.lives = 0;
-          this.endingMessage = "YOU DID IT!!!!";
+          if(currentLevel == "level1"){
+            this.keys = 0;
+            currentLevel = "level2";
+          }else if(currentLevel == "level2"){
+            this.keys = 0;
+            currentLevel = "level3";
+          }else{
+            this.keys = 0;
+            this.lives = 0;
+            gameState = "win";
+          }
         }
-
       }
     }
-
   
   isAlive() {
     if (this.lives > 0)
       return true;
     return false;
   }
+
   updateInjured() {
     if (this.injured) {
       //FPS: 60
@@ -76,30 +81,32 @@ class Player {
         this.injuryTimer = 0;
       }
     }
-
-
   }
 
-  getBlockType(offX = 0, offY = 0) {
-    var z = this.getLoc(this.pos.x + offX, this.pos.y + offY);
-    return currentMap.blocks[z[1]][z[0]].constructor.name;
+  getBlockClass(offX = 0, offY = 0) {
+    var gridPos = this.getLoc(this.pos.x + offX, this.pos.y + offY);
+    return currentMap.blocks[gridPos[1]][gridPos[0]];
   }
 
   getLoc(x = this.pos.x, y = this.pos.y) {
-    var location = [floor((x + currentMap.xOffset) / 50), floor(y / 50)];
+    var location = [floor((x + currentMap.xOffset) / 50), floor((y + currentMap.yOffset) / 50)];
     return location;
   }
 
   getBlockDir(offX = 0, offY = 0) {
-    var z = this.getLoc(this.pos.x + offX, this.pos.y + offY);
-    if(currentMap.blocks[z[1]][z[0]].constructor.name === "PortalSolid") {
-      return currentMap.blocks[z[1]][z[0]].direction;
+    var gridPos = this.getLoc(this.pos.x + offX, this.pos.y + offY);
+    if(currentMap.blocks[gridPos[1]][gridPos[0]].type === "standard") {
+      return currentMap.blocks[gridPos[1]][gridPos[0]].direction;
     }
   }
 
   touchingEnemy() {
     for (var i = 0; i < currentMap.enemyList.length; i++) {
-      var distance = dist(this.pos.x + currentMap.xOffset, this.pos.y, currentMap.enemyList[i].pos.x, currentMap.enemyList[i].pos.y)
+      var distance = dist(
+        this.pos.x + currentMap.xOffset, 
+        this.pos.y + currentMap.yOffset, 
+        currentMap.enemyList[i].pos.x, 
+        currentMap.enemyList[i].pos.y)
       if (distance < 40) {
         return true;
       }
@@ -109,32 +116,35 @@ class Player {
 
   touchingItem() {
     for (var i = 0; i < currentMap.itemList.length; i++) {
-      var distance = dist(this.pos.x + currentMap.xOffset, this.pos.y, currentMap.itemList[i].pos.x, currentMap.itemList[i].pos.y)
+      var distance = dist(
+        this.pos.x + currentMap.xOffset, 
+        this.pos.y + currentMap.yOffset, 
+        currentMap.itemList[i].pos.x, 
+        currentMap.itemList[i].pos.y)
       if (distance < 40) {
         this.collectItem(i);
       }
     }
-
   }
 
-  onSolid() {
+  onWall() {
     // checking bottom left
-    if (this.getBlockType(0, this.size) == "Wall" || this.getBlockType(0, this.size) == "DirectionWall" ) {
+    if (this.getBlockClass(0, this.size) == "Wall" || this.getBlockClass(0, this.size) == "DirectionWall" ) {
       this.pos.y = this.getLoc()[1] * 50
       return "bottom";
     }
     // checking bottom right
-    if (this.getBlockType(this.size - 1, this.size) == "Wall" || this.getBlockType(this.size - 1, this.size) == "DirectionWall") {
+    if (this.getBlockClass(this.size - 1, this.size) == "Wall" || this.getBlockClass(this.size - 1, this.size) == "DirectionWall") {
       this.pos.y = this.getLoc()[1] * 50
       return "bottom";
     }
     // checking top left
-    if (this.getBlockType() == "Wall" || this.getBlockType(this.size - 1, this.size) == "DirectionWall") {
+    if (this.getBlockClass(0, 0) == "Wall" || this.getBlockClass(0, 0) == "DirectionWall") {
       this.pos.y = this.getLoc()[1] * 50 + 50
       return "top";
     }
     // checking top right
-    if (this.getBlockType(this.size - 1, 0) == "Wall" || this.getBlockType(this.size - 1, 0) == "DirectionWall") {
+    if (this.getBlockClass(this.size - 1, 0) == "Wall" || this.getBlockClass(this.size - 1, 0) == "DirectionWall") {
       this.pos.y = this.getLoc()[1] * 50 + 50
       return "top";
     }
@@ -157,9 +167,9 @@ class Player {
       currentMap.yOffset = 0;
     }
 
-    if (this.isFalling() && this.onSolid() != "top") {
+    if (this.isFalling() && this.onWall() != "top") {
       this.velocity.mult(0.9);
-    } else if (this.isFalling() && this.onSolid() == "top") {
+    } else if (this.isFalling() && this.onWall() == "top") {
       this.velocity.y = 0;
     } else {
       this.velocity.mult(0);
@@ -173,16 +183,15 @@ class Player {
   }
 
   isFalling() {
-    if (this.onSolid() != "bottom")
+    if (this.onWall() != "bottom")
       return true;
     return false;
   }
 
-//懂了
   processInput(key) {
     //A
     if (keyIsDown(65)) {
-      if (this.getBlockType(-1, 25) != "Wall" && this.getBlockType(-1, 25) != "PortalSolid" && this.getBlockType(-1, 25) != "NonPortalSolid" && this.getBlockType(-1, 25) != "ReflectSolid") {
+      if (this.getBlockClass(-1, 25) != "Wall" && this.getBlockClass(-1, 25) != "DirectionWall") {
         if (this.pos.x < width / 6) {
           this.pos.x -= 5;
         } else {
@@ -193,7 +202,7 @@ class Player {
     }
     //D
     if (keyIsDown(68)) {
-      if (this.getBlockType(this.size, 25) != "Wall" && this.getBlockType(this.size, 25) != "PortalSolid" && this.getBlockType(this.size, 25) != "NonPortalSolid" && this.getBlockType(this.size, 25) != "ReflectSolid") {
+      if (this.getBlockClass(this.size, 25) != "Wall" && this.getBlockClass(this.size, 25) != "DirectionWall") {
         if (this.pos.x < width / 3) {
           this.pos.x += 5;
         } else {
@@ -210,23 +219,23 @@ class Player {
     //press 'E' to teleport
     if(key === 'e' || key === 'E'){
 
-      //teleport from the right of the portalsolid
-      if(this.getBlockType(-1, 25) === "PortalSolid" && this.getBlockDir(-1, 25) === "right"){
+      //teleport from the right of the standard wall
+      if(this.getBlockClass(-1, 25).type === "standard" && this.getBlockDir(-1, 25) === "right"){
         var current_x = this.getLoc(this.pos.x -1, this.pos.y + 25)[0];
         var current_y = this.getLoc(this.pos.x -1, this.pos.y + 25)[1];
         for (var row = 0; row < currentMap.blocks.length; row++) {
           for (var col = 0; col < currentMap.blocks[row].length; col++) {
-            if(currentMap.blocks[row][col].constructor.name == "PortalSolid") {
+            if(currentMap.blocks[row][col].type == "standard") {
               if(col != current_x || row != current_y) {
 
-                //teleport to the right of the portalsolid
+                //teleport to the right of the standard wall
                 if(currentMap.blocks[row][col].direction === "right") {
                   this.pos.x = 50 * col + 50 - currentMap.xOffset;
                   this.pos.y = 50* row;
                   currentMap.xOffset += (col - current_x)*50;
                   this.pos.x -= (col - current_x)*50;
                 }
-                //teleport to the left of the portalsolid
+                //teleport to the left of the standard wall
                 if(currentMap.blocks[row][col].direction === "left") {
                   this.pos.x = 50 * col - 50 - currentMap.xOffset;
                   this.pos.y = 50 * row;
@@ -234,7 +243,7 @@ class Player {
                   this.pos.x -= (col - current_x)*50 - 100;
                 }
 
-                //teleport to the top of the portalsolid
+                //teleport to the top of the standard wall
                 if(currentMap.blocks[row][col].direction === "top") {
                   this.pos.x = 50 * col - currentMap.xOffset;
                   this.pos.y = 50* row - 50;
@@ -242,7 +251,7 @@ class Player {
                   this.pos.x -= (col - current_x)*50 - 50;
                 }
 
-                //teleport to the bottom of the portalsolid
+                //teleport to the bottom of the standard wall
                 if(currentMap.blocks[row][col].direction === "bottom") {
                   this.pos.x = 50 * col - currentMap.xOffset;
                   this.pos.y = 50* row + 50;
@@ -255,13 +264,13 @@ class Player {
         }
       }
 
-      //teleport from the left of the portalsolid
-      else if(this.getBlockType(this.size, 25) === "PortalSolid" && this.getBlockDir(this.size, 25) === "left"){
+      //teleport from the left of the standard wall
+      else if(this.getBlockClass(this.size, 25).type === "standard" && this.getBlockDir(this.size, 25) === "left"){
         var current_x = this.getLoc(this.pos.x + this.size, this.pos.y + 25)[0];
         var current_y = this.getLoc(this.pos.x + this.size, this.pos.y + 25)[1];
         for (var row = 0; row < currentMap.blocks.length; row++) {
           for (var col = 0; col < currentMap.blocks[row].length; col++) {
-            if(currentMap.blocks[row][col].constructor.name == "PortalSolid") {
+            if(currentMap.blocks[row][col].type == "standard") {
               if(col != current_x || row != current_y) {
                 if(currentMap.blocks[row][col].direction === "right") {
                   this.pos.x = 50 * col + 50 - currentMap.xOffset;
@@ -297,13 +306,13 @@ class Player {
         }
       }
 
-      //teleport from the top of the portalsolid
-      else if(this.getBlockType(25, this.size + 1) === "PortalSolid" && this.getBlockDir(25, this.size+1) === "top"){
+      //teleport from the top of the standard
+      else if(this.getBlockClass(25, this.size + 1).type === "standard" && this.getBlockDir(25, this.size+1) === "top"){
         var current_x = this.getLoc(this.pos.x + 25, this.pos.y + this.size + 1)[0];
         var current_y = this.getLoc(this.pos.x + 25, this.pos.y + this.size + 1)[1];
         for (var row = 0; row < currentMap.blocks.length; row++) {
           for (var col = 0; col < currentMap.blocks[row].length; col++) {
-            if(currentMap.blocks[row][col].constructor.name == "PortalSolid") {
+            if(currentMap.blocks[row][col].type == "standard") {
               if(col != current_x || row != current_y) {
 
                 if(currentMap.blocks[row][col].direction === "right") {
@@ -336,13 +345,13 @@ class Player {
         }
       }
 
-      //teleport from the bottom of the portalsolid
-      else if(this.getBlockType(25, -1) === "PortalSolid" && this.getBlockDir(25, -1) === "bottom"){
+      //teleport from the bottom of the standard wall
+      else if(this.getBlockClass(25, -1).type === "standard" && this.getBlockDir(25, -1) === "bottom"){
         var current_x = this.getLoc(this.pos.x + 25, this.pos.y - 1)[0];
         var current_y = this.getLoc(this.pos.x + 25, this.pos.y - 1)[1];
         for (var row = 0; row < currentMap.blocks.length; row++) {
           for (var col = 0; col < currentMap.blocks[row].length; col++) {
-            if(currentMap.blocks[row][col].constructor.name == "PortalSolid") {
+            if(currentMap.blocks[row][col].type == "standard") {
               if(col != current_x || row != current_y) {
 
                 if(currentMap.blocks[row][col].direction === "right") {
@@ -380,11 +389,11 @@ class Player {
       pistol = 1 - pistol;
     }
     if(key === 'blue pistol click'){
-      this.bullet = new Bullet(this.pos.x + currentMap.xOffset, this.pos.y, mouseX + currentMap.xOffset, mouseY + currentMap.yOffset, [7,3], "blue");
+      this.bullet = new Bullet(this.pos.x + currentMap.xOffset, this.pos.y, mouseX + currentMap.xOffset, mouseY + currentMap.yOffset, [0,5], "blue");
     }
 
     if(key === 'red pistol click'){
-      this.bullet = new Bullet(this.pos.x + currentMap.xOffset, this.pos.y, mouseX + currentMap.xOffset, mouseY + currentMap.yOffset, [10,3], "red");
+      this.bullet = new Bullet(this.pos.x + currentMap.xOffset, this.pos.y, mouseX + currentMap.xOffset, mouseY + currentMap.yOffset, [0,5], "red");
     }
   }
   

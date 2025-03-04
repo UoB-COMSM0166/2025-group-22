@@ -2,7 +2,7 @@ class Enemy {
   constructor(x, y, img, type, movement) {
     this.pos = createVector(x, y);
     this.velocity = createVector(10, 0);
-    this.gravity = 15;
+    //this.gravity = 15;
     this.img = img;
     this.type = type;
     this.canMove = movement;
@@ -13,7 +13,7 @@ class Enemy {
   update() {
     if (this.canMove) {
       this.pos.x += this.velocity.x
-      if (this.nextToSolid() || !this.onSolid())
+      if (this.nextToWall() || !this.onWall())
         this.velocity.x = -this.velocity.x;
     }
   }
@@ -70,7 +70,7 @@ class Enemy {
     this.update();
   }
 
-  onSolid() {
+  onWall() {
     if (this.getBlockClass(this.getLoc(this.pos.x - currentMap.xOffset, this.pos.y + this.size)) instanceof Wall) {
       if (this.getBlockClass(this.getLoc(this.pos.x - currentMap.xOffset + this.size - 1, this.pos.y + this.size)) instanceof Wall) {
         return true;
@@ -79,7 +79,7 @@ class Enemy {
     return false;
   }
 
-  nextToSolid() {
+  nextToWall() {
     if (this.getBlockClass(this.getLoc(this.pos.x - currentMap.xOffset - 1, this.pos.y)) instanceof Wall) {
       return true;
     } else if (this.getBlockClass(this.getLoc(this.pos.x - currentMap.xOffset + this.size, this.pos.y)) instanceof Wall) {
@@ -93,7 +93,7 @@ class Enemy {
   }
 
   getLoc(x = this.pos.x, y = this.pos.y) {
-    var location = [floor((x + currentMap.xOffset) / 50), floor((y) / 50)];
+    var location = [floor((x + currentMap.xOffset) / 50), floor((y + currentMap.yOffset) / 50)];
     return location;
   }
 }
