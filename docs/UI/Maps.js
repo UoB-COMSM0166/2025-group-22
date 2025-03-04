@@ -43,22 +43,26 @@ class Maps {
           this.itemList.push(this.blocks[row][col])
         }
         if (this.blocks[row][col] == 10) {
+          this.blocks[row][col] = new Item(col * 50, row * 50, [2, 4], "heart");
+          this.itemList.push(this.blocks[row][col])
+        }
+        if (this.blocks[row][col] == 11) {
           this.blocks[row][col] = new Enemy(col * 50, row * 50, [0, 0], "", false);
           this.enemyList.push(this.blocks[row][col])
         }
-        if (this.blocks[row][col] == 11) {
+        if (this.blocks[row][col] == 12) {
           this.blocks[row][col] = new Enemy(col * 50, row * 50, [1, 0], "", true);
           this.enemyList.push(this.blocks[row][col])
         }
-        if (this.blocks[row][col] == 12) {
+        if (this.blocks[row][col] == 13) {
           this.blocks[row][col] = new Enemy(col * 50, row * 50, [2, 0], "", true);
           this.enemyList.push(this.blocks[row][col])
         }
-        if (this.blocks[row][col] == 13) {
+        if (this.blocks[row][col] == 14) {
           this.blocks[row][col] = new Enemy(col * 50, row * 50, [3, 0], "", true);
           this.enemyList.push(this.blocks[row][col])
         }
-        if (this.blocks[row][col] == 14) {
+        if (this.blocks[row][col] == 15) {
           this.blocks[row][col] = new Enemy(col * 50, row * 50, [5, 1], "dragon", false);
           this.enemyList.push(this.blocks[row][col])
         }

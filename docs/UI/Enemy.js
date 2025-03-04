@@ -1,7 +1,7 @@
 class Enemy {
   constructor(x, y, img, type, movement) {
     this.pos = createVector(x, y);
-    this.velocity = createVector(10, 0);
+    this.velocity = createVector(5, 0);
     //this.gravity = 15;
     this.img = img;
     this.type = type;
