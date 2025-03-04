@@ -9,7 +9,7 @@ class Player {
     this.injured = false;
     this.injuryTimer = 0;
     this.animationTimer = 0;
-    this.lives = 1;
+    this.lives = 100;
     // items/keys/etc...
     this.keys = 0;
     this.movingState = 0;

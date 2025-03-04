@@ -20,8 +20,8 @@ class Bullet {
     this.velocity.y = b/v*10;
     this.bullettype = bullettype;
   }
-  draw(offset, yOffset) {
-    image(tiles_image, this.pos.x - offset, this.pos.y - yOffset, this.size, this.size, this.img[0] * this.spriteSize, this.img[1] * this.spriteSize, this.spriteSize, this.spriteSize);
+  draw(xOffset, yOffset) {
+    image(tiles_image, this.pos.x - xOffset, this.pos.y - yOffset, this.size, this.size, this.img[0] * this.spriteSize, this.img[1] * this.spriteSize, this.spriteSize, this.spriteSize);
   }
 
   updateGravity() {
@@ -54,8 +54,23 @@ class Bullet {
       return "undefined";
     }
     else {
-      return currentMap.blocks[gridPos[1]][gridPos[0]];   //CHECK
+      return currentMap.blocks[gridPos[1]][gridPos[0]].constructor.name;   //CHECK
     }
+
+    
+  }
+
+  getBlockType(offX = 0, offY = 0) {   //CHECK
+    var gridPos = this.getLoc(this.pos.x + this.size/2 + offX, this.pos.y + this.size/2 + offY);    //CHECK
+    if(floor((this.pos.x + this.size/2) / 50) < 0 || floor((this.pos.x + this.size/2) / 50) > currentMap.blocks[0].length - 1 || floor((this.pos.y + this.size/2) / 50) < 0 || floor((this.pos.y + this.size/2) / 50) > currentMap.blocks.length - 1) {
+      console.log("undefined");
+      return "undefined";
+    }
+    else {
+      return currentMap.blocks[gridPos[1]][gridPos[0]].type;   //CHECK
+    }
+
+    
   }
 
   getLoc(x = this.pos.x + this.size/2, y = this.pos.y + this.size/2) {
@@ -132,7 +147,8 @@ class Bullet {
 
   bulletonWall() {
     // checking if the bullet in the wall
-    if (this.getBlockClass(0, 0) == "Wall" || this.getBlockClass(0, 0) == "DirectionWall") {   //CHECK
+    if (this.getBlockClass(0, 0) == "DirectionWall" && this.getBlockType(0, 0) == "standard"){   //CHECK
+      console.log("bulletonWall");
       var dirFlag = 0;  
       var blockDir = this.getBlockDir();
       var direction = this.getDir();
@@ -153,7 +169,7 @@ class Bullet {
             top: [0, 1], bottom: [1, 1], left: [2, 1], right: [3, 1]
         },
         red: {
-            top: [0, 2], bottom: [1, 2], left: [2, 2], right: [2, 3]
+            top: [0, 2], bottom: [1, 2], left: [2, 2], right: [3, 2]
         }
       };
       let portalType = this.bullettype;
@@ -188,10 +204,10 @@ class Bullet {
 
   bulletonReflectWall() {
     // checking if the bullet in the "solid"
-    if (this.getBlockClass(0, 0).type == "reflectDown" ||    //CHECK
-        this.getBlockClass(0, 0).type == "reflectUp"||     //CHECK
-        this.getBlockClass(0, 0).type == "reflectLeft"||    //CHECK
-        this.getBlockClass(0, 0).type == "reflectRight") {   //CHECK
+    if (this.getBlockType(0, 0) == "reflectDown" ||    //CHECK
+        this.getBlockType(0, 0) == "reflectUp"||     //CHECK
+        this.getBlockType(0, 0) == "reflectLeft"||    //CHECK
+        this.getBlockType(0, 0) == "reflectRight") {   //CHECK
       var dirFlag = 0;
       var blockDir = this.getBlockDir();
       var direction = this.getDir();

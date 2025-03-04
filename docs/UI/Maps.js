@@ -47,8 +47,8 @@ class Maps {
           this.itemList.push(this.blocks[row][col])
         }
         if (this.blocks[row][col] == 11) {
-          this.blocks[row][col] = new Enemy(col * 50, row * 50, [0, 0], "", false);
-          this.enemyList.push(this.blocks[row][col])
+          this.blocks[row][col] = new Enemy(col * 50, row * 50, [0, 0], "spike", false);
+          this.enemyList.push(this.blocks[row][col]);
         }
         if (this.blocks[row][col] == 12) {
           this.blocks[row][col] = new Enemy(col * 50, row * 50, [1, 0], "", true);

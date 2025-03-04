@@ -4,9 +4,10 @@ let currentLevel = "level1";
 let mySound,playButton; //音乐
 let ui;
 let pistol = 0;
+let currentEnemy = null;
 
 function preload() {
-  //player_image = loadImage("images/player.png");
+  player_image = loadImage("images/player.png");
   tiles_image = loadImage("images/tiles.png");
   enemies_image = loadImage("images/enemies.png");
   level1_background = loadImage("images/level1_background.png");
@@ -59,9 +60,10 @@ function draw() {
       ui = new LevelUI();
       break;
     case "playing":
-      loadLevel(); // 游戏进行中不渲染 UI
+      // loadLevel(); // 游戏进行中不渲染 UI
       currentMap.draw();
       crosshair.draw();
+      // console.log(currentMap);
       player.draw();
       player.update();
         if(player.bullet != 0){
@@ -124,10 +126,10 @@ function keyPressed() {
 }
 
 function mousePressed() {
-  if(mouseButton === LEFT && pistol === 0) {
+  if(mouseButton === LEFT && pistol === 0 && gameState == "playing") {
     player.processInput('blue pistol click');
   }
-  else if(mouseButton === LEFT && pistol === 1) {
+  else if(mouseButton === LEFT && pistol === 1 && gameState == "playing") {
     player.processInput('red pistol click');
   }
 }

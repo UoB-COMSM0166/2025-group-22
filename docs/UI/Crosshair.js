@@ -6,7 +6,7 @@ class Crosshair {
     //this.sprites
 
   }
-  draw(offset, yOffset) {
+  draw(xOffset, yOffset) {
     image(tiles_image, 
       mouseX - this.size/2, 
       mouseY - this.size/2, 

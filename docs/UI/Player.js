@@ -9,7 +9,7 @@ class Player {
     this.injured = false;
     this.injuryTimer = 0;
     this.animationTimer = 0;
-    this.lives = 3;
+    this.lives = 100;
     // items/keys/etc...
     this.keys = 0;
     this.movingState = 0;
@@ -25,7 +25,13 @@ class Player {
       if (this.touchingEnemy()) {
         this.injured = true;
         if (this.injuryTimer == 0) {
-          this.lives--;
+          if(currentEnemy == "spike"){
+            this.lives -= 3;
+          }
+          else{
+            this.lives--;
+          }
+          
         }
       }
       this.touchingItem();
@@ -53,9 +59,13 @@ class Player {
           if(currentLevel == "level1"){
             this.keys = 0;
             currentLevel = "level2";
+            loadLevel();
+            this.pos = createVector(200, 200);
           }else if(currentLevel == "level2"){
             this.keys = 0;
             currentLevel = "level3";
+            this.pos = createVector(200, 200);
+            loadLevel();
           }else{
             this.keys = 0;
             this.lives = 0;
@@ -85,17 +95,19 @@ class Player {
 
   getBlockClass(offX = 0, offY = 0) {
     var gridPos = this.getLoc(this.pos.x + offX, this.pos.y + offY);
-    return currentMap.blocks[gridPos[1]][gridPos[0]];
+    // console.log(currentMap.blocks[gridPos[1]][gridPos[0]].constructor.name);
+    return currentMap.blocks[gridPos[1]][gridPos[0]].constructor.name;
   }
 
   getLoc(x = this.pos.x, y = this.pos.y) {
-    var location = [floor((x + currentMap.xOffset) / 50), floor((y + currentMap.yOffset) / 50)];
+    var location = [floor((x + currentMap.xOffset) / 50), floor((y) / 50)];
+    // var location = [floor((x + currentMap.xOffset) / 50), floor((y + currentMap.yOffset) / 50)];
     return location;
   }
 
   getBlockDir(offX = 0, offY = 0) {
     var gridPos = this.getLoc(this.pos.x + offX, this.pos.y + offY);
-    if(currentMap.blocks[gridPos[1]][gridPos[0]].type === "standard") {
+    if(currentMap.blocks[gridPos[1]][gridPos[0]].constructor.name === "Portal") {
       return currentMap.blocks[gridPos[1]][gridPos[0]].direction;
     }
   }
@@ -104,10 +116,13 @@ class Player {
     for (var i = 0; i < currentMap.enemyList.length; i++) {
       var distance = dist(
         this.pos.x + currentMap.xOffset, 
-        this.pos.y + currentMap.yOffset, 
+        // this.pos.y + currentMap.yOffset, 
+        this.pos.y, 
         currentMap.enemyList[i].pos.x, 
         currentMap.enemyList[i].pos.y)
       if (distance < 40) {
+        currentEnemy = currentMap.enemyList[i].type;
+        // console.log(currentEnemy);
         return true;
       }
     }
@@ -118,7 +133,8 @@ class Player {
     for (var i = 0; i < currentMap.itemList.length; i++) {
       var distance = dist(
         this.pos.x + currentMap.xOffset, 
-        this.pos.y + currentMap.yOffset, 
+        this.pos.y, 
+        // this.pos.y + currentMap.yOffset, 
         currentMap.itemList[i].pos.x, 
         currentMap.itemList[i].pos.y)
       if (distance < 40) {
@@ -129,22 +145,24 @@ class Player {
 
   onWall() {
     // checking bottom left
-    if (this.getBlockClass(0, this.size) == "Wall" || this.getBlockClass(0, this.size) == "DirectionWall" ) {
+    if (this.getBlockClass(0, this.size) == "Wall" || this.getBlockClass(0, this.size) == "DirectionWall" || this.getBlockClass(0, this.size) == "Portal") {
+      // console.log("bottom1");
       this.pos.y = this.getLoc()[1] * 50
       return "bottom";
     }
     // checking bottom right
-    if (this.getBlockClass(this.size - 1, this.size) == "Wall" || this.getBlockClass(this.size - 1, this.size) == "DirectionWall") {
+    if (this.getBlockClass(this.size - 1, this.size) == "Wall" || this.getBlockClass(this.size - 1, this.size) == "DirectionWall" || this.getBlockClass(this.size - 1, this.size) == "Portal") {
+      // console.log("bottom2");
       this.pos.y = this.getLoc()[1] * 50
       return "bottom";
     }
     // checking top left
-    if (this.getBlockClass(0, 0) == "Wall" || this.getBlockClass(0, 0) == "DirectionWall") {
+    if (this.getBlockClass(0, 0) == "Wall" || this.getBlockClass(0, 0) == "DirectionWall" || this.getBlockClass(0, 0) == "Portal") {
       this.pos.y = this.getLoc()[1] * 50 + 50
       return "top";
     }
     // checking top right
-    if (this.getBlockClass(this.size - 1, 0) == "Wall" || this.getBlockClass(this.size - 1, 0) == "DirectionWall") {
+    if (this.getBlockClass(this.size - 1, 0) == "Wall" || this.getBlockClass(this.size - 1, 0) == "DirectionWall" || this.getBlockClass(this.size - 1, 0) == "Portal") {
       this.pos.y = this.getLoc()[1] * 50 + 50
       return "top";
     }
@@ -152,6 +170,9 @@ class Player {
   }
 
   updateGravity() {
+    // console.log(this.velocity);
+    // console.log(this.isFalling());
+    // console.log(this.pos);
     this.pos.add(this.velocity);
 
     if (this.isFalling()) {
@@ -172,7 +193,9 @@ class Player {
     } else if (this.isFalling() && this.onWall() == "top") {
       this.velocity.y = 0;
     } else {
+      // console.log("else");
       this.velocity.mult(0);
+
     }
   }
 
@@ -185,13 +208,17 @@ class Player {
   isFalling() {
     if (this.onWall() != "bottom")
       return true;
+    // console.log("false");
     return false;
   }
 
   processInput(key) {
     //A
     if (keyIsDown(65)) {
-      if (this.getBlockClass(-1, 25) != "Wall" && this.getBlockClass(-1, 25) != "DirectionWall") {
+      if (this.getBlockClass(-1, 25) != "Wall" && this.getBlockClass(-1, 25) != "DirectionWall" && this.getBlockClass(-1, 25) != "Portal") {
+        console.log(this.pos.x);
+        
+        // console.log(width / 6);
         if (this.pos.x < width / 6) {
           this.pos.x -= 5;
         } else {
@@ -202,7 +229,7 @@ class Player {
     }
     //D
     if (keyIsDown(68)) {
-      if (this.getBlockClass(this.size, 25) != "Wall" && this.getBlockClass(this.size, 25) != "DirectionWall") {
+      if (this.getBlockClass(this.size, 25) != "Wall" && this.getBlockClass(this.size, 25) != "DirectionWall" && this.getBlockClass(this.size, 25) != "Portal") {
         if (this.pos.x < width / 3) {
           this.pos.x += 5;
         } else {
@@ -225,15 +252,17 @@ class Player {
     }
     
     //press 'E' to teleport
+    
     if(key === 'e' || key === 'E'){
-
+      // console.log(this.getBlockClass(25, this.size + 1));
+      // console.log(this.getBlockDir(25, this.size+1));
       //teleport from the right of the standard wall
-      if(this.getBlockClass(-1, 25).type === "standard" && this.getBlockDir(-1, 25) === "right"){
+      if(this.getBlockClass(-1, 25) === "Portal" && this.getBlockDir(-1, 25) === "right"){
         var current_x = this.getLoc(this.pos.x -1, this.pos.y + 25)[0];
         var current_y = this.getLoc(this.pos.x -1, this.pos.y + 25)[1];
         for (var row = 0; row < currentMap.blocks.length; row++) {
           for (var col = 0; col < currentMap.blocks[row].length; col++) {
-            if(currentMap.blocks[row][col].type == "standard") {
+            if(currentMap.blocks[row][col].constructor.name == "Portal") {
               if(col != current_x || row != current_y) {
 
                 //teleport to the right of the standard wall
@@ -273,12 +302,12 @@ class Player {
       }
 
       //teleport from the left of the standard wall
-      else if(this.getBlockClass(this.size, 25).type === "standard" && this.getBlockDir(this.size, 25) === "left"){
+      else if(this.getBlockClass(this.size, 25) === "Portal" && this.getBlockDir(this.size, 25) === "left"){
         var current_x = this.getLoc(this.pos.x + this.size, this.pos.y + 25)[0];
         var current_y = this.getLoc(this.pos.x + this.size, this.pos.y + 25)[1];
         for (var row = 0; row < currentMap.blocks.length; row++) {
           for (var col = 0; col < currentMap.blocks[row].length; col++) {
-            if(currentMap.blocks[row][col].type == "standard") {
+            if(currentMap.blocks[row][col].constructor.name == "Portal") {
               if(col != current_x || row != current_y) {
                 if(currentMap.blocks[row][col].direction === "right") {
                   this.pos.x = 50 * col + 50 - currentMap.xOffset;
@@ -315,12 +344,13 @@ class Player {
       }
 
       //teleport from the top of the standard
-      else if(this.getBlockClass(25, this.size + 1).type === "standard" && this.getBlockDir(25, this.size+1) === "top"){
+      else if(this.getBlockClass(25, this.size + 1) === "Portal" && this.getBlockDir(25, this.size+1) === "top"){
+        // console.log("11111111111");
         var current_x = this.getLoc(this.pos.x + 25, this.pos.y + this.size + 1)[0];
         var current_y = this.getLoc(this.pos.x + 25, this.pos.y + this.size + 1)[1];
         for (var row = 0; row < currentMap.blocks.length; row++) {
           for (var col = 0; col < currentMap.blocks[row].length; col++) {
-            if(currentMap.blocks[row][col].type == "standard") {
+            if(currentMap.blocks[row][col].constructor.name == "Portal") {
               if(col != current_x || row != current_y) {
 
                 if(currentMap.blocks[row][col].direction === "right") {
@@ -354,12 +384,12 @@ class Player {
       }
 
       //teleport from the bottom of the standard wall
-      else if(this.getBlockClass(25, -1).type === "standard" && this.getBlockDir(25, -1) === "bottom"){
+      else if(this.getBlockClass(25, -1) === "Portal" && this.getBlockDir(25, -1) === "bottom"){
         var current_x = this.getLoc(this.pos.x + 25, this.pos.y - 1)[0];
         var current_y = this.getLoc(this.pos.x + 25, this.pos.y - 1)[1];
         for (var row = 0; row < currentMap.blocks.length; row++) {
           for (var col = 0; col < currentMap.blocks[row].length; col++) {
-            if(currentMap.blocks[row][col].type == "standard") {
+            if(currentMap.blocks[row][col].constructor.name === "Portal") {
               if(col != current_x || row != current_y) {
 
                 if(currentMap.blocks[row][col].direction === "right") {

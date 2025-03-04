@@ -71,8 +71,8 @@ class Enemy {
   }
 
   onWall() {
-    if (this.getBlockClass(this.getLoc(this.pos.x - currentMap.xOffset, this.pos.y + this.size)) instanceof Wall) {
-      if (this.getBlockClass(this.getLoc(this.pos.x - currentMap.xOffset + this.size - 1, this.pos.y + this.size)) instanceof Wall) {
+    if (this.getBlockClass(this.getLoc(this.pos.x - currentMap.xOffset, this.pos.y - currentMap.yOffset + this.size)) instanceof Wall) {
+      if (this.getBlockClass(this.getLoc(this.pos.x - currentMap.xOffset + this.size - 1, this.pos.y - currentMap.yOffset + this.size)) instanceof Wall) {
         return true;
       }
     }
@@ -80,9 +80,9 @@ class Enemy {
   }
 
   nextToWall() {
-    if (this.getBlockClass(this.getLoc(this.pos.x - currentMap.xOffset - 1, this.pos.y)) instanceof Wall) {
+    if (this.getBlockClass(this.getLoc(this.pos.x - currentMap.xOffset - 1, this.pos.y - currentMap.yOffset)) instanceof Wall) {
       return true;
-    } else if (this.getBlockClass(this.getLoc(this.pos.x - currentMap.xOffset + this.size, this.pos.y)) instanceof Wall) {
+    } else if (this.getBlockClass(this.getLoc(this.pos.x - currentMap.xOffset + this.size, this.pos.y - currentMap.yOffset)) instanceof Wall) {
       return true;
     }
     return false;
