@@ -3,6 +3,7 @@ let currentMap = null;
 let currentLevel = "level1";
 let mySound,playButton; //音乐
 let ui;
+let pistol = 0;
 
 function preload() {
   //player_image = loadImage("images/player.png");
@@ -23,7 +24,7 @@ function setup() {
   mySound.setVolume(0.05); // 设置音量为0.2（即20%）
 
   crosshair = new Crosshair([0, 5]);
-
+  player = new Player();
 }
 
 function Music() { //音乐
@@ -61,6 +62,14 @@ function draw() {
       loadLevel(); // 游戏进行中不渲染 UI
       currentMap.draw();
       crosshair.draw();
+      player.draw();
+      player.update();
+        if(player.bullet != 0){
+          player.bullet.draw(currentMap.xOffset, currentMap.yOffset);  
+          if(player.bullet.update() == "undefined") {
+            player.bullet = 0;
+          }
+        }
       noCursor();
       ui = null;
       break;
@@ -111,14 +120,7 @@ function loadLevel(){
 }
 
 function keyPressed() {
-  //player.processInput(key);
-  if(key === "P" || key === "p"){
-    if(gameState === "pause"){
-      gameState = "playing";
-    }else if(gameState === "playing"){
-      gameState = "pause";
-    }
-  }
+  player.processInput(key);
 }
 
 function mousePressed() {

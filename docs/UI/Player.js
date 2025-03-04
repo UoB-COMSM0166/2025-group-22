@@ -215,6 +215,14 @@ class Player {
     if (keyIsDown(87)) {
       this.jump();
     }
+
+    if(key === "P" || key === "p"){
+      if(gameState === "pause"){
+        gameState = "playing";
+      }else if(gameState === "playing"){
+        gameState = "pause";
+      }
+    }
     
     //press 'E' to teleport
     if(key === 'e' || key === 'E'){
@@ -402,7 +410,7 @@ class Player {
       image(tiles_image, i * 25, 10, 50, 50, 11 * 64, 4 * 64, 64, 64)
     }
     if(this.injured && this.injuryTimer % 6 == 0){
-      image(player_injured_image, this.pos.x, this.pos.y - currentMap.yOffset, this.size, this.size, 0, 0, this.spriteSize, this.spriteSize);
+      image(player_image, this.pos.x, this.pos.y - currentMap.yOffset, this.size, this.size, 0, 0, this.spriteSize, this.spriteSize);
     }
     else{
       image(player_image, this.pos.x, this.pos.y - currentMap.yOffset, this.size, this.size, 0, 0, this.spriteSize, this.spriteSize);
