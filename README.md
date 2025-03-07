@@ -2,7 +2,7 @@
 2025 COMSM0166 group 22
 
 
-## 1.Your Game
+## Game
 
 Link to your game(demo)[PLAY HERE](https://uob-comsm0166.github.io/2025-group-22/UI/)
 
@@ -10,14 +10,18 @@ Your game lives in the [/docs](/docs) folder, and is published using Github page
 
 Include a demo video of your game here (you don't have to wait until the end, you can insert a work in progress video)
 
-## 2.Your Progress
+## Progress
 - [Week1](https://github.com/UoB-COMSM0166/2025-group-22/tree/main/conference/week01)
 
 - [Week2](https://github.com/UoB-COMSM0166/2025-group-22/tree/main/conference/week02)
 
 - [Week3]()
 
-## 3.Your Group
+
+## Project Report
+1.Our Group
+2.Introduction
+## 1.Our Group
 
 <p align="center">
   <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/Group-22.jpg" width="550">
@@ -36,9 +40,9 @@ Include a demo video of your game here (you don't have to wait until the end, yo
 
 </div>
 
-## 4.Project Report
+### 2. Introduction 
 
-### 4.1 Introduction and Inspriation
+### 2.1Game Inspriation
 
 | Game | Mechanics                  |
 | :---   | :---   |
@@ -47,7 +51,8 @@ Include a demo video of your game here (you don't have to wait until the end, yo
 | Hotline Miami     | Fast-paced combat: Players pursue efficient combos by using precise manoeuvres to quickly eliminate enemies with melee weapons or firearms.High difficulty and one-hit kills: Both players and enemies can be knocked out in one hit, emphasising planning and reaction speed.Level Strategy: Choose different routes and tactics for each level, while wearing character masks to gain special abilities.Retro Aesthetics: Combines pixel art style and 80's neon atmosphere with intense electronic music to shape a unique experience. | 
 | Portal     | Portal Gun: the player uses the device to create two connected portals for travelling through walls, floors and obstacles.Physics Puzzle: Solve puzzles using gravity, inertia and the properties of the portals, such as jumping to hard-to-reach areas.Linear levels: Each level is designed with independent puzzles that gradually guide the player through complex techniques. | 
 | Papers, Please      | Border Inspection: Players take on the role of an immigration officer who examines the passports and documents of those entering the country and decides whether to release or deny them.  Rule Changes: Over time, entry policies are updated to check for additional documents or identify falsified information.  Time Management: a fixed number of hours in a day and the need to complete work quickly to earn an income while maintaining a family.  Moral Choice: Players make choices between rules, prizes and human nature, affecting the ending and story development.   | 
-## Game Mechanics
+
+## 2.2Game Ideas
 
 | Game | Mechanics                  | Challenges                  |
 | :---   | :---   |:---   |
