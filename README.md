@@ -19,11 +19,11 @@ Include a demo video of your game here (you don't have to wait until the end, yo
 
 
 ## Project Report
-#### - [Our Group](#1-our-group)
+#### · [1.Group Formation](#1-group-formation)
 
-#### - [Introduction](#2-introduction)
+#### · [2.Introduction](#2-introduction)
 
-## 1. Our Group
+## 1. Group Formation
 
 <p align="center">
   <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/Group-22.jpg" width="550">
