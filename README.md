@@ -10,7 +10,9 @@ Your game lives in the [/docs](/docs) folder, and is published using Github page
 
 Include a demo video of your game here (you don't have to wait until the end, you can insert a work in progress video)
 
+
 ## Progress
+
 - [Week1](https://github.com/UoB-COMSM0166/2025-group-22/tree/main/conference/week01)
 
 - [Week2](https://github.com/UoB-COMSM0166/2025-group-22/tree/main/conference/week02)
@@ -19,9 +21,11 @@ Include a demo video of your game here (you don't have to wait until the end, yo
 
 
 ## Project Report
+
 #### · [1. Group Formation](#1-group-formation)
 
 #### · [2. Introduction](#2-introduction)
+
 
 ### 1. Group Formation
 
@@ -41,6 +45,7 @@ Include a demo video of your game here (you don't have to wait until the end, yo
 | 6            | Hao Jen Shih | qf24044@bristol.ac.uk  |    |
 
 </div>
+
 
 ### 2. Introduction 
 
