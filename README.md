@@ -59,7 +59,9 @@ Include a demo video of your game here (you don't have to wait until the end, yo
 | Portal     | Portal Gun: the player uses the device to create two connected portals for travelling through walls, floors and obstacles.Physics Puzzle: Solve puzzles using gravity, inertia and the properties of the portals, such as jumping to hard-to-reach areas.Linear levels: Each level is designed with independent puzzles that gradually guide the player through complex techniques. | 
 | Papers, Please      | Border Inspection: Players take on the role of an immigration officer who examines the passports and documents of those entering the country and decides whether to release or deny them.  Rule Changes: Over time, entry policies are updated to check for additional documents or identify falsified information.  Time Management: a fixed number of hours in a day and the need to complete work quickly to earn an income while maintaining a family.  Moral Choice: Players make choices between rules, prizes and human nature, affecting the ending and story development.   | 
 
+<div align="center">
 #### 2.2. Game Ideas
+</div>
 
 | Game | Mechanics                  | Challenges                  |
 | :---   | :---   |:---   |
