@@ -20,7 +20,7 @@ Include a demo video of your game here (you don't have to wait until the end, yo
 - [Week3]()
 
 
-## Project Report
+## Project Report Contents
 
 #### · [1. Group Formation](#1-group-formation)
 
