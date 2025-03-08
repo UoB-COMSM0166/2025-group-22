@@ -50,7 +50,7 @@ Include a demo video of your game here (you don't have to wait until the end, yo
 ## 2. Introduction 
 
 <div align="center">
-2.1. Game Inspriation
+Game Inspriation
 </div>
 
 | Game | Mechanics                  |
@@ -62,7 +62,7 @@ Include a demo video of your game here (you don't have to wait until the end, yo
 | Papers, Please      | Border Inspection: Players take on the role of an immigration officer who examines the passports and documents of those entering the country and decides whether to release or deny them.  Rule Changes: Over time, entry policies are updated to check for additional documents or identify falsified information.  Time Management: a fixed number of hours in a day and the need to complete work quickly to earn an income while maintaining a family.  Moral Choice: Players make choices between rules, prizes and human nature, affecting the ending and story development.   | 
 
 <div align="center">
-2.2. Game Ideas
+Game Ideas
 </div>
 
 | Game | Mechanics                  | Challenges                  |
