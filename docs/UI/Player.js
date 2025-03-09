@@ -5,7 +5,7 @@ class Player {
     this.gravity = 10;
     this.size = 50;
     // this.sprite stuff
-    this.spriteSize = 96
+    this.spriteSize = 64
     this.injured = false;
     this.injuryTimer = 0;
     this.animationTimer = 0;
