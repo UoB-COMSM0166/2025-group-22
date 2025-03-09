@@ -7,7 +7,7 @@ let pistol = 0;
 let currentEnemy = null;
 
 function preload() {
-  player_image = loadImage("images/player.png");
+  player_image = loadImage("images/players.png");
   tiles_image = loadImage("images/tiles.png");
   enemies_image = loadImage("images/enemies.png");
   level1_background = loadImage("images/level1_background.png");
