@@ -125,8 +125,44 @@ To improve development efficiency and task planning, we have written user storie
 
 ### 4. Design
 
-- 15% ~750 words 
-- System architecture. Class diagrams, behavioural diagrams. 
+#### System Architecture
+
+##### User Interface
+1. Menu: main menu and various state menus (level selection, pause, win, game over, etc.)
+2. In-Game Interface: timer, HP, menu indicators, level indicators
+3. Graphics Rendering: 2D sprite-based rendering
+   
+##### Game Controller
+1. Player movement
+   - "A" key: move left
+   - "D" key: move right
+   - Space key: jump
+2. Partal switching
+   - "E" key: trun into the ther portal
+3. Shooting bullets
+   - Left mouse button: fire bullet
+4. Changing portal type
+   - "C" key: change the portal that the player want to fire
+  
+##### Game logic
+1. Portal Mechanism
+   - The player can only enter a portal from the direction the bullet was fired and exit from the other portal of a different color.    
+2. Level Design
+   - The game complexity oncreses with different enemy types in each level.
+4. Enemy Type
+   - Slime: move back and front at a alow speed
+   - Goblin: move back and forth at a fast speed
+   - Dragon: shoot fireballs in a single direction
+6. Item System
+   - Heart: restores health
+   - Key: Unlock doors
+   - Door: Requires a key to open and progress.
+
+##### Audio and Graphics
+1. pixel art
+2. Animation system
+3. Soung Design
+4. Background Music
 
 ### 5. Implementation
 
