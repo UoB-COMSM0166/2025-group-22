@@ -80,18 +80,18 @@ These are the two games we have chosen after some discussion. First, Twilight Se
 
 ## 3. Requirements 
 
-## Paper Prototypes
+### Paper Prototypes
 
 In workshop3, we created paper prototypes for both games we designed, so that players and everyone in the development team could understand the core gameplay and mechanics of the games. (2D Jumper: https://youtu.be/Vv2zbfhl6WI
   Cross Fire: https://youtu.be/X4RS6Jgd0k) For example in Twilight Seeker, the core portal mechanic, How to create a portal and how to teleport through it. At the same time, it mimics the change of the game screen according to the movement of the player, which is also one of the possible problems that we need to solve during the development process.
 
-## Feasibility Studies
+### Feasibility Studies
 In addition to the paper prototype, we have also drawn some pictures to illustrate the most important game mechanics, such as the mechanism of defeating monsters and picking up items in Cross Fire, as well as the picture effect of players shooting, which also reminds us that since players need to interact with the map to get different items, Designing a map becomes a much more painstaking process. In Twilight Seeker, the portal mechanic also brought up a lot of other issues to consider, such as controlling the trajectory of bullets and collision detection, how to get bullets to the exact square that the player needs to hit, which led us to the consensus that crosshair should be designed specifically for the map screen.
 The gravity factor was also a consideration in the design, with the player needing to fall at normal speed when normally encountering blank parts of the map (i.e. air), and maintaining the same speed when passing through the portal as before.
 
 In the design of paper prototype, we also found that due to the fixed screen size, many parts of the map may be out of the screen, and players may jump and fall, which makes the picture players see on the screen in the vertical direction is updated in real time, which is actually a challenge to the design of our map offset. After discussion, we reached a consensus that the design not only took into account the offset of the map, but also designed the left and right, up and down boundaries for the content displayed on the screen, so that the game's graphics did not change too frequently.
 
-## Identify Stakeholders
+### Identify Stakeholders
 To clarify the development direction and decision-making by identifying key stakeholders and understanding their needs and expectations. We find the satkeholders of the game can be boardly categorised into two groups: game developers and players.
 
 For the game developers, we identify the following roles:
@@ -108,17 +108,17 @@ For the players, we classify them into three types:
 2. Puzzle Game Players: They enjoy solving challenging puzzles in the game.
 3. Casual Players: They prefer a more relaxed and enjoyabe gaming experience.
 
-## User Story
+### User Story
 To improve development efficiency and task planning, we have written user stories for each type of players.
-# Speed runners
+#### Speed runners
 1. As a speed runner, I want a game has mutiple routes to complete levels, so I can experiment and find the fastest path to victory.
 2. As a speed runner, I want a game allow me to skip opening cutscenes, so I can focus on completing the game as quickly as possible.
 3. As a speed runner, I want a game that has built-in timer, so I can clearly track how much time I have spent on my run.
-# Puzzle Game Players
+#### Puzzle Game Players
 1. As a puzzle game player, I want a game has progressive difficulty curve, so I can first learn the mechanics and then take on more challenging puzzles.
 2. As a puzzle game player, I want a game allow trying error, so I do not have to restart entire level due to a single mistake.
 3. As a puzzle game player, I want a game providing approproate hints, so I do not get stuck fot too long and end up giving up.
-# Casual Players
+#### Casual Players
 1. As a casual player, I want a game has visual operation cues, so I can start playing without speeding too much time learning the mechanics.
 2. As a casual player, I want a game can save progress and have short completion time, so I can play during short breaks or in my free time.
 3. As a casual player, I want a game has an engaging story line, so I can connect with the main character and enjoy the experience.
