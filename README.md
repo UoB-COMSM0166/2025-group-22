@@ -108,20 +108,26 @@ For the players, we classify them into three types:
 2. Puzzle Game Players: They enjoy solving challenging puzzles in the game.
 3. Casual Players: They prefer a more relaxed and enjoyabe gaming experience.
 
-### User Story
+### Epics and User Stories
 To improve development efficiency and task planning, we have written user stories for each type of players.
+#### Epics
+1. Provide diverse gameplay experience.
+2. Enhance game accessibility and convenience.
 #### Speed runners
-1. As a speed runner, I want a game has mutiple routes to complete levels, so I can experiment and find the fastest path to victory.
-2. As a speed runner, I want a game allow me to skip opening cutscenes, so I can focus on completing the game as quickly as possible.
-3. As a speed runner, I want a game that has built-in timer, so I can clearly track how much time I have spent on my run.
+1. As a speed runner, I want a game has mutiple routes to complete levels, so I can experiment and find the fastest path to victory. (Epic 2)
+2. As a speed runner, I want a game allow me to skip opening cutscenes, so I can focus on completing the game as quickly as possible. (Epic 2)
+3. As a speed runner, I want a game that has built-in timer, so I can clearly track how much time I have spent on my run. (Epic 1)
 #### Puzzle Game Players
-1. As a puzzle game player, I want a game has progressive difficulty curve, so I can first learn the mechanics and then take on more challenging puzzles.
-2. As a puzzle game player, I want a game allow trying error, so I do not have to restart entire level due to a single mistake.
-3. As a puzzle game player, I want a game providing approproate hints, so I do not get stuck fot too long and end up giving up.
+1. As a puzzle game player, I want a game has progressive difficulty curve, so I can first learn the mechanics and then take on more challenging puzzles. (Epic 1)
+2. As a puzzle game player, I want a game allow trying error, so I do not have to restart entire level due to a single mistake. (Epic 2)
+3. As a puzzle game player, I want a game providing approproate hints, so I do not get stuck fot too long and end up giving up. (Epic 2)
 #### Casual Players
-1. As a casual player, I want a game has visual operation cues, so I can start playing without speeding too much time learning the mechanics.
-2. As a casual player, I want a game can save progress and have short completion time, so I can play during short breaks or in my free time.
-3. As a casual player, I want a game has an engaging story line, so I can connect with the main character and enjoy the experience.
+1. As a casual player, I want a game has visual operation cues, so I can start playing without speeding too much time learning the mechanics. (Epic 1)
+2. As a casual player, I want a game can save progress and have short completion time, so I can play during short breaks or in my free time. (Epic 2)
+3. As a casual player, I want a game has an engaging story line, so I can connect with the main character and enjoy the experience. (Epic 1)
+
+### Reflection
+
 
 ### 4. Design
 
