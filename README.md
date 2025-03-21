@@ -67,6 +67,9 @@ After discussion, our group members selected five games that we thought could se
 
 The core mechanics of these games provided valuable inspiration for our project, and we wanted to combine the best of them to create a game experience that was both challenging and fun.
 
+In this 2D pixel-art platformer, a young girl embarks on a journey to rescue her grandmother using a portal gun left behind by her grandfather. Players must navigate intricate levels by strategically using three types of blocks: normal blocks that act as solid platforms without interacting with portal bullets, bouncing blocks that reflect portal bullets and require precise aiming, and absorbing blocks that accept portal bullets for instant teleportation. As the difficulty increases, players must minimize damage and time spent while solving puzzles and uncovering the secrets behind the portal gun.
+
+
 <div align="center">
 Game Ideas
 </div>
@@ -80,146 +83,38 @@ These are the two games we have chosen after some discussion. First, Twilight Se
 
 ## 3. Requirements 
 
-### Paper Prototypes
+## Paper Prototypes
 
 In workshop3, we created paper prototypes for both games we designed, so that players and everyone in the development team could understand the core gameplay and mechanics of the games. (2D Jumper: https://youtu.be/Vv2zbfhl6WI
   Cross Fire: https://youtu.be/X4RS6Jgd0k) For example in Twilight Seeker, the core portal mechanic, How to create a portal and how to teleport through it. At the same time, it mimics the change of the game screen according to the movement of the player, which is also one of the possible problems that we need to solve during the development process.
 
-### Feasibility Studies
+## Feasibility Studies
 In addition to the paper prototype, we have also drawn some pictures to illustrate the most important game mechanics, such as the mechanism of defeating monsters and picking up items in Cross Fire, as well as the picture effect of players shooting, which also reminds us that since players need to interact with the map to get different items, Designing a map becomes a much more painstaking process. In Twilight Seeker, the portal mechanic also brought up a lot of other issues to consider, such as controlling the trajectory of bullets and collision detection, how to get bullets to the exact square that the player needs to hit, which led us to the consensus that crosshair should be designed specifically for the map screen.
 The gravity factor was also a consideration in the design, with the player needing to fall at normal speed when normally encountering blank parts of the map (i.e. air), and maintaining the same speed when passing through the portal as before.
 
 In the design of paper prototype, we also found that due to the fixed screen size, many parts of the map may be out of the screen, and players may jump and fall, which makes the picture players see on the screen in the vertical direction is updated in real time, which is actually a challenge to the design of our map offset. After discussion, we reached a consensus that the design not only took into account the offset of the map, but also designed the left and right, up and down boundaries for the content displayed on the screen, so that the game's graphics did not change too frequently.
 
-### Identify Stakeholders
-To clarify the development direction and decision-making by identifying key stakeholders and understanding their needs and expectations. We find the satkeholders of the game can be boardly categorised into two groups: game developers and players.
-
-For the game developers, we identify the following roles:
-
-1. Project Manager: Oversees the development process and ensures timely delivery.
-2. Game Designer: Responsible for designing game mechanics, levels, and overall gameplay experience.
-3. Developers: Handle programming and implementation of game features.
-4. Artists: Create visual assests such as character designs, environments, and animations.
-5. Testers: Ensure the game is no bugs and provide feedback on gameplay balance and performance.
-
-For the players, we classify them into three types:
-
-1. Speed runners: They aim to complete the game in the shortest possible time.
-2. Puzzle Game Players: They enjoy solving challenging puzzles in the game.
-3. Casual Players: They prefer a more relaxed and enjoyabe gaming experience.
-
-### Epics and User Stories
-To improve development efficiency and task planning, we have written user stories for each type of players.
-#### Epics
-1. Provide diverse gameplay experience.
-2. Enhance game accessibility and convenience.
-#### Speed runners
-1. As a speed runner, I want a game has mutiple routes to complete levels, so I can experiment and find the fastest path to victory. (Epic 2)
-2. As a speed runner, I want a game allow me to skip opening cutscenes, so I can focus on completing the game as quickly as possible. (Epic 2)
-3. As a speed runner, I want a game that has built-in timer, so I can clearly track how much time I have spent on my run. (Epic 1)
-#### Puzzle Game Players
-1. As a puzzle game player, I want a game has progressive difficulty curve, so I can first learn the mechanics and then take on more challenging puzzles. (Epic 1)
-2. As a puzzle game player, I want a game allow trying error, so I do not have to restart entire level due to a single mistake. (Epic 2)
-3. As a puzzle game player, I want a game providing approproate hints, so I do not get stuck fot too long and end up giving up. (Epic 2)
-#### Casual Players
-1. As a casual player, I want a game has visual operation cues, so I can start playing without speeding too much time learning the mechanics. (Epic 1)
-2. As a casual player, I want a game can save progress and have short completion time, so I can play during short breaks or in my free time. (Epic 2)
-3. As a casual player, I want a game has an engaging story line, so I can connect with the main character and enjoy the experience. (Epic 1)
-
-### Reflection
 Through the analysis of Epics and User Stories, we have clarified the game’s development direction, aiming to create a game that caters to different player types. We selected "Provide diverse gameplay experience" and "Enhance game accessibility and convenience" as our core Epics, ensuring players spend more time enjoying the game rather than learning how to play.
-
 User Stories help refine these goals. To prevent frustration from restarting due to a single mistake, we implemented a health system displaying remaining attempts. Speedrunners require precise timing, so we designed an in-game timer to track countdowns and provide automatic prompts, ensuring puzzle players do not get stuck for too long.
-
 We use Acceptance Criteria to validate these features. For instance, the timer system must visually display time progression and trigger a prompt when it reaches zero. The health display must clearly show remaining attempts without obstructing gameplay.
 Through these designs, we ensure the game accommodates different player needs while offering a clear and user-friendly experience.
 
+![Usecase Diagram](./images/usecase-diagram.png)
+
 ### 4. Design
 
-#### System Architecture
+- 15% ~750 words 
+- System architecture. Class diagrams, behavioural diagrams. 
 
-##### User Interface
-1. Menu: main menu and various state menus (level selection, pause, win, game over, etc.)
-2. In-Game Interface: timer, HP, menu indicators, level indicators
-3. Graphics Rendering: 2D sprite-based rendering
-   
-##### Game Controller
-1. Player movement
-   - "A" key: move left
-   - "D" key: move right
-   - Space key: jump
-2. Partal switching
-   - "E" key: trun into the ther portal
-3. Shooting bullets
-   - Left mouse button: fire bullet
-4. Changing portal type
-   - "C" key: change the portal that the player want to fire
-  
-##### Game logic
-1. Portal Mechanism
-   - The player can only enter a portal from the direction the bullet was fired and exit from the other portal of a different color.    
-2. Level Design
-   - The game complexity oncreses with different enemy types in each level.
-4. Enemy Type
-   - Slime: move back and front at a alow speed
-   - Goblin: move back and forth at a fast speed
-   - Dragon: shoot fireballs in a single direction
-6. Item System
-   - Heart: restores health
-   - Key: Unlock doors
-   - Door: Requires a key to open and progress.
+![Class Diagram](./images/class_diagram.png)
 
-##### Audio and Graphics
-1. pixel art
-2. Animation system
-3. Soung Design
-4. Background Music
 
 ### 5. Implementation
 
-#### Bullet Collision Detection
+- 15% ~750 words
 
-When implementing bullet collision detection, we tried three different methods.
 
-##### First Method: Coordinate Detection
-
-At first, we used a simple coordinate-based method. When a bullet's position was detected inside a block, we checked what type of block it was. If it was an air block, the bullet kept moving. If it was a solid block, the bullet disappeared immediately.
-However, later we needed to determine the portal’s entrance and exit direction based on the bullet’s incoming direction. This meant we had to find out which edge of the block the bullet touched first. Because of the limited frame rate, we couldn’t always capture the exact moment when the bullet hit the edge. Most of the time, the bullet had already moved inside the block before we detected it.
-
-##### Second Method: Triangle Region Detection
-
-To solve this, we came up with another idea. We divided the block into four triangular areas using two diagonal lines. When a bullet was first detected inside a block, we checked which triangle it was in. The hypotenuse of that triangle was assumed to be the first edge the bullet touched. However, this method had many bugs. When a bullet barely grazed the corner of a block, it often resulted in incorrect edge detection.
-
-##### Third Method: Line Intersection Calculation
-
-To improve accuracy, we used a mathematical approach. As soon as a bullet entered a block, we calculated the intersection between the bullet’s movement line and the four edges of the block. The first intersecting edge was the one the bullet touched first. This method finally solved the bullet direction detection problem.
-
-##### Handling Edge Cases
-
-One tricky issue was when a bullet hit exactly at the corner of a block or moved perfectly along the edge. These cases were rare, but if they happened, we decided to simply remove the bullet and let the player shoot again.
-
-##### Bullet Reflection
-
-For reflective blocks, we used the same method to detect the bullet’s direction and first contact edge. Depending on which edge it hit, we flipped the bullet’s velocity on the x or y axis (adding a negative sign) to achieve reflection.
-
-#### Character Movement and Offset Issues
-
-The biggest challenge in character movement is the map offset problem. When the character moves horizontally, we need to decide whether to change the map’s offset or adjust the character’s relative position on the screen.
-To make movement feel natural, we set a range for the character’s relative position on the screen. This prevents the character from always staying in a fixed spot while only the background moves. If the character never changes position, it looks strange. At the same time, we must also make sure the character never moves outside the screen.
-
-The map offset problem also happens when going through a portal because the player teleports instantly over a certain distance. We 
-need to calculate how much the map offset should change based on this distance.
-
-Similarly, we added Y-axis offset, just like the X-axis. When the player jumps, the map also moves slightly in the Y direction to keep the player within a certain range on the screen.
-
-##### Gravity Implementation
-
-To handle gravity, we check if there is a solid block under the player’s feet. If there is no block, the player is considered to be in the air and continuously receives an increasing downward acceleration. This makes the falling speed keep increasing.
-If there is a solid block above the player’s head, the player’s upward speed is immediately set to zero. This works the same way as when the player hits a solid block from the side in the X direction—the horizontal speed also resets to zero.
-
-##### Collision Size and Movement Smoothness
-
-To make movement and screen transitions smoother, we also needed to solve the collision size problem between the character and blocks. The character’s horizontal collision size cannot be exactly the same as the block width. If they are the same, it becomes very difficult for the player to squeeze through narrow gaps that are only one block wide. This is because the player can only fall through if they are positioned exactly in the center of the gap, which makes movement feel frustrating.
+- Describe implementation of your game, in particular highlighting the three areas of challenge in developing your game. 
 
 ### 6. Evaluation
 
