@@ -108,7 +108,8 @@ Through these designs, we ensure the game accommodates different player needs wh
 - 15% ~750 words 
 - System architecture. Class diagrams, behavioural diagrams. 
 
-![Class Diagram](./images/class_diagram.png)
+![Class Diagram](https://raw.githubusercontent.com/UoB-COMSM0166/2025-group-22/5c0c49dec0afabe153df1382047a8d2659b63bd0/images/class_ diagram.png)
+
 
 
 
