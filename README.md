@@ -127,7 +127,12 @@ To improve development efficiency and task planning, we have written user storie
 3. As a casual player, I want a game has an engaging story line, so I can connect with the main character and enjoy the experience. (Epic 1)
 
 ### Reflection
+Through the analysis of Epics and User Stories, we have clarified the game’s development direction, aiming to create a game that caters to different player types. We selected "Provide diverse gameplay experience" and "Enhance game accessibility and convenience" as our core Epics, ensuring players spend more time enjoying the game rather than learning how to play.
 
+User Stories help refine these goals. To prevent frustration from restarting due to a single mistake, we implemented a health system displaying remaining attempts. Speedrunners require precise timing, so we designed an in-game timer to track countdowns and provide automatic prompts, ensuring puzzle players do not get stuck for too long.
+
+We use Acceptance Criteria to validate these features. For instance, the timer system must visually display time progression and trigger a prompt when it reaches zero. The health display must clearly show remaining attempts without obstructing gameplay.
+Through these designs, we ensure the game accommodates different player needs while offering a clear and user-friendly experience.
 
 ### 4. Design
 
@@ -172,9 +177,49 @@ To improve development efficiency and task planning, we have written user storie
 
 ### 5. Implementation
 
-- 15% ~750 words
+#### Bullet Collision Detection
 
-- Describe implementation of your game, in particular highlighting the three areas of challenge in developing your game. 
+When implementing bullet collision detection, we tried three different methods.
+
+##### First Method: Coordinate Detection
+
+At first, we used a simple coordinate-based method. When a bullet's position was detected inside a block, we checked what type of block it was. If it was an air block, the bullet kept moving. If it was a solid block, the bullet disappeared immediately.
+However, later we needed to determine the portal’s entrance and exit direction based on the bullet’s incoming direction. This meant we had to find out which edge of the block the bullet touched first. Because of the limited frame rate, we couldn’t always capture the exact moment when the bullet hit the edge. Most of the time, the bullet had already moved inside the block before we detected it.
+
+##### Second Method: Triangle Region Detection
+
+To solve this, we came up with another idea. We divided the block into four triangular areas using two diagonal lines. When a bullet was first detected inside a block, we checked which triangle it was in. The hypotenuse of that triangle was assumed to be the first edge the bullet touched. However, this method had many bugs. When a bullet barely grazed the corner of a block, it often resulted in incorrect edge detection.
+
+##### Third Method: Line Intersection Calculation
+
+To improve accuracy, we used a mathematical approach. As soon as a bullet entered a block, we calculated the intersection between the bullet’s movement line and the four edges of the block. The first intersecting edge was the one the bullet touched first. This method finally solved the bullet direction detection problem.
+
+##### Handling Edge Cases
+
+One tricky issue was when a bullet hit exactly at the corner of a block or moved perfectly along the edge. These cases were rare, but if they happened, we decided to simply remove the bullet and let the player shoot again.
+
+##### Bullet Reflection
+
+For reflective blocks, we used the same method to detect the bullet’s direction and first contact edge. Depending on which edge it hit, we flipped the bullet’s velocity on the x or y axis (adding a negative sign) to achieve reflection.
+
+#### Character Movement and Offset Issues
+
+The biggest challenge in character movement is the map offset problem. When the character moves horizontally, we need to decide whether to change the map’s offset or adjust the character’s relative position on the screen.
+To make movement feel natural, we set a range for the character’s relative position on the screen. This prevents the character from always staying in a fixed spot while only the background moves. If the character never changes position, it looks strange. At the same time, we must also make sure the character never moves outside the screen.
+
+The map offset problem also happens when going through a portal because the player teleports instantly over a certain distance. We 
+need to calculate how much the map offset should change based on this distance.
+
+Similarly, we added Y-axis offset, just like the X-axis. When the player jumps, the map also moves slightly in the Y direction to keep the player within a certain range on the screen.
+
+##### Gravity Implementation
+
+To handle gravity, we check if there is a solid block under the player’s feet. If there is no block, the player is considered to be in the air and continuously receives an increasing downward acceleration. This makes the falling speed keep increasing.
+If there is a solid block above the player’s head, the player’s upward speed is immediately set to zero. This works the same way as when the player hits a solid block from the side in the X direction—the horizontal speed also resets to zero.
+
+##### Collision Size and Movement Smoothness
+
+To make movement and screen transitions smoother, we also needed to solve the collision size problem between the character and blocks. The character’s horizontal collision size cannot be exactly the same as the block width. If they are the same, it becomes very difficult for the player to squeeze through narrow gaps that are only one block wide. This is because the player can only fall through if they are positioned exactly in the center of the gap, which makes movement feel frustrating.
 
 ### 6. Evaluation
 
