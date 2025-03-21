@@ -14,32 +14,44 @@ class Player {
     this.keys = 0;
     this.movingState = 0;
     this.bullet = 0;
+    this.spriteFrames = {
+      idle: 0,
+      run1: 1,
+      run2: 2,
+      jump: 3
+    };
+    this.currentFrame = this.spriteFrames.idle; // 当前帧
+    this.runFrame = 1; // 跑步帧切换
+    this.isRunning = false; // 是否在跑步
+    this.isJumping = false; // 是否在跳跃
   }
 
   update() {
     if (this.isAlive()) {
-      this.updateInjured()
+      this.updateInjured();
       this.processInput();
-      // update position
       this.updateGravity();
-      if (this.touchingEnemy()) {
-        this.injured = true;
-        if (this.injuryTimer == 0) {
-          if(currentEnemy == "spike"){
-            this.lives -= 3;
-          }
-          else{
-            this.lives--;
-          }
-          
-        }
-      }
+  
+      // 检测与物品的交互
       this.touchingItem();
+  
+      // 更新动画帧
+      if (this.isJumping) {
+        this.currentFrame = this.spriteFrames.jump;
+      } else if (this.isRunning) {
+        // 切换跑步帧
+        if (frameCount % 10 === 0) { // 每10帧切换一次
+          this.runFrame = this.runFrame === this.spriteFrames.run1 ? this.spriteFrames.run2 : this.spriteFrames.run1;
+        }
+        this.currentFrame = this.runFrame;
+      } else {
+        this.currentFrame = this.spriteFrames.idle;
+      }
     } else {
       gameState = "gameOver";
     }
-
   }
+
    collectItem(item) {
       if (currentMap.itemList[item].type == "heart") {
         // remove item from map
@@ -174,11 +186,11 @@ class Player {
     // console.log(this.isFalling());
     // console.log(this.pos);
     this.pos.add(this.velocity);
-
+  
     if (this.isFalling()) {
       this.pos.add(0, this.gravity);
     }
-
+  
     // 根据玩家的垂直位置调整地图的垂直偏移量
     if (this.pos.y < height / 3) {
       currentMap.yOffset = this.pos.y - height / 3;
@@ -187,7 +199,7 @@ class Player {
     } else {
       currentMap.yOffset = 0;
     }
-
+  
     if (this.isFalling() && this.onWall() != "top") {
       this.velocity.mult(0.9);
     } else if (this.isFalling() && this.onWall() == "top") {
@@ -195,7 +207,11 @@ class Player {
     } else {
       // console.log("else");
       this.velocity.mult(0);
-
+    }
+  
+    // 添加的代码：当玩家落地时，重置跳跃状态
+    if (this.onWall() == "bottom") {
+      this.isJumping = false;
     }
   }
 
@@ -213,43 +229,38 @@ class Player {
   }
 
   processInput(key) {
-    //A
-    if (keyIsDown(65)) {
-      if (this.getBlockClass(-1, 25) != "Wall" && this.getBlockClass(-1, 25) != "DirectionWall" && this.getBlockClass(-1, 25) != "Portal") {
-        console.log(this.pos.x);
-        
-        // console.log(width / 6);
-        if (this.pos.x < width / 6) {
-          this.pos.x -= 5;
-        } else {
-          currentMap.xOffset -= 5
-
-        }
+  // A键（向左移动）
+  if (keyIsDown(65)) { // 65 是 'A' 键的键码
+    if (this.getBlockClass(-1, 25) != "Wall" && this.getBlockClass(-1, 25) != "DirectionWall" && this.getBlockClass(-1, 25) != "Portal") {
+      if (this.pos.x < width / 6) {
+        this.pos.x -= 5; // 角色向左移动
+      } else {
+        currentMap.xOffset -= 5; // 地图向右移动
       }
     }
-    //D
-    if (keyIsDown(68)) {
-      if (this.getBlockClass(this.size, 25) != "Wall" && this.getBlockClass(this.size, 25) != "DirectionWall" && this.getBlockClass(this.size, 25) != "Portal") {
-        if (this.pos.x < width / 3) {
-          this.pos.x += 5;
-        } else {
-          currentMap.xOffset += 5
-
-        }
+    this.isRunning = true;
+  }
+  // D键（向右移动）
+  if (keyIsDown(68)) { // 68 是 'D' 键的键码
+    if (this.getBlockClass(this.size, 25) != "Wall" && this.getBlockClass(this.size, 25) != "DirectionWall" && this.getBlockClass(this.size, 25) != "Portal") {
+      if (this.pos.x < width / 3) {
+        this.pos.x += 5; // 角色向右移动
+      } else {
+        currentMap.xOffset += 5; // 地图向左移动
       }
     }
-    //W
-    if (keyIsDown(87)) {
-      this.jump();
-    }
+    this.isRunning = true;
+  }
+  // W键（跳跃）
+  if (keyIsDown(87)) { // 87 是 'W' 键的键码
+    this.isJumping = true;
+    this.jump();
+  }
 
-    if(key === "P" || key === "p"){
-      if(gameState === "pause"){
-        gameState = "playing";
-      }else if(gameState === "playing"){
-        gameState = "pause";
-      }
-    }
+  // 如果没有按下 A 或 D 键，停止跑步
+  if (!keyIsDown(65) && !keyIsDown(68)) {
+    this.isRunning = false;
+  }
     
     //press 'E' to teleport
     
@@ -437,13 +448,14 @@ class Player {
   
   draw() {
     for (var i = 0; i < this.lives; i++) {
-      image(tiles_image, i * 25, 10, 50, 50, 11 * 64, 4 * 64, 64, 64)
+      image(tiles_image, i * 25, 10, 50, 50, 11 * 64, 4 * 64, 64, 64);
     }
-    if(this.injured && this.injuryTimer % 6 == 0){
-      image(player_image, this.pos.x, this.pos.y - currentMap.yOffset, this.size, this.size, 0, 0, this.spriteSize, this.spriteSize);
-    }
-    else{
-      image(player_image, this.pos.x, this.pos.y - currentMap.yOffset, this.size, this.size, 0, 0, this.spriteSize, this.spriteSize);
+  
+    // 根据当前帧绘制玩家
+    if (this.injured && this.injuryTimer % 6 == 0) {
+      image(player_image, this.pos.x, this.pos.y - currentMap.yOffset, this.size, this.size, this.currentFrame * this.spriteSize, 0, this.spriteSize, this.spriteSize);
+    } else {
+      image(player_image, this.pos.x, this.pos.y - currentMap.yOffset, this.size, this.size, this.currentFrame * this.spriteSize, 0, this.spriteSize, this.spriteSize);
     }
   }
 }
