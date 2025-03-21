@@ -99,14 +99,16 @@ User Stories help refine these goals. To prevent frustration from restarting due
 We use Acceptance Criteria to validate these features. For instance, the timer system must visually display time progression and trigger a prompt when it reaches zero. The health display must clearly show remaining attempts without obstructing gameplay.
 Through these designs, we ensure the game accommodates different player needs while offering a clear and user-friendly experience.
 
-![Usecase Diagram](./images/usecase diagram.png)
+![Class Diagram](./images/class_%20diagram.png)
+
 
 ### 4. Design
 
 - 15% ~750 words 
 - System architecture. Class diagrams, behavioural diagrams. 
 
-![Class Diagram](./images/class_ diagram.png)
+![Class Diagram](./images/class_diagram.png)
+
 
 
 ### 5. Implementation
