@@ -126,6 +126,10 @@ To improve development efficiency and task planning, we have written user storie
 2. As a casual player, I want a game can save progress and have short completion time, so I can play during short breaks or in my free time. (Epic 2)
 3. As a casual player, I want a game has an engaging story line, so I can connect with the main character and enjoy the experience. (Epic 1)
 
+<p align="center">
+  <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/use_case_diagram.jpg" width="550">
+</p>
+
 ### Reflection
 Through the analysis of Epics and User Stories, we have clarified the game’s development direction, aiming to create a game that caters to different player types. We selected "Provide diverse gameplay experience" and "Enhance game accessibility and convenience" as our core Epics, ensuring players spend more time enjoying the game rather than learning how to play.
 
@@ -174,6 +178,10 @@ Through these designs, we ensure the game accommodates different player needs wh
 2. Animation system
 3. Soung Design
 4. Background Music
+
+<p align="center">
+  <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/class_diagram.jpg" width="550">
+</p>
 
 ### 5. Implementation
 
