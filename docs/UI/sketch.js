@@ -6,6 +6,12 @@ let ui;
 let pistol = 0;
 let currentEnemy = null;
 
+let startTime;
+let elapsedTime = 0;
+let timerRunning = false;
+let pausedTime = 0; // 记录暂停时已过去的时间
+
+
 function preload() {
   player_image = loadImage("images/players.png");
   tiles_image = loadImage("images/tiles.png");
@@ -26,6 +32,8 @@ function setup() {
 
   crosshair = new Crosshair([0, 5]);
   player = new Player();
+
+  startTime = millis(); // 记录开始时间
 }
 
 function Music() { //音乐
@@ -48,8 +56,24 @@ function draw() {
     }else{
       background(level3_background);
     }
+
+    if (timerRunning) {
+      elapsedTime = millis() - startTime;
+    }
+
+    // 显示计时器
+    fill(255);
+    textSize(20);
+    textAlign(LEFT, TOP);
+    text("Time: " + nf(elapsedTime / 1000, 0, 2) + "s", 20, 50);
+
   }else{
     background(180, 217, 239)
+  }
+
+  if (gameState === "pause" || gameState === "gameOver" || gameState === "win") {
+    timerRunning = false;
+    pausedTime = elapsedTime; // 记录暂停时的时间
   }
 
   switch (gameState) {
@@ -122,7 +146,14 @@ function loadLevel(){
 }
 
 function keyPressed() {
+  if (gameState === "playing") {
+    if (!timerRunning) {
+      startTime = millis() - pausedTime; // 恢复计时，不重置
+      timerRunning = true;
+    }
+  }
   player.processInput(key);
+  
 }
 
 function mousePressed() {
