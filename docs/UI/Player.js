@@ -238,8 +238,8 @@ class Player {
         }
       }
     }
-    //W
-    if (keyIsDown(87)) {
+    //SPACE
+    if (keyIsDown(32)) {
       this.jump();
     }
 
@@ -423,7 +423,7 @@ class Player {
       }
     }
 
-    if(key === " ") {
+    if(key === 'c' || key === 'C') {
       pistol = 1 - pistol;
     }
     if(key === 'blue pistol click'){
