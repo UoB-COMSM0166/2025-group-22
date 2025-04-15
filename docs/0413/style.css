@@ -1,0 +1,9 @@
+/* 清除瀏覽器預設的 margin/padding，避免出現不必要的空白邊框。 */
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+canvas {
+  display: block;
+}
