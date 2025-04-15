@@ -19,7 +19,22 @@ class StartUI extends UI {
         height: 90,
         text: "Start",
         action: () => {
-          GameController.start("level1");
+
+          // // ❌ 如果還沒有，才 prompt 一次，並儲存
+          // if (!playerName) {
+          //   playerName = prompt("Please enter a nickname. \nDo not use your real name for privacy reasons:") || "Unknown";
+          //   localStorage.setItem("playerName", playerName);
+          // }
+          //
+          // GameController.start("level1");
+          console.log("playerName =", playerName)
+
+          if (!playerName) {
+            gameState = "namePrompt";
+          } else {
+            GameController.start("level1");
+          }
+
         }
       },
       {
@@ -34,5 +49,6 @@ class StartUI extends UI {
         }
       }
     ]);
+    //playerName = localStorage.getItem("playerName");
   }
 }

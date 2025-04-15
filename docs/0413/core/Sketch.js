@@ -6,6 +6,7 @@ let mySound, playButton;
 let pistol = 0;
 let currentEnemy = null;
 let player;
+let playerName;
 
 let startTime;
 let elapsedTime = 0;
@@ -24,8 +25,11 @@ function preload() {
 
 function setup() {
   createCanvas(800, 450);
+  playerName = localStorage.getItem("playerName");
+  if (playerName === "null") playerName = null;
+
   playButton = createButton("Play Music");
-  playButton.position(710, 20);
+  playButton.position(700, 20);
   playButton.mousePressed(Music);
   mySound.setVolume(0.05);
   crosshair = new Crosshair([0, 5]);
@@ -106,7 +110,7 @@ function handleBullet() {
       //console.log("Bullet removed");
       player.bullet = 0;
     }
-    else if(result === "In") {
+    else if(result === "inStandard") {
       player.bullet.velocity = 0;
     }
   }

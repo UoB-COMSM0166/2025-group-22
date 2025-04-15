@@ -18,10 +18,10 @@ class Maps {
         switch (value) {
           case 1: block = new Wall(x, y, [0, 0]); break;
           case 2: block = new DirectionWall(x, y, [1, 0], "standard"); break;
-          case 3: block = new DirectionWall(x, y, [6, 0], "reflectUp"); break;
-          case 4: block = new DirectionWall(x, y, [6, 0], "reflectDown"); break;
-          case 5: block = new DirectionWall(x, y, [6, 0], "reflectLeft"); break;
-          case 6: block = new DirectionWall(x, y, [6, 0], "reflectRight"); break;
+          case 3: block = new DirectionWall(x, y, [2, 0], "reflectUp"); break;
+          case 4: block = new DirectionWall(x, y, [3, 0], "reflectDown"); break;
+          case 5: block = new DirectionWall(x, y, [4, 0], "reflectLeft"); break;
+          case 6: block = new DirectionWall(x, y, [5, 0], "reflectRight"); break;
           case 7: block = new Item(x, y, [0, 4], "door"); this.itemList.push(block); break;
           case 8: block = new Item(x, y, [1, 3], "treasure"); this.itemList.push(block); break;
           case 9: block = new Item(x, y, [2, 3], "key"); this.itemList.push(block); break;

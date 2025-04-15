@@ -52,7 +52,7 @@ class Bullet {
         return "undefined";
       }
       this.placePortal(block);
-      return "In";
+      return "inStandard";
     }
     // 子弹打到Wall返回undefined, 子弹消除
     else if (block instanceof Wall && block.type === "solid") {
@@ -66,12 +66,14 @@ class Bullet {
 
     // 反彈牆邏輯
     if (block.type?.startsWith("reflect")) {
+
       // 把block有空气的方向push到block.direction
       this.getNotBlockedSides();
 
-      if (!this.isEnteringAllowed(block)) return "undefined";
-      this.reflect(block);
-      return "In";
+      if (!this.isEnteringAllowed(block)) return "undefined"
+
+      return this.reflect(block);
+
     }
   }
 
@@ -184,8 +186,17 @@ class Bullet {
 
   reflect(block) {
     const direction = this.getEntryDirection();
-    if (direction === "left" || direction === "right") this.velocity.x *= -1;
-    if (direction === "top" || direction === "bottom") this.velocity.y *= -1;
+    if ((direction === "left" && block.type === "reflectLeft") ||
+        direction === "right" && block.type === "reflectRight") {
+      this.velocity.x *= -1;
+      return "inReflect";
+    }
+    if ((direction === "top" && block.type === "reflectUp") ||
+        direction === "bottom" && block.type === "reflectDown") {
+      this.velocity.y *= -1;
+      return "inReflect";
+    }
+    return "undefined";
   }
 }
 

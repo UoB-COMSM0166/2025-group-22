@@ -6,7 +6,8 @@ class UIManager {
       choosingLevel: () => new LevelUI(),
       pause: () => new PauseUI(),
       gameOver: () => new GameOverUI(),
-      win: () => new WinUI()
+      win: () => new WinUI(),
+      namePrompt: () => new NameUI()
     };
     return uiMap[gameState]?.() || null;
   }

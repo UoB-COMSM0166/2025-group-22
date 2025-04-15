@@ -3,6 +3,7 @@ class LevelController {
   static nextLevel() {
     const next = LevelController.getNextLevel(currentLevel);
     if (next) {
+      this.saveLevelTime();
       currentLevel = next;
       GameController.start(currentLevel);
     } else {
@@ -25,5 +26,12 @@ class LevelController {
       currentLevel = level;
       GameController.start(level);
     }
+  }
+
+  static saveLevelTime() {
+    const key = `levelTime-${playerName}`;
+    const allTimes = JSON.parse(localStorage.getItem(key)) || {};
+    allTimes[currentLevel] = elapsedTime;
+    localStorage.setItem(key, JSON.stringify(allTimes));
   }
 }
