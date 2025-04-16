@@ -13,6 +13,9 @@ let elapsedTime = 0;
 let timerRunning = false;
 let pausedTime = 0;
 
+let textBoxFlag  = false;
+let saveScoreFlag = false;
+
 function preload() {
   player_image = loadImage("assets/images/players.png");
   tiles_image = loadImage("assets/images/tiles.png");
@@ -25,8 +28,9 @@ function preload() {
 
 function setup() {
   createCanvas(800, 450);
-  playerName = localStorage.getItem("playerName");
-  if (playerName === "null") playerName = null;
+  runPlayerTests();
+  // playerName = localStorage.getItem("playerName");
+  // if (playerName === "null") playerName = null;
 
   playButton = createButton("Play Music");
   playButton.position(700, 20);
@@ -48,9 +52,14 @@ function Music() {
 function draw() {
   InputController.handleHeldKeys();
   background(getBackground());
-
+  console.log("textBoxFlag =", textBoxFlag);
 
   if (GameController.is("playing")) {
+    // console.log("playerName =", playerName);
+
+    // console.log("saveScoreFlag =", saveScoreFlag);
+
+
     if (!currentMap || !player) GameController.start(currentLevel);
     currentMap.draw();
     crosshair.draw();

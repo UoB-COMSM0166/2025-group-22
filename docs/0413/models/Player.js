@@ -93,8 +93,8 @@ class Player {
       [0, 5],
       type
     );
-    console.log("Shooting bullet of type", type, "from", this.pos.x, this.pos.y);
-    console.log("Bullet created:", this.bullet);
+    // console.log("Shooting bullet of type", type, "from", this.pos.x, this.pos.y);
+    // console.log("Bullet created:", this.bullet);
   }
 
   togglePistol() {
@@ -136,7 +136,7 @@ class Player {
         const block = currentMap.blocks[row][col];
         if (block instanceof Portal && (col !== currentX || row !== currentY)) {
           const destDir = block.direction;
-          console.log("destDir = ", destDir);
+          // console.log("destDir = ", destDir);
           let dx = 0, dy = 0;
 
           switch (destDir) {

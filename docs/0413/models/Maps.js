@@ -12,7 +12,7 @@ class Maps {
         const x = col * 50;
         const y = row * 50;
         const value = this.blocks[row][col];
-        console.log("value: ", value);
+        // console.log("value: ", value);
 
         let block = 0;
         switch (value) {

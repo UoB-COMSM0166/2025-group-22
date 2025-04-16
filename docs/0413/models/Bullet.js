@@ -37,7 +37,7 @@ class Bullet {
 
 
     const block = this.getBlock();
-    console.log("Block hit by bullet:", block?.constructor?.name, "at", this.getLoc());
+    // console.log("Block hit by bullet:", block?.constructor?.name, "at", this.getLoc());
 
     if (block === null || block === undefined) return;
 
@@ -159,7 +159,7 @@ class Bullet {
   placePortal(block) {
     const [col, row] = this.getLoc();
     const incomingDir = this.getEntryDirection() || "top";
-    console.log("Entry Direction", this.getEntryDirection());
+    // console.log("Entry Direction", this.getEntryDirection());
 
     this.pos.x = this.getLoc()[0] * 50;
     this.pos.y = this.getLoc()[1] * 50;

@@ -25,7 +25,7 @@ class InputController {
     if (gameState === "playing" && player) {
       const pistolType = pistol === 0 ? "blue" : "red";
       player.shoot(pistolType);
-      console.log("Mouse clicked -> try shoot", gameState, player);
+      // console.log("Mouse clicked -> try shoot", gameState, player);
     }
   }
 

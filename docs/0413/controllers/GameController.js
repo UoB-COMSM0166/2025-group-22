@@ -46,6 +46,12 @@ class GameController {
     this.start(currentLevel);
   }
 
+  static resetGame() {
+    textBoxFlag  = false;
+    saveScoreFlag = false;
+    playerName = null;
+  }
+
   static win() {
     gameState = "win";
     timerRunning = false;

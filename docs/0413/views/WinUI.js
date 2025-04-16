@@ -10,6 +10,7 @@ class WinUI extends UI {
         text: "Menu",
         action: () => {
           gameState = "start";
+          GameController.resetGame();
         }
       },
       {
@@ -30,8 +31,9 @@ class WinUI extends UI {
 
     LevelController.saveLevelTime();
 
-    if (this.isFinalLevel()) {
+    if (this.isFinalLevel() && !saveScoreFlag) {
       this.saveToLeaderboard();
+      saveScoreFlag = true;
     }
   }
 
@@ -39,7 +41,6 @@ class WinUI extends UI {
   isFinalLevel() {
     return currentLevel === "level3"; // ✅ 根據你目前是三關的設計
   }
-
   saveToLeaderboard() {
     const allTimes = JSON.parse(localStorage.getItem(`levelTime-${playerName}`)) || {};
     const levels = ["level1", "level2", "level3"];
