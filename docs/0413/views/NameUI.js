@@ -55,6 +55,12 @@ class NameUI extends UI {
         this.input.remove();
         this.button.remove();
 
-        GameController.start("level1");
+        // GameController.start("level1");
+
+        // 👇 延迟到下一帧再启动游戏，避免 mousePressed() 被误触
+        setTimeout(() => {
+            GameController.start("level1");
+        }, 50); // 50ms 就足够
     }
+
 }

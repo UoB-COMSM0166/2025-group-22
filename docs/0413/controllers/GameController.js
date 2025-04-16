@@ -2,10 +2,11 @@
 class GameController {
   static start(level = "level1") {
     currentLevel = level;
-    gameState = "playing";
+    // gameState = "playing";
     this.loadLevel();
     this.initPlayer();
     this.startTimer();
+    gameState = "playing";
   }
 
   static loadLevel() {

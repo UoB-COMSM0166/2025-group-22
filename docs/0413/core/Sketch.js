@@ -130,5 +130,7 @@ function keyPressed() {
 }
 
 function mousePressed() {
-  InputController.handleMousePressed(mouseButton);
+  if (gameState === "playing" && player) {
+    InputController.handleMousePressed(mouseButton);
+  }
 }

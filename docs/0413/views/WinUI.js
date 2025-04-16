@@ -31,7 +31,10 @@ class WinUI extends UI {
 
     LevelController.saveLevelTime();
 
-    if (this.isFinalLevel() && !saveScoreFlag) {
+    if (this.isFinalLevel() &&
+        !saveScoreFlag &&
+        playerName !== null &&
+        playerName !== undefined) {
       this.saveToLeaderboard();
       saveScoreFlag = true;
     }
