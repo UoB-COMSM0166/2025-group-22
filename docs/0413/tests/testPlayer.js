@@ -1,5 +1,74 @@
 let _originalLevelController = null;
 
+function setupMockVectorSystemIfNeeded() {
+  const isBrowser = typeof window !== "undefined";
+
+  const mockVector = function (x, y) {
+    if (typeof x !== "number" || typeof y !== "number") {
+      console.warn("🔥 createVector received invalid input:", x, y);
+      return {
+        x: NaN, y: NaN,
+        add: () => this,
+        sub: () => this,
+        setMag: () => this,
+        mult: () => this,
+        copy: () => this,
+        toString: () => `(NaN, NaN)`
+      };
+    }
+
+    return {
+      x,
+      y,
+      add(dx, dy) {
+        if (typeof dx === "object") {
+          this.x += dx.x;
+          this.y += dx.y;
+        } else {
+          this.x += dx;
+          this.y += dy;
+        }
+        return this;
+      },
+      sub(v) {
+        return mockVector(this.x - v.x, this.y - v.y);
+      },
+      mult(n) {
+        this.x *= n;
+        this.y *= n;
+        return this;
+      },
+      setMag(mag) {
+        const len = Math.sqrt(this.x * this.x + this.y * this.y);
+        if (len === 0) return this;
+        this.x = (this.x / len) * mag;
+        this.y = (this.y / len) * mag;
+        return this;
+      },
+      copy() {
+        return mockVector(this.x, this.y);
+      },
+      toString() {
+        return `(${this.x.toFixed(1)}, ${this.y.toFixed(1)})`;
+      }
+    };
+  };
+
+  globalThis.createVector = mockVector;
+
+  globalThis.p5 = {
+    Vector: {
+      sub: (a, b) => mockVector(a.x - b.x, a.y - b.y),
+      add: (a, b) => mockVector(a.x + b.x, a.y + b.y)
+    }
+  };
+
+  console.log("🧪 Mock vector system injected for Bullet.js usage.");
+}
+
+
+
+
 function runPlayerTests() {
   console.log("=== Running Player Tests ===");
 
@@ -16,6 +85,11 @@ function runPlayerTests() {
     testPlayerMoveLeft();
     testPlayerMoveRight();
     testPlayerShoot();
+    testBulletReflection();
+    testPlayerTeleportation();
+    testPlayerPortalEntryDirectionStrict();
+
+
   });
 
   // Restore the original LevelController
@@ -25,6 +99,7 @@ function runPlayerTests() {
 }
 
 function withMockEnv(mockFunc) {
+  setupMockVectorSystemIfNeeded(); 
     // Fully mock the methods in CollisionController to ensure they work in the tests
     const mockCollisionController = {
       // Mock the isSolid method, defaulting to false, indicating no obstacles
@@ -64,14 +139,12 @@ function createMockMap() {
     return {
       xOffset: 0,
       yOffset: 0,
-      blocks: Array(20).fill().map(() => Array(20).fill({ constructor: { name: "Floor" } })),
+      blocks: [...Array(20).fill().map(() => Array(20).fill(0))],
       itemList: [],
       enemyList: [],
-      blocks: [
-        ...Array(20).fill().map(() => Array(20).fill({ constructor: { name: "Floor" } }))
-      ]
     };
   }
+  
   
 
 function testPlayerInit() {
@@ -255,6 +328,150 @@ function testPlayerMoveLeft() {
   
     console.log("✅ testPlayerShoot passed.");
   }
+  
+  function testBulletReflection() {
+    console.log("✅ Running testBulletReflection...");
+    setupMockVectorSystemIfNeeded();
+  
+    // ✅ Mock 一切相关方法
+    Bullet.prototype.getEntryDirection = function () {
+      console.log("🧪 Mocked entry direction: right");
+      return "right";
+    };
+  
+    const map = createMockMap();
+    const wall = new DirectionWall(250, 250, [5, 0], "reflectRight");
+    wall.direction = ["right"];
+    map.blocks[5][5] = wall;
+    currentMap = map;
+  
+    globalThis.mouseX = 275;
+    globalThis.mouseY = 275;
+    const bullet = new Bullet(350, 250, mouseX, mouseY, [0, 5], "blue");
+  
+    const result = bullet.update();
+  
+    console.log("➡️ Entry direction =", bullet.getEntryDirection());
+    console.log("📌 Block type =", wall.type);
+    console.log("📌 Allowed directions =", wall.direction);
+    console.assert(bullet.velocity.x < 0, "❌ bullet x 方向应反转为负数");
+    console.log("✅ testBulletReflection passed.");
+  }
+  
+
+  function testPlayerTeleportation() {
+    console.log("✅ Running testPlayerTeleportation...");
+  
+    const map = createMockMap();
+  
+    // 假设从右侧 portal 传送到左侧 portal
+    map.blocks[5][6] = new Portal(6 * 50, 5 * 50, [3, 1], "blue", "left");
+    map.blocks[5][3] = new Portal(3 * 50, 5 * 50, [2, 1], "red", "right");
+  
+    currentMap = map;
+  
+    const player = new Player();
+    player.pos.x = 6 * 50 - 10;  // 靠近入口 portal 的左边
+    player.pos.y = 5 * 50;
+  
+    const before = player.pos.copy();
+    player.teleport();
+    const after = player.pos;
+  
+    console.assert(before.x !== after.x || before.y !== after.y, "❌ 玩家位置应改变");
+    console.log("✅ testPlayerTeleportation passed.");
+  }
+  
+  function testPlayerPortalEntryDirectionStrict() {
+    console.log("✅ Running testPlayerPortalEntryDirectionStrict...");
+  
+    const player = new Player();
+  
+    // ✅ top 门：从上进入 ✅，从下进入 ❌
+    const map1 = createMockMap();
+    map1.blocks[10][10] = new Portal(10 * 50, 10 * 50, [0, 1], "blue", "top");
+    map1.blocks[8][8] = new Portal(8 * 50, 8 * 50, [1, 1], "red", "bottom");
+    currentMap = map1;
+  
+    player.pos.x = 10 * 50;
+    player.pos.y = 10 * 50 - 49; // ✅ 从上方进入 top
+    before = player.pos.copy();
+    player.teleport();
+    after = player.pos.copy();
+    console.assert(before.x !== after.x || before.y !== after.y, "❌ 从上进入 top 门应传送");
+
+  
+    player.pos.x = 10 * 50;
+    player.pos.y = 11 * 50; // ❌ 从下进入 top
+    before = player.pos.copy();
+    player.teleport();
+    after = player.pos.copy();
+    console.assert(before.x === after.x && before.y === after.y, "❌ 从下进入 top 门不应传送");
+  
+    // ✅ bottom 门：从下进入 ✅，从上进入 ❌
+    const map2 = createMockMap();
+    map2.blocks[8][8] = new Portal(8 * 50, 8 * 50, [0, 1], "blue", "bottom");
+    map2.blocks[6][6] = new Portal(6 * 50, 6 * 50, [1, 1], "red", "top");
+    currentMap = map2;
+  
+    player.pos.x = 8 * 50;
+    player.pos.y = 9 * 50; // ✅ 从下进入 bottom
+    before = player.pos.copy();
+    player.teleport();
+    after = player.pos.copy();
+    console.assert(before.x !== after.x || before.y !== after.y, "❌ 从下进入 bottom 门应传送");
+  
+    player.pos.x = 8 * 50;
+    player.pos.y = 7 * 50; // ❌ 从上进入 bottom
+    before = player.pos.copy();
+    player.teleport();
+    after = player.pos.copy();
+    console.assert(before.x === after.x && before.y === after.y, "❌ 从上进入 bottom 门不应传送");
+  
+    // ✅ left 门：从左进入 ✅，从右进入 ❌
+    const map3 = createMockMap();
+    map3.blocks[5][12] = new Portal(12 * 50, 5 * 50, [0, 1], "blue", "left");
+    map3.blocks[4][4] = new Portal(4 * 50, 4 * 50, [1, 1], "red", "right");
+    currentMap = map3;
+  
+    player.pos.x = 11 * 50;
+    player.pos.y = 5 * 50; // ✅ 从左进入 left
+    before = player.pos.copy();
+    player.teleport();
+    after = player.pos.copy();
+    console.assert(before.x !== after.x || before.y !== after.y, "❌ 从左进入 left 门应传送");
+  
+    player.pos.x = 13 * 50;
+    player.pos.y = 5 * 50; // ❌ 从右进入 left
+    before = player.pos.copy();
+    player.teleport();
+    after = player.pos.copy();
+    console.assert(before.x === after.x && before.y === after.y, "❌ 从右进入 left 门不应传送");
+  
+    // ✅ right 门：从右进入 ✅，从左进入 ❌
+    const map4 = createMockMap();
+    map4.blocks[12][6] = new Portal(6 * 50, 12 * 50, [0, 1], "blue", "right");
+    map4.blocks[14][8] = new Portal(8 * 50, 14 * 50, [1, 1], "red", "left");
+    currentMap = map4;
+  
+    player.pos.x = 7 * 50;
+    player.pos.y = 12 * 50; // ✅ 从右进入 right
+    before = player.pos.copy();
+    player.teleport();
+    after = player.pos.copy();
+    console.assert(before.x !== after.x || before.y !== after.y, "❌ 从右进入 right 门应传送");
+  
+    player.pos.x = 5 * 50;
+    player.pos.y = 12 * 50; // ❌ 从左进入 right
+    before = player.pos.copy();
+    player.teleport();
+    after = player.pos.copy();
+    console.assert(before.x === after.x && before.y === after.y, "❌ 从左进入 right 门不应传送");
+  
+    console.log("✅ testPlayerPortalEntryDirectionStrict passed.");
+  }
+  
+  
   
   
   
