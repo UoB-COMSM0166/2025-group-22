@@ -3,7 +3,7 @@ class Player {
   constructor() {
     this.pos = createVector(200, 200);
     this.velocity = createVector(0, 0);
-    this.gravity = 7;
+    this.gravity = 9;
     this.size = 50;
     this.spriteSize = 64;
     this.injured = false;
@@ -86,7 +86,7 @@ class Player {
 
   jump() {
     if (!this.isFalling()) {
-      this.velocity.y = -17;
+      this.velocity.y = -30;
     }
   }
 
@@ -233,7 +233,7 @@ class Player {
     }
 
     if (this.isFalling() && this.onWall() !== "top") {
-      this.velocity.mult(0.99);
+      this.velocity.mult(0.9);
     } else if (this.isFalling() && this.onWall() === "top") {
       this.velocity.y = 0;
     } else {
