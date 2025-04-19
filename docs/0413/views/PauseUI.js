@@ -29,7 +29,14 @@ class PauseUI extends UI {
                 height: 70,
                 text: "Menu",
                 action: () => {
-                    gameState = "start";
+                    // 👇 延迟到下一帧，避免 mousePressed() 被误触
+                    setTimeout(() => {
+                        gameState = "start";
+                        GameController.resetGame();
+                    }, 60); // 50ms 就足够
+
+                    // gameState = "start";
+                    // GameController.resetGame();
                 }
             }
         ]);

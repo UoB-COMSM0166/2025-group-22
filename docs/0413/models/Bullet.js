@@ -32,14 +32,18 @@ class Bullet {
       this.pos.x < 0 || this.pos.x > currentMap.blocks[0].length * 50 ||
       this.pos.y < 0 || this.pos.y > currentMap.blocks.length * 50
     ) {
+      console.log("1111111111111");
       return "undefined";
     }
 
 
     const block = this.getBlock();
-    // console.log("Block hit by bullet:", block?.constructor?.name, "at", this.getLoc());
+    console.log("Block hit by bullet:", block?.constructor?.name, "at", this.getLoc());
 
-    if (block === null || block === undefined) return;
+    if (block === null || block === undefined) {
+      console.log("222222222222");
+      return;
+    }
 
 
     // 傳送門牆邏輯
@@ -52,15 +56,17 @@ class Bullet {
         return "undefined";
       }
       this.placePortal(block);
+      console.log("33333333333");
       return "inStandard";
     }
     // 子弹打到Wall返回undefined, 子弹消除
     else if (block instanceof Wall && block.type === "solid") {
-
+      console.log("44444444444444");
       return "undefined";
     }
     // 子弹打到Portal返回undefined, 子弹消除
     else if (block instanceof Portal) {
+      console.log("555555555555");
       return "undefined";
     }
 
@@ -69,12 +75,16 @@ class Bullet {
 
       // 把block有空气的方向push到block.direction
       this.getNotBlockedSides();
+      console.log("6666666666");
 
       if (!this.isEnteringAllowed(block)) return "undefined"
+      // 反弹音效
+      bulletBounceSoundEffect.play();
 
+      console.log("77777777777");
       return this.reflect(block);
-
     }
+
   }
 
   getNotBlockedSides() {
@@ -82,22 +92,34 @@ class Bullet {
     var block_row = this.getLoc()[1];
     // currentMap.blocks[block_row][block_col].direction = [];
     //top has air wall
-    if(block_row - 1 >= 0 && currentMap.blocks[block_row - 1][block_col] === 0) {
+    if(block_row - 1 >= 0 &&
+        !(currentMap.blocks[block_row - 1][block_col] instanceof Wall ||
+        currentMap.blocks[block_row - 1][block_col] instanceof DirectionWall)) {
+        //     currentMap.blocks[block_row - 1][block_col] === 0) {
       currentMap.blocks[block_row][block_col].direction.push("top");
     }
 
     //right has air wall
-    if(block_col + 1 <= currentMap.blocks[0].length - 1 && currentMap.blocks[block_row][block_col + 1] === 0) {
+    if(block_col + 1 <= currentMap.blocks[0].length - 1 &&
+        !(currentMap.blocks[block_row][block_col + 1] instanceof Wall ||
+            currentMap.blocks[block_row][block_col + 1] instanceof DirectionWall)) {
+        // currentMap.blocks[block_row][block_col + 1] === 0) {
       currentMap.blocks[block_row][block_col].direction.push("right");
     }
 
     //bottom has air wall
-    if(block_row + 1 <= currentMap.blocks.length - 1 && currentMap.blocks[block_row + 1][block_col] === 0) {
+    if(block_row + 1 <= currentMap.blocks.length - 1 &&
+        !(currentMap.blocks[block_row + 1][block_col] instanceof Wall ||
+            currentMap.blocks[block_row + 1][block_col] instanceof DirectionWall)) {
+        // currentMap.blocks[block_row + 1][block_col] === 0) {
       currentMap.blocks[block_row][block_col].direction.push("bottom");
     }
 
     //left has air wall
-    if(block_col - 1 >= 0 && currentMap.blocks[block_row][block_col - 1] === 0) {
+    if(block_col - 1 >= 0 &&
+        !(currentMap.blocks[block_row][block_col - 1] instanceof Wall ||
+            currentMap.blocks[block_row][block_col - 1] instanceof DirectionWall)) {
+        // currentMap.blocks[block_row][block_col - 1] === 0) {
       currentMap.blocks[block_row][block_col].direction.push("left");
     }
   }

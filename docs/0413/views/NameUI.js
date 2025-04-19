@@ -19,15 +19,17 @@ class NameUI extends UI {
 
             this.button = createButton("Start");
             this.button.position(width / 2 - 30, height / 2 + 80);
-            this.button.style('font-size', '16px');
-            this.button.style('padding', '8px 20px');
-            this.button.style('border-radius', '6px');
-            this.button.style('background-color', '#4CAF50');
-            this.button.style('color', 'white');
-            this.button.style('border', 'none');
-            this.button.style('cursor', 'pointer');
-            this.button.mouseOver(() => this.button.style('background-color', '#45a049'));
-            this.button.mouseOut(() => this.button.style('background-color', '#4CAF50'));
+            // this.button.style('font-size', '16px');
+            // this.button.style('padding', '8px 20px');
+            // this.button.style('border-radius', '6px');
+            // this.button.style('background-color', '#4CAF50');
+            // this.button.style('color', 'white');
+            // this.button.style('border', 'none');
+            // this.button.style('cursor', 'pointer');
+            // this.button.class('neon-button');
+            this.button.class('neon-button');
+            // this.button.mouseOver(() => this.button.style('background-color', '#45a049'));
+            // this.button.mouseOut(() => this.button.style('background-color', '#4CAF50'));
             this.button.mousePressed(() => this.submitName());
 
             textBoxFlag = true;
@@ -40,10 +42,12 @@ class NameUI extends UI {
         textSize(20);
         textAlign(CENTER);
         // Please enter a nickname.\nDo not use your real name for privacy reasons.\nYour nickname will be shown on the leaderboard at the end of the game:
-        text("Please enter a nickname", width / 2, height / 2 - 50);
+        text("Please enter a nickname", width / 2, height / 2 - 100);
         textSize(14);
-        text("Do not use your real name for privacy reasons.", width / 2, height / 2 - 25);
-        text("Your nickname will be shown on the leaderboard at the end of the game:", width / 2, height / 2);
+        text("Do not use your real name for privacy reasons.", width / 2, height / 2 - 75);
+        text("Your nickname will be shown on the leaderboard at the end of the game:", width / 2, height / 2 -50);
+        // textSize(8);
+        text("(Only Start button games count for the leaderboard.)", width / 2, height / 2 -25);
         pop();
     }
 

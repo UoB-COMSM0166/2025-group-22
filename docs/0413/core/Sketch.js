@@ -2,7 +2,7 @@
 let gameState = "start";
 let currentMap = null;
 let currentLevel = "level1";
-let mySound, playButton;
+let openingBGM, playButton;
 let pistol = 0;
 let currentEnemy = null;
 let player;
@@ -23,28 +23,59 @@ function preload() {
   level1_background = loadImage("assets/images/level1_background.png");
   level2_background = loadImage("assets/images/level2_background.png");
   level3_background = loadImage("assets/images/level3_background.png");
-  mySound = loadSound("assets/soundtrack/Melody.mp3");
+
+  openingBGM = loadSound("assets/soundtrack/opening.mp3");
+
+  pistolFireSoundEffect = loadSound("assets/soundeffect/pistol_fire_2.mp3");
+  teleportSoundEffect = loadSound("assets/soundeffect/teleport_1.mp3");
+  bulletBounceSoundEffect = loadSound("assets/soundeffect/bullet_bounce_1.mp3");
+
+  keyPickupSoundEffect = loadSound("assets/soundeffect/key_pickup_1.mp3");
+  healthPickupSoundEffect = loadSound("assets/soundeffect/health_pickup.mp3");
+  doorOpenSoundEffect = loadSound("assets/soundeffect/door_open.mp3");
+
+  playerHitSoundEffect = loadSound("assets/soundeffect/player_hit_1.mp3");
+  playerInjuredOrDeadSoundEffect = loadSound("assets/soundeffect/player_injuredordead_1.mp3");
+
+
+
+
+  openingBGM.setVolume(0.5);
+
+  pistolFireSoundEffect.setVolume(0.5);
+  teleportSoundEffect.setVolume(0.2);
+  bulletBounceSoundEffect.setVolume(1);
+
+  keyPickupSoundEffect.setVolume(1);
+  healthPickupSoundEffect.setVolume(1);
+  doorOpenSoundEffect.setVolume(1);
+
+  playerHitSoundEffect.setVolume(1);
+  playerInjuredOrDeadSoundEffect.setVolume(1);
+
+
+  gameFont = loadFont("assets/font/Gloomie Saturday.otf");
 }
 
 function setup() {
   createCanvas(800, 450);
-  runPlayerTests();
+  // createCanvas(windowWidth, windowHeight);
+  // runPlayerTests();
   // playerName = localStorage.getItem("playerName");
   // if (playerName === "null") playerName = null;
 
   playButton = createButton("Play Music");
   playButton.position(700, 20);
   playButton.mousePressed(Music);
-  mySound.setVolume(0.05);
   crosshair = new Crosshair([0, 5]);
 }
 
 function Music() {
-  if (mySound.isPlaying()) {
-    mySound.pause();
+  if (openingBGM.isPlaying()) {
+    openingBGM.pause();
     playButton.html("Play Music");
   } else {
-    mySound.loop();
+    openingBGM.loop();
     playButton.html("Pause Music");
   }
 }
@@ -52,7 +83,7 @@ function Music() {
 function draw() {
   InputController.handleHeldKeys();
   background(getBackground());
-  console.log("textBoxFlag =", textBoxFlag);
+  // console.log("textBoxFlag =", textBoxFlag);
 
   if (GameController.is("playing")) {
     // console.log("playerName =", playerName);
@@ -128,8 +159,10 @@ function handleBullet() {
 function keyPressed() {
   InputController.handleKeyPressed(key);
 }
-
+//
 function mousePressed() {
+// function mouseReleased() {
+// function mouseClicked() {
   if (gameState === "playing" && player) {
     InputController.handleMousePressed(mouseButton);
   }

@@ -9,7 +9,7 @@ class Player {
     this.injured = false;
     this.injuryTimer = 0;
     this.animationTimer = 0;
-    this.lives =3000;
+    this.lives =3;
     this.keys = 0;
     this.movingState = 0;
     this.bullet = 0;
@@ -22,6 +22,8 @@ class Player {
       if (this.checkEnemyCollision()) this.injured = true;
       this.checkItemCollision();
     } else {
+      // 玩家死亡
+      playerInjuredOrDeadSoundEffect.play();
       gameState = "gameOver";
     }
   }
@@ -31,6 +33,10 @@ class Player {
     if (enemy) {
       if (this.injuryTimer === 0) {
         currentEnemy = enemy.type;
+
+        // 玩家受伤
+        playerHitSoundEffect.play();
+
         this.lives -= currentEnemy === "spike" ? 3 : 1;
       }
       return true;
@@ -85,6 +91,11 @@ class Player {
   }
 
   shoot(type) {
+
+    // if (this.bullet) {
+    //   this.bullet = null; // 或者 this.bullet.destroy() 如果你有销毁逻辑
+    // }
+    pistolFireSoundEffect.play();
     this.bullet = new Bullet(
       this.pos.x + currentMap.xOffset,
       this.pos.y,
@@ -112,6 +123,10 @@ class Player {
     for (const [dir, { offsetX, offsetY }] of Object.entries(directions)) {
       if (this.getBlockClass(offsetX, offsetY) === "Portal" &&
           this.getPortalDir(offsetX, offsetY) === dir) {
+
+        // 传送音效
+        teleportSoundEffect.play();
+
         const [currentX, currentY] = this.getLoc(this.pos.x + offsetX, this.pos.y + offsetY);
         this.teleportToLinkedPortal(currentX, currentY, dir);
         break;
@@ -269,12 +284,26 @@ class Player {
     const row = item.pos.y / 50;
 
     if (item.type === "heart") {
+      // 捡爱心音效
+      healthPickupSoundEffect.play();
       this.lives++;
     } else if (item.type === "key") {
+      // 捡钥匙音效
+      keyPickupSoundEffect.play();
       this.keys++;
-    } else if (item.type === "door") {
+    } else if (item.type === "door" ||
+        item.type === "treasure") {
       if (this.keys > 0) {
         this.keys = 0;
+        if (item.type === "treasure") {
+          // 开宝箱音效
+          // doorOpenSoundEffect.play();
+        }
+        else if (item.type === "door") {
+          // 开门音效
+          doorOpenSoundEffect.play();
+        }
+
         LevelController.nextLevel();
         return;
       } else {
