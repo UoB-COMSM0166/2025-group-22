@@ -7,6 +7,8 @@ let pistol = 0;
 let currentEnemy = null;
 let player;
 let playerName;
+// let playerIsMovingLeft = false;
+// let playerIsMovingRight = false;
 
 let startTime;
 let elapsedTime = 0;

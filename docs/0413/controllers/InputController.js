@@ -31,8 +31,22 @@ class InputController {
 
   static handleHeldKeys() {
     if (gameState === "playing" && player) {
-      if (keyIsDown(65)) player.moveLeft();   // A
-      if (keyIsDown(68)) player.moveRight();  // D
+      if (keyIsDown(65)) {
+        // playerIsMovingLeft = true;
+        player.moveLeft(); // A
+      }
+      else{
+        player.stopLeft(); // A
+        // playerIsMovingLeft = false;
+      }
+      if (keyIsDown(68)) {
+        // playerIsMovingRight = true;
+        player.moveRight(); // D
+      }
+      else{
+        player.stopRight(); // D
+        // playerIsMovingRight = false;
+      }
     }
   }
 }

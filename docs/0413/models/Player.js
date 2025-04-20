@@ -9,15 +9,20 @@ class Player {
     this.injured = false;
     this.injuryTimer = 0;
     this.animationTimer = 0;
-    this.lives =3;
+    this.lives =30;
     this.keys = 0;
     this.movingState = 0;
     this.bullet = 0;
+
+    this.IsMovingLeft = false;
+    this.IsMovingRight = false;
+    this.movingTimer = 0;
   }
 
   update() {
     if (this.isAlive()) {
       this.updateInjured();
+      this.updateWalking();
       this.updateGravity();
       if (this.checkEnemyCollision()) this.injured = true;
       this.checkItemCollision();
@@ -61,6 +66,7 @@ class Player {
   }
 
   moveLeft() {
+    this.IsMovingLeft = true;
     if (this.getBlockClass(5, 25) !== "Wall" &&
         this.getBlockClass(5, 25) !== "DirectionWall" &&
         this.getBlockClass(5, 25) !== "Portal") {
@@ -73,6 +79,7 @@ class Player {
   }
 
   moveRight() {
+    this.IsMovingRight = true;
     if (this.getBlockClass(this.size - 5, 25) !== "Wall" &&
         this.getBlockClass(this.size - 5, 25) !== "DirectionWall" &&
         this.getBlockClass(this.size - 5, 25) !== "Portal") {
@@ -82,6 +89,14 @@ class Player {
         currentMap.xOffset += 5;
       }
     }
+  }
+
+  stopLeft() {
+    this.IsMovingLeft=false;
+  }
+
+  stopRight() {
+    this.IsMovingRight=false;
   }
 
   jump() {
@@ -219,6 +234,17 @@ class Player {
     }
   }
 
+  updateWalking() {
+    if (this.IsMovingLeft || this.IsMovingRight) {
+      if (this.movingTimer < 17) {
+        this.movingTimer++;
+      } else {
+        // this.injured = false;
+        this.movingTimer = 0;
+      }
+    }
+  }
+
   updateGravity() {
     this.pos.add(this.velocity);
 
@@ -316,10 +342,35 @@ class Player {
   }
 
   draw() {
-    for (let i = 0; i < this.lives; i++) {
-      image(tiles_image, i * 25, 10, 50, 50, 11 * 64, 4 * 64, 64, 64);
-    }
     if (this.injured && this.injuryTimer % 6 === 0) return;
-    image(player_image, this.pos.x, this.pos.y - currentMap.yOffset, this.size, this.size, 0, 0, this.spriteSize, this.spriteSize);
+    if (this.IsMovingLeft === false && this.IsMovingRight === false) {
+      image(player_image, this.pos.x, this.pos.y - currentMap.yOffset, this.size, this.size, 0, 0, this.spriteSize, this.spriteSize);
+    }
+    else if(this.IsMovingLeft === true) {
+      push();
+      translate(this.pos.x + this.size, this.pos.y - currentMap.yOffset);  // 平移到正確位置（注意這裡是 + size）
+      scale(-1, 1);                 // 左右翻轉
+      if (Math.floor(this.movingTimer/6)===0){
+        image(player_image, 0, 0, this.size, this.size, this.spriteSize * 0, 0, this.spriteSize, this.spriteSize);
+      }
+      else if (Math.floor(this.movingTimer/6)===2){
+        image(player_image, 0, 0, this.size, this.size, this.spriteSize * 1, 0, this.spriteSize, this.spriteSize);
+      }
+      else if (Math.floor(this.movingTimer/6)===1){
+        image(player_image, 0, 0, this.size, this.size, this.spriteSize * 2, 0, this.spriteSize, this.spriteSize);
+      }
+      pop();
+    }
+    else if(this.IsMovingRight === true){
+      if (Math.floor(this.movingTimer/6)===0){
+        image(player_image, this.pos.x, this.pos.y - currentMap.yOffset, this.size, this.size, this.spriteSize * 0, 0, this.spriteSize, this.spriteSize);
+      }
+      else if (Math.floor(this.movingTimer/6)===2){
+        image(player_image, this.pos.x, this.pos.y - currentMap.yOffset, this.size, this.size, this.spriteSize * 1, 0, this.spriteSize, this.spriteSize);
+      }
+      else if (Math.floor(this.movingTimer/6)===1){
+        image(player_image, this.pos.x, this.pos.y - currentMap.yOffset, this.size, this.size, this.spriteSize * 2, 0, this.spriteSize, this.spriteSize);
+      }
+    }
   }
 }
