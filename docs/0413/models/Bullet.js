@@ -12,7 +12,7 @@ class Bullet {
 
   draw(xOffset, yOffset) {
     image(
-      tiles_image,
+      images["tiles_image"],
       this.pos.x - xOffset,
       this.pos.y - yOffset,
       this.size,
@@ -79,7 +79,7 @@ class Bullet {
 
       if (!this.isEnteringAllowed(block)) return "undefined"
       // 反弹音效
-      bulletBounceSoundEffect.play();
+      sounds["bulletBounceSoundEffect"].play();
 
       console.log("77777777777");
       return this.reflect(block);

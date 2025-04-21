@@ -28,7 +28,7 @@ class Player {
       this.checkItemCollision();
     } else {
       // 玩家死亡
-      playerInjuredOrDeadSoundEffect.play();
+      sounds["playerInjuredOrDeadSoundEffect"].play();
       gameState = "gameOver";
     }
   }
@@ -40,7 +40,7 @@ class Player {
         currentEnemy = enemy.type;
 
         // 玩家受伤
-        playerHitSoundEffect.play();
+        sounds["playerHitSoundEffect"].play();
 
         this.lives -= currentEnemy === "spike" ? 3 : 1;
       }
@@ -110,7 +110,7 @@ class Player {
     // if (this.bullet) {
     //   this.bullet = null; // 或者 this.bullet.destroy() 如果你有销毁逻辑
     // }
-    pistolFireSoundEffect.play();
+    sounds["pistolFireSoundEffect"].play();
     this.bullet = new Bullet(
       this.pos.x + currentMap.xOffset,
       this.pos.y,
@@ -140,7 +140,7 @@ class Player {
           this.getPortalDir(offsetX, offsetY) === dir) {
 
         // 传送音效
-        teleportSoundEffect.play();
+        sounds["teleportSoundEffect"].play();
 
         const [currentX, currentY] = this.getLoc(this.pos.x + offsetX, this.pos.y + offsetY);
         this.teleportToLinkedPortal(currentX, currentY, dir);
@@ -311,11 +311,11 @@ class Player {
 
     if (item.type === "heart") {
       // 捡爱心音效
-      healthPickupSoundEffect.play();
+      sounds["healthPickupSoundEffect"].play();
       this.lives++;
     } else if (item.type === "key") {
       // 捡钥匙音效
-      keyPickupSoundEffect.play();
+      sounds["keyPickupSoundEffect"].play();
       this.keys++;
     } else if (item.type === "door" ||
         item.type === "treasure") {
@@ -327,7 +327,7 @@ class Player {
         }
         else if (item.type === "door") {
           // 开门音效
-          doorOpenSoundEffect.play();
+          sounds["doorOpenSoundEffect"].play();
         }
 
         LevelController.nextLevel();
@@ -344,32 +344,32 @@ class Player {
   draw() {
     if (this.injured && this.injuryTimer % 6 === 0) return;
     if (this.IsMovingLeft === false && this.IsMovingRight === false) {
-      image(player_image, this.pos.x, this.pos.y - currentMap.yOffset, this.size, this.size, 0, 0, this.spriteSize, this.spriteSize);
+      image(images["player_image"], this.pos.x, this.pos.y - currentMap.yOffset, this.size, this.size, 0, 0, this.spriteSize, this.spriteSize);
     }
     else if(this.IsMovingLeft === true) {
       push();
       translate(this.pos.x + this.size, this.pos.y - currentMap.yOffset);  // 平移到正確位置（注意這裡是 + size）
       scale(-1, 1);                 // 左右翻轉
       if (Math.floor(this.movingTimer/6)===0){
-        image(player_image, 0, 0, this.size, this.size, this.spriteSize * 0, 0, this.spriteSize, this.spriteSize);
+        image(images["player_image"], 0, 0, this.size, this.size, this.spriteSize * 0, 0, this.spriteSize, this.spriteSize);
       }
       else if (Math.floor(this.movingTimer/6)===2){
-        image(player_image, 0, 0, this.size, this.size, this.spriteSize * 1, 0, this.spriteSize, this.spriteSize);
+        image(images["player_image"], 0, 0, this.size, this.size, this.spriteSize * 1, 0, this.spriteSize, this.spriteSize);
       }
       else if (Math.floor(this.movingTimer/6)===1){
-        image(player_image, 0, 0, this.size, this.size, this.spriteSize * 2, 0, this.spriteSize, this.spriteSize);
+        image(images["player_image"], 0, 0, this.size, this.size, this.spriteSize * 2, 0, this.spriteSize, this.spriteSize);
       }
       pop();
     }
     else if(this.IsMovingRight === true){
       if (Math.floor(this.movingTimer/6)===0){
-        image(player_image, this.pos.x, this.pos.y - currentMap.yOffset, this.size, this.size, this.spriteSize * 0, 0, this.spriteSize, this.spriteSize);
+        image(images["player_image"], this.pos.x, this.pos.y - currentMap.yOffset, this.size, this.size, this.spriteSize * 0, 0, this.spriteSize, this.spriteSize);
       }
       else if (Math.floor(this.movingTimer/6)===2){
-        image(player_image, this.pos.x, this.pos.y - currentMap.yOffset, this.size, this.size, this.spriteSize * 1, 0, this.spriteSize, this.spriteSize);
+        image(images["player_image"], this.pos.x, this.pos.y - currentMap.yOffset, this.size, this.size, this.spriteSize * 1, 0, this.spriteSize, this.spriteSize);
       }
       else if (Math.floor(this.movingTimer/6)===1){
-        image(player_image, this.pos.x, this.pos.y - currentMap.yOffset, this.size, this.size, this.spriteSize * 2, 0, this.spriteSize, this.spriteSize);
+        image(images["player_image"], this.pos.x, this.pos.y - currentMap.yOffset, this.size, this.size, this.spriteSize * 2, 0, this.spriteSize, this.spriteSize);
       }
     }
   }

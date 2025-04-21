@@ -7,7 +7,7 @@ class Crosshair {
 
   draw(xOffset = 0, yOffset = 0) {
     image(
-      tiles_image,
+      images["tiles_image"],
       mouseX - this.size / 2,
       mouseY - this.size / 2,
       this.size,

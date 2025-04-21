@@ -24,7 +24,7 @@ class Enemy {
 
   drawPart(xOffset, yOffset, dx = 0, dy = 0, offsetCol = 0, offsetRow = 0) {
     image(
-      enemies_image,
+      images["enemies_image"],
       this.pos.x + dx - xOffset,
       this.pos.y + dy - yOffset,
       this.size,

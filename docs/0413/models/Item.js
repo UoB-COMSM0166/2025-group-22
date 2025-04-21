@@ -15,10 +15,10 @@ class Item {
     const sy = this.img[1] * this.spriteSize;
 
     if (this.type === "door") {
-      image(tiles_image, x, y - 50, this.size, this.size, sx, sy - this.spriteSize, this.spriteSize, this.spriteSize);
-      image(tiles_image, x, y, this.size, this.size, sx, sy, this.spriteSize, this.spriteSize);
+      image(images["tiles_image"], x, y - 50, this.size, this.size, sx, sy - this.spriteSize, this.spriteSize, this.spriteSize);
+      image(images["tiles_image"], x, y, this.size, this.size, sx, sy, this.spriteSize, this.spriteSize);
     } else {
-      image(tiles_image, x, y, this.size, this.size, sx, sy, this.spriteSize, this.spriteSize);
+      image(images["tiles_image"], x, y, this.size, this.size, sx, sy, this.spriteSize, this.spriteSize);
     }
   }
 }
