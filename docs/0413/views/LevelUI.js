@@ -1,14 +1,14 @@
 // 📁 views/LevelUI.js
 class LevelUI extends UI {
   constructor() {
-    super(images["levelUI_background"], [
+    super(images["background_default"], [
       {
         x: canvasWidth * 0.5,
         y: canvasHeight * 0.429,
         width: canvasWidth * 161/800,
         height: canvasHeight * 53/450,
-        img: images["sample_button"],
-        imgLight: images["sample_button_light"],
+        img: images["button_sample"],
+        imgLight: images["button_sample_hover"],
         action: () => {
           LevelController.goToLevel("sample");
         }
@@ -18,8 +18,8 @@ class LevelUI extends UI {
         y: canvasHeight * 0.585,
         width: canvasWidth * 161/800,
         height: canvasHeight * 53/450,
-        img: images["level1_button"],
-        imgLight: images["level1_button_light"],
+        img: images["button_level1"],
+        imgLight: images["button_level1_hover"],
         action: () => {
           LevelController.goToLevel("level1");
         }
@@ -29,8 +29,8 @@ class LevelUI extends UI {
         y: canvasHeight * 0.757,
         width: canvasWidth * 161/800,
         height: canvasHeight * 53/450,
-        img: images["level2_button"],
-        imgLight: images["level2_button_light"],
+        img: images["button_level2"],
+        imgLight: images["button_level2_hover"],
         action: () => {
           LevelController.goToLevel("level2");
         }
@@ -40,8 +40,8 @@ class LevelUI extends UI {
         y: canvasHeight * 0.919,
         width: canvasWidth * 161/800,
         height: canvasHeight * 53/450,
-        img: images["level3_button"],
-        imgLight: images["level3_button_light"],
+        img: images["button_level3"],
+        imgLight: images["button_level3_hover"],
         action: () => {
           LevelController.goToLevel("level3");
         }

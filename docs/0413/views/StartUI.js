@@ -1,14 +1,14 @@
 // 📁 views/StartUI.js
 class StartUI extends UI {
   constructor() {
-    super(images["startUI_background"], [
+    super(images["background_start"], [
       {
         x: canvasWidth * 0.5,
         y: canvasHeight * 0.5,
         width: canvasWidth * 161/800,
         height: canvasHeight * 53/450,
-        img: images["start_button"],
-        imgLight: images["start_button_light"],
+        img: images["button_start"],
+        imgLight: images["button_start_hover"],
         action: () => {
 
           // // ❌ 如果還沒有，才 prompt 一次，並儲存
@@ -33,8 +33,8 @@ class StartUI extends UI {
         y: canvasHeight * 0.64,
         width: canvasWidth * 161/800,
         height: canvasHeight * 53/450,
-        img: images["level_button"],
-        imgLight: images["level_button_light"],
+        img: images["button_level"],
+        imgLight: images["button_level_hover"],
         action: () => {
           gameState = "choosingLevel";
         }
@@ -44,8 +44,8 @@ class StartUI extends UI {
         y: canvasHeight * 0.79,
         width: canvasWidth * 161/800,
         height: canvasHeight * 53/450,
-        img: images["exit_button"],
-        imgLight: images["exit_button_light"],
+        img: images["button_exit"],
+        imgLight: images["button_exit_hover"],
         action: () => {
           alert("請手動關閉頁面");
           window.close();
@@ -56,32 +56,82 @@ class StartUI extends UI {
   }
   draw() {
     super.draw();
-    this.imageLight(canvasWidth * 0.5,
-        canvasHeight * 0.5,
-        canvasWidth * 161/800,
-        canvasHeight * 53/450,
-        40,
-        images["main_character_light"]
+    // UIManager.imageFloat(images["icon_main_character"], 0, 0, canvasWidth, canvasHeight, 0, 0.05, 10);
+    // image(images["icon_main_character"], 0, 0, canvasWidth, canvasHeight);
+    image(images["icon_tower"], 0, 0, canvasWidth, canvasHeight);
+    UIManager.imageEffect(
+      images["text_twilight_seeker"],
+      0,
+      0,
+      canvasWidth,
+      canvasHeight,
+      {
+          highlightOnlyHover: false,
+          float: true,
+      }
     );
+    UIManager.imageEffect(
+      images["icon_bloodmoon"],
+      0,
+      0,
+      canvasWidth,
+      canvasHeight,
+      {
+          highlightOnlyHover: false,
+          float: true
+      }
+    );
+    UIManager.imageEffect(
+        images["icon_main_character"],
+        0,
+        0,
+        canvasWidth,
+        canvasHeight,
+        {
+            highlightOnlyHover: true,
+          float: true,
+          buttonX: canvasWidth * 0.5,
+          buttonY: canvasHeight * 0.5,
+          buttonWidth: canvasWidth * 161/800,
+          buttonHeight: canvasHeight * 53/450,
+        }
+    );
+    UIManager.imageEffect(
+        images["icon_tower"],
+        0,
+        0,
+        canvasWidth,
+        canvasHeight,
+        {
+            highlightOnlyHover: true,
+          float: false,
+          buttonX: canvasWidth * 0.5,
+          buttonY: canvasHeight * 0.64,
+          buttonWidth: canvasWidth * 161/800,
+          buttonHeight: canvasHeight * 53/450,
+        }
+    );
+    // UIManager.imageHover(
+    //     images["icon_main_character_hover"],
+    //     canvasWidth * 0.5,
+    //     canvasHeight * 0.5,
+    //     canvasWidth * 161/800,
+    //     canvasHeight * 53/450,
+    //     40
+    // );
+    //
+    // UIManager.imageHover(
+    //     images["icon_tower_hover"],
+    //     canvasWidth * 0.5,
+    //     canvasHeight * 0.64,
+    //     canvasWidth * 161/800,
+    //     canvasHeight * 53/450,
+    //     40
+    // );
 
-    this.imageLight(canvasWidth * 0.5,
-        canvasHeight * 0.64,
-        canvasWidth * 161/800,
-        canvasHeight * 53/450,
-        40,
-        images["tower_light"]
-    );
+
   }
-  imageLight(x, y, width, height, alpha, imageLight){
-    const isHovered =
-        mouseX >= x - width / 2 && mouseX <= x + width / 2 &&
-        mouseY >= y - height / 2 && mouseY <= y + height / 2;
-    // 這裡你就可以針對「有被 hover 的按鈕」做額外的效果
-    if (isHovered) {
-      push();
-      tint(255, alpha)
-      image(imageLight, 0, 0, canvasWidth, canvasHeight);
-      pop();
-    }
-  }
+
+
+
 }

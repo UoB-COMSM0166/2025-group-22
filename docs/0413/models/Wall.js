@@ -10,7 +10,7 @@ class Wall {
 
   draw(xOffset = 0, yOffset = 0) {
     image(
-      images["tiles_image"],
+      images["image_tiles"],
       this.pos.x - xOffset,
       this.pos.y - yOffset,
       this.size,

@@ -24,7 +24,14 @@ class UI {
     }
     push();
     imageMode(CENTER);
-    image(imgToShow, x, y, w, h);
+    // image(imgToShow, x, y, w, h);
+    UIManager.imageEffect(imgToShow, x, y, w, h, {
+      hoverOnlyHighlight: false,
+      float: true,
+      floatSpeed: 0.02,
+      floatAmplitude: 1,
+      floatOffset: 0
+    });
     pop();
     // fill(isPressed ? pressedColor : isHovered ? hoverColor : baseColor);
     // noStroke();

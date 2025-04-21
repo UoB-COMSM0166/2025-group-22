@@ -344,32 +344,32 @@ class Player {
   draw() {
     if (this.injured && this.injuryTimer % 6 === 0) return;
     if (this.IsMovingLeft === false && this.IsMovingRight === false) {
-      image(images["player_image"], this.pos.x, this.pos.y - currentMap.yOffset, this.size, this.size, 0, 0, this.spriteSize, this.spriteSize);
+      image(images["image_player"], this.pos.x, this.pos.y - currentMap.yOffset, this.size, this.size, 0, 0, this.spriteSize, this.spriteSize);
     }
     else if(this.IsMovingLeft === true) {
       push();
       translate(this.pos.x + this.size, this.pos.y - currentMap.yOffset);  // 平移到正確位置（注意這裡是 + size）
       scale(-1, 1);                 // 左右翻轉
       if (Math.floor(this.movingTimer/6)===0){
-        image(images["player_image"], 0, 0, this.size, this.size, this.spriteSize * 0, 0, this.spriteSize, this.spriteSize);
+        image(images["image_player"], 0, 0, this.size, this.size, this.spriteSize * 0, 0, this.spriteSize, this.spriteSize);
       }
       else if (Math.floor(this.movingTimer/6)===2){
-        image(images["player_image"], 0, 0, this.size, this.size, this.spriteSize * 1, 0, this.spriteSize, this.spriteSize);
+        image(images["image_player"], 0, 0, this.size, this.size, this.spriteSize * 1, 0, this.spriteSize, this.spriteSize);
       }
       else if (Math.floor(this.movingTimer/6)===1){
-        image(images["player_image"], 0, 0, this.size, this.size, this.spriteSize * 2, 0, this.spriteSize, this.spriteSize);
+        image(images["image_player"], 0, 0, this.size, this.size, this.spriteSize * 2, 0, this.spriteSize, this.spriteSize);
       }
       pop();
     }
     else if(this.IsMovingRight === true){
       if (Math.floor(this.movingTimer/6)===0){
-        image(images["player_image"], this.pos.x, this.pos.y - currentMap.yOffset, this.size, this.size, this.spriteSize * 0, 0, this.spriteSize, this.spriteSize);
+        image(images["image_player"], this.pos.x, this.pos.y - currentMap.yOffset, this.size, this.size, this.spriteSize * 0, 0, this.spriteSize, this.spriteSize);
       }
       else if (Math.floor(this.movingTimer/6)===2){
-        image(images["player_image"], this.pos.x, this.pos.y - currentMap.yOffset, this.size, this.size, this.spriteSize * 1, 0, this.spriteSize, this.spriteSize);
+        image(images["image_player"], this.pos.x, this.pos.y - currentMap.yOffset, this.size, this.size, this.spriteSize * 1, 0, this.spriteSize, this.spriteSize);
       }
       else if (Math.floor(this.movingTimer/6)===1){
-        image(images["player_image"], this.pos.x, this.pos.y - currentMap.yOffset, this.size, this.size, this.spriteSize * 2, 0, this.spriteSize, this.spriteSize);
+        image(images["image_player"], this.pos.x, this.pos.y - currentMap.yOffset, this.size, this.size, this.spriteSize * 2, 0, this.spriteSize, this.spriteSize);
       }
     }
   }

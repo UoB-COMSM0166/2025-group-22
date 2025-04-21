@@ -146,15 +146,15 @@ function windowResized() {
 
 function getBackground() {
   switch (currentLevel) {
-    case "level1": return images["level1_background"];
-    case "level2": return images["level2_background"];
-    case "level3": return images["level3_background"];
+    case "level1": return images["background_level1"];
+    case "level2": return images["background_level2"];
+    case "level3": return images["background_level3"];
   }
 }
 
 function drawLives() {
   for (var i = 0; i < player.lives; i++) {
-    image(images["tiles_image"], i * 30, 3, 50, 50, 2*64, 4*64, 64, 64);
+    image(images["image_tiles"], i * 30, 3, 50, 50, 2*64, 4*64, 64, 64);
   }
 }
 
@@ -204,45 +204,80 @@ function mousePressed() {
 
 function defineImagePaths() {
   imagePaths = {
-    player_image: "assets/images/players.png",
-    tiles_image: "assets/images/tiles.png",
-    enemies_image: "assets/images/enemies.png",
-    level1_background: "assets/images/level1_background.png",
-    level2_background: "assets/images/level2_background.png",
-    level3_background: "assets/images/level3_background.png",
+    //sprite
+    image_player: "assets/images/sprite/player.png",
+    image_tiles: "assets/images/sprite/tiles.png",
+    image_enemies: "assets/images/sprite/enemies.png",
 
-    guide: "assets/images/UI/GUIDE.png",
-    guide_down: "assets/images/UI/GUIDEDOWNSTAIR.png",
-    startUI_background: "assets/images/UI/BEGINNING.png",
-    levelUI_background: "assets/images/UI/LEVELUI.png",
-    pauseUI_background: "assets/images/UI/PAUSEDUI.png",
-    winUI_background: "assets/images/UI/WINUI.png",
+    //background
+    background_sample: "assets/images/background/background_sample.png",
+    background_level1: "assets/images/background/background_level1.png",
+    background_level2: "assets/images/background/background_level2.png",
+    background_level3: "assets/images/background/background_level3.png",
 
-    moon: "assets/images/UI/bloodmoon.png",
-    moon_light: "assets/images/UI/BLOODMOONL.png",
-    tower: "assets/images/UI/TOWER.png",
-    tower_light: "assets/images/UI/TOWERL2.png",
-    main_character: "assets/images/UI/MAINCHARACTER.png",
-    main_character_light: "assets/images/UI/MAINCHARACTERL.png",
+    //buttons
+    button_exit: "assets/images/buttons/button_exit.png",
+    button_exit_hover: "assets/images/buttons/button_exit_hover.png",
+    button_menu: "assets/images/buttons/button_menu.png",
+    button_menu_hover: "assets/images/buttons/button_menu_hover.png",
+    button_resume: "assets/images/buttons/button_resume.png",
+    button_resume_hover: "assets/images/buttons/button_resume_hover.png",
+    button_restart: "assets/images/buttons/button_restart.png",
+    button_restart_hover: "assets/images/buttons/button_restart_hover.png",
+    button_start: "assets/images/buttons/button_start.png",
+    button_start_hover: "assets/images/buttons/button_start_hover.png",
+    button_sample: "assets/images/buttons/button_sample.png",
+    button_sample_hover: "assets/images/buttons/button_sample_hover.png",
+    button_level: "assets/images/buttons/button_level.png",
+    button_level_hover: "assets/images/buttons/button_level_hover.png",
+    button_level1: "assets/images/buttons/button_level1.png",
+    button_level1_hover: "assets/images/buttons/button_level1_hover.png",
+    button_level2: "assets/images/buttons/button_level2.png",
+    button_level2_hover: "assets/images/buttons/button_level2_hover.png",
+    button_level3: "assets/images/buttons/button_level3.png",
+    button_level3_hover: "assets/images/buttons/button_level3_hover.png",
 
-    exit_button: "assets/images/UI/EXITBUTTON.png",
-    exit_button_light: "assets/images/UI/EXITBUTTONL.png",
-    menu_button: "assets/images/UI/MENUBUTTON.png",
-    menu_button_light: "assets/images/UI/MENUBUTTONL.png",
-    restart_button: "assets/images/UI/RESTARTBUTTON.png",
-    restart_button_light: "assets/images/UI/RESTARTBUTTONL.png",
-    start_button: "assets/images/UI/STARTBUTTON.png",
-    start_button_light: "assets/images/UI/STARTBUTTONL.png",
-    sample_button: "assets/images/UI/SAMPLEBUTTON.png",
-    sample_button_light: "assets/images/UI/SAMPLEBUTTONL.png",
-    level_button: "assets/images/UI/LEVELBUTTON.png",
-    level_button_light: "assets/images/UI/LEVELBUTTONL.png",
-    level1_button: "assets/images/UI/LEVELBUTTON1.png",
-    level1_button_light: "assets/images/UI/LEVELBUTTON1L.png",
-    level2_button: "assets/images/UI/LEVELBUTTON2.png",
-    level2_button_light: "assets/images/UI/LEVELBUTTON2L.png",
-    level3_button: "assets/images/UI/LEVELBUTTON3.png",
-    level3_button_light: "assets/images/UI/LEVELBUTTON3L.png",
+    //startUI
+    icon_bloodmoon: "assets/images/startUI/icon_bloodmoon.png",
+    icon_bloodmoon_hover: "assets/images/startUI/icon_bloodmoon_hover.png",
+    icon_tower: "assets/images/startUI/icon_tower.png",
+    icon_tower_hover: "assets/images/startUI/icon_tower_hover.png",
+    icon_main_character: "assets/images/startUI/icon_main_character.png",
+    icon_main_character_hover: "assets/images/startUI/icon_main_character_hover.png",
+    text_twilight_seeker: "assets/images/startUI/text_twilight_seeker.png",
+    background_start: "assets/images/startUI/background_start.png",
+
+    //guideUI
+    background_guide: "assets/images/guideUI/background_guide.png",
+    bar_key_hint: "assets/images/guideUI/bar_key_hint.png",
+    key_a: "assets/images/guideUI/key_a.png",
+    key_d: "assets/images/guideUI/key_d.png",
+    key_e: "assets/images/guideUI/key_e.png",
+    key_p: "assets/images/guideUI/key_p.png",
+    key_space: "assets/images/guideUI/key_space.png",
+    mouse: "assets/images/guideUI/mouse.png",
+
+    // guide: "assets/images/UI/GUIDE.png",
+    // guide_down: "assets/images/UI/GUIDEDOWNSTAIR.png",
+    // background_start: "assets/images/UI/BEGINNING.png",
+    // levelUI_background: "assets/images/UI/LEVELUI.png",
+    // pauseUI_background: "assets/images/UI/PAUSEDUI.png",
+    // winUI_background: "assets/images/UI/WINUI.png",
+
+    //levelUI
+    icon_tower_levelUI: "assets/images/levelUI/icon_tower_levelUI.png",
+
+    //otherUI
+    background_default: "assets/images/otherUI/background_default.png",
+    background_scoreboard: "assets/images/otherUI/background_scoreboard.png",
+    text_gameover: "assets/images/otherUI/text_gameover.png",
+    text_leaderboard: "assets/images/otherUI/text_leaderboard.png",
+    text_name: "assets/images/otherUI/text_name.png",
+    text_pause: "assets/images/otherUI/text_pause.png",
+    text_please_enter_a_nick_name: "assets/images/otherUI/text_please_enter_a_nick_name.png",
+    text_press_any_key_to_start: "assets/images/otherUI/text_press_any_key_to_start.png",
+    text_youwin: "assets/images/otherUI/text_youwin.png",
+
 
   };
 }
