@@ -23,6 +23,7 @@ let resolutionRatio=800/450;
 let canvasWidth;
 let canvasHeight;
 
+
 let images = {};
 let sounds = {};
 

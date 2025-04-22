@@ -11,18 +11,24 @@ class Bullet {
   }
 
   draw(xOffset, yOffset) {
+    const scaleRatio = (canvasWidth / 800)*0.5;
+    const drawX = (this.pos.x - xOffset) * scaleRatio;
+    const drawY = (this.pos.y - yOffset) * scaleRatio;
+    const drawSize = this.size * scaleRatio;
+  
     image(
       images["image_tiles"],
-      this.pos.x - xOffset,
-      this.pos.y - yOffset,
-      this.size,
-      this.size,
+      drawX,
+      drawY,
+      drawSize,
+      drawSize,
       this.img[0] * this.spriteSize,
       this.img[1] * this.spriteSize,
       this.spriteSize,
       this.spriteSize
     );
   }
+  
 
   update() {
     this.pos.add(this.velocity);

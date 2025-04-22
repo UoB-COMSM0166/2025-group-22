@@ -106,22 +106,24 @@ class Player {
   }
 
   shoot(type) {
-
-    // if (this.bullet) {
-    //   this.bullet = null; // 或者 this.bullet.destroy() 如果你有销毁逻辑
-    // }
+    const scaleRatio = (canvasWidth / 800)*0.5;
+  
+    // 将 mouseX/mouseY 从画布像素坐标转换为地图坐标
+    const logicalMouseX = mouseX / scaleRatio + currentMap.xOffset;
+    const logicalMouseY = mouseY / scaleRatio + currentMap.yOffset;
+  
     sounds["pistolFireSoundEffect"].play();
+  
     this.bullet = new Bullet(
       this.pos.x + currentMap.xOffset,
       this.pos.y,
-      mouseX + currentMap.xOffset,
-      mouseY + currentMap.yOffset,
+      logicalMouseX,
+      logicalMouseY,
       [0, 5],
       type
     );
-    // console.log("Shooting bullet of type", type, "from", this.pos.x, this.pos.y);
-    // console.log("Bullet created:", this.bullet);
   }
+  
 
   togglePistol() {
     pistol = 1 - pistol;
@@ -342,35 +344,27 @@ class Player {
   }
 
   draw() {
+    const scaleRatio = (canvasWidth / 800)*0.5;
+    const drawX = this.pos.x * scaleRatio;
+    const drawY = (this.pos.y - currentMap.yOffset) * scaleRatio;
+    const drawSize = this.size * scaleRatio;
+
     if (this.injured && this.injuryTimer % 6 === 0) return;
-    if (this.IsMovingLeft === false && this.IsMovingRight === false) {
-      image(images["image_player"], this.pos.x, this.pos.y - currentMap.yOffset, this.size, this.size, 0, 0, this.spriteSize, this.spriteSize);
-    }
-    else if(this.IsMovingLeft === true) {
+
+    if (!this.IsMovingLeft && !this.IsMovingRight) {
+      image(images["image_player"], drawX, drawY, drawSize, drawSize, 0, 0, this.spriteSize, this.spriteSize);
+    } else if (this.IsMovingLeft) {
       push();
-      translate(this.pos.x + this.size, this.pos.y - currentMap.yOffset);  // 平移到正確位置（注意這裡是 + size）
-      scale(-1, 1);                 // 左右翻轉
-      if (Math.floor(this.movingTimer/6)===0){
-        image(images["image_player"], 0, 0, this.size, this.size, this.spriteSize * 0, 0, this.spriteSize, this.spriteSize);
-      }
-      else if (Math.floor(this.movingTimer/6)===2){
-        image(images["image_player"], 0, 0, this.size, this.size, this.spriteSize * 1, 0, this.spriteSize, this.spriteSize);
-      }
-      else if (Math.floor(this.movingTimer/6)===1){
-        image(images["image_player"], 0, 0, this.size, this.size, this.spriteSize * 2, 0, this.spriteSize, this.spriteSize);
-      }
+      translate(drawX + drawSize, drawY);
+      scale(-1, 1);
+      const frame = Math.floor(this.movingTimer / 6);
+      const sx = this.spriteSize * (frame % 3);
+      image(images["image_player"], 0, 0, drawSize, drawSize, sx, 0, this.spriteSize, this.spriteSize);
       pop();
-    }
-    else if(this.IsMovingRight === true){
-      if (Math.floor(this.movingTimer/6)===0){
-        image(images["image_player"], this.pos.x, this.pos.y - currentMap.yOffset, this.size, this.size, this.spriteSize * 0, 0, this.spriteSize, this.spriteSize);
-      }
-      else if (Math.floor(this.movingTimer/6)===2){
-        image(images["image_player"], this.pos.x, this.pos.y - currentMap.yOffset, this.size, this.size, this.spriteSize * 1, 0, this.spriteSize, this.spriteSize);
-      }
-      else if (Math.floor(this.movingTimer/6)===1){
-        image(images["image_player"], this.pos.x, this.pos.y - currentMap.yOffset, this.size, this.size, this.spriteSize * 2, 0, this.spriteSize, this.spriteSize);
-      }
+    } else if (this.IsMovingRight) {
+      const frame = Math.floor(this.movingTimer / 6);
+      const sx = this.spriteSize * (frame % 3);
+      image(images["image_player"], drawX, drawY, drawSize, drawSize, sx, 0, this.spriteSize, this.spriteSize);
     }
   }
 }

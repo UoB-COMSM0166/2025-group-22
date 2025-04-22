@@ -39,15 +39,23 @@ class Maps {
   }
 
   draw() {
+    const scaleRatio = (canvasWidth / 800)*0.5;
+  
+    push();
+    scale(scaleRatio);  // 缩放整个地图（包括 tile、player、enemy、bullet 等）
+  
     for (let row = 0; row < this.blocks.length; row++) {
       for (let col = 0; col < this.blocks[row].length; col++) {
         const block = this.blocks[row][col];
         if (block !== 0 && typeof block.draw === "function") {
-          block.draw(this.xOffset, this.yOffset);
+          block.draw(this.xOffset, this.yOffset); // ✅ 仍使用逻辑偏移，内部会乘 scaleRatio
         }
       }
     }
+  
+    pop();
   }
+  
 
   constrainPosition(pos, size) {
     const mapWidth = this.blocks[0].length * 50;
