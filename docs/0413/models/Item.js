@@ -18,8 +18,31 @@ class Item {
     if (this.type === "door") {
       image(images["image_tiles"], x, y - 50, this.size, this.size, sx, sy - this.spriteSize, this.spriteSize, this.spriteSize);
       image(images["image_tiles"], x, y, this.size, this.size, sx, sy, this.spriteSize, this.spriteSize);
-    } else {
-      image(images["image_tiles"], x, y, this.size, this.size, sx, sy, this.spriteSize, this.spriteSize);
     }
+    else if(this.type === "key" || this.type === "heart") {
+      const tileX = this.img[0];
+      const tileY = this.img[1];
+
+      iconEffect(
+          images["image_tiles"],
+          x, y,
+          this.size, this.size,
+          {
+            float: true,
+            floatSpeed: 0.03,
+            floatAmplitude: 3,
+            floatOffset: 0,
+            highlightOnlyHover: false,
+            alpha: 255,
+            buttonX: x,
+            buttonY: y,
+            buttonWidth: this.size,
+            buttonHeight: this.size
+          },
+          [tileX, tileY],
+          this.spriteSize
+      );
+    }
+
   }
 }

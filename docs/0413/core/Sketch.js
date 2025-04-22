@@ -317,4 +317,45 @@ function defineSoundPathsAndVolume() {
   }
 }
 
+function iconEffect(img, x, y, width, height, {
+  highlightOnlyHover = false, // 只有 hover 才高光
+  alpha = 255,
+  float = false,
+  floatSpeed = 0.03,
+  floatAmplitude = 3,
+  floatOffset = 0,
+  buttonX,
+  buttonY,
+  buttonWidth,
+  buttonHeight
+} = {}, tile = [0, 0], spriteSize = 64) {
+
+  let drawY = y;
+
+  // ✅ 浮動效果
+  if (float) {
+    drawY = y + Math.sin(frameCount * floatSpeed + floatOffset) * floatAmplitude;
+  }
+
+  // ✅ 判斷是否 hover
+  const isHovered =
+      mouseX >= buttonX - buttonWidth / 2 && mouseX <= buttonX + buttonWidth / 2 &&
+      mouseY >= buttonY - buttonHeight / 2 && mouseY <= buttonY + buttonHeight / 2;
+
+  // ✅ 計算裁圖座標
+  const sx = tile[0] * spriteSize;
+  const sy = tile[1] * spriteSize;
+
+  push();
+  imageMode(CORNER);
+
+  if (!highlightOnlyHover || (highlightOnlyHover && isHovered)) {
+    tint(255, alpha);
+  } else {
+    noTint();
+  }
+
+  image(img, x, drawY, width, height, sx, sy, spriteSize, spriteSize);
+  pop();
+}
 
