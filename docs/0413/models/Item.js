@@ -43,6 +43,9 @@ class Item {
           this.spriteSize
       );
     }
+    else {
+      image(images["image_tiles"], x, y, this.size, this.size, sx, sy, this.spriteSize, this.spriteSize);
+    }
 
   }
 }
