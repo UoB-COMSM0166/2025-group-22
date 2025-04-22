@@ -1,17 +1,18 @@
-// 📁 views/LevelUI.js
 class LevelUI extends UI {
-  static topY=0.329;
-  static gap=0.159;
-  constructor() {
+  static topY = 0.329;
+  static gap = 0.159;
 
+  constructor() {
     super(images["background_level"], [
       {
         x: canvasWidth * 0.5,
         y: canvasHeight * (LevelUI.topY),
-        width: canvasWidth * 161/800,
-        height: canvasHeight * 53/450,
+        width: canvasWidth * 161 / 800,
+        height: canvasHeight * 53 / 450,
         img: images["button_sample"],
         imgLight: images["button_sample_hover"],
+        floatAmplitude: 1,
+        floatOffset: 0,
         action: () => {
           LevelController.goToLevel("sample");
         }
@@ -19,10 +20,12 @@ class LevelUI extends UI {
       {
         x: canvasWidth * 0.5,
         y: canvasHeight * (LevelUI.topY + LevelUI.gap),
-        width: canvasWidth * 161/800,
-        height: canvasHeight * 53/450,
+        width: canvasWidth * 161 / 800,
+        height: canvasHeight * 53 / 450,
         img: images["button_level1"],
         imgLight: images["button_level1_hover"],
+        floatAmplitude: 1,
+        floatOffset: Math.PI / 2,
         action: () => {
           LevelController.goToLevel("level1");
         }
@@ -30,10 +33,12 @@ class LevelUI extends UI {
       {
         x: canvasWidth * 0.5,
         y: canvasHeight * (LevelUI.topY + LevelUI.gap * 2),
-        width: canvasWidth * 161/800,
-        height: canvasHeight * 53/450,
+        width: canvasWidth * 161 / 800,
+        height: canvasHeight * 53 / 450,
         img: images["button_level2"],
         imgLight: images["button_level2_hover"],
+        floatAmplitude: 1,
+        floatOffset: Math.PI,
         action: () => {
           LevelController.goToLevel("level2");
         }
@@ -41,10 +46,12 @@ class LevelUI extends UI {
       {
         x: canvasWidth * 0.5,
         y: canvasHeight * (LevelUI.topY + LevelUI.gap * 3),
-        width: canvasWidth * 161/800,
-        height: canvasHeight * 53/450,
+        width: canvasWidth * 161 / 800,
+        height: canvasHeight * 53 / 450,
         img: images["button_level3"],
         imgLight: images["button_level3_hover"],
+        floatAmplitude: 1,
+        floatOffset: Math.PI * 1.5,
         action: () => {
           LevelController.goToLevel("level3");
         }
@@ -52,10 +59,12 @@ class LevelUI extends UI {
       {
         x: canvasWidth * 0.5,
         y: canvasHeight * (LevelUI.topY + LevelUI.gap * 4 - 53 / 450 * 0.25),
-        width: canvasWidth * 161/800 * 0.5,
-        height: canvasHeight * 53/450 * 0.5,
+        width: canvasWidth * 161 / 800 * 0.5,
+        height: canvasHeight * 53 / 450 * 0.5,
         img: images["button_menu"],
         imgLight: images["button_menu_hover"],
+        floatAmplitude: 1,
+        floatOffset: Math.PI / 4,
         action: () => {
           gameState = "start";
           GameController.resetGame();
@@ -66,16 +75,17 @@ class LevelUI extends UI {
 
   draw() {
     super.draw();
-    push();
+
+
     // 顯示每關成績
+    push();
     fill(0);
-    textSize(10 /850 * canvasWidth);
+    textSize(10 / 850 * canvasWidth);
     textAlign(CENTER, CENTER);
 
     const leaderboard = JSON.parse(localStorage.getItem("leaderboard-total")) || [];
     const levels = ["level1", "level2", "level3"];
 
-// 統計每關的最快時間
     const bestTimes = {};
     levels.forEach(lv => {
       const validTimes = leaderboard
@@ -86,23 +96,20 @@ class LevelUI extends UI {
 
     let total = 0;
     let y = canvasHeight * (LevelUI.topY + LevelUI.gap * 0.5);
-
     levels.forEach(lv => {
       push();
       fill(86, 96, 97);
       textStyle(BOLD);
-      textFont("Courier New");
-      // textFont(gameFont);
+      textFont("Georgia");
       translate(canvasWidth * 0.5, y);
-      // rotate(radians(30));
       const time = bestTimes[lv];
       if (typeof time === "number") {
         total += time;
         text(`${lv.toUpperCase()} Best: ${nf(time / 1000, 0, 2)}s`, 0, 0);
         y += canvasHeight * LevelUI.gap;
       }
-      pop()
+      pop();
     });
-    pop()
+    pop();
   }
 }

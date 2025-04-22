@@ -7,30 +7,34 @@ class UI {
     this.buttons = buttons;
   }
 
-  static button(x, y, w, h, img, imgLight) {
-    const isHovered = mouseX >= x - w / 2 && mouseX <= x + w / 2 &&
-                      mouseY >= y - h / 2 && mouseY <= y + h / 2;
+  static button(btn) {
+    const isHovered = mouseX >= btn.x - btn.width / 2 && mouseX <= btn.x + btn.width / 2 &&
+        mouseY >= btn.y - btn.height / 2 && mouseY <= btn.y + btn.height / 2;
     const isPressed = isHovered && mouseIsPressed;
 
     // const baseColor = color(245, 242, 196);     // 原始
     // const hoverColor = color(235, 225, 160);    // 懸停
     // const pressedColor = color(210, 200, 140);  // 按下
 
-    let imgToShow = img;
+    let imgToShow = btn.img;
     if (isHovered) {
-      imgToShow = imgLight;
-     } else if (isPressed) {
-      imgToShow = img;
+      imgToShow = btn.imgLight;
+    } else if (isPressed) {
+      imgToShow = btn.img;
     }
     push();
     imageMode(CENTER);
     // image(imgToShow, x, y, w, h);
-    UIManager.imageEffect(imgToShow, x, y, w, h, {
-      hoverOnlyHighlight: false,
+    UIManager.imageEffect(imgToShow, btn.x, btn.y, btn.width, btn.height, {
+      highlightOnlyHover: false,
       float: true,
-      floatSpeed: 0.02,
-      floatAmplitude: 1,
-      floatOffset: 0
+      floatSpeed: btn.floatSpeed ?? 0.02,
+      floatAmplitude: btn.floatAmplitude ?? 1,
+      floatOffset: btn.floatOffset ?? 0,
+      buttonX: btn.x,
+      buttonY: btn.y,
+      buttonWidth: btn.width,
+      buttonHeight: btn.height
     });
     pop();
     // fill(isPressed ? pressedColor : isHovered ? hoverColor : baseColor);
@@ -65,7 +69,7 @@ class UI {
       //   noStroke();
       // }
 
-      UI.button(btn.x, btn.y, btn.width, btn.height, btn.img, btn.imgLight);
+      UI.button(btn);
     });
   }
 

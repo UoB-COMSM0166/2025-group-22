@@ -15,7 +15,7 @@ class Bullet {
     const drawX = (this.pos.x - xOffset) * scaleRatio;
     const drawY = (this.pos.y - yOffset) * scaleRatio;
     const drawSize = this.size * scaleRatio;
-  
+    var imagePadding = 1;
     image(
       images["image_tiles"],
       drawX,
@@ -23,7 +23,7 @@ class Bullet {
       drawSize,
       drawSize,
       this.img[0] * this.spriteSize,
-      this.img[1] * this.spriteSize,
+      this.img[1] * this.spriteSize + imagePadding,
       this.spriteSize,
       this.spriteSize
     );

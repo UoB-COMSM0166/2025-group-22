@@ -9,10 +9,11 @@ class Item {
   }
 
   draw(xOffset, yOffset) {
+    var imagePadding = 1;
     const x = this.pos.x - xOffset;
     const y = this.pos.y - yOffset;
     const sx = this.img[0] * this.spriteSize;
-    const sy = this.img[1] * this.spriteSize;
+    const sy = this.img[1] * this.spriteSize + imagePadding;
 
     if (this.type === "door") {
       image(images["image_tiles"], x, y - 50, this.size, this.size, sx, sy - this.spriteSize, this.spriteSize, this.spriteSize);

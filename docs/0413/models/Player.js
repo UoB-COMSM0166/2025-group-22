@@ -102,6 +102,7 @@ class Player {
   jump() {
     if (!this.isFalling()) {
       this.velocity.y = -30;
+      sounds["jumpSoundEffect"].play();
     }
   }
 
