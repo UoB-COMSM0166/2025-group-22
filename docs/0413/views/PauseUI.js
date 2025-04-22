@@ -1,62 +1,46 @@
 // 📁 views/PauseUI.js
 class PauseUI extends UI {
     constructor() {
-        super("Paused", [
+        super(images["background_default"], [
             {
-                x: 325,
-                y: 140,
-                width: 150,
-                height: 70,
-                text: "Resume",
+                x: canvasWidth * 0.5,
+                y: canvasHeight * (0.65 - LevelUI.gap),
+                width: canvasWidth * 161/800,
+                height: canvasHeight * 53/450,
+                img: images["button_resume"],
+                imgLight: images["button_resume_hover"],
                 action: () => {
                     GameController.resume();
                 }
             },
             {
-                x: 325,
-                y: 250,  // 第二顆按鈕
-                width: 150,
-                height: 70,
-                text: "Restart",
+                x: canvasWidth * 0.5,
+                y: canvasHeight * 0.65,
+                width: canvasWidth * 161/800,
+                height: canvasHeight * 53/450,
+                img: images["button_restart"],
+                imgLight: images["button_restart_hover"],
                 action: () => {
                     GameController.restart();
                 }
             },
             {
-                x: 325,
-                y: 360,  // 第三顆按鈕
-                width: 150,
-                height: 70,
-                text: "Menu",
+                x: canvasWidth * 0.5,
+                y: canvasHeight * (0.65 + LevelUI.gap),
+                width: canvasWidth * 161/800,
+                height: canvasHeight * 53/450,
+                img: images["button_menu"],
+                imgLight: images["button_menu_hover"],
                 action: () => {
-                    // 👇 延迟到下一帧，避免 mousePressed() 被误触
-                    setTimeout(() => {
-                        gameState = "start";
-                        GameController.resetGame();
-                    }, 60); // 50ms 就足够
-
-                    // gameState = "start";
-                    // GameController.resetGame();
+                    gameState = "start";
+                    GameController.resetGame();
                 }
             }
         ]);
     }
 
     draw() {
-        UI.textFormat(400, 80, 80, this.title); // 對齊 LevelUI 的標題位置
-
-        this.buttons.forEach(btn => {
-            const isHovered = mouseX >= btn.x && mouseX <= btn.x + btn.width &&
-                mouseY >= btn.y && mouseY <= btn.y + btn.height;
-
-            if (isHovered) {
-                stroke(0);
-                strokeWeight(3);
-            } else {
-                noStroke();
-            }
-
-            UI.button(btn.x, btn.y, btn.width, btn.height, btn.text);
-        });
+        super.draw();
+        image(images["text_pause"], 0, canvasHeight * 0.12, canvasWidth, canvasHeight);
     }
 }

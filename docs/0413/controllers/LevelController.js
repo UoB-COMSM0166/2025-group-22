@@ -1,4 +1,3 @@
-// 📁 controllers/LevelController.js
 class LevelController {
   static nextLevel() {
     const next = LevelController.getNextLevel(currentLevel);

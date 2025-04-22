@@ -1,8 +1,8 @@
-// 📁 core/UIManager.js
 class UIManager {
   static getCurrentUI() {
     const uiMap = {
       start: () => new StartUI(),
+      guide: () => new GuideUI(),
       choosingLevel: () => new LevelUI(),
       pause: () => new PauseUI(),
       gameOver: () => new GameOverUI(),
@@ -11,12 +11,10 @@ class UIManager {
     };
     return uiMap[gameState]?.() || null;
   }
-
   static drawCurrentUI() {
     const ui = UIManager.getCurrentUI();
     if (ui) {
       ui.draw();
-      ui.handleMouseClick();
     }
   }
   static imageEffect(img, x, y, width, height, {
@@ -49,21 +47,4 @@ class UIManager {
     image(img, x, drawY, width, height);
     pop();
   }
-  // static imageFloat(img, x, y, width, height, floatOffset, floatSpeed, floatAmplitude) {
-  //   let floatY = y + Math.sin(frameCount * floatSpeed + floatOffset) * floatAmplitude;
-  //   image(img, x, floatY, width, height);
-  // }
-  //
-  // static imageHover(imageHover, x, y, width, height, alpha){
-  //   const isHovered =
-  //       mouseX >= x - width / 2 && mouseX <= x + width / 2 &&
-  //       mouseY >= y - height / 2 && mouseY <= y + height / 2;
-  //   // 這裡你就可以針對「有被 hover 的按鈕」做額外的效果
-  //   if (isHovered) {
-  //     push();
-  //     tint(255, alpha);
-  //     image(imageHover, 0, 0, canvasWidth, canvasHeight);
-  //     pop();
-  //   }
-  // }
 }

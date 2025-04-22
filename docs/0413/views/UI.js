@@ -71,8 +71,7 @@ class UI {
 
   handleMouseClick() {
     this.buttons.forEach(btn => {
-      if (mouseIsPressed &&
-          mouseX >= btn.x - btn.width / 2 && mouseX <= btn.x + btn.width / 2 &&
+      if (mouseX >= btn.x - btn.width / 2 && mouseX <= btn.x + btn.width / 2 &&
           mouseY >= btn.y - btn.height / 2 && mouseY <= btn.y + btn.height / 2 ){
         btn.action();
       }

@@ -1,70 +1,65 @@
-// 📁 views/NamePromptUI.js
 class NameUI extends UI {
     constructor() {
-        super("Enter Your Name", []);
+        super(images["background_default"], [
+            {
+                x: canvasWidth * 0.5,
+                y: canvasHeight * 0.8,
+                width: canvasWidth * 161/800,
+                height: canvasHeight * 53/450,
+                img: images["button_start"],
+                imgLight: images["button_start_hover"],
+                action: () => {
+                    playerName = textInput.value() || "Unknown";
+                    localStorage.setItem("playerName", playerName);
+                    textInput.remove();
+                    textInput=null;
+                    gameState = "guide";
+                }
+            }
+        ]);
     }
 
     draw() {
-        if (!textBoxFlag) {
-            this.input = createInput();
+        super.draw();
+        image(images["text_please_enter_a_nick_name"], 0, canvasHeight * 0.15, canvasWidth, canvasHeight);
 
-            this.input.position(width / 2 - 100, height / 2 + 25);
-            this.input.size(200);
-            this.input.style('font-size', '16px');
-            this.input.style('padding', '8px');
-            this.input.style('border-radius', '6px');
-            this.input.style('border', '1px solid #ccc');
-            this.input.style('text-align', 'center');
-            this.input.style('outline', 'none');
+            let charCountText = '';
+            if (!textInput) {
 
-            this.button = createButton("Start");
-            this.button.position(width / 2 - 30, height / 2 + 80);
-            // this.button.style('font-size', '16px');
-            // this.button.style('padding', '8px 20px');
-            // this.button.style('border-radius', '6px');
-            // this.button.style('background-color', '#4CAF50');
-            // this.button.style('color', 'white');
-            // this.button.style('border', 'none');
-            // this.button.style('cursor', 'pointer');
-            // this.button.class('neon-button');
-            this.button.class('neon-button');
-            // this.button.mouseOver(() => this.button.style('background-color', '#45a049'));
-            // this.button.mouseOut(() => this.button.style('background-color', '#4CAF50'));
-            this.button.mousePressed(() => this.submitName());
+                textInput = createInput();
+                textInput.class('custom-input');
+                textInput.input(() => {
+                    // 你可以在這裡動態監控文字輸入，例如限制長度
+                    let val = textInput.value();
+                    // 只保留 英文字母、数字、底线
+                    val = val.replace(/[^a-zA-Z0-9_]/g, '');
+                    // 限制最大長度為 16
+                    val = val.slice(0, 16);
+                    textInput.value(val);
+                    // 顯示目前長度，限制最少 3 個
+                    charCountText = `${val.length}/16`;
+                });
+            }
+            // if (charCountText) {
+            //     textAlign(CENTER);
+            //     textSize(16);
+            //     if (textInput.value().length < 3) {
+            //         fill(255, 100, 100); // 紅色提示
+            //         text("請輸入至少 3 個有效字符", width / 2, height * 0.72);
+            //     } else {
+            //         fill(255);
+            //     }
+            //     text(charCountText, width / 2, height * 0.75);
+            // }
 
-            textBoxFlag = true;
-        }
-        push();
-        fill(255);
-        rectMode(CENTER);
-        rect(width / 2, height / 2, 600, 300, 10);
-        fill(0);
-        textSize(20);
-        textAlign(CENTER);
-        // Please enter a nickname.\nDo not use your real name for privacy reasons.\nYour nickname will be shown on the leaderboard at the end of the game:
-        text("Please enter a nickname", width / 2, height / 2 - 100);
-        textSize(14);
-        text("Do not use your real name for privacy reasons.", width / 2, height / 2 - 75);
-        text("Your nickname will be shown on the leaderboard at the end of the game:", width / 2, height / 2 -50);
-        // textSize(8);
-        text("(Only Start button games count for the leaderboard.)", width / 2, height / 2 -25);
-        pop();
-    }
-
-    submitName() {
-        playerName = this.input.value() || "Unknown";
-        localStorage.setItem("playerName", playerName);
-
-        // 移除輸入 UI
-        this.input.remove();
-        this.button.remove();
-
-        // GameController.start("level1");
-
-        // 👇 延迟到下一帧再启动游戏，避免 mousePressed() 被误触
-        setTimeout(() => {
-            GameController.start("level1");
-        }, 50); // 50ms 就足够
+            const inputWidth = canvasWidth * 508 / 800 * 0.8;
+            const inputHeight = canvasHeight * 76 / 450 * 0.8;
+            const posX = (windowWidth - canvasWidth) / 2 + (canvasWidth - inputWidth) / 2;
+            const posY = (windowHeight - canvasHeight) / 2 + canvasHeight * 0.52;
+            var fontSize = 24 /850 * canvasWidth
+            textInput.style('font-size', `${fontSize}px`);
+            textInput.position(posX, posY);
+            textInput.size(inputWidth, inputHeight);
     }
 
 }

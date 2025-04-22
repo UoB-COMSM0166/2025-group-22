@@ -1,4 +1,3 @@
-// 📁 controllers/CollisionController.js
 class CollisionController {
   // 根據座標取得地圖上的區塊
   static getBlockAt(x, y, useWorldCoords = true) {

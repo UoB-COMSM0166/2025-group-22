@@ -48,7 +48,7 @@ class GameController {
   }
 
   static resetGame() {
-    textBoxFlag  = false;
+    // textBoxFlag  = false;
     saveScoreFlag = false;
     playerName = null;
   }

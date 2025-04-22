@@ -1,10 +1,13 @@
 // 📁 views/LevelUI.js
 class LevelUI extends UI {
+  static topY=0.329;
+  static gap=0.159;
   constructor() {
-    super(images["background_default"], [
+
+    super(images["background_level"], [
       {
         x: canvasWidth * 0.5,
-        y: canvasHeight * 0.429,
+        y: canvasHeight * (LevelUI.topY),
         width: canvasWidth * 161/800,
         height: canvasHeight * 53/450,
         img: images["button_sample"],
@@ -15,7 +18,7 @@ class LevelUI extends UI {
       },
       {
         x: canvasWidth * 0.5,
-        y: canvasHeight * 0.585,
+        y: canvasHeight * (LevelUI.topY + LevelUI.gap),
         width: canvasWidth * 161/800,
         height: canvasHeight * 53/450,
         img: images["button_level1"],
@@ -26,7 +29,7 @@ class LevelUI extends UI {
       },
       {
         x: canvasWidth * 0.5,
-        y: canvasHeight * 0.757,
+        y: canvasHeight * (LevelUI.topY + LevelUI.gap * 2),
         width: canvasWidth * 161/800,
         height: canvasHeight * 53/450,
         img: images["button_level2"],
@@ -37,7 +40,7 @@ class LevelUI extends UI {
       },
       {
         x: canvasWidth * 0.5,
-        y: canvasHeight * 0.919,
+        y: canvasHeight * (LevelUI.topY + LevelUI.gap * 3),
         width: canvasWidth * 161/800,
         height: canvasHeight * 53/450,
         img: images["button_level3"],
@@ -45,74 +48,28 @@ class LevelUI extends UI {
         action: () => {
           LevelController.goToLevel("level3");
         }
+      },
+      {
+        x: canvasWidth * 0.5,
+        y: canvasHeight * (LevelUI.topY + LevelUI.gap * 4 - 53 / 450 * 0.25),
+        width: canvasWidth * 161/800 * 0.5,
+        height: canvasHeight * 53/450 * 0.5,
+        img: images["button_menu"],
+        imgLight: images["button_menu_hover"],
+        action: () => {
+          gameState = "start";
+          GameController.resetGame();
+        }
       }
     ]);
   }
 
-//   draw() {
-//     super.draw();
-//     push();
-//     // 顯示每關成績
-//     fill(0);
-//     // textSize(20);
-//     textSize(15 /850 * canvasWidth);
-//     // textSize(20 / (800 * 450) * canvasWidth * canvasHeight);
-//     textAlign(CENTER, CENTER);
-//
-//     const leaderboard = JSON.parse(localStorage.getItem("leaderboard-total")) || [];
-//     const levels = ["level1", "level2", "level3"];
-//
-// // 統計每關的最快時間
-//     const bestTimes = {};
-//     levels.forEach(lv => {
-//       const validTimes = leaderboard
-//           .map(entry => entry.levelTimes?.[lv])
-//           .filter(t => typeof t === "number");
-//       bestTimes[lv] = validTimes.length > 0 ? Math.min(...validTimes) : null;
-//     });
-//
-//     let total = 0;
-//     let y = canvasHeight * 0.6;
-//
-//     levels.forEach(lv => {
-//       push();
-//       // fill("#e88504");
-//       // fill(44, 65, 66);
-//       // fill(127, 127, 127);
-//       fill(86, 96, 97);
-//       textStyle(BOLD);
-//       textFont("Courier New");
-//       // textFont(gameFont);
-//       translate(canvasWidth * 0.7, y);
-//       // rotate(radians(30));
-//       const time = bestTimes[lv];
-//       if (typeof time === "number") {
-//         total += time;
-//         // text(`${lv.toUpperCase()} Time: ${nf(time / 1000, 0, 2)}s`, 600, y);
-//
-//         text(`${lv.toUpperCase()} Time: \n${nf(time / 1000, 0, 2)}s`, 0, 0);
-//         y += canvasHeight * 0.17;
-//       }
-//       // else {
-//       //   // text(`${lv.toUpperCase()} Time: --`, 600, y);
-//       //
-//       //   text(`${lv.toUpperCase()} Time: \n--`, 0, 0);
-//       //
-//       //   y += 110;
-//       // }
-//       pop()
-//     });
-//
-//     pop()
-//   }
   draw() {
     super.draw();
     push();
     // 顯示每關成績
     fill(0);
-    // textSize(20);
     textSize(10 /850 * canvasWidth);
-    // textSize(20 / (800 * 450) * canvasWidth * canvasHeight);
     textAlign(CENTER, CENTER);
 
     const leaderboard = JSON.parse(localStorage.getItem("leaderboard-total")) || [];
@@ -128,13 +85,10 @@ class LevelUI extends UI {
     });
 
     let total = 0;
-    let y = canvasHeight * 0.51;
+    let y = canvasHeight * (LevelUI.topY + LevelUI.gap * 0.5);
 
     levels.forEach(lv => {
       push();
-      // fill("#e88504");
-      // fill(44, 65, 66);
-      // fill(127, 127, 127);
       fill(86, 96, 97);
       textStyle(BOLD);
       textFont("Courier New");
@@ -144,21 +98,11 @@ class LevelUI extends UI {
       const time = bestTimes[lv];
       if (typeof time === "number") {
         total += time;
-        // text(`${lv.toUpperCase()} Time: ${nf(time / 1000, 0, 2)}s`, 600, y);
-
         text(`${lv.toUpperCase()} Best: ${nf(time / 1000, 0, 2)}s`, 0, 0);
-        y += canvasHeight * 0.165;
+        y += canvasHeight * LevelUI.gap;
       }
-      // else {
-      //   // text(`${lv.toUpperCase()} Time: --`, 600, y);
-      //
-      //   text(`${lv.toUpperCase()} Time: \n--`, 0, 0);
-      //
-      //   y += 110;
-      // }
       pop()
     });
-
     pop()
   }
 }

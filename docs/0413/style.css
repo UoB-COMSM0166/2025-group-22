@@ -12,40 +12,21 @@ canvas {
   display: block;
 }
 
-/* style.css */
-
-.neon-button {
-  background: transparent;
-  border: 2px solid #0ff;
-  color: #0ff;
-  padding: 8px 20px;
-  font-size: 16px;
-  border-radius: 10px;
-  text-shadow: 0 0 5px #0ff;
-  box-shadow: 0 0 10px #0ff;
-  transition: all 0.3s ease-in-out;
-  cursor: pointer;
-}
-
-.neon-button:hover {
-  background: #0ff;
-  color: #000;
-  box-shadow: 0 0 20px #0ff;
-}
-.pressed-button {
-  background-color: #4CAF50;
+.custom-input {
+  background-image: url('assets/images/otherUI/input_name.png');
+  background-size: cover;
+  background-repeat: no-repeat;
   border: none;
-  color: white;
-  padding: 15px 30px;
-  font-size: 20px;
-  border-radius: 10px;
-  box-shadow: 0 5px #999;
-  transition: all 0.2s ease-in-out;
-  cursor: pointer;
+  /*font-size: 18px;*/
+  color: #255;
+  padding: 10px;
+  box-sizing: border-box;
+  outline: none;
 }
 
-.pressed-button:active {
-  box-shadow: 0 2px #666;
-  transform: translateY(4px);
+/* 可加上 hover 效果 */
+.custom-input:focus {
+  outline: 2px solid rgb(127, 127, 127);
 }
+
 

@@ -13,7 +13,8 @@ let elapsedTime = 0;
 let timerRunning = false;
 let pausedTime = 0;
 
-let textBoxFlag  = false;
+// let textBoxFlag  = false;
+let textInput;
 let saveScoreFlag = false;
 
 // let gameWindowRatio;
@@ -71,11 +72,6 @@ function preload() {
 
 function setup() {
 
-  // createCanvas(windowWidth, windowHeight);
-  // runPlayerTests();
-  // playerName = localStorage.getItem("playerName");
-  // if (playerName === "null") playerName = null;
-
   playButton = createButton("Play Music");
   playButton.position(700, 20);
   playButton.mousePressed(Music);
@@ -110,13 +106,8 @@ function draw() {
     background(getBackground());
   }
 
-  // console.log("textBoxFlag =", textBoxFlag);
 
   if (GameController.is("playing")) {
-    // console.log("playerName =", playerName);
-
-    // console.log("saveScoreFlag =", saveScoreFlag);
-
 
     if (!currentMap || !player) GameController.start(currentLevel);
     currentMap.draw();
@@ -193,12 +184,17 @@ function handleBullet() {
 function keyPressed() {
   InputController.handleKeyPressed(key);
 }
-//
+
 function mousePressed() {
-// function mouseReleased() {
-// function mouseClicked() {
   if (gameState === "playing" && player) {
     InputController.handleMousePressed(mouseButton);
+  }
+}
+
+function mouseReleased() {
+  const ui = UIManager.getCurrentUI();
+  if (ui) {
+    ui.handleMouseClick();
   }
 }
 
@@ -254,8 +250,16 @@ function defineImagePaths() {
     key_d: "assets/images/guideUI/key_d.png",
     key_e: "assets/images/guideUI/key_e.png",
     key_p: "assets/images/guideUI/key_p.png",
+    key_c: "assets/images/guideUI/key_c.png",
     key_space: "assets/images/guideUI/key_space.png",
     mouse: "assets/images/guideUI/mouse.png",
+    text_jump: "assets/images/guideUI/text_jump.png",
+    text_move: "assets/images/guideUI/text_move.png",
+    text_pause_guideUI: "assets/images/guideUI/text_pause_guideUI.png",
+    text_shoot: "assets/images/guideUI/text_shoot.png",
+    text_teleport: "assets/images/guideUI/text_teleport.png",
+    text_toggle_portal: "assets/images/guideUI/text_toggle_portal.png",
+    text_press_any_key_to_start: "assets/images/guideUI/text_press_any_key_to_start.png",
 
     // guide: "assets/images/UI/GUIDE.png",
     // guide_down: "assets/images/UI/GUIDEDOWNSTAIR.png",
@@ -265,7 +269,8 @@ function defineImagePaths() {
     // winUI_background: "assets/images/UI/WINUI.png",
 
     //levelUI
-    icon_tower_levelUI: "assets/images/levelUI/icon_tower_levelUI.png",
+    //icon_tower_levelUI: "assets/images/levelUI/icon_tower_levelUI.png",
+    background_level: "assets/images/levelUI/background_level.png",
 
     //otherUI
     background_default: "assets/images/otherUI/background_default.png",
@@ -275,7 +280,6 @@ function defineImagePaths() {
     text_name: "assets/images/otherUI/text_name.png",
     text_pause: "assets/images/otherUI/text_pause.png",
     text_please_enter_a_nick_name: "assets/images/otherUI/text_please_enter_a_nick_name.png",
-    text_press_any_key_to_start: "assets/images/otherUI/text_press_any_key_to_start.png",
     text_youwin: "assets/images/otherUI/text_youwin.png",
 
 

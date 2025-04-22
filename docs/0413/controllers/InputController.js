@@ -5,6 +5,9 @@ class InputController {
       startTime = millis() - pausedTime;
       timerRunning = true;
     }
+    else if (gameState === "guide") {
+      GameController.start("level1");
+    }
 
     if (!player) return;
 

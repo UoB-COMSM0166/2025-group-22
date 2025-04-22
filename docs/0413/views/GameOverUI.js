@@ -1,44 +1,34 @@
-// 📁 views/GameOverUI.js
 class GameOverUI extends UI {
     constructor() {
-        super("Game Over", [
+        super(images["background_default"], [
             {
-                x: 170,
-                y: 320,
-                width: 150,
-                height: 90,
-                text: "Restart",
-                action: () => GameController.restart()
+                x: canvasWidth * 0.5,
+                y: canvasHeight * 0.5,
+                width: canvasWidth * 161/800,
+                height: canvasHeight * 53/450,
+                img: images["button_restart"],
+                imgLight: images["button_restart_hover"],
+                action: () => {
+                    GameController.restart();
+                }
             },
             {
-                x: 480,
-                y: 320,
-                width: 150,
-                height: 90,
-                text: "Exit",
+                x: canvasWidth * 0.5,
+                y: canvasHeight * (0.5 + LevelUI.gap),
+                width: canvasWidth * 161/800,
+                height: canvasHeight * 53/450,
+                img: images["button_menu"],
+                imgLight: images["button_menu_hover"],
                 action: () => {
-                    alert("請手動關閉頁面");
-                    window.close();
+                    gameState = "start";
+                    GameController.resetGame();
                 }
             }
         ]);
     }
 
     draw() {
-        UI.textFormat(400, 150, 80, this.title);
-
-        this.buttons.forEach(btn => {
-            const isHovered = mouseX >= btn.x && mouseX <= btn.x + btn.width &&
-                mouseY >= btn.y && mouseY <= btn.y + btn.height;
-
-            if (isHovered) {
-                stroke(0);
-                strokeWeight(3);
-            } else {
-                noStroke();
-            }
-
-            UI.button(btn.x, btn.y, btn.width, btn.height, btn.text);
-        });
+        super.draw();
+        image(images["text_gameover"], 0, canvasHeight * 0.15, canvasWidth, canvasHeight);
     }
 }
