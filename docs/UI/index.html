@@ -1,34 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+  <meta charset="UTF-8" />
+  <title>Twilight Seeker</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- p5.js -->
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/addons/p5.sound.min.js"></script>
+</head>
+<body>
+  <main></main>
 
-    <title>Sketch</title>
+  <!-- Models -->
+  <script src="models/Wall.js"></script>
+  <script src="models/DirectionWall.js"></script>
+  <script src="models/Item.js"></script>
+  <script src="models/Enemy.js"></script>
+  <script src="models/Portal.js"></script>
+  <script src="models/Bullet.js"></script>
+  <script src="models/Player.js"></script>
+  <script src="models/Maps.js"></script>
+  <script src="models/LevelMaps.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="style.css">
+  <!-- Views -->
+  <script src="views/UI.js"></script>
+  <script src="views/LoadingUI.js"></script>
+  <script src="views/NameUI.js"></script>
+  <script src="views/StartUI.js"></script>
+  <script src="views/GuideUI.js"></script>
+  <script src="views/LevelUI.js"></script>
+  <script src="views/PauseUI.js"></script>
+  <script src="views/GameOverUI.js"></script>
+  <script src="views/WinUI.js"></script>
+  <script src="views/Crosshair.js"></script>
 
-    <script src="libraries/p5.min.js"></script>
-    <script src="libraries/p5.sound.min.js"></script>
-  </head>
+  <!-- Controllers -->
+  <script src="controllers/InputController.js"></script>
+  <script src="controllers/LevelController.js"></script>
+  <script src="controllers/GameController.js"></script>
+  <script src="controllers/CollisionController.js"></script>
 
-  <body>
-    <script src="UI.js"></script>
-    <script src="StartUI.js"></script>
-    <script src="WinUI.js"></script>
-    <script src="GameOverUI.js"></script>
-    <script src="PauseUI.js"></script>
-    <script src="LevelUI.js"></script>
-    <script src="Maps.js"></script>
-    <script src="LevelMaps.js"></script>
-    <script src="Wall.js"></script>
-    <script src="DirectionWall.js"></script>
-    <script src="Portal.js"></script>
-    <script src="Player.js"></script>
-    <script src="Enemy.js"></script>
-    <script src="Item.js"></script>
-    <script src="Crosshair.js"></script>
-    <script src="Bullet.js"></script>
-    <script src="sketch.js"></script>
-  </body>
+  <!-- Tests  -->
+  <script src="tests/testPlayer.js"></script>
+
+  <!-- Core -->
+  <script src="core/UIManager.js"></script>
+  <script src="core/Sketch.js"></script>
+
+</body>
 </html>

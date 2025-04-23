@@ -1,8 +1,32 @@
-html, body {
+/* 清除瀏覽器預設的 margin/padding，避免出現不必要的空白邊框。 */
+html {
   margin: 0;
   padding: 0;
+}
+
+body {
+  background-color: #0A1923;
 }
 
 canvas {
   display: block;
 }
+
+.custom-input {
+  background-image: url('assets/images/otherUI/input_name.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: none;
+  /*font-size: 18px;*/
+  color: #255;
+  padding: 10px;
+  box-sizing: border-box;
+  outline: none;
+}
+
+/* 可加上 hover 效果 */
+.custom-input:focus {
+  outline: 2px solid rgb(127, 127, 127);
+}
+
+
