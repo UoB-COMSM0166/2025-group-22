@@ -31,13 +31,6 @@ class NameUI extends UI {
     }
 
     draw() {
-        if (gameState !== "namePrompt") {
-            if (textInput) {
-                textInput.remove();
-                textInput = null;
-            }
-            return;
-        }
         super.draw();
         image(images["text_please_enter_a_nick_name"], 0, canvasHeight * 0.15, canvasWidth, canvasHeight);
         push();
