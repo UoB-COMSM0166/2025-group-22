@@ -1,4 +1,4 @@
-let gameState = "start";
+let gameState = "loading";
 let currentMap = null;
 let currentLevel = "sample";
 let playButton;
@@ -323,6 +323,7 @@ function defineImagePaths() {
     text_please_enter_a_nick_name: "assets/images/otherUI/text_please_enter_a_nick_name.png",
     text_youwin: "assets/images/otherUI/text_youwin.png",
     text_privacy: "assets/images/otherUI/text_privacy.png",
+    background_vhs: "assets/images/otherUI/vhs_playback_centered_800x450.png",
 
 
   };

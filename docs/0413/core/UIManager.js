@@ -1,6 +1,13 @@
 class UIManager {
+  static loadingInstance = null;
   static getCurrentUI() {
     const uiMap = {
+      loading: () => {
+        if (!UIManager.loadingInstance) {
+          UIManager.loadingInstance = new LoadingUI();
+        }
+        return UIManager.loadingInstance;
+      },      
       start: () => new StartUI(),
       guide: () => new GuideUI(),
       choosingLevel: () => new LevelUI(),
