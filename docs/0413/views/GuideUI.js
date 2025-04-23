@@ -107,7 +107,7 @@ class GuideUI extends UI {
         localStorage.setItem("playerName", playerName);
 
         textInput.remove();
-        GameController.start("level1");
+        GameController.start("sample");
 
     }
 

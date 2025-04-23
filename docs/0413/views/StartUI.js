@@ -9,11 +9,7 @@ class StartUI extends UI {
                 img: images["button_start"],
                 imgLight: images["button_start_hover"],
                 action: () => {
-                    if (!playerName) {
-                        gameState = "namePrompt";
-                    } else {
-                        GameController.start("level1");
-                    }
+                    gameState = "namePrompt";
                 }
             },
             {

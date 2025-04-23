@@ -3,15 +3,17 @@ class LevelController {
     const next = LevelController.getNextLevel(currentLevel);
     if (next) {
       this.saveLevelTime();
+      this.markLevelComplete(currentLevel); // ✅ 标记当前关卡已完成
       currentLevel = next;
       GameController.start(currentLevel);
     } else {
+      this.markLevelComplete(currentLevel); // ✅ 最后一关也需要标记
       GameController.win();
     }
   }
 
   static getNextLevel(level) {
-    const levels = ["level1", "level2", "level3"];
+    const levels = ["sample", "level1", "level2", "level3"];
     const index = levels.indexOf(level);
     return index >= 0 && index < levels.length - 1 ? levels[index + 1] : null;
   }
@@ -21,9 +23,11 @@ class LevelController {
   }
 
   static goToLevel(level) {
-    if (["level1", "level2", "level3"].includes(level)) {
+    if (["sample", "level1", "level2", "level3"].includes(level) && this.isLevelUnlocked(level)) {
       currentLevel = level;
       GameController.start(level);
+    } else {
+      console.warn(`❌ 无法进入 ${level}，前一关尚未通关`);
     }
   }
 
@@ -32,5 +36,23 @@ class LevelController {
     const allTimes = JSON.parse(localStorage.getItem(key)) || {};
     allTimes[currentLevel] = elapsedTime;
     localStorage.setItem(key, JSON.stringify(allTimes));
+  }
+
+  static markLevelComplete(level) {
+    // const key = `levelCompleted-${playerName}`;
+    const key = `levelCompleted`;
+    const completed = JSON.parse(localStorage.getItem(key)) || {};
+    completed[level] = true;
+    localStorage.setItem(key, JSON.stringify(completed));
+  }
+
+  static isLevelUnlocked(level) {
+    const levels = ["sample", "level1", "level2", "level3"];
+    const index = levels.indexOf(level);
+    if (index === 0 || index === 1) return true; // 第一关永远解锁
+    const prevLevel = levels[index - 1];
+    // const completed = JSON.parse(localStorage.getItem(`levelCompleted-${playerName}`)) || {};
+    const completed = JSON.parse(localStorage.getItem(`levelCompleted`)) || {};
+    return completed[prevLevel];
   }
 }

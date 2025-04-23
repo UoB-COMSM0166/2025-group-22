@@ -6,7 +6,7 @@ class InputController {
       timerRunning = true;
     }
     else if (gameState === "guide") {
-      GameController.start("level1");
+      GameController.start("sample");
     }
 
     if (!player) return;

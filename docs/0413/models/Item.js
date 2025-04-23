@@ -1,4 +1,3 @@
-// 📁 models/Item.js
 class Item {
   constructor(x, y, img, type) {
     this.pos = createVector(x, y);
@@ -9,11 +8,10 @@ class Item {
   }
 
   draw(xOffset, yOffset) {
-    var imagePadding = 1;
     const x = this.pos.x - xOffset;
     const y = this.pos.y - yOffset;
     const sx = this.img[0] * this.spriteSize;
-    const sy = this.img[1] * this.spriteSize + imagePadding;
+    const sy = this.img[1] * this.spriteSize;
 
     if (this.type === "door") {
       image(images["image_tiles"], x, y - 50, this.size, this.size, sx, sy - this.spriteSize, this.spriteSize, this.spriteSize);
@@ -42,6 +40,12 @@ class Item {
           [tileX, tileY],
           this.spriteSize
       );
+    }
+    else if(this.type === "dragon"){
+      image(images["image_enemies"], x, y, this.size, this.size, sx, sy, this.spriteSize, this.spriteSize);
+      image(images["image_enemies"], x+50, y, this.size, this.size, sx+ this.spriteSize, sy, this.spriteSize, this.spriteSize);
+      image(images["image_enemies"], x, y + 50, this.size, this.size, sx, sy + this.spriteSize, this.spriteSize, this.spriteSize);
+      image(images["image_enemies"], x+50, y+50, this.size, this.size, sx+ this.spriteSize, sy+ this.spriteSize, this.spriteSize, this.spriteSize);
     }
     else {
       image(images["image_tiles"], x, y, this.size, this.size, sx, sy, this.spriteSize, this.spriteSize);

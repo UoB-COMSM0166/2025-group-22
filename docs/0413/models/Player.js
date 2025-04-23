@@ -38,16 +38,25 @@ class Player {
     if (enemy) {
       if (this.injuryTimer === 0) {
         currentEnemy = enemy.type;
-
-        // 玩家受伤
+  
+        // ✅ 特别处理 spike 的碰撞范围（只检测下半部）
+        if (enemy.type === "spike") {
+          const playerBottom = this.pos.y + this.size;
+          const spikeTop = enemy.pos.y + enemy.size / 2 ; // spike 的下半部
+          if (playerBottom < spikeTop) {
+            return false; // 🚫 玩家还没真正踩到 spike 的下半部
+          }
+        }
+  
+        // ✅ 播放音效 & 扣血
         sounds["playerHitSoundEffect"].play();
-
-        this.lives -= currentEnemy === "spike" ? 3 : 1;
+        this.lives -= currentEnemy === "spike" ? 2 : 1;
       }
       return true;
     }
     return false;
   }
+  
 
   checkItemCollision() {
     const item = CollisionController.isTouching(this, "item", 40);
@@ -70,7 +79,7 @@ class Player {
     if (this.getBlockClass(5, 25) !== "Wall" &&
         this.getBlockClass(5, 25) !== "DirectionWall" &&
         this.getBlockClass(5, 25) !== "Portal") {
-      if (this.pos.x < width / 6) {
+      if (this.pos.x < originalWidth / 6) { // 新屏幕宽度
         this.pos.x -= 5;
       } else {
         currentMap.xOffset -= 5;
@@ -83,7 +92,7 @@ class Player {
     if (this.getBlockClass(this.size - 5, 25) !== "Wall" &&
         this.getBlockClass(this.size - 5, 25) !== "DirectionWall" &&
         this.getBlockClass(this.size - 5, 25) !== "Portal") {
-      if (this.pos.x < width / 3) {
+      if (this.pos.x < originalWidth / 3) {// 新屏幕宽度
         this.pos.x += 5;
       } else {
         currentMap.xOffset += 5;
@@ -269,10 +278,18 @@ class Player {
       this.velocity.mult(0);
     }
 
-    if (this.pos.y < height / 3) {
-      currentMap.yOffset = this.pos.y - height / 3;
-    } else if (this.pos.y > (2 * height) / 3) {
-      currentMap.yOffset = this.pos.y - (2 * height) / 3;
+    // if (this.pos.y < height / 3) {
+    //   currentMap.yOffset = this.pos.y - height / 3;
+    // } else if (this.pos.y > (2 * height) / 3) {
+    //   currentMap.yOffset = this.pos.y - (2 * height) / 3;
+    // } else {
+    //   currentMap.yOffset = 0;
+    // }
+
+    if (this.pos.y < originalHeight / 3) {
+      currentMap.yOffset = this.pos.y - originalHeight / 3;
+    } else if (this.pos.y > (2 * originalHeight) / 3) {
+      currentMap.yOffset = this.pos.y - (2 * originalHeight) / 3;
     } else {
       currentMap.yOffset = 0;
     }
@@ -321,12 +338,15 @@ class Player {
       sounds["keyPickupSoundEffect"].play();
       this.keys++;
     } else if (item.type === "door" ||
-        item.type === "treasure") {
+        item.type === "treasure" ||item.type === "dragon") {
       if (this.keys > 0) {
         this.keys = 0;
         if (item.type === "treasure") {
           // 开宝箱音效
           // doorOpenSoundEffect.play();
+        }
+        else if(item.type === "dragon"){
+
         }
         else if (item.type === "door") {
           // 开门音效

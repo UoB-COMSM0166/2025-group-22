@@ -72,7 +72,17 @@ class Bullet {
     }
     // 子弹打到Portal返回undefined, 子弹消除
     else if (block instanceof Portal) {
-      console.log("555555555555");
+      const incomingDir = this.getEntryDirection() || "top";
+    
+      // 如果颜色不同，或方向不同，就允许替换
+      if (block.type !== this.type || block.direction !== incomingDir) {
+        console.log("🛠 Portal override by bullet at", this.getLoc());
+        this.placePortal(block); // ✅ 使用新规则放置
+        return "inStandard";     // ✅ 保持子弹不立即销毁（你可以也设 velocity = 0）
+      }
+    
+      // 颜色和方向都一样，就销毁子弹
+      console.log("🛑 Bullet hit same portal with same direction. Disappear.");
       return "undefined";
     }
 
@@ -187,30 +197,47 @@ class Bullet {
   placePortal(block) {
     const [col, row] = this.getLoc();
     const incomingDir = this.getEntryDirection() || "top";
-    // console.log("Entry Direction", this.getEntryDirection());
-
-    this.pos.x = this.getLoc()[0] * 50;
-    this.pos.y = this.getLoc()[1] * 50;
-
+  
     const spriteMap = {
       blue:  { top: [0, 1], bottom: [1, 1], left: [2, 1], right: [3, 1] },
       red:   { top: [0, 2], bottom: [1, 2], left: [2, 2], right: [3, 2] }
     };
     const sprite = spriteMap[this.type][incomingDir];
-
-    // 移除舊的同色傳送門
+  
+    // ✅ 如果当前格子已有 portal，做处理
+    const existingBlock = currentMap.blocks[row][col];
+    if (existingBlock instanceof Portal) {
+      // 🎯 不同颜色：直接替换
+      if (existingBlock.type !== this.type) {
+        console.log("🟥 Replacing portal with different color");
+      }
+      // 🎯 同颜色但方向不同：更新方向
+      else if (existingBlock.direction !== incomingDir) {
+        console.log("🔄 Updating same-color portal to new direction");
+      }
+      // 🛑 同颜色且方向相同：不动
+      else {
+        console.log("🔵 Same portal and direction exist. No update.");
+        return;
+      }
+    }
+  
+    // ✅ 移除旧的同色 portal（其他格子）
     for (let r = 0; r < currentMap.blocks.length; r++) {
       for (let c = 0; c < currentMap.blocks[r].length; c++) {
+        if (r === row && c === col) continue;
         const b = currentMap.blocks[r][c];
         if (b instanceof Portal && b.type === this.type) {
           currentMap.blocks[r][c] = new DirectionWall(c * 50, r * 50, [1, 0], "standard");
         }
       }
     }
-
+  
+    // ✅ 放置新 portal
     currentMap.blocks[row][col] = new Portal(col * 50, row * 50, sprite, this.type, incomingDir);
     console.log("✅ Portal placed at", col, row, "with direction:", incomingDir);
   }
+  
 
   reflect(block) {
     const direction = this.getEntryDirection();

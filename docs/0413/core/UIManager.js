@@ -19,6 +19,7 @@ class UIManager {
   }
   static imageEffect(img, x, y, width, height, {
     highlightOnlyHover = false, // 只有 hover 才高光
+    gray = 255, // 灰度
     alpha = 255,
     float = false,
     floatSpeed = 0.03,
@@ -32,7 +33,7 @@ class UIManager {
     let drawY = y;
 
     if (float) {
-      drawY = y + Math.sin(frameCount * floatSpeed + floatOffset) * floatAmplitude;
+      drawY = y + Math.sin(frameCount * floatSpeed + floatOffset) * floatAmplitude / originalWidth * canvasWidth;
     }
 
     const isHovered =
@@ -40,10 +41,11 @@ class UIManager {
         mouseY >= buttonY - buttonHeight / 2 && mouseY <= buttonY + buttonHeight / 2;
 
     push();
+    tint(gray, alpha);
     if (highlightOnlyHover && isHovered) {
       blendMode(ADD);
-      tint(255, alpha);
     }
+    
     image(img, x, drawY, width, height);
     pop();
   }

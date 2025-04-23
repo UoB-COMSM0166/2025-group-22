@@ -1,6 +1,6 @@
 // 📁 controllers/GameController.js
 class GameController {
-  static start(level = "level1") {
+  static start(level = "sample") {
     currentLevel = level;
     // gameState = "playing";
     this.loadLevel();
@@ -12,9 +12,10 @@ class GameController {
   static loadLevel() {
     // 浅拷贝一层就够了，但要注意拷贝每一行子数组，否则还是引用
     const levels = {
+      sample: sample.map(row => [...row]),
       level1: level1.map(row => [...row]),
       level2: level2.map(row => [...row]),
-      level3: level3.map(row => [...row])
+      level3: level3.map(row => [...row]),
     };
     currentMap = new Maps(levels[currentLevel]);
   }

@@ -1,7 +1,6 @@
-// 📁 core/sketch.js
 let gameState = "start";
 let currentMap = null;
-let currentLevel = "level1";
+let currentLevel = "sample";
 let playButton;
 let pistol = 0;
 let currentEnemy = null;
@@ -13,12 +12,18 @@ let elapsedTime = 0;
 let timerRunning = false;
 let pausedTime = 0;
 
+let completed = {
+  level1: false,
+  level2: false
+};
+
 // let textBoxFlag  = false;
 let textInput;
 let saveScoreFlag = false;
 
-// let gameWindowRatio;
-let resolutionRatio=800/450;
+let originalWidth = 800;
+let originalHeight = 450;
+let resolutionRatio = originalWidth / originalHeight;
 
 let canvasWidth;
 let canvasHeight;
@@ -26,6 +31,7 @@ let canvasHeight;
 
 let images = {};
 let sounds = {};
+
 
 function preload() {
   defineImagePaths(); // 提前调用
@@ -38,44 +44,18 @@ function preload() {
     sounds[key].setVolume(soundVolume[key]);
   }
 
-
-  // sounds["openingBGM"] =                     loadSound("assets/soundtrack/opening.mp3");
-  // pistolFireSoundEffect =          loadSound("assets/soundeffect/pistol_fire_2.mp3");
-  // teleportSoundEffect =            loadSound("assets/soundeffect/teleport_1.mp3");
-  // bulletBounceSoundEffect =        loadSound("assets/soundeffect/bullet_bounce_1.mp3");
-  //
-  // keyPickupSoundEffect =           loadSound("assets/soundeffect/key_pickup_1.mp3");
-  // healthPickupSoundEffect =        loadSound("assets/soundeffect/health_pickup.mp3");
-  // doorOpenSoundEffect =            loadSound("assets/soundeffect/door_open.mp3");
-  //
-  // playerHitSoundEffect =           loadSound("assets/soundeffect/player_hit_1.mp3");
-  // playerInjuredOrDeadSoundEffect = loadSound("assets/soundeffect/player_injuredordead_1.mp3");
-
-
-
-
-  // sounds["openingBGM"].setVolume(0.5);
-  //
-  // pistolFireSoundEffect.setVolume(0.5);
-  // teleportSoundEffect.setVolume(0.2);
-  // bulletBounceSoundEffect.setVolume(1);
-  //
-  // keyPickupSoundEffect.setVolume(1);
-  // healthPickupSoundEffect.setVolume(1);
-  // doorOpenSoundEffect.setVolume(1);
-  //
-  // playerHitSoundEffect.setVolume(1);
-  // playerInjuredOrDeadSoundEffect.setVolume(1);
-
-
-  gameFont = loadFont("assets/font/Gloomie Saturday.otf");
+  //gameFont = loadFont("assets/font/Gloomie Saturday.otf");
 }
 
 function setup() {
 
   playButton = createButton("Play Music");
-  playButton.position(700, 20);
+  //playButton.position(canvas.x  - 140, canvas.y + 20);
+
   playButton.mousePressed(Music);
+
+  updateButtonPosition();
+
   crosshair = new Crosshair([0, 5]);
 }
 
@@ -97,10 +77,10 @@ function draw() {
     canvasWidth = windowWidth;
     canvasHeight = canvasWidth / resolutionRatio;
   }
-  // canvasWidth = 800;
-  // canvasHeight = 450;
+  
   canvas = createCanvas(canvasWidth, canvasHeight);
   centerCanvas();
+  updateButtonPosition();
 
   InputController.handleHeldKeys();
   if (GameController.is("playing")) {
@@ -132,12 +112,41 @@ function centerCanvas() {
   canvas.position(x, y);
 }
 
+let buttonXRatio = 0.85;
+let buttonYRatio = 0.05;
+
+function updateButtonPosition() {
+  // 先确保 canvas 已被创建并定位
+  if (canvas && playButton) {
+    const x = canvas.x + canvasWidth * buttonXRatio;
+    const y = canvas.y + canvasHeight * buttonYRatio;
+    playButton.position(x, y);
+
+    const buttonWidth = canvasWidth * 0.08;
+    const buttonHeight = canvasHeight * 0.03;
+    playButton.size(buttonWidth, buttonHeight);
+
+    
+    playButton.style("font-size", canvasWidth * 0.01 + "px");
+    
+
+    //playButton.style("font-size", canvasWidth * 0.01 + "px");
+    playButton.style("border-radius", canvasWidth * 0.008+"px");
+    playButton.style("border", "none");
+    playButton.style("white-space", "nowrap");
+
+    //playButton.style("border", canvasHeight*0.5/800+"px solid black");
+  }
+}
+
 function windowResized() {
   centerCanvas(); // 視窗改變時重新居中
+  updateButtonPosition(); // 重新计算按钮位置
 }
 
 function getBackground() {
   switch (currentLevel) {
+    case "sample": return images["background_sample"];
     case "level1": return images["background_level1"];
     case "level2": return images["background_level2"];
     case "level3": return images["background_level3"];
@@ -145,8 +154,14 @@ function getBackground() {
 }
 
 function drawLives() {
+  const iconSize = canvasWidth * 0.03; // 根据画布宽度动态缩放图标大小
+  const spacing = iconSize * 1.2;      // 图标之间的间距
+  const marginX = canvasWidth * 0.01;  // 左边边距
+  const marginY = canvasHeight * 0.01; // 上边边距
+
   for (var i = 0; i < player.lives; i++) {
-    image(images["image_tiles"], i * 30, 3, 50, 50, 2*64, 4*64, 64, 64);
+    image(images["image_tiles"], marginX + i * spacing,
+        marginY, iconSize, iconSize, 2*64, 4*64, 64, 64);
   }
 }
 
@@ -160,20 +175,52 @@ function handleTimer() {
   }
   if (GameController.is("playing")) {
     fill(255);
-    textSize(20);
+
+    const baseX = canvasWidth * 0.012;  // 左边距
+    let baseY = canvasHeight * 0.07;    // 第一行文字的起始 Y
+    const lineHeight = canvasHeight * 0.035; // 每行高度
+
+    textFont("Lucida Console");
+    textStyle(BOLD);
+    textSize(canvasWidth * 0.015);
     textAlign(LEFT, TOP);
-    text("Time: " + nf(elapsedTime / 1000, 0, 2) + "s", 10, 50);
+    text("Time: " + nf(elapsedTime / 1000, 0, 2) + "s",  baseX, baseY);
+
+    baseY += lineHeight;
+    const keyText = player.keys ? "Key: 1/1" : "Key: 0/1";
+    textFont("Lucida Console");
+    textStyle(BOLD);
+    text(keyText, baseX, baseY);
+
+
+    baseY += lineHeight;
+    const pistolText =  "Current Pistol:";
+    textFont("Lucida Console");
+    textStyle(BOLD);
+    text(pistolText, baseX, baseY);
+
+    const iconSize = canvasWidth * 0.03; // 根据画布宽度动态缩放图标大小
+    //const spacing = iconSize * 0.6;      // 图标之间的间距
+    const marginX = canvasWidth * 0.152;  // 左边边距
+    //const marginY = canvasHeight * 0.08;
+
+    if(!pistol){
+      image(images["image_tiles"], marginX,
+          baseY-canvasHeight*0.01, iconSize, iconSize, 2*64, 5*64, 64, 64);
+    }
+    else{
+      image(images["image_tiles"], marginX,
+          baseY-canvasHeight*0.01, iconSize, iconSize, 1*64, 5*64, 64, 64);
+    }
+
   }
 }
 
 function handleBullet() {
   if (player?.bullet != 0) {
-    //console.log("Drawing bullet at", player.bullet.pos);
     player.bullet.draw(currentMap.xOffset, currentMap.yOffset);
     const result = player.bullet.update();
-    //console.log("Bullet update result:", result);
     if (result === "undefined") {
-      //console.log("Bullet removed");
       player.bullet = 0;
     }
     else if(result === "inStandard") {
@@ -262,13 +309,6 @@ function defineImagePaths() {
     text_toggle_portal: "assets/images/guideUI/text_toggle_portal.png",
     text_press_any_key_to_start: "assets/images/guideUI/text_press_any_key_to_start.png",
 
-    // guide: "assets/images/UI/GUIDE.png",
-    // guide_down: "assets/images/UI/GUIDEDOWNSTAIR.png",
-    // background_start: "assets/images/UI/BEGINNING.png",
-    // levelUI_background: "assets/images/UI/LEVELUI.png",
-    // pauseUI_background: "assets/images/UI/PAUSEDUI.png",
-    // winUI_background: "assets/images/UI/WINUI.png",
-
     //levelUI
     //icon_tower_levelUI: "assets/images/levelUI/icon_tower_levelUI.png",
     background_level: "assets/images/levelUI/background_level.png",
@@ -282,6 +322,7 @@ function defineImagePaths() {
     text_pause: "assets/images/otherUI/text_pause.png",
     text_please_enter_a_nick_name: "assets/images/otherUI/text_please_enter_a_nick_name.png",
     text_youwin: "assets/images/otherUI/text_youwin.png",
+    text_privacy: "assets/images/otherUI/text_privacy.png",
 
 
   };
@@ -293,6 +334,7 @@ function defineSoundPathsAndVolume() {
     pistolFireSoundEffect: "assets/soundeffect/pistol_fire_2.mp3",
     teleportSoundEffect: "assets/soundeffect/teleport_1.mp3",
     bulletBounceSoundEffect: "assets/soundeffect/bullet_bounce_1.mp3",
+    jumpSoundEffect: "assets/soundeffect/jump_2.mp3",
 
     keyPickupSoundEffect : "assets/soundeffect/key_pickup_1.mp3",
     healthPickupSoundEffect : "assets/soundeffect/health_pickup.mp3",

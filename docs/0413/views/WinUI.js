@@ -1,4 +1,3 @@
-// 📁 views/WinUI.js
 class WinUI extends UI {
   constructor() {
     super(images["background_default"], [
@@ -16,8 +15,7 @@ class WinUI extends UI {
       }
     ]);
 
-    // ✅ 嘗試從 localStorage 讀取玩家名稱
-
+    // 嘗試從 localStorage 讀取玩家名稱
     LevelController.saveLevelTime();
 
     if (this.isFinalLevel() &&
@@ -31,7 +29,7 @@ class WinUI extends UI {
 
 
   isFinalLevel() {
-    return currentLevel === "level3"; // ✅ 根據你目前是三關的設計
+    return currentLevel === "level3";
   }
   saveToLeaderboard() {
     const allTimes = JSON.parse(localStorage.getItem(`levelTime-${playerName}`)) || {};
@@ -51,7 +49,7 @@ class WinUI extends UI {
 
     leaderboard.push(playerData);
     leaderboard.sort((a, b) => a.total - b.total);
-    leaderboard = leaderboard.slice(0, 5); // 只保留前五名
+    leaderboard = leaderboard.slice(0, 5);
 
     localStorage.setItem(key, JSON.stringify(leaderboard));
   }
@@ -62,14 +60,8 @@ class WinUI extends UI {
     image(images["text_youwin"], 0, 0, canvasWidth, canvasHeight);
     image(images["text_leaderboard"], 0, 0, canvasWidth, canvasHeight);
     image(images["text_name"], 0, 0, canvasWidth, canvasHeight);
-    // background(180, 217, 239);
 
-    // UI.textFormat(400, 40, 70, this.title);
-    textFont("Georgia"); // 或自訂 retro 遊戲字體
-    textStyle(BOLD);
-    fill("#3C5058"); // 類似 LEADER BOARD 那種深灰藍
-    // textAlign(CENTER, CENTER);
-    textSize(canvasWidth * 20 / 800);
+    this.textStyle(color(255));
     textAlign(CENTER, TOP);
     text(`${playerName}`, canvasWidth * 0.25, canvasHeight * 0.35);
 
@@ -97,7 +89,6 @@ class WinUI extends UI {
     // 顯示排行榜
     y = canvasHeight * 70/450
     textSize(canvasWidth * 20 / 800);
-    // text("Leaderboard", canvasWidth * 0.75, y);
     const leaderboard = JSON.parse(localStorage.getItem("leaderboard-total")) || [];
     leaderboard.forEach((entry, i) => {
       text(`${i + 1}. ${entry.name} - ${nf(entry.total / 1000, 0, 2)}s`, canvasWidth * 600/800, canvasHeight * 0.35 + i * canvasHeight * 0.09);

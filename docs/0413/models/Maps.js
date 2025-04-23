@@ -12,7 +12,6 @@ class Maps {
         const x = col * 50;
         const y = row * 50;
         const value = this.blocks[row][col];
-        // console.log("value: ", value);
 
         let block = 0;
         switch (value) {
@@ -30,7 +29,7 @@ class Maps {
           case 12: block = new Enemy(x, y, [1, 0], "walker", true); this.enemyList.push(block); break;
           case 13: block = new Enemy(x, y, [2, 0], "slime", true); this.enemyList.push(block); break;
           case 14: block = new Enemy(x, y, [3, 0], "saw", true); this.enemyList.push(block); break;
-          case 15: block = new Enemy(x, y, [5, 1], "dragon", false); this.enemyList.push(block); break;
+          case 15: block = new Item(x, y, [0, 2], "dragon"); this.itemList.push(block); break;
         }
 
         this.blocks[row][col] = block || 0;
@@ -39,7 +38,7 @@ class Maps {
   }
 
   draw() {
-    const scaleRatio = (canvasWidth / 800)*0.5;
+    const scaleRatio = (canvasWidth / 800) * 0.5;
   
     push();
     scale(scaleRatio);  // 缩放整个地图（包括 tile、player、enemy、bullet 等）
@@ -48,7 +47,7 @@ class Maps {
       for (let col = 0; col < this.blocks[row].length; col++) {
         const block = this.blocks[row][col];
         if (block !== 0 && typeof block.draw === "function") {
-          block.draw(this.xOffset, this.yOffset); // ✅ 仍使用逻辑偏移，内部会乘 scaleRatio
+          block.draw(this.xOffset, this.yOffset);
         }
       }
     }
@@ -61,7 +60,7 @@ class Maps {
     const mapWidth = this.blocks[0].length * 50;
     const mapHeight = this.blocks.length * 50;
     pos.x = constrain(pos.x, 0, mapWidth - size);
-    pos.y = constrain(pos.y, 0, mapHeight - size); // ✅ 修正：移除 -1，允許角色到達最底部
+    pos.y = constrain(pos.y, 0, mapHeight - size);
   }
 
   constrainOffset(viewWidth) {

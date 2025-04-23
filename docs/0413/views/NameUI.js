@@ -23,6 +23,9 @@ class NameUI extends UI {
                 }
             }
         ]);
+        this.privacyAlpha = 0;         // 当前透明度
+        this.privacyTargetAlpha = 0;   // 目标透明度
+        this.privacyFloatOffset = 0;   // 浮动动画
 
         this.charCountText = "";
     }
@@ -30,9 +33,15 @@ class NameUI extends UI {
     draw() {
         super.draw();
         image(images["text_please_enter_a_nick_name"], 0, canvasHeight * 0.15, canvasWidth, canvasHeight);
+        push();
+        this.textStyle(color(127, 127, 127), 15);
+        textAlign(CENTER);
+        text("[ Data Privacy Notice ]", canvasWidth * 0.5, canvasHeight * 0.91 )
+        pop();       
 
-        const inputWidth = canvasWidth * 508 / 800 * 0.8;
-        const inputHeight = canvasHeight * 76 / 450 * 0.8;
+        const inputWidth = canvasWidth * (508 / 800) * 0.8;
+        const inputHeight = canvasHeight * (76 / 450) * 0.8;
+        // console.log("canvasHeight :inputHeight: " + canvasHeight + ":" + inputHeight);
         const posX = (windowWidth - canvasWidth) / 2 + (canvasWidth - inputWidth) / 2;
         const posY = (windowHeight - canvasHeight) / 2 + canvasHeight * 0.52;
 
@@ -41,23 +50,20 @@ class NameUI extends UI {
             textInput.class('custom-input');
             textInput.input(() => {
                 let val = textInput.value();
-                val = val.replace(/[^a-zA-Z0-9_]/g, ''); // ✅ 過濾非法字符
-                val = val.slice(0, 16); // ✅ 最長 16
+                val = val.replace(/[^a-zA-Z0-9_]/g, ''); // 過濾非法字符
+                val = val.slice(0, 16); // 最長 16
                 textInput.value(val);
 
                 this.charCountText = `${val.length}/16`;
             });
         }
 
-        // ✅ 顯示長度與錯誤提示
+        // 顯示長度與錯誤提示
         push();
-        textAlign(CENTER);
-        textFont("Georgia"); // 或自訂 retro 遊戲字體
-        textStyle(BOLD);
-        textSize(canvasWidth * 20 / 800);
         if (textInput.value().length < 3) {
-            fill(255, 100, 100); // 紅色
-            text("Please enter 3 valid character at least!", canvasWidth * 0.5, canvasHeight * 0.72);
+            this.textStyle(color(255, 165, 0), 12);
+            textAlign(CENTER);
+            text("Please enter 3 valid character at least!", canvasWidth * 0.5, canvasHeight * 0.71);
         }
         pop();
 
@@ -65,5 +71,41 @@ class NameUI extends UI {
         textInput.style('font-size', `${fontSize}px`);
         textInput.position(posX, posY);
         textInput.size(inputWidth, inputHeight);
+
+    
+        const startBtn = this.buttons[0];
+        const isHovered = mouseX >= startBtn.x - startBtn.width * 5 / 6 &&
+                        mouseX <= startBtn.x + startBtn.width * 5 / 6 &&
+                        mouseY >= canvasHeight * 0.91 - startBtn.height / 4 &&
+                        mouseY <= canvasHeight * 0.91 + startBtn.height / 4;
+
+        if (isHovered) {
+            textInput.hide();
+        }else {
+            textInput.show();
+        }
+        // ✅ 控制透明度目标
+        this.privacyTargetAlpha = isHovered ? 255 : 0;
+
+        // ✅ 透明度逐帧平滑变化（lerp）
+        this.privacyAlpha = lerp(this.privacyAlpha, this.privacyTargetAlpha, 0.9);
+
+        // ✅ 浮动效果（上下轻轻漂）
+        this.privacyFloatOffset = sin(frameCount * 0.05) * 6;
+
+        if (this.privacyAlpha > 1) { // 超过 1 再渲染
+            push();
+            tint(255, this.privacyAlpha); // 设置透明度
+            const img = images["text_privacy"];
+            const popupW = canvasWidth * 0.65;
+            const popupH = popupW * (497 / 912); // 保持原图比例
+            const popupX = startBtn.x - popupW / 2;
+            const popupY = startBtn.y - startBtn.height * 5 + this.privacyFloatOffset;
+
+            image(img, popupX, popupY, popupW, popupH);
+            // image(img, 0, 0, canvasWidth, canvasHeight);
+            pop();
+        }
+
     }
 }
