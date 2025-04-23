@@ -2,87 +2,124 @@ class UI {
   constructor(backgroundImage, buttons) {
     this.backgroundImage = backgroundImage;
     this.buttons = buttons;
+
+    this.fragmentingButton = null;
+    this.fragments = [];
+    this.explosionStart = null;
+    this.__pendingAction = null;
   }
 
   static button(btn) {
-    btn.isDark = btn.isDark ?? false;// 默认 true
     const isHovered = mouseX >= btn.x - btn.width / 2 && mouseX <= btn.x + btn.width / 2 &&
         mouseY >= btn.y - btn.height / 2 && mouseY <= btn.y + btn.height / 2;
     const isPressed = isHovered && mouseIsPressed;
 
     let imgToShow = btn.img;
-    // console.log("btn.isCompleteLevel: " + btn.isCompleteLevel);
-    if (btn.isCompleteLevel===undefined || btn.isCompleteLevel===true) {
-      if (isHovered) {// 根据是否通关上一关来决定画可互动按钮还是黑按钮
+    if (btn.isCompleteLevel === undefined || btn.isCompleteLevel === true) {
+      if (isHovered) {
         imgToShow = btn.imgLight;
       } else if (isPressed) {
         imgToShow = btn.img;
       }
-    }else {
+    } else {
       imgToShow = btn.img;
     }
-    // if (isHovered) {
-    //   imgToShow = btn.imgLight;
-    // } else if (isPressed) {
-    //   imgToShow = btn.img;
-    // }
+
     push();
     imageMode(CENTER);
-    // 根据是否通关上一关来决定画可互动按钮还是黑按钮
-    if(btn.isDark === false){
-      UIManager.imageEffect(imgToShow, btn.x, btn.y, btn.width, btn.height, {
-        highlightOnlyHover: false,
-        float: true,
-        floatSpeed: btn.floatSpeed ?? 0.02,
-        floatAmplitude: btn.floatAmplitude ?? 1,
-        floatOffset: btn.floatOffset ?? 0,
-        buttonX: btn.x,
-        buttonY: btn.y,
-        buttonWidth: btn.width,
-        buttonHeight: btn.height
-      });
-    }
-    else if (btn.isDark === true) {
-      console.log("22222222222222");
-      UIManager.imageEffect(imgToShow, btn.x, btn.y, btn.width, btn.height, {
-        highlightOnlyHover: false,
-        float: true,
-        floatSpeed: btn.floatSpeed ?? 0.02,
-        floatAmplitude: btn.floatAmplitude ?? 1,
-        floatOffset: btn.floatOffset ?? 0,
-        buttonX: btn.x,
-        buttonY: btn.y,
-        buttonWidth: btn.width,
-        buttonHeight: btn.height,
-        gray: 50
-      });
-    }
-    
+
+    UIManager.imageEffect(imgToShow, btn.x, btn.y, btn.width, btn.height, {
+      highlightOnlyHover: false,
+      float: true,
+      floatSpeed: btn.floatSpeed ?? 0.02,
+      floatAmplitude: btn.floatAmplitude ?? 1,
+      floatOffset: btn.floatOffset ?? 0,
+      buttonX: btn.x,
+      buttonY: btn.y,
+      buttonWidth: btn.width,
+      buttonHeight: btn.height,
+      gray: btn.isDark ? 50 : 255
+    });
+
     pop();
-  
   }
 
   draw() {
-    // UI.textFormat(400, 150, 80, this.title);
     image(this.backgroundImage, 0, 0, canvasWidth, canvasHeight);
 
     this.buttons.forEach(btn => {
-
-
-      UI.button(btn);
+      if (this.fragmentingButton !== btn) {
+        UI.button(btn);
+      }
     });
+
+    // 畫碎片動畫
+    this.drawFragments();
+
+    // 爆炸動畫完成後執行 action
+    if (this.fragments.length === 0 && this.__pendingAction) {
+      const fn = this.__pendingAction;
+      this.__pendingAction = null;
+      fn();
+    }
   }
 
   handleMouseClick() {
-    this.buttons.forEach(btn => {
-      if (mouseX >= btn.x - btn.width / 2 && mouseX <= btn.x + btn.width / 2 &&
-          mouseY >= btn.y - btn.height / 2 && mouseY <= btn.y + btn.height / 2 ){
-        btn.action();
+    if (this.fragmentingButton || this.fragments.length > 0) return;
+
+    for (const btn of this.buttons) {
+      const isHovered = mouseX >= btn.x - btn.width / 2 &&
+          mouseX <= btn.x + btn.width / 2 &&
+          mouseY >= btn.y - btn.height / 2 &&
+          mouseY <= btn.y + btn.height / 2;
+
+      if (isHovered) {
+        this.fragmentingButton = btn;
+        this.fragments = this.createFragments(btn);
+        this.__pendingAction = btn.action;
+        break;
       }
-    });
+    }
   }
 
-  textStyle(color = 255, sizeRatio = 20,) {
+  createFragments(btn) {
+    const pieces = [];
+    const pieceCount = 12;
+    for (let i = 0; i < pieceCount; i++) {
+      pieces.push({
+        x: btn.x,
+        y: btn.y,
+        dx: random(-3, 3),
+        dy: random(-3, 3),
+        size: random(8, 14),
+        alpha: 255
+      });
+    }
+    return pieces;
+  }
+
+  drawFragments() {
+    if (this.fragments.length === 0) return;
+
+    push();
+    noStroke();
+    fill(255);
+    for (let i = this.fragments.length - 1; i >= 0; i--) {
+      const f = this.fragments[i];
+      f.x += f.dx;
+      f.y += f.dy;
+      f.alpha -= 8;
+      fill(255, f.alpha);
+      ellipse(f.x, f.y, f.size);
+
+      if (f.alpha <= 0) {
+        this.fragments.splice(i, 1);
+      }
+    }
+    pop();
+  }
+
+  textStyle(color = 255, sizeRatio = 20) {
     textFont("Lucida Console");
     textStyle(BOLD);
     fill(color);
