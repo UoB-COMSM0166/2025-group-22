@@ -2,6 +2,7 @@
 class Enemy {
   constructor(x, y, img, type, canMove) {
     this.pos = createVector(x, y);
+    this.initialPos = createVector(x, y); // ✅ 记录出生点
     this.velocity = createVector(5, 0);
     this.img = img;
     this.type = type;
@@ -13,14 +14,7 @@ class Enemy {
   }
 
   draw(xOffset, yOffset) {
-    // if (this.type === "dragon") {
-    //   this.drawPart(xOffset, yOffset, 0, 0);
-    //   this.drawPart(xOffset, yOffset, -50, 0, -1, 0);
-    //   this.drawPart(xOffset, yOffset, -50, -50, -1, -1);
-    //   this.drawPart(xOffset, yOffset, 0, -50, 0, -1);
-    // } else {
-      this.drawPart(xOffset, yOffset);
-    // }
+    this.drawPart(xOffset, yOffset);
     this.update();
   }
 
@@ -29,19 +23,17 @@ class Enemy {
     const drawX = this.pos.x + dx - xOffset;
     const drawY = this.pos.y + dy - yOffset;
 
-    push(); // 儲存當前畫布狀態
-
+    push();
     if (this.facingLeft) {
-      // 當朝左時，水平翻轉
-      translate(drawX + this.size, drawY); // 平移畫布到角色位置 + size
-      scale(-1, 1); // 水平翻轉
+      translate(drawX + this.size, drawY);
+      scale(-1, 1);
     } else {
-      translate(drawX, drawY); // 正常平移
+      translate(drawX, drawY);
     }
 
     image(
       images["image_enemies"],
-      0, 0, // 畫出位置改為 (0, 0) 因為我們已經 translate 過了
+      0, 0,
       this.size,
       this.size,
       (this.img[0] + animCol) * this.spriteSize,
@@ -50,28 +42,41 @@ class Enemy {
       this.spriteSize
     );
 
-    pop(); // 還原畫布狀態
+    pop();
   }
 
   update() {
     if (this.canMove) {
       this.pos.x += this.velocity.x;
 
-      if (this.nextToWall() || !this.onSolidGround()) {
-        this.velocity.x *= -1;
-        this.facingLeft = this.velocity.x < 0;
+      const hitWall = this.nextToWall();
+      const noGround = !this.onSolidGround();
 
+      // ✅ fireBall：碰到墙就重置位置
+      if (this.type === "fireBall" && hitWall) {
+        this.resetToInitial();
+        return;
       }
 
-      // 移动才动画：走动 1 和 2 两帧轮换
+      // 其他敌人掉头
+      if (this.type !== "fireBall" && (hitWall || noGround)) {
+        this.velocity.x *= -1;
+        this.facingLeft = this.velocity.x < 0;
+      }
+
+      // 动画更新
       this.movingTimer++;
-      if (this.movingTimer >= 12) { // 每12帧换一次
-        this.animationFrame = (this.animationFrame + 1) % 2; // 在 [1, 2] 之间轮换
+      if (this.movingTimer >= 12) {
+        this.animationFrame = (this.animationFrame + 1) % 2;
         this.movingTimer = 0;
       }
     } else {
-      this.animationFrame = 0; // 停止时永远用帧0
+      this.animationFrame = 0;
     }
+  }
+
+  resetToInitial() {
+    this.pos = this.initialPos.copy(); // ✅ 传送回出生点
   }
 
   onSolidGround() {

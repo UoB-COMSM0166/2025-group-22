@@ -42,14 +42,32 @@ class CollisionController {
   static isTouching(player, blockType, radius = 40) {
     const list = blockType === "item" ? currentMap.itemList : currentMap.enemyList;
     for (const obj of list) {
-      const distVal = dist(
-        player.pos.x + currentMap.xOffset,
-        player.pos.y,
-        obj.pos.x,
-        obj.pos.y
-      );
-      if (distVal < radius) return obj;
+      if (obj.type === "dragon") {
+        // 🐉 处理 dragon 的 2x2 占格检测
+        const offsets = [
+          [0, 0], [50, 0],
+          [0, 50], [50, 50]
+        ];
+        for (const [dx, dy] of offsets) {
+          const distVal = dist(
+            player.pos.x + currentMap.xOffset,
+            player.pos.y,
+            obj.pos.x + dx,
+            obj.pos.y + dy
+          );
+          if (distVal < radius) return obj;
+        }
+      } else {
+        const distVal = dist(
+          player.pos.x + currentMap.xOffset,
+          player.pos.y,
+          obj.pos.x,
+          obj.pos.y
+        );
+        if (distVal < radius) return obj;
+      }
     }
+    
     return null;
   }
 
