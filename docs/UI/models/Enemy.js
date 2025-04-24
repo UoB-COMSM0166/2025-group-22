@@ -2,7 +2,7 @@
 class Enemy {
   constructor(x, y, img, type, canMove) {
     this.pos = createVector(x, y);
-    this.initialPos = createVector(x, y); // ✅ 记录出生点
+    this.initialPos = createVector(x, y); // 记录出生点
     this.velocity = createVector(5, 0);
     this.img = img;
     this.type = type;
@@ -52,7 +52,7 @@ class Enemy {
       const hitWall = this.nextToWall();
       const noGround = !this.onSolidGround();
 
-      // ✅ fireBall：碰到墙就重置位置
+      // fireBall：碰到墙就重置位置
       if (this.type === "fireBall" && hitWall) {
         this.resetToInitial();
         return;
@@ -76,7 +76,7 @@ class Enemy {
   }
 
   resetToInitial() {
-    this.pos = this.initialPos.copy(); // ✅ 传送回出生点
+    this.pos = this.initialPos.copy(); // 传送回出生点
   }
 
   onSolidGround() {

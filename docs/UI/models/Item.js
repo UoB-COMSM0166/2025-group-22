@@ -16,7 +16,7 @@ class Item {
     const y = this.pos.y - yOffset;
 
     if (this.type === "dragon") {
-      // ✅ 2×2 拼图绘制龙 (0,2), (1,2), (0,3), (1,3)
+      // 2×2 拼图绘制龙 (0,2), (1,2), (0,3), (1,3)
       image(images["image_enemies"], x, y, this.size, this.size, 0 * this.spriteSize, 2 * this.spriteSize, this.spriteSize, this.spriteSize);         // 左上
       image(images["image_enemies"], x + 50, y, this.size, this.size, 1 * this.spriteSize, 2 * this.spriteSize, this.spriteSize, this.spriteSize);     // 右上
       image(images["image_enemies"], x, y + 50, this.size, this.size, 0 * this.spriteSize, 3 * this.spriteSize, this.spriteSize, this.spriteSize);     // 左下
@@ -24,7 +24,7 @@ class Item {
       return;
     }
 
-    // ✅ 普通道具绘制逻辑
+    // 普通道具绘制逻辑
     const imagePadding = 1;
     const sx = this.img[0] * this.spriteSize;
     const sy = this.img[1] * this.spriteSize + imagePadding;

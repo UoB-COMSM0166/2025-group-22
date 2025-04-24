@@ -209,11 +209,11 @@ function handleTimer() {
 
     if(!pistol){
       image(images["image_tiles"], marginX,
-          baseY-canvasHeight*0.01, iconSize, iconSize, 2*64, 5*64, 64, 64);
+          baseY-canvasHeight*0.01, iconSize, iconSize, 6*64, 6*64, 64, 64);
     }
     else{
       image(images["image_tiles"], marginX,
-          baseY-canvasHeight*0.01, iconSize, iconSize, 1*64, 5*64, 64, 64);
+          baseY-canvasHeight*0.01, iconSize, iconSize, 4*64, 6*64, 64, 64);
     }
 
   }

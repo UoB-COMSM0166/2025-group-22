@@ -124,14 +124,25 @@ class Player {
 
     sounds["pistolFireSoundEffect"].play();
 
-    this.bullet = new Bullet(
-      this.pos.x + currentMap.xOffset,
-      this.pos.y,
-      logicalMouseX,
-      logicalMouseY,
-      [0, 5],
-      type
-    );
+    if (pistol == 0) {
+      this.bullet = new Bullet(
+        this.pos.x + currentMap.xOffset,
+        this.pos.y,
+        logicalMouseX,
+        logicalMouseY,
+        [8, 4],
+        type
+      );
+    } else {
+      this.bullet = new Bullet(
+        this.pos.x + currentMap.xOffset,
+        this.pos.y,
+        logicalMouseX,
+        logicalMouseY,
+        [10, 4],
+        type
+      );
+    }
   }
 
 

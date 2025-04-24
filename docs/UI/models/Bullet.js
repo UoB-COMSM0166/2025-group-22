@@ -1,11 +1,10 @@
-// 📁 models/Bullet.js
 class Bullet {
   constructor(x, y, mouseX, mouseY, img, type) {
     this.size = 50;
     this.spriteSize = 64;
     this.pos = createVector(x, y);
-    this.origin = createVector(x + this.size / 2, y + this.size / 2); // ✅ 修正為中心點
-    this.velocity = p5.Vector.sub(createVector(mouseX, mouseY), this.origin).setMag(10); // ✅ 使用 origin 計算方向
+    this.origin = createVector(x + this.size / 2, y + this.size / 2); // 修正為中心點
+    this.velocity = p5.Vector.sub(createVector(mouseX, mouseY), this.origin).setMag(10); // 使用 origin 計算方向
     this.img = img;
     this.type = type;
   }
@@ -38,16 +37,12 @@ class Bullet {
       this.pos.x < 0 || this.pos.x > currentMap.blocks[0].length * 50 ||
       this.pos.y < 0 || this.pos.y > currentMap.blocks.length * 50
     ) {
-      console.log("1111111111111");
       return "undefined";
     }
 
 
     const block = this.getBlock();
-    console.log("Block hit by bullet:", block?.constructor?.name, "at", this.getLoc());
-
     if (block === null || block === undefined) {
-      console.log("222222222222");
       return;
     }
 
@@ -77,12 +72,11 @@ class Bullet {
       // 如果颜色不同，或方向不同，就允许替换
       if (block.type !== this.type || block.direction !== incomingDir) {
         console.log("🛠 Portal override by bullet at", this.getLoc());
-        this.placePortal(block); // ✅ 使用新规则放置
-        return "inStandard";     // ✅ 保持子弹不立即销毁（你可以也设 velocity = 0）
+        this.placePortal(block); // 使用新规则放置
+        return "inStandard";     // 保持子弹不立即销毁（你可以也设 velocity = 0）
       }
 
       // 颜色和方向都一样，就销毁子弹
-      console.log("🛑 Bullet hit same portal with same direction. Disappear.");
       return "undefined";
     }
 
@@ -91,13 +85,10 @@ class Bullet {
 
       // 把block有空气的方向push到block.direction
       this.getNotBlockedSides();
-      console.log("6666666666");
 
       if (!this.isEnteringAllowed(block)) return "undefined"
       // 反弹音效
       sounds["bulletBounceSoundEffect"].play();
-
-      console.log("77777777777");
       return this.reflect(block);
     }
 
@@ -156,7 +147,7 @@ class Bullet {
   isEnteringAllowed(block) {
     const direction = this.getEntryDirection();
     if (!direction) {
-      console.warn("⚠️ No entry direction detected, allowing fallback.");
+      console.warn("No entry direction detected, allowing fallback.");
       return true;
     }
     return block.direction?.includes(direction);
@@ -178,13 +169,11 @@ class Bullet {
     for (const dir in sides) {
       const [P1, P2] = sides[dir];
       if (isIntersecting(P1, P2, A, B)) {
-        console.log("🧭 Bullet entering from:", dir);
         return dir;
       }
     }
 
     // fallback 回傳：預設使用 top
-    console.warn("⚠️ 無法判斷子彈方向，使用 fallback → 'top'");
     return "top";
   }
 
@@ -204,25 +193,25 @@ class Bullet {
     };
     const sprite = spriteMap[this.type][incomingDir];
 
-    // ✅ 如果当前格子已有 portal，做处理
+    // 如果当前格子已有 portal，做处理
     const existingBlock = currentMap.blocks[row][col];
     if (existingBlock instanceof Portal) {
-      // 🎯 不同颜色：直接替换
+      // 不同颜色：直接替换
       if (existingBlock.type !== this.type) {
         console.log("🟥 Replacing portal with different color");
       }
-      // 🎯 同颜色但方向不同：更新方向
+      // 同颜色但方向不同：更新方向
       else if (existingBlock.direction !== incomingDir) {
         console.log("🔄 Updating same-color portal to new direction");
       }
-      // 🛑 同颜色且方向相同：不动
+      // 同颜色且方向相同：不动
       else {
         console.log("🔵 Same portal and direction exist. No update.");
         return;
       }
     }
 
-    // ✅ 移除旧的同色 portal（其他格子）
+    // 移除旧的同色 portal（其他格子）
     for (let r = 0; r < currentMap.blocks.length; r++) {
       for (let c = 0; c < currentMap.blocks[r].length; c++) {
         if (r === row && c === col) continue;
@@ -233,9 +222,8 @@ class Bullet {
       }
     }
 
-    // ✅ 放置新 portal
+    // 放置新 portal
     currentMap.blocks[row][col] = new Portal(col * 50, row * 50, sprite, this.type, incomingDir);
-    console.log("✅ Portal placed at", col, row, "with direction:", incomingDir);
   }
 
 
@@ -255,7 +243,7 @@ class Bullet {
   }
 }
 
-// 🔧 工具函式：線段交集判斷
+// 工具函式：線段交集判斷
 function isIntersecting(A, B, C, D) {
   function cross(ax, ay, bx, by) {
     return ax * by - ay * bx;
