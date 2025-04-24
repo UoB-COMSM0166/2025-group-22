@@ -94,6 +94,7 @@ function draw() {
 
     if (!currentMap || !player) GameController.start(currentLevel);
     currentMap.draw();
+    
     crosshair.draw();
     player.draw();
     player.update();

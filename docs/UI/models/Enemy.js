@@ -13,14 +13,14 @@ class Enemy {
   }
 
   draw(xOffset, yOffset) {
-    if (this.type === "dragon") {
-      this.drawPart(xOffset, yOffset, 0, 0);
-      this.drawPart(xOffset, yOffset, -50, 0, -1, 0);
-      this.drawPart(xOffset, yOffset, -50, -50, -1, -1);
-      this.drawPart(xOffset, yOffset, 0, -50, 0, -1);
-    } else {
+    // if (this.type === "dragon") {
+    //   this.drawPart(xOffset, yOffset, 0, 0);
+    //   this.drawPart(xOffset, yOffset, -50, 0, -1, 0);
+    //   this.drawPart(xOffset, yOffset, -50, -50, -1, -1);
+    //   this.drawPart(xOffset, yOffset, 0, -50, 0, -1);
+    // } else {
       this.drawPart(xOffset, yOffset);
-    }
+    // }
     this.update();
   }
 
