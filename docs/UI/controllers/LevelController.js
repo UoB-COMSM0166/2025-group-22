@@ -53,6 +53,10 @@ class LevelController {
     const prevLevel = levels[index - 1];
     // const completed = JSON.parse(localStorage.getItem(`levelCompleted-${playerName}`)) || {};
     const completed = JSON.parse(localStorage.getItem(`levelCompleted`)) || {};
-    return completed[prevLevel];
+
+    //                                  ****** for test unlock all level ******
+    // return completed[prevLevel];//   ****** for test unlock all level ******
+    return true;//                      ****** for test unlock all level ******
+    //                                  ****** for test unlock all level ******
   }
 }
