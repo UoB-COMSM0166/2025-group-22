@@ -61,13 +61,13 @@ function setup() {
 }
 
 function Music() {
-  if (sounds["openingBGM"].isPlaying()) {
-    sounds["openingBGM"].pause();
-    playButton.html("Play Music");
-  } else {
-    sounds["openingBGM"].loop();
-    playButton.html("Pause Music");
-  }
+  // if (sounds["openingBGM"].isPlaying()) {
+  //   sounds["openingBGM"].pause();
+  //   playButton.html("Play Music");
+  // } else {
+  //   sounds["openingBGM"].loop();
+  //   playButton.html("Pause Music");
+  // }
 }
 
 function draw() {
@@ -94,7 +94,7 @@ function draw() {
 
     if (!currentMap || !player) GameController.start(currentLevel);
     currentMap.draw();
-    
+
     crosshair.draw();
     player.draw();
     player.update();
@@ -333,7 +333,7 @@ function defineImagePaths() {
 }
 function defineSoundPathsAndVolume() {
   soundPaths = {
-    openingBGM: "assets/soundtrack/opening.mp3",
+    // openingBGM: "assets/soundtrack/opening.mp3",
 
     pistolFireSoundEffect: "assets/soundeffect/pistol_fire_2.mp3",
     teleportSoundEffect: "assets/soundeffect/teleport_1.mp3",
@@ -348,7 +348,7 @@ function defineSoundPathsAndVolume() {
     playerInjuredOrDeadSoundEffect: "assets/soundeffect/player_injuredordead_1.mp3"
   }
   soundVolume = {
-    openingBGM: 0.5,
+    // openingBGM: 0.5,
 
     pistolFireSoundEffect: 0.5,
     teleportSoundEffect: 0.2,
