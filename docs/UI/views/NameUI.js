@@ -34,7 +34,7 @@ class NameUI extends UI {
         super.draw();
         image(images["text_please_enter_a_nick_name"], 0, canvasHeight * 0.15, canvasWidth, canvasHeight);
         push();
-        this.textStyle(color(127, 127, 127), 15);
+        UIManager.textStyle(color(127, 127, 127), 15);
         textAlign(CENTER);
         text("[ Data Privacy Notice ]", canvasWidth * 0.5, canvasHeight * 0.91 )
         pop();       
@@ -61,7 +61,7 @@ class NameUI extends UI {
         // 顯示長度與錯誤提示
         push();
         if (textInput.value().length < 3) {
-            this.textStyle(color(255, 165, 0), 12);
+            UIManager.textStyle(color(255, 165, 0), 12);
             textAlign(CENTER);
             text("Please enter 3 valid character at least!", canvasWidth * 0.5, canvasHeight * 0.71);
         }

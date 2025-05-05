@@ -3,7 +3,7 @@ class Enemy {
   constructor(x, y, img, type, canMove) {
     this.pos = createVector(x, y);
     this.initialPos = createVector(x, y); // 记录出生点
-    this.velocity = createVector(5, 0);
+    // this.velocity = createVector(5, 0);
     this.img = img;
     this.type = type;
     this.canMove = canMove;
@@ -11,6 +11,14 @@ class Enemy {
     this.spriteSize = 64;
     this.animationFrame = 0;
     this.movingTimer = 0;
+
+    if (this.type === "slime"){
+      this.velocity = createVector(3, 0);
+    }else if (this.type === "saw"){
+      this.velocity = createVector(5, 0);
+    }else if (this.type === "fireBall"){
+      this.velocity = createVector(5, 0);
+    }
   }
 
   draw(xOffset, yOffset) {

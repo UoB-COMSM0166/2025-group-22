@@ -3,10 +3,13 @@ let gameState = "loading";
 let currentMap = null;
 let currentLevel = "sample";
 let playButton;
-let pistol = 0;
+let pistol = 1;
 let currentEnemy = null;
 let player;
 let playerName;
+
+let guideWindowShowing = false;
+let guideWindow;
 
 let startTime;
 let elapsedTime = 0;
@@ -29,6 +32,7 @@ let resolutionRatio = originalWidth / originalHeight;
 let canvasWidth;
 let canvasHeight;
 
+let drawRatio = 0.5;
 
 let images = {};
 let sounds = {};
@@ -58,6 +62,7 @@ function setup() {
   updateButtonPosition();
 
   crosshair = new Crosshair([2, 4]);
+  guideWindow = new Guide();
 }
 
 function Music() {
@@ -85,13 +90,11 @@ function draw() {
   updateButtonPosition();
 
   InputController.handleHeldKeys();
-  if (GameController.is("playing")) {
-    background(getBackground());
-  }
-
 
   if (GameController.is("playing")) {
-
+    // console.log("player.pos =", player.pos.x, " and ", player.pos.y);
+    // background(getBackground());
+    drawParallaxBackground(getBackground());
     if (!currentMap || !player) GameController.start(currentLevel);
     currentMap.draw();
 
@@ -102,6 +105,7 @@ function draw() {
     noCursor();
     drawLives();
     handleTimer();
+    guideWindow.draw();
   } else {
     cursor();
   }
@@ -253,6 +257,7 @@ function defineImagePaths() {
   imagePaths = {
     //sprite
     image_player: "assets/images/sprite/player.png",
+    image_player_blue_pistol: "assets/images/sprite/player_blue_pistol.png",
     image_tiles: "assets/images/sprite/tiles.png",
     image_enemies: "assets/images/sprite/enemies.png",
 
@@ -404,4 +409,18 @@ function iconEffect(img, x, y, width, height, {
   image(img, x, drawY, width, height, sx, sy, spriteSize, spriteSize);
   pop();
 }
+
+function drawParallaxBackground(bgImage) {
+  if (!player || !bgImage) return;
+
+  const parallaxFactor = 0.02; // 越小越远，建议 0.02 - 0.1
+
+  const offsetX = -player.pos.x * parallaxFactor;
+  // const offsetY = -player.pos.y * parallaxFactor;
+  const offsetY = 0;
+
+  // 背景图可能需要足够大才能完整填充，或可设置为 loopable
+  image(bgImage, offsetX, offsetY, canvasWidth * (1 + parallaxFactor), canvasHeight * (1 + parallaxFactor));
+}
+
 

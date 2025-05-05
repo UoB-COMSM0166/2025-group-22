@@ -57,9 +57,9 @@ class UI {
         gray: 50
       });
     }
-    
+
     pop();
-  
+
   }
 
   draw() {
@@ -80,12 +80,5 @@ class UI {
         btn.action();
       }
     });
-  }
-
-  textStyle(color = 255, sizeRatio = 20,) {
-    textFont("Lucida Console");
-    textStyle(BOLD);
-    fill(color);
-    textSize(canvasWidth * sizeRatio / 800);
   }
 }

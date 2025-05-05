@@ -1,7 +1,7 @@
 // 📁 controllers/InputController.js
 class InputController {
   static handleKeyPressed(key) {
-    if (gameState === "playing" && !timerRunning) {
+    if (gameState === "playing" && !timerRunning && player.isAlive()) {
       startTime = millis() - pausedTime;
       timerRunning = true;
     }
@@ -9,7 +9,7 @@ class InputController {
       GameController.start("sample");
     }
 
-    if (!player) return;
+    if (!player || !player.isAlive()) return;
 
     const keyLower = key.toLowerCase();
 
@@ -21,11 +21,13 @@ class InputController {
       player.togglePistol();
     } else if (keyLower === "e") {
       player.teleport();
+    }else if (keyLower === "m") {
+      GameController.isGuided() ? GameController.guidOff() : GameController.guideOn();
     }
   }
 
   static handleMousePressed(mouseBtn) {
-    if (gameState === "playing" && player) {
+    if (gameState === "playing" && player && player.isAlive()) {
       const pistolType = pistol === 0 ? "blue" : "red";
       player.shoot(pistolType);
       // console.log("Mouse clicked -> try shoot", gameState, player);
@@ -33,7 +35,7 @@ class InputController {
   }
 
   static handleHeldKeys() {
-    if (gameState === "playing" && player) {
+    if (gameState === "playing" && player && player.isAlive()) {
       if (keyIsDown(65)) {
         // playerIsMovingLeft = true;
         player.moveLeft(); // A

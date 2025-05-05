@@ -38,7 +38,7 @@ class Maps {
   }
 
   draw() {
-    const scaleRatio = (canvasWidth / 800) * 0.5;
+    const scaleRatio = (canvasWidth / 800) * drawRatio;
 
     push();
     scale(scaleRatio);  // 缩放整个地图（包括 tile、player、enemy、bullet 等）

@@ -7,7 +7,7 @@ class UIManager {
           UIManager.loadingInstance = new LoadingUI();
         }
         return UIManager.loadingInstance;
-      },      
+      },
       start: () => new StartUI(),
       guide: () => new GuideUI(),
       choosingLevel: () => new LevelUI(),
@@ -52,8 +52,15 @@ class UIManager {
     if (highlightOnlyHover && isHovered) {
       blendMode(ADD);
     }
-    
+
     image(img, x, drawY, width, height);
     pop();
+  }
+
+  static textStyle(color = 255, sizeRatio = 20,) {
+    textFont("Lucida Console");
+    textStyle(BOLD);
+    fill(color);
+    textSize(canvasWidth * sizeRatio / 800);
   }
 }

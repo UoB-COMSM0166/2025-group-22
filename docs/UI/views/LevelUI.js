@@ -121,7 +121,7 @@ class LevelUI extends UI {
       //fill(86, 96, 97);
       // textStyle(BOLD);
       // textFont("Georgia");
-      this.textStyle(color(86, 96, 97), 10);
+      UIManager.textStyle(color(86, 96, 97), 10);
       translate(canvasWidth * 0.5, y);
       const time = bestTimes[lv];
       if (typeof time === "number") {

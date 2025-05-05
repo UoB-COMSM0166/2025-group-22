@@ -6,7 +6,7 @@ class Crosshair {
   }
 
   draw() {
-    const scaleRatio = (canvasWidth / 800) * 0.5;
+    const scaleRatio = (canvasWidth / 800) * drawRatio;
 
     // 将 mouseX/mouseY 映射回逻辑世界坐标
     const logicMouseX = mouseX / scaleRatio;

@@ -22,6 +22,16 @@ class GameController {
 
   static initPlayer() {
     player = new Player();
+    if (currentLevel === "sample") {
+      player.pos = createVector(200, 750);
+      // player.pos = createVector(200, 500);
+    }else if (currentLevel === "level1") {
+      // player.pos = createVector(200, 750);
+      player.pos = createVector(250, 300);
+    }else if (currentLevel === "level2") {
+      // player.pos = createVector(200, 750);
+      player.pos = createVector(250, 250);
+    }
   }
 
   static startTimer() {
@@ -78,5 +88,17 @@ class GameController {
 
   static isPaused() {
     return gameState === "pause";
+  }
+
+  static isGuided() {
+    return guideWindowShowing === true;
+  }
+
+  static guidOff() {
+    guideWindowShowing = false;
+  }
+
+  static guideOn() {
+    guideWindowShowing = true;
   }
 }

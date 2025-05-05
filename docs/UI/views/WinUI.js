@@ -61,7 +61,7 @@ class WinUI extends UI {
     image(images["text_leaderboard"], 0, 0, canvasWidth, canvasHeight);
     image(images["text_name"], 0, 0, canvasWidth, canvasHeight);
 
-    this.textStyle(color(255));
+    UIManager.textStyle(color(255));
     textAlign(CENTER, TOP);
     text(`${playerName}`, canvasWidth * 0.25, canvasHeight * 0.35);
 
