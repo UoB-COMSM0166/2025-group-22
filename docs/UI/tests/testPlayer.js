@@ -16,6 +16,10 @@ function runPlayerTests() {
     testBulletReflection();
     testPlayerTeleportation();
     testPlayerPortalEntryDirectionStrict();
+    testPlayerCannotJumpWhenFalling();
+    testPlayerDiesWhenLivesZero();
+    testPlayerHitEnemyOnlyOnce();
+
   });
   console.log("✅ All Player tests completed!");
 }
@@ -39,16 +43,18 @@ function withMockEnv(mockFunc) {
     }
   }
 
-  const mockCollisionController = {
+  const originalCollisionController = CollisionController;
+
+  // 🟡 默认行为可以被测试中重写
+  CollisionController = {
+    ...originalCollisionController,
     isSolid: () => false,
-    getCollidingEnemy: () => ({ type: "enemy" }),
     isTouching: () => null,
     isItem: () => false,
     isEnemy: () => false,
+    getCollidingEnemy: () => null,
+    getItemType: () => null
   };
-
-  const originalCollisionController = CollisionController;
-  CollisionController = mockCollisionController;
 
   currentMap = createMockMap();
   const originalLevelController = LevelController;
@@ -65,6 +71,7 @@ function withMockEnv(mockFunc) {
   }
 }
 
+
 function setupMockVectorSystemIfNeeded() {
   if (typeof createVector === "undefined") {
     console.log("🧪 Mock vector system injected.");
@@ -74,12 +81,14 @@ function setupMockVectorSystemIfNeeded() {
 
 function createMockMap() {
   return {
-    blocks: Array.from({ length: 10 }, () => Array(10).fill(null)),
-    tileSize: 50,
     xOffset: 0,
     yOffset: 0,
+    blocks: Array(20).fill().map(() => Array(20).fill(0)), // ✅ 修复错误的点号
+    itemList: [],
+    enemyList: [],
   };
 }
+
 
 // === Tests ===
 
@@ -107,36 +116,83 @@ function testPlayerJump() {
 
 
 function testPlayerInjury() {
-  const player = new Player(100, 200, [1, 2]);
+  const player = new Player();
   player.lives = 3;
+
+  CollisionController.getCollidingEnemy = () => ({ type: "enemy" });
+  player.invincibleTimer = 0;
+
   player.update();
+
   console.assert(player.lives === 2, "❌ Player injury logic failed");
   console.log("✅ testPlayerInjury passed.");
 }
 
 function testPlayerCollectHeart() {
-  const player = new Player(100, 200, [1, 2]);
+  const player = new Player();
   player.lives = 2;
-  player.lives += 1; // 模拟收集 heart 效果
-  console.assert(player.lives === 3, "❌ Heart did not increase lives");
+
+  const potion = { type: "potion", pos: { x: 0, y: 0 } };
+  currentMap.itemList.push(potion);
+
+  CollisionController = {
+    isTouching: () => potion
+  };
+
+  player.checkItemCollision();
+
+  console.assert(player.lives === 3, "❌ Should increase one life");
+  console.assert(currentMap.itemList.length === 0, "❌ Potion should be removed");
   console.log("✅ testPlayerCollectHeart passed.");
 }
 
+
 function testPlayerCollectKey() {
-  const player = new Player(100, 200, [1, 2]);
+  const player = new Player();
   player.keys = 0;
-  player.keys += 1; // 模拟收集 key
-  console.assert(player.keys === 1, "❌ Key not collected");
+
+  const key = { type: "key", pos: { x: 0, y: 0 } };
+  currentMap.itemList.push(key);
+
+  CollisionController.isTouching = (obj, list) => key;
+
+  player.checkItemCollision();
+
+  console.assert(player.keys === 1, "❌ Should increase key count");
+  console.assert(currentMap.itemList.length === 0, "❌ Key should be removed");
   console.log("✅ testPlayerCollectKey passed.");
 }
 
+
 function testPlayerUseKeyOnDoor() {
-  const player = new Player(100, 200, [1, 2]);
+  const player = new Player();
   player.keys = 1;
-  player.keys -= 1; // 模拟用钥匙开门
-  console.assert(player.keys === 0, "❌ Door use did not consume key");
+
+  const door = { type: "door", pos: { x: 0, y: 0 } };
+  currentMap.itemList.push(door);
+
+  CollisionController.isTouching = () => door;
+
+  // ✅ 替换方法，而不是整个对象
+  const originalNextLevel = LevelController.nextLevel;
+  let nextLevelCalled = false;
+
+  LevelController.nextLevel = function () {
+    nextLevelCalled = true;
+  };
+
+  player.checkItemCollision();
+
+  console.assert(player.keys === 0, "❌ Door should consume a key");
+  console.assert(nextLevelCalled, "❌ Should switch to the next level");
   console.log("✅ testPlayerUseKeyOnDoor passed.");
+
+  // ✅ 恢复原始方法，防止影响游戏
+  LevelController.nextLevel = originalNextLevel;
 }
+
+
+
 
 function testPlayerIsAlive() {
   const player = new Player(100, 200, [1, 2]);
@@ -160,7 +216,6 @@ function testPlayerMoveLeft() {
   console.assert(player.pos.x === 95, "❌ Player should move left by 5 units");
   console.log("✅ testPlayerMoveLeft passed.");
 }
-
 
 function testPlayerShoot() {
   const player = new Player();
@@ -254,4 +309,44 @@ function testPlayerPortalEntryDirectionStrict() {
   const allowed = bullet.isEnteringAllowed(block);
   console.assert(allowed === true, "❌ Portal entry direction check failed");
   console.log("✅ testPlayerPortalEntryDirectionStrict passed.");
+}
+
+function testPlayerCannotJumpWhenFalling() {
+  const player = new Player();
+  player.isFalling = () => true; // 模拟空中状态
+  player.velocity.y = 0;
+  player.jump();
+  console.assert(player.velocity.y === 0, "❌ Player jumped while falling");
+  console.log("✅ testPlayerCannotJumpWhenFalling passed.");
+}
+
+function testPlayerDiesWhenLivesZero() {
+  const player = new Player();
+  player.lives = 1;
+
+  CollisionController.getCollidingEnemy = () => ({ type: "enemy" });
+
+  player.update(); // 敌人命中一次
+
+  console.assert(!player.isAlive(), `❌ Player should be dead, lives = ${player.lives}`);
+  console.log("✅ testPlayerDiesWhenLivesZero passed.");
+}
+
+
+function testPlayerHitEnemyOnlyOnce() {
+  const player = new Player();
+  player.lives = 3;
+
+  CollisionController.getCollidingEnemy = () => ({ type: "enemy" });
+
+  player.invincibleTimer = 0; // 确保第一次会扣血
+  player.update(); // 第一次受伤
+  const afterFirstHit = player.lives;
+
+  player.update(); // 第二次在无敌期，不应再扣血
+  const afterSecondHit = player.lives;
+
+  console.assert(afterFirstHit === 2, `❌ Expected lives = 2 after first hit, got ${afterFirstHit}`);
+  console.assert(afterSecondHit === 2, `❌ Expected no change during invincibility, got ${afterSecondHit}`);
+  console.log("✅ testPlayerHitEnemyOnlyOnce passed.");
 }
