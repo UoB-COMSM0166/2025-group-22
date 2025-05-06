@@ -63,6 +63,9 @@ function setup() {
 
   crosshair = new Crosshair([2, 4]);
   guideWindow = new Guide();
+
+  // run testPlayer.js
+  runPlayerTests();
 }
 
 function Music() {
