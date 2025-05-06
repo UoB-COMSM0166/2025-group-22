@@ -19,6 +19,8 @@ function runPlayerTests() {
     testPlayerCannotJumpWhenFalling();
     testPlayerDiesWhenLivesZero();
     testPlayerHitEnemyOnlyOnce();
+    testBulletDestroysOnSolidWall();
+    testBulletPortalMismatchDestroys();
 
   });
   console.log("✅ All Player tests completed!");
@@ -350,3 +352,40 @@ function testPlayerHitEnemyOnlyOnce() {
   console.assert(afterSecondHit === 2, `❌ Expected no change during invincibility, got ${afterSecondHit}`);
   console.log("✅ testPlayerHitEnemyOnlyOnce passed.");
 }
+
+function testBulletDestroysOnSolidWall() {
+  console.log("✅ Running testBulletDestroysOnSolidWall...");
+
+  const bullet = new Bullet(100, 100, 200, 100, [1, 1], "blue");
+  const col = 2, row = 2;
+
+  currentMap = createMockMap();
+  currentMap.blocks[row][col] = new Wall(col * 50, row * 50, [1, 1], "solid");
+
+  bullet.getLoc = () => [col, row];
+
+  const result = bullet.update();
+
+  console.assert(result === "undefined", "❌ Bullet should be destroyed by solid wall");
+  console.log("✅ testBulletDestroysOnSolidWall passed.");
+}
+
+function testBulletPortalMismatchDestroys() {
+  console.log("✅ Running testBulletPortalMismatchDestroys...");
+
+  const bullet = new Bullet(100, 100, 200, 100, [1, 1], "blue");
+  const col = 3, row = 3;
+
+  const portal = new Portal(col * 50, row * 50, [1, 1], "red", "top");
+  currentMap = createMockMap();
+  currentMap.blocks[row][col] = portal;
+
+  bullet.getLoc = () => [col, row];
+  bullet.getEntryDirection = () => "top";
+
+  const result = bullet.update();
+
+  console.assert(result === "undefined", "❌ Bullet should be destroyed if portal type mismatches");
+  console.log("✅ testBulletPortalMismatchDestroys passed.");
+}
+
