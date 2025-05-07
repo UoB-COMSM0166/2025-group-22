@@ -12,7 +12,9 @@ class Player {
     this.lives =3;
     this.keys = 0;
     this.movingState = 0;
-    this.bullet = 0;
+    // this.bullet = 0;
+    this.bulletRed = 0;
+    this.bulletBlue = 0;
 
     this.IsMovingLeft = false;
     this.IsMovingRight = false;
@@ -145,8 +147,9 @@ class Player {
     sounds["pistolFireSoundEffect"].play();
 
     if (pistol == 0) {
-      this.bullet = new Bullet(
-        this.pos.x + currentMap.xOffset,
+      this.bulletBlue = new Bullet(
+        // this.pos.x + currentMap.xOffset, //0507lqwxOffset
+        this.pos.x, //0507lqwxOffset/
         this.pos.y,
         logicalMouseX,
         logicalMouseY,
@@ -154,8 +157,9 @@ class Player {
         type
       );
     } else {
-      this.bullet = new Bullet(
-        this.pos.x + currentMap.xOffset,
+      this.bulletRed = new Bullet(
+        // this.pos.x + currentMap.xOffset, //0507lqwxOffset
+        this.pos.x, //0507lqwxOffset
         this.pos.y,
         logicalMouseX,
         logicalMouseY,
@@ -219,7 +223,8 @@ class Player {
             case "bottom": dy = 50; break;
           }
 
-          this.pos.x = col * 50 + dx - currentMap.xOffset;
+          // this.pos.x = col * 50 + dx - currentMap.xOffset; //0507lqwxOffset
+          this.pos.x = col * 50 + dx; //0507lqwxOffset
           this.pos.y = row * 50 + dy;
           // const offsetX = this.getPortalDestOffset(currentX, col) + this.getPortalDestSidesOffset(fromDir, destDir);
           // currentMap.xOffset += offsetX;
@@ -292,10 +297,10 @@ class Player {
 
 
     if (this.isFalling()) {
-      if (this.velocity.y + this.gravity> 5) {
+      if (this.velocity.y + this.gravity> 6) {
         // 匀速下落：设置固定下落速度（比如 10）
         // console.log("this.velocity.y =", this.velocity.y);
-        this.velocity.y = 5;
+        this.velocity.y = 6;
       }
       else {
 
@@ -363,7 +368,8 @@ class Player {
   }
 
   getLoc(x = this.pos.x, y = this.pos.y) {
-    return [floor((x + currentMap.xOffset) / 50), floor(y / 50)];
+    // return [floor((x + currentMap.xOffset) / 50), floor(y / 50)]; //0507lqwxOffset
+    return [floor((x) / 50), floor(y / 50)]; //0507lqwxOffset
   }
 
   collectItem(i) {
@@ -408,7 +414,8 @@ class Player {
 
   draw() {
     const scaleRatio = (canvasWidth / 800) * drawRatio;
-    const drawX = this.pos.x * scaleRatio;
+    // const drawX = this.pos.x * scaleRatio; //0507lqwxOffset
+    const drawX = (this.pos.x - currentMap.xOffset) * scaleRatio; //0507lqwxOffset
     const drawY = (this.pos.y - currentMap.yOffset) * scaleRatio;
     const drawSize = this.size * scaleRatio;
 
@@ -484,6 +491,8 @@ class Player {
       }
     }
     else {// 死亡动画
+      inputAllowed = false; // 禁止输入
+      timerRunning = false; // 时间停止
       if (this.deathPhase === undefined) {
         this.deathPhase = 0;
         this.deathStartTime = millis(); // p5.js 内置时间
@@ -564,6 +573,7 @@ class Player {
         }
       } else if (this.deathPhase === 3) {
         // 不再绘制角色，可选择添加结束逻辑
+        inputAllowed = true; // 允许输入
         gameState = "gameOver";
       }
     }

@@ -50,7 +50,8 @@ class CollisionController {
         ];
         for (const [dx, dy] of offsets) {
           const distVal = dist(
-            player.pos.x + currentMap.xOffset,
+            // player.pos.x + currentMap.xOffset, //0507lqwxOffset
+            player.pos.x, //0507lqwxOffset
             player.pos.y,
             obj.pos.x + dx,
             obj.pos.y + dy
@@ -59,7 +60,8 @@ class CollisionController {
         }
       } else {
         const distVal = dist(
-          player.pos.x + currentMap.xOffset,
+          // player.pos.x + currentMap.xOffset, //0507lqwxOffset
+          player.pos.x, //0507lqwxOffset
           player.pos.y,
           obj.pos.x,
           obj.pos.y
@@ -67,7 +69,7 @@ class CollisionController {
         if (distVal < radius) return obj;
       }
     }
-    
+
     return null;
   }
 

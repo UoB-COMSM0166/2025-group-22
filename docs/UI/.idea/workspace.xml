@@ -6,25 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="4d7a2260-0d24-4d2b-973d-299f4f77eb35" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/images/guideUI/background_guide.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/guideUI/background_guide.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/images/guideUI/text_toggle_portal.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/guideUI/text_toggle_portal.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/images/sprite/player.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/sprite/player.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/CollisionController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/CollisionController.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/GameController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/GameController.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/InputController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/InputController.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/Sketch.js" beforeDir="false" afterPath="$PROJECT_DIR$/core/Sketch.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/UIManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/core/UIManager.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/Bullet.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Bullet.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/Enemy.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Enemy.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Guide.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Guide.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Item.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Item.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/LevelMaps.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/LevelMaps.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/Maps.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Maps.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/Player.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Player.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/Portal.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Portal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/Crosshair.js" beforeDir="false" afterPath="$PROJECT_DIR$/views/Crosshair.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/LevelUI.js" beforeDir="false" afterPath="$PROJECT_DIR$/views/LevelUI.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/NameUI.js" beforeDir="false" afterPath="$PROJECT_DIR$/views/NameUI.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/UI.js" beforeDir="false" afterPath="$PROJECT_DIR$/views/UI.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/WinUI.js" beforeDir="false" afterPath="$PROJECT_DIR$/views/WinUI.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/testEnemy.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/testEnemy.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/testPlayer.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/testPlayer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/StartUI.js" beforeDir="false" afterPath="$PROJECT_DIR$/views/StartUI.js" afterDir="false" />
     </list>
     <list id="889e8c49-3533-435e-b89a-fa7031d8aadb" name="Agnes 进行的更改" comment="" />
     <list id="a54d38f5-487e-4f6b-8608-10ca84cec4aa" name="asus 进行的更改" comment="" />
@@ -41,27 +34,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "E:/Desktop/JAVA2025/Game/new0423/2025-group-22/docs/0413/assets/images/sprite",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/Desktop/JAVA2025/Game/new0423/2025-group-22/docs/0413/assets/images/sprite&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\Desktop\JAVA2025\Game\new0423\2025-group-22\docs\0413\assets\images\sprite" />
     </key>
   </component>
-  <component name="RunManager" selected="Node.js.Player.js">
+  <component name="RunManager" selected="JavaScript 调试.index.html (1)">
     <configuration name="index.html (1)" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/UI/docs/UI/index.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
@@ -73,8 +66,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Node.js.Player.js" />
         <item itemvalue="JavaScript 调试.index.html (1)" />
+        <item itemvalue="Node.js.Player.js" />
         <item itemvalue="JavaScript 调试.index.html" />
       </list>
     </recent_temporary>
@@ -95,6 +88,8 @@
       <workItem from="1746362852857" duration="16952000" />
       <workItem from="1746389178539" duration="9357000" />
       <workItem from="1746401131461" duration="18574000" />
+      <workItem from="1746574437322" duration="31258000" />
+      <workItem from="1746609953783" duration="1921000" />
     </task>
     <servers />
   </component>

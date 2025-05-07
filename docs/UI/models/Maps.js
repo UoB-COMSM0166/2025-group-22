@@ -5,6 +5,7 @@ class Maps {
     this.yOffset = 0;
     this.enemyList = [];
     this.itemList = [];
+    this.currentAnimation = null; // 用于跟踪当前动画
 
     for (let row = 0; row < this.blocks.length; row++) {
       for (let col = 0; col < this.blocks[row].length; col++) {
@@ -53,18 +54,5 @@ class Maps {
     }
 
     pop();
-  }
-
-
-  constrainPosition(pos, size) {
-    const mapWidth = this.blocks[0].length * 50;
-    const mapHeight = this.blocks.length * 50;
-    pos.x = constrain(pos.x, 0, mapWidth - size);
-    pos.y = constrain(pos.y, 0, mapHeight - size);
-  }
-
-  constrainOffset(viewWidth) {
-    const mapWidth = this.blocks[0].length * 50;
-    this.xOffset = constrain(this.xOffset, 0, mapWidth - viewWidth);
   }
 }

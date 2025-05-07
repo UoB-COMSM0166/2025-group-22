@@ -5,12 +5,22 @@ class Guide {
     this.privacyFloatOffset = 0;   // 浮动动画
   }
   draw(){
+    // 在某些位置调用粒子效果
+    // Guide.createParticleEffect(player.pos.x + 50 / 2, player.pos.y + 50 / 2, 50, 50, {
+    //   sizeRange: [2, 10],  // 控制粒子大小
+    //   density: 1,       // 密度为 50 个粒子
+    //   speed: 0.02,          // 速度为 3
+    //   color: [236, 233, 179],// 红色
+    //   // shape: 'square'    // 方形粒子
+    //   shape: 'circle',    // 方形粒子
+    //   lifetimeRange: [2, 3],
+    // });
     if (currentLevel === "sample"){
 
       if (player.pos.x >= 100 && player.pos.x <= 300 &&
         player.pos.y >= 550 && player.pos.y <= 750) {
-          UIManager.textStyle(color(235, 232, 177), 10);
-          text("Press \"A\" and \"D\" to move left and right.", canvasWidth * (160 / 1600), canvasHeight * (620 / 900));
+        UIManager.textStyle(color(235, 232, 177), 10);
+        text("Press \"A\" and \"D\" to move left and right.", canvasWidth * (160 / 1600), canvasHeight * (620 / 900));
       }else if (player.pos.x >= 300 && player.pos.x <= 500 &&
         player.pos.y >= 550 && player.pos.y <= 750) {
         UIManager.textStyle(color(235, 232, 177), 10);
@@ -153,5 +163,304 @@ class Guide {
     // 清除虚线设置（防止影响后续绘图）
     drawingContext.setLineDash([]);
     pop();
+  }
+
+  static createAnimation(mapInstance, {
+    initialDrawRatio,
+    initialX,
+    initialY,
+    targetDrawRatio,
+    targetX,
+    targetY,
+    duration = 1000,
+    easing = 'easeInOutQuad',
+    onComplete = null,
+    // 保留过渡状态的缩放比参数
+    viaDrawRatio = (initialDrawRatio + targetDrawRatio) / 2 // 默认取中间值
+  }) {
+    // 计算偏移量（保持中心点）
+    const initialXOffset = initialX - 1600 * (0.5 / initialDrawRatio) / 2;
+    const initialYOffset = initialY - 900 * (0.5 / initialDrawRatio) / 2;
+    const targetXOffset = targetX - 1600 * (0.5 / targetDrawRatio) / 2;
+    const targetYOffset = targetY - 900 * (0.5 / targetDrawRatio) / 2;
+
+    // 取消已有动画
+    if (mapInstance.currentAnimation || mapInstance.currentAnimation === "finished") {
+      cancelAnimationFrame(mapInstance.currentAnimation.animationId);
+    }
+
+    const startTime = performance.now();
+    const endTime = startTime + duration;
+
+    const animate = (timestamp) => {
+      if (timestamp >= endTime) {
+        // 动画结束
+        mapInstance.xOffset = targetXOffset;
+        mapInstance.yOffset = targetYOffset;
+        drawRatio = targetDrawRatio;
+        if (onComplete) onComplete();
+        return;
+      }
+
+      // 计算进度（0到1）
+      const elapsed = timestamp - startTime;
+      const progress = elapsed / duration;
+
+      // 应用缓动函数（仅用于位置）
+      let easedProgress;
+      switch (easing) {
+        case 'linear': easedProgress = progress; break;
+        case 'easeInQuad': easedProgress = progress * progress; break;
+        case 'easeOutQuad': easedProgress = progress * (2 - progress); break;
+        case 'easeInOutQuad':
+          easedProgress = progress < 0.5
+            ? 2 * progress * progress
+            : -1 + (4 - 2 * progress) * progress;
+          break;
+        default: easedProgress = progress;
+      }
+
+      // 位置直接插值（初始→目标）
+      const currentX = initialX + (targetX - initialX) * easedProgress;
+      const currentY = initialY + (targetY - initialY) * easedProgress;
+
+      // 缩放比例三阶段处理
+      let currentDrawRatio;
+      if (progress < 0.5) {
+        // 前半段：初始→过渡缩放比
+        const scaleProgress = progress * 2; // 映射到0-1
+        currentDrawRatio = initialDrawRatio + (viaDrawRatio - initialDrawRatio) * scaleProgress;
+      } else {
+        // 后半段：过渡→目标缩放比
+        const scaleProgress = (progress - 0.5) * 2; // 映射到0-1
+        currentDrawRatio = viaDrawRatio + (targetDrawRatio - viaDrawRatio) * scaleProgress;
+      }
+
+      // 更新偏移量（基于当前坐标和缩放比）
+      mapInstance.xOffset = currentX - (1600 * (0.5 / currentDrawRatio)) / 2;
+      mapInstance.yOffset = currentY - (900 * (0.5 / currentDrawRatio)) / 2;
+      drawRatio = currentDrawRatio;
+
+      // 继续动画
+      mapInstance.currentAnimation = {
+        animationId: requestAnimationFrame(animate)
+      };
+    };
+
+    // 启动动画
+    mapInstance.currentAnimation = {
+      animationId: requestAnimationFrame(animate)
+    };
+  }
+
+  static async playGuideAnimation() {
+    defineAnimations();
+    // 按顺序执行动画
+    for (const anim of animations[currentLevel]) {
+      await new Promise((resolve) => {
+        Guide.createAnimation(currentMap, {
+          ...anim,
+          onComplete: resolve, // 动画完成后 resolve Promise
+        });
+      });
+    }
+    console.log("所有动画播放完成！");
+    currentMap.currentAnimation = "finished";
+  }
+
+// 静态方法：创建粒子效果
+  static createParticleEffect(x, y, width, height, options = {}) {
+    console.log("Guide =");
+
+    // 解构参数
+    const {
+      density = 50,       // 粒子数量
+      speed = 2,          // 粒子速度
+      color = [255, 255, 255], // 粒子颜色
+      shape = 'circle',   // 粒子形状（circle/square）
+      sizeRange = [5, 10], // 粒子大小范围 [最小值, 最大值]
+      lifetimeRange = [100, 255] // 新增：粒子生命周期范围 [最小值, 最大值]
+    } = options;
+
+    // 存储所有粒子
+    let particles = [];
+    // 生成粒子
+    for (let i = 0; i < density; i++) {
+      let particle = {
+        x: canvasWidth * ( (x + random(-width / 2, width / 2)) / 1600),
+        y: canvasHeight * ((y + random(-height / 2, height / 2)) / 900),
+        vx: random(-speed, speed),      // X轴速度
+        vy: random(-speed, speed),      // Y轴速度
+        lifetime: random(...lifetimeRange),     // 使用参数控制生命周期
+        size: random(canvasWidth * (sizeRange[0] / 1600), canvasHeight * (sizeRange[1] / 900)), // 使用参数控制大小
+        color: color,
+        shape: shape
+      };
+      particles.push(particle);
+    }
+
+    // 渲染粒子
+    push();
+    for (let i = 0; i < particles.length; i++) {
+      let p = particles[i];
+
+      // 绘制粒子
+      fill(p.color);
+      noStroke();
+      if (p.shape === 'circle') {
+        ellipse(p.x, p.y, p.size, p.size);  // 圆形
+      } else if (p.shape === 'square') {
+        rect(p.x, p.y, p.size, p.size);     // 方形
+      }
+
+      // 更新位置
+      p.x += canvasWidth * (p.vx / 1600);
+      p.y += canvasHeight * (p.vy / 900);
+
+      // 生命周期衰减
+      p.lifetime -= 2;
+      if (p.lifetime <= 0) {
+        // 重置粒子
+        p.x = x + random(-width / 2, width / 2);
+        p.y = y + random(-height / 2, height / 2);
+        p.lifetime = random(...lifetimeRange); // 使用参数控制重置后的生命周期
+      }
+    }
+    pop();
+  }
+}
+
+
+function defineAnimations(){
+  animations = {
+    level1: [
+      {
+        initialDrawRatio: 0.5,
+        initialX: 800,
+        initialY: 450,
+        targetDrawRatio: 0.5,
+        targetX: 800,
+        targetY: 450,
+        duration: 200,
+        easing: 'linear',
+      },
+      {
+        initialDrawRatio: 0.5,
+        initialX: 800,
+        initialY: 450,
+        targetDrawRatio: 2.0,
+        targetX: 725,
+        targetY: 175,
+        duration: 1500,
+        easing: 'easeInOutQuad',
+      },
+      {
+        initialDrawRatio: 2.0,
+        initialX: 725,
+        initialY: 175,
+        targetDrawRatio: 2.0,
+        targetX: 175,
+        targetY: 750,
+        duration: 2000,
+        easing: 'easeInOutQuad',
+        viaDrawRatio: 0.9, // 过渡缩放比
+      },
+      {
+        initialDrawRatio: 2.0,
+        initialX: 175,
+        initialY: 750,
+        targetDrawRatio: 0.5,
+        targetX: 800,
+        targetY: 450,
+        duration: 1500,
+        easing: 'easeInOutQuad',
+      },
+    ],
+    level2: [
+      {
+        initialDrawRatio: 0.5,
+        initialX: 800,
+        initialY: 450,
+        targetDrawRatio: 0.5,
+        targetX: 800,
+        targetY: 450,
+        duration: 200,
+        easing: 'linear',
+      },
+      {
+        initialDrawRatio: 0.5,
+        initialX: 800,
+        initialY: 450,
+        targetDrawRatio: 2.0,
+        targetX: 975,
+        targetY: 375,
+        duration: 1500,
+        easing: 'easeInOutQuad',
+      },
+      {
+        initialDrawRatio: 2.0,
+        initialX: 975,
+        initialY: 375,
+        targetDrawRatio: 2.0,
+        targetX: 1275,
+        targetY: 775,
+        duration: 2000,
+        easing: 'easeInOutQuad',
+        viaDrawRatio: 0.9, // 过渡缩放比
+      },
+      {
+        initialDrawRatio: 2.0,
+        initialX: 1275,
+        initialY: 775,
+        targetDrawRatio: 0.5,
+        targetX: 800,
+        targetY: 450,
+        duration: 1500,
+        easing: 'easeInOutQuad',
+      },
+    ],
+    level3: [
+      {
+        initialDrawRatio: 0.5,
+        initialX: 800,
+        initialY: 450,
+        targetDrawRatio: 0.5,
+        targetX: 800,
+        targetY: 450,
+        duration: 200,
+        easing: 'linear',
+      },
+      {
+        initialDrawRatio: 0.5,
+        initialX: 800,
+        initialY: 450,
+        targetDrawRatio: 2.0,
+        targetX: 475,
+        targetY: 425,
+        duration: 1500,
+        easing: 'easeInOutQuad',
+      },
+      {
+        initialDrawRatio: 2.0,
+        initialX: 475,
+        initialY: 425,
+        targetDrawRatio: 2.0,
+        targetX: 750,
+        targetY: 750,
+        duration: 2000,
+        easing: 'easeInOutQuad',
+        viaDrawRatio: 0.9, // 过渡缩放比
+      },
+      {
+        initialDrawRatio: 2.0,
+        initialX: 750,
+        initialY: 750,
+        targetDrawRatio: 0.5,
+        targetX: 800,
+        targetY: 450,
+        duration: 1500,
+        easing: 'easeInOutQuad',
+      },
+    ],
   }
 }

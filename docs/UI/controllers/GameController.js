@@ -5,7 +5,10 @@ class GameController {
     // gameState = "playing";
     this.loadLevel();
     this.initPlayer();
-    this.startTimer();
+    if (currentLevel !== "sample") {
+      Guide.playGuideAnimation();
+    }
+
     gameState = "playing";
   }
 
@@ -31,6 +34,9 @@ class GameController {
     }else if (currentLevel === "level2") {
       // player.pos = createVector(200, 750);
       player.pos = createVector(250, 250);
+    }else if (currentLevel === "level3") {
+      player.pos = createVector(200, 200);
+      // player.pos = createVector(1050, 750);// test
     }
   }
 

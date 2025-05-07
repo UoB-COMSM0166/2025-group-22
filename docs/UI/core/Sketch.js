@@ -37,6 +37,9 @@ let drawRatio = 0.5;
 let images = {};
 let sounds = {};
 
+let animations = {};
+let inputAllowed = true;
+
 
 function preload() {
   defineImagePaths(); // 提前调用
@@ -106,9 +109,19 @@ function draw() {
     player.update();
     handleBullet();
     noCursor();
-    drawLives();
-    handleTimer();
-    guideWindow.draw();
+
+    // 播放完动画化时
+    if (currentMap.currentAnimation === "finished") {
+      GameController.startTimer();
+      currentMap.currentAnimation =null;
+    }
+    // 播放完动画化后
+    if (currentMap.currentAnimation === null) {
+      drawLives();
+      handleTimer();
+      guideWindow.draw();
+    }
+
   } else {
     cursor();
   }
@@ -227,14 +240,24 @@ function handleTimer() {
 }
 
 function handleBullet() {
-  if (player?.bullet != 0) {
-    player.bullet.draw(currentMap.xOffset, currentMap.yOffset);
-    const result = player.bullet.update();
+  if (player?.bulletRed != 0) {
+    player.bulletRed.draw(currentMap.xOffset, currentMap.yOffset);
+    const result = player.bulletRed.update();
     if (result === "undefined") {
-      player.bullet = 0;
+      player.bulletRed = 0;
     }
     else if(result === "inStandard") {
-      player.bullet.velocity = 0;
+      player.bulletRed.velocity = 0;
+    }
+  }
+  if (player?.bulletBlue != 0) {
+    player.bulletBlue.draw(currentMap.xOffset, currentMap.yOffset);
+    const result = player.bulletBlue.update();
+    if (result === "undefined") {
+      player.bulletBlue = 0;
+    }
+    else if(result === "inStandard") {
+      player.bulletBlue.velocity = 0;
     }
   }
 }
@@ -246,6 +269,19 @@ function keyPressed() {
 function mousePressed() {
   if (gameState === "playing" && player) {
     InputController.handleMousePressed(mouseButton);
+  }
+  if (gameState === "guide") {
+    GameController.start("sample");
+  }
+  // 添加动画打断逻辑
+  if (gameState === "playing" && currentMap.currentAnimation && currentMap.currentAnimation !== "finished") {
+    cancelAnimationFrame(currentMap.currentAnimation.animationId);
+    currentMap.currentAnimation = "finished";
+    // 重置画面
+    currentMap.xOffset = 0;
+    currentMap.yOffset = 0;
+    drawRatio = 0.5
+    return; // 打断后直接返回，不处理其他输入
   }
 }
 
@@ -370,47 +406,22 @@ function defineSoundPathsAndVolume() {
     playerInjuredOrDeadSoundEffect: 1
   }
 }
-
-function iconEffect(img, x, y, width, height, {
-  highlightOnlyHover = false, // 只有 hover 才高光
-  alpha = 255,
+function iconEffect(img, x, y, width, height, sx, sy, sw, sh,{
   float = false,
   floatSpeed = 0.03,
   floatAmplitude = 3,
-  floatOffset = 0,
-  buttonX,
-  buttonY,
-  buttonWidth,
-  buttonHeight
-} = {}, tile = [0, 0], spriteSize = 64) {
+  floatOffset = 0,// 0-2
+} = {}) {
 
   let drawY = y;
 
   // ✅ 浮動效果
   if (float) {
-    drawY = y + Math.sin(frameCount * floatSpeed + floatOffset) * floatAmplitude;
+    // drawY = y + Math.sin(frameCount * floatSpeed + floatOffset) * floatAmplitude;
+    drawY = y + Math.sin(frameCount * floatSpeed + Math.PI * floatOffset) * floatAmplitude;
   }
 
-  // ✅ 判斷是否 hover
-  const isHovered =
-      mouseX >= buttonX - buttonWidth / 2 && mouseX <= buttonX + buttonWidth / 2 &&
-      mouseY >= buttonY - buttonHeight / 2 && mouseY <= buttonY + buttonHeight / 2;
-
-  // ✅ 計算裁圖座標
-  const sx = tile[0] * spriteSize;
-  const sy = tile[1] * spriteSize;
-
-  push();
-  imageMode(CORNER);
-
-  if (!highlightOnlyHover || (highlightOnlyHover && isHovered)) {
-    tint(255, alpha);
-  } else {
-    noTint();
-  }
-
-  image(img, x, drawY, width, height, sx, sy, spriteSize, spriteSize);
-  pop();
+  image(img, x, drawY, width, height, sx, sy, sw, sh);
 }
 
 function drawParallaxBackground(bgImage) {
@@ -419,8 +430,8 @@ function drawParallaxBackground(bgImage) {
   const parallaxFactor = 0.02; // 越小越远，建议 0.02 - 0.1
 
   const offsetX = -player.pos.x * parallaxFactor;
-  // const offsetY = -player.pos.y * parallaxFactor;
-  const offsetY = 0;
+  const offsetY = -player.pos.y * parallaxFactor;
+  // const offsetY = 0;
 
   // 背景图可能需要足够大才能完整填充，或可设置为 loopable
   image(bgImage, offsetX, offsetY, canvasWidth * (1 + parallaxFactor), canvasHeight * (1 + parallaxFactor));

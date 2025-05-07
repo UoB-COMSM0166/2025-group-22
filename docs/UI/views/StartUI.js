@@ -32,7 +32,7 @@ class StartUI extends UI {
                 img: images["button_exit"],
                 imgLight: images["button_exit_hover"],
                 action: () => {
-                    alert("請手動關閉頁面");
+                  alert("Please close the page manually.");
                     window.close();
                 }
             }

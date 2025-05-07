@@ -237,10 +237,10 @@ function testPlayerShoot() {
 
   player.shoot(shootType);
 
-  console.assert(player.bullet instanceof Bullet, "❌ Bullet was not created");
-  console.assert(player.bullet.type === shootType, `❌ Bullet type should be ${shootType}`);
-  console.assert(!isNaN(player.bullet.velocity.x), "❌ Bullet velocity.x is invalid");
-  console.assert(!isNaN(player.bullet.velocity.y), "❌ Bullet velocity.y is invalid");
+  console.assert(player.bulletBlue instanceof Bullet, "❌ Bullet was not created");
+  console.assert(player.bulletBlue.type === shootType, `❌ Bullet type should be ${shootType}`);
+  console.assert(!isNaN(player.bulletBlue.velocity.x), "❌ Bullet velocity.x is invalid");
+  console.assert(!isNaN(player.bulletBlue.velocity.y), "❌ Bullet velocity.y is invalid");
 
   console.log("✅ testPlayerShoot passed.");
 }
