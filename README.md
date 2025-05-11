@@ -6,7 +6,7 @@
 
 Link to our game [PLAY HERE](https://uob-comsm0166.github.io/2025-group-22/)
 
-Link to our demo video [Video Demonstration]
+Link to our demo video [Video Demonstration](https://youtu.be/5f1Fr8TCwSo)
 
 ## Project Report
 ### 1.Development Team
