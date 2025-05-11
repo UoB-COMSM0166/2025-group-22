@@ -12,18 +12,20 @@ Include a demo video of your game here (you don't have to wait until the end, yo
 
 ## Your Group
 
-Add a group photo here!
+<p align="center">
+  <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/Group-22.jpg" width="550">
+</p>
 
 <div align="center">
 
-| Group member | name         | email                  |role|
+| Group member | Name         | Email                  |GitHub Username|
 | :---:   | :---:    | :---:   |:---:   |
-| 1            | Qiwei Lian   | vr24936@bristol.ac.uk  |    |
-| 2            | Gaochang He  | co24396@bristol.ac.uk  |    |
-| 3            | Yi-Chun Chi  | ws24986@bristol.ac.uk  |    |
-| 4            | Xu Hu        | ty24832@bristol.ac.uk  |    |
-| 5            | Wenqi Xue    | qh24128@bristol.ac.uk  |    |
-| 6            | Hao Jen Shih | qf24044@bristol.ac.uk  |    |
+| 1            | Qiwei Lian   | vr24936@bristol.ac.uk  | SH1ROd |
+| 2            | Gaochang He  | co24396@bristol.ac.uk  | HeGaochang |
+| 3            | Yi-Chun Chi  | ws24986@bristol.ac.uk  | YCC317 |
+| 4            | Xu Hu        | ty24832@bristol.ac.uk  | xh7210zo |
+| 5            | Wenqi Xue    | qh24128@bristol.ac.uk  | kk0998 |
+| 6            | Hao Jen Shih | qf24044@bristol.ac.uk  | HaoJenShih |
 </div>
 
 ## Project Report
@@ -41,7 +43,6 @@ We also strongly encourage players to explore. To support this, each level is de
 This project is written in JavaScript and utilizes the p5.js library to implement visuals and physics effects. In addition to realizing core game functions, we are committed to delivering a smooth player experience by ensuring that essential information is always accessible through the game interface. Accordingly, we clearly display the player’s health, key count, and pistol status, and provide each interface with a consistent title and options layout. We also strive to give responsive feedback to every player’s action, further enhancing the overall user experience.
 
 We believe that Twilight Seeker can bring an unprecedented experience for players who enjoy thinking strategically and pushing their operational limits.
-
 
 ### Requirements 
 
@@ -67,7 +68,20 @@ We believe that Twilight Seeker can bring an unprecedented experience for player
 
 - One quantitative evaluation (of your choice) 
 
-- Description of how code was tested. 
+- Description of how code was tested.
+
+### Sustainability
+
+#### 7.1.Sustainability Analysis Framework (SusAF) Results
+
+The sustainability evaluation of our game using the Sustainability Analysis Framework (SusAF) reveals strong performance across social, individual, environmental, economic, and technical dimensions. Socially, the game promotes user guidance through interfaces like GuideUI.js, supporting better decision-making and reducing waste. The animated LoadingUI.js improves user experience by easing wait anxiety. Educationally, the game fosters critical thinking, enhancing awareness of sustainability issues. On the individual level, it protects user privacy by avoiding data collection and improves autonomy by allowing level choice. It supports lifelong learning and encourages healthier gaming behaviors through reduced waste and better habits. Environmentally, functions like preload() and draw() optimize resources through lazy loading and frame rate control, reducing power consumption. These are complemented by efficient checks like isTouching(), contributing to lower carbon emissions. Economically, user retention is improved through rewarding mechanisms, while modular code design enables cost-effective scalability and potential monetization. Technically, the modular design supports easy maintenance and security, setting a foundation for scalable green software development and promoting adherence to technical standards. Overall, the game balances immediate, enabling, and systemic sustainability impacts effectively.
+
+#### 7.2.Green Foundation Implementation Patterns
+
+Our game integrates several Green Software Foundation patterns to reduce environmental impact while enhancing performance. Efficient Algorithms are applied in CollisionController.js, where optimized methods like getBlockAt() improve performance by minimizing redundant calculations. Lazy Loading is used in Sketch.js to defer non-critical asset loading, reducing memory usage. Caching is evident in Player.js, where getBlockClass() stores computed results to reduce processing load. We also adopted an Event-Driven Architecture in InputController.js by responding to user input via event handlers, which avoids resource-heavy polling. In Bullet.js, we implemented Resource Pooling by reusing bullet instances, thereby saving on object creation and garbage collection. Additionally, Asynchronous Processing is used in Guide.js for smooth animation playback without blocking the main thread, and Minimal Resource Usage is practiced in UI.js, where the draw() function only renders essential UI elements. These patterns collectively ensure that the game operates with lower energy consumption and more efficient use of computing resources. By integrating these green software patterns, we not only reduce our carbon footprint but also establish our codebase as a model for sustainable game development.
+#### 7.3.Sustainability User Stories and Green Software Foundation Patterns
+
+To further embed sustainability into our project, we implemented Sustainability User Stories aligned with the Green Software Foundation’s best practices. For example, to reduce energy consumption, we added logic in Sketch.js that lowers the frame rate when the game runs in the background. This conserves device power and prolongs battery life. To optimize resource loading, we tailored the preload() function to load only the assets required for the current scene, minimizing memory usage and load time. Additionally, to educate users, GuideUI.js includes in-game environmental tips, helping players build awareness about conservation. These stories enhance both user experience and ecological responsibility. From a development perspective, we continue to apply GSF patterns such as Efficient Algorithms and Lazy Loading to maintain system efficiency. Looking ahead, we plan to extend these strategies by evaluating our codebase for further energy-saving opportunities, refining the use of events and caching, and continuously testing performance post-optimization. This dual-pronged approach—combining user-centered sustainability goals with technical green software patterns—ensures our game remains environmentally responsible while delivering a high-quality user experience.
 
 ### Process 
 
@@ -83,16 +97,14 @@ We believe that Twilight Seeker can bring an unprecedented experience for player
 
 ### Contribution Statement
 
-- Provide a table of everyone's contribution, which may be used to weight individual grades. We expect that the contribution will be split evenly across team-members in most cases. Let us know as soon as possible if there are any issues with teamwork as soon as they are apparent. 
+<div align="center">
 
-### Additional Marks
-
-You can delete this section in your own repo, it's just here for information. in addition to the marks above, we will be marking you on the following two points:
-
-- **Quality** of report writing, presentation, use of figures and visual material (5%) 
-  - Please write in a clear concise manner suitable for an interested layperson. Write as if this repo was publicly available.
-
-- **Documentation** of code (5%)
-
-  - Is your repo clearly organised? 
-  - Is code well commented throughout?
+| Group member | name         | role                  |Contribution|
+| :---:   | :---:    | :---:   |:---:   |
+| 1            | Qiwei Lian   | back-end developer | 1.0 |
+| 2            | Gaochang He  | front-end developer | 1.0 |
+| 3            | Yi-Chun Chi  | project manager | 1.0 |
+| 4            | Xu Hu        | test engineering | 1.0 |
+| 5            | Wenqi Xue    | back-end developer | 1.0 |
+| 6            | Hao Jen Shih | front-end developer | 1.0 |
+</div>
