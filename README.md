@@ -56,9 +56,46 @@ We believe that Twilight Seeker can bring an unprecedented experience for player
 
 ### Implementation
 
-- 15% ~750 words
+#### Challenge1: Bullet Collision Detection and Portal Generation Process
 
-- Describe implementation of your game, in particular highlighting the three areas of challenge in developing your game. 
+Bullet collision detection and portal generation form a precise, coordinated system: during flight, the bullet continuously checks block collisions using getBlock and isEnteringAllowed.  On hitting a solid block, it reflects;  on hitting a portal-compatible block, it uses surface normals (getNormal) and position data (getBlockCenter, getEntryDirection) to generate a correctly oriented portal.  This logic, refined through iterations in models/Bullet.js, ensures accurate behavior and consistent portal placement.  However, in models/Bullet.js, this system was not built in one step.  The logic behind bullet collision detection and direction handling went through several iterations and improvements before reaching the final efficient and accurate solution:
+
+##### Stage 1: Basic Detection and Early Problems
+Initially, collision detection relied on checking if the bullet's position was inside a block's bounding box. It worked for simple cases—air blocks let the bullet pass; solid blocks destroyed it. However, due to limited refresh rates, bullets sometimes passed through blocks before being detected. Moreover, this method lacked direction awareness, making it unsuitable for features like portals. It was efficient but unreliable in complex situations.
+
+##### Stage 2: Trying to Detect Direction
+
+To address direction detection, Plan 2 divided each block into four triangles using diagonals. The triangle the bullet entered helped estimate its incoming direction, enabling portal logic. But the method struggled with edge and corner cases, often causing errors. It also introduced extra complexity, making the system harder to maintain despite its improved accuracy.
+
+#####　Stage 3: Final Optimization for Precise Collision
+
+Plan 3 calculates where the bullet's path intersects a block’s edges to identify the first contact side. This geometry-based method offers precise, stable direction detection—even along edges or corners. In rare cases like hitting corners exactly, the bullet is removed to avoid complex logic. This solution is now the most accurate and reliable in the system.
+
+#### Challenge2 : Creating precise and reliable collision detection systems
+
+We also encountered the challenge of creating precise and reliable collision detection systems to ensure smooth and realistic player interactions with blocks, enemies, and items while maintaining fairness and control over game mechanics: 
+
+##### Player-Block Collision
+
+Player-block collision restricts movement to prevent passing through walls and supports gravity and jump detection. The getBlockClass(offX, offY) function checks block types (e.g., "Wall", "DirectionWall", "Portal"). Horizontal detection uses offsets (5, 25) in moveLeft() and moveRight(), while vertical detection aligns the player during falling and landing with updateGravity(). The onWall() method identifies player states like standing, falling, or hitting their head. The system uses grid alignment (50px/block) and pixel-level detection for realistic movement and to avoid errors.
+
+##### Player-Enemy Collision
+
+Enemy collision detects when the player is hurt by an enemy. The system uses CollisionController.getCollidingEnemy(this, 40) to check for enemies within 40 pixels. For regular enemies, damage is triggered upon contact, and for "spike" enemies, it checks if the player steps on the lower half. Damage triggers sound effects, reduces health, and sets injured = true. An immunity timer of 120 frames prevents continuous damage, ensuring fairness and control over game pacing.
+
+##### Player-Item Collision
+
+Item collision detects nearby items within 40 pixels. Using CollisionController.isTouching(this, "item", 40), items like potions (health restore) and keys (inventory) are picked up. Once collected, items are removed from the map, and their effects are applied (e.g., unlocking doors). The 40-pixel detection range improves pickup fluidity and avoids duplicates, ensuring accurate interactions.
+
+#### Summary of Key Collision Parameters
+| Parameter                | Value               | Usage Scenario                                            | Meaning and Design Purpose                                                                   |
+| ------------------------ | ------------------- | --------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `this.size`              | `50`                | Player width and height                                   | Standard character size, used as the base for the collision bounding box                     |
+| Offset `5, 25`           | `5`, `y: 25`        | Detecting left and right walls during horizontal movement | Ensures detection near the edges, not the center, to improve accuracy                        |
+| Enemy detection radius   | `40`                | Enemy proximity check                                     | Sufficient to trigger a collision without causing false triggers                             |
+| Item detection radius    | `40`                | Checking proximity to items (potions, keys)               | High tolerance to improve player item pickup experience                                      |
+| Spike danger zone height | `enemy.size / 2`    | Special case for spikes                                   | Only causes damage when the player actually steps on the lower part of the spike             |
+ 
 
 ### Evaluation
 
