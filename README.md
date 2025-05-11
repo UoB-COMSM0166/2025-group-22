@@ -123,9 +123,37 @@ To further embed sustainability into our project, we implemented Sustainability 
 
 ### 8.Process 
 
-- 15% ~750 words
+To effectively drive project progress, we adopted the agile development methodology and completed three Sprints.
 
-- Teamwork. How did you work together, what tools did you use. Did you have team roles? Reflection on how you worked together. 
+#### The first Sprint (before week 6): 
+
+Implement the initial version of the game and the basic interface.
+
+#### The second Sprint (before week 12):
+
+Integrate the user interface and game logic part and complete the development of the main functions.
+
+#### The third Sprint (before submission):
+
+Optimize based on user feedback to enhance the overall gaming experience and completion.
+
+After each Sprint, we would review the current progress, adjust the to-do list, and reflect on the parts that need improvement.
+
+In the early stage of development, we held a regular physical meeting weekly. During the meeting, we discussed the completion of the previous week's tasks, planned tasks for the current week, and provided support for the difficulties encountered by the members. During the Easter holiday, to accelerate the development pace, we increased the meeting frequency to once every three days. While early meetings emphasized system architecture, the focus in the later stages shifted more toward enhancing user experience and integrating feedback.
+
+Regarding task implementation, we assigned tasks based on functional modules. However, this approach often led to multiple members simultaneously modifying the same code block, causing integration confusion. Therefore, we changed to adopt the Pair Programming mode for collaboration, which not only solved the conflict problem but also improved the debugging and development efficiency. We used the Live Share feature of VS Code for synchronous collaboration, enabling joint programming and real-time communication even remotely.
+
+In addition to technical cooperation, we also attached importance to team learning. We paired experienced members with those who are relatively less familiar with coding. Each pairing was not only about completing tasks but also a process of mutual learning and reflection. Through this mode, we found that everyone's programming logic and architectural thinking have significantly improved.
+
+Therefore, although tasks were initially assigned based on predefined roles, team members often supported one another whenever someone encountered difficulties. As a result, individuals frequently took on multiple responsibilities. Nevertheless, the team structure remained identifiable, consisting of one project manager, two back-end developers, two front-end developers, and one test engineer.
+
+To manage version control and ensure that all members had access to the complete program, we used GitHub to maintain our codebase. This ensured that everyone was always working on the latest version of the code. GitHub was especially helpful during development, as it allowed us to easily revert to earlier versions whenever unexpected issues occurred.
+
+In terms of project management, we used Asana's Kanban board to manage the task progress of work and divide the tasks into “To Do”, “Doing” and “Done”. This helped us determine whether the task has been stalled for too long and clarify the priorities. Although Asana provided structured task tracking, its limited accessibility and lack of instant communication features made it less efficient for our fast-paced iterations. WeChat, on the other hand, allowed for more immediate coordination, quick status updates, and better integration with our daily communication habits.
+
+In addition to technical development, we also placed great importance on team communication, as we believe it is a key factor in a successful project. During the development process, we encountered several instances of differing opinions. Whenever such situations arose, we would first clarify our ultimate goal and evaluate whether the conflicting ideas contributed to achieving it. If an idea aligned with the objective, we adopted it; if not, the proposal was rejected. Having a shared sense of purpose was also one of the key factors that kept us motivated and ultimately led to the successful completion of the project.
+
+Finally, when we further integrated the functions and conducted user tests, we found that the original program architecture was not easy to maintain. Therefore, we carried out a systematic refactoring in the third Sprint. This refactoring not only improved the readability and scalability of the program but also laid a more stable foundation for subsequent development.
 
 ### 9.Conclusion
 
