@@ -35,7 +35,7 @@ Link to our demo video [Video Demonstration](https://youtu.be/5f1Fr8TCwSo)
     - [5.1.1. Stage 1: Basic Detection and Early Problems](#511-stage-1-basic-detection-and-early-problems)
     - [5.1.2. Stage 2: Trying to Detect Direction](#512-stage-2-trying-to-detect-direction)
     - [5.1.3. Stage 3: Final Optimization for Precise Collision](#513-stage-3-final-optimization-for-precise-collision)
-  - [5.2. Challenge2: Creating Precise and Reliable Collision Detection Systems](#52challenge2--creating-precise-and-reliable-collision-detection-systems)
+  - [5.2. Challenge2: Creating Precise and Reliable Collision Detection Systems](#52challenge2-creating-precise-and-reliable-collision-detection-systems)
     - [5.2.1. Player-Block Collision](#521player-block-collision)
     - [5.2.2. Player-Enemy Collision](#522player-enemy-collision)
     - [5.2.3. Player-Item Collision](#523player-item-collision)
@@ -138,46 +138,46 @@ To support our design process, we identified key stakeholders and analyzed their
 
 Players, as the primary target group of this project, form the core layer. Based on their play styles and motivations, we categorized them into three types:
 
-##### Speed Runners: 
+#### Speed Runners: 
 
 Focused on speed, these players value precision in controls and efficient level layouts.
 
-##### Puzzle Game Players: 
+#### Puzzle Game Players: 
 
 Motivated by problem-solving, these players enjoy logical and spatial challenges and value the satisfaction of gradual discovery.
-##### Casual Players:
+#### Casual Players:
 
 Drawn to a relaxed pace, these players value intuitive interactions, appealing visuals, and overall atmosphere.
 
 To meet the needs of players and provide stable and interesting game content, the second level consists of the team members responsible for development, including:
 
-##### Game Developers:
+#### Game Developers:
 
 Implement core systems and maintain gameplay logic.
 
-##### Game Designers:
+#### Game Designers:
 
 Create levels and mechanics that support challenge and variety.
 
-##### Artists:
+#### Artists:
 
 Responsible for visual assets, including characters, scenes, and animations.
 
-##### Testers:
+#### Testers:
 
 Identify bugs and help fine-tune game balance.
 
-##### Project Manager:
+#### Project Manager:
 
 Coordinates timelines, task assignment, and team communication.
 
 The outer level consists of Supporters who not directly involved in the development, provide important external feedback and initial testing support, including:
 
-##### Peer and Friends:
+#### Peer and Friends:
 
 Provided early testing, feedback, and observational input during informal play sessions.
 
-##### Broader Audience:
+#### Broader Audience:
 
 Potential future players who may contribute external perspectives and help shape public reception.
 
@@ -195,15 +195,15 @@ This layered structure allowed us to align design decisions with the expectation
 
 Despite involving different types of users, players remain our primary focus. Based on the three player types identified earlier, we developed targeted user stories, grouped under two core epics to support efficient development and user-centered design.
 
-##### Epic 1:
+#### Epic 1:
 
 It offers a diverse and strategic gaming experience, allowing players of different styles to find fulfilling gameplay
 
-##### Epic 2:
+#### Epic 2:
 
 Ensure the accessibility and user-friendliness of game operation, supporting flexible control, clear feedback, and a low learning threshold
 
-##### Speed Runners
+#### Speed Runners
 
 Players who aim to complete the game as quickly as possible by optimizing routes and minimizing downtime.
 
@@ -213,7 +213,7 @@ As a speed runner, I want a game that allows me to skip opening cutscenes, so I 
 
 As a speed runner, I want a game that includes a built-in timer, so I can clearly track how much time I spend on each run. (Epic 1)
 
-##### Puzzle Game Players
+#### Puzzle Game Players
 
 Players who enjoy logical challenges, spatial reasoning, and step-by-step problem-solving.
 
@@ -223,7 +223,7 @@ As a puzzle game player, I want a game that allows trial and error, so I don’t
 
 As a puzzle game player, I want a well-designed instruction system that supports learning, so I can improve my problem-solving skills as I play. (Epic 2)
 
-##### Casual Players
+#### Casual Players
 
 Players who prefer a relaxed experience with intuitive controls and immersive storytelling.
 
@@ -253,12 +253,12 @@ Specific user stories were translated into concrete features: to reduce frustrat
 
 To confirm these implementations met expectations, we defined clear acceptance criteria for key functions. For example:
 
-##### In-game timer:
+#### In-game timer:
 
 It should accurately show the players elapsed time and be placed in the upper-right corner for easy reference by speedrunners
  (linked to Speed Runner Story 3).
 
-##### Health system:
+#### Health system:
 
 The remaining attempts should be clearly marked visually and avoid blocking the Player's operation perspective 
 (linked to Puzzle Player Story 2).
@@ -300,36 +300,36 @@ In addition, we used inheritance to improve the data model. For example, special
 
 Our game uses object-oriented programming (OOP) and follows a modular structure based on the MVC architecture. 
 
-##### Models
+#### Models
 This type includes all visible and interactive objects on the field:
 
-##### Player: 
+#### Player: 
 Responsible for the status management of players (position, health points, bullets, teleportation, etc.) and behavioral logic (movement, jumping, shooting, collision handling).
 
-##### Bullet: 
+#### Bullet: 
 Represents the teleportation bullet fired by the player, featuring reflection, direction determination, and portal creation logic.
 
-##### Enemy:
+#### Enemy:
 A unified category for all enemy types, including movement logic.
 
-##### Item:
+#### Item:
 Includes all interactive items such as keys, potions, treasure chests, and portals, with floating animations and type recognition.
 
-##### Wall, DirectionWall, Portal:
+#### Wall, DirectionWall, Portal:
 Static block types that make up the map, some of which have directionality and collision interactivity. Portal and DirectionWall inherit from Wall and share location and drawing logic.
 
-##### Controller
+#### Controller
 
 The controller category is uniformly responsible for the management of game logic and process, and is implemented in a static way to facilitate cross-module calls.
 
-##### GameController:
+#### GameController:
 Controls game state switching (start, pause, restart, win, game over).
 LevelController: Responsible for level switching, time storage, unlock determination, and progress storage.
 
-##### InputController:
+#### InputController:
 Manages user input (keyboard and mouse) and converts it into player actions or game control behaviors.
 
-##### CollisionController:
+#### CollisionController:
 Encapsulates collision logic, including obtaining blocks, collision type detection.
 User interface category
 
@@ -343,7 +343,7 @@ Guide is an in-game guidance and prompt module. It displays prompt text and anim
 
 This Game uses the draw() function of p5.js as the main Game Loop. Each frame determines the content and logic execution of the screen update based on the current gameState. The state management of the game adopts a state machine design, controlling the overall process through the global variable gameState. 
 
-##### Example of game state transition
+#### Example of game state transition
 
 If the player's life drops to zero, gameState will change to "gameOver", and UIManager will load the GameOverUI.
 
@@ -351,7 +351,7 @@ If players success through checkpoints door or treasure chest, by LevelControlle
 
 The user can switch between the "playing" and "pause" states by pressing the "P" key. Press the M key to show/hide the guide interface.
 
-##### Loop update content
+#### Loop update content
 
 When gameState === "playing", each frame will execute:
 
@@ -384,7 +384,7 @@ To address direction detection, Plan 2 divided each block into four triangles us
 
 Plan 3 calculates where the bullet's path intersects a block’s edges to identify the first contact side. This geometry-based method offers precise, stable direction detection—even along edges or corners. In rare cases like hitting corners exactly, the bullet is removed to avoid complex logic. This solution is now the most accurate and reliable in the system.
 
-### 5.2.Challenge2 : Creating precise and reliable collision detection systems
+### 5.2.Challenge2: Creating precise and reliable collision detection systems
 
 We also encountered the challenge of creating precise and reliable collision detection systems to ensure smooth and realistic player interactions with blocks, enemies, and items while maintaining fairness and control over game mechanics: 
 
@@ -650,15 +650,15 @@ To further embed sustainability into our project, we implemented Sustainability 
 
 To effectively drive project progress, we adopted the agile development methodology and completed three Sprints.
 
-##### The first Sprint (before week 6): 
+### The first Sprint (before week 6): 
 
 Implement the initial version of the game and the basic interface.
 
-##### The second Sprint (before week 12):
+### The second Sprint (before week 12):
 
 Integrate the user interface and game logic part and complete the development of the main functions.
 
-##### The third Sprint (before submission):
+### The third Sprint (before submission):
 
 Optimize based on user feedback to enhance the overall gaming experience and completion.
 
@@ -696,15 +696,15 @@ Through these challenges, we learned valuable lessons—not only in system desig
 
 For the future, we plan to continue developing Twilight Seeker in the following directions:
 
-#### 1.Cross-platform support: 
+### 1.Cross-platform support: 
 
 Optimize screen scaling and interaction to deliver a mobile-friendly version.
 
-#### 2.Guidance and teaching optimization:
+### 2.Guidance and teaching optimization:
 
 Improve beginner onboarding and test interface revisions using A/B testing.
 
-#### 3.User-generated Content:
+### 3.User-generated Content:
 
 Implement a level editor to allow players to create and share custom challenges, extending the game's lifespan and community engagement.
 
