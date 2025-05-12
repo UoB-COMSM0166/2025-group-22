@@ -12,6 +12,43 @@ Link to our game [PLAY HERE](https://uob-comsm0166.github.io/2025-group-22/UI/)
 
 Link to our demo video [Video Demonstration](https://youtu.be/5f1Fr8TCwSo)
 
+## 📑 Table of Contents
+
+### Main Sections
+- [1. Development Team](#1development-team)
+- [2. Introduction](#2-introduction)
+- [3. Requirements](#3-requirements)
+  - [3.1. Ideation process](#31-ideation-process)
+  - [3.2. Paper Prototypes](#32-paper-prototypes)
+  - [3.3. Feasibility Studies](#33-feasibility-studies)
+  - [3.4. Identify Stakeholders](#34-identify-stakeholders)
+  - [3.5. Epics and User Stories](#35-epics-and-user-stories)
+  - [3.6. Use-Cases Breakdown](#36-use-cases-breakdown)
+  - [3.7. Reflection](#37-reflection)
+- [4. Design](#4-design)
+  - [4.1. Initial Design](#41-initial-design)
+  - [4.2. Final Design and Refactoring](#42-final-design-and-refactoring)
+  - [4.3. Class and Interaction Details](#43-class-and-interaction-details)
+  - [4.4. GameLoop and State Transition](#44-gameloop-and-state-transition)
+  - [4.5. Sound and Graphics](#45-sound-and-graphics)
+- [5. Implementation](#5-implementation)
+  - [5.1. Challenge 1: Bullet Collision Detection and Portal Generation](#51-challenge-1-bullet-collision-detection-and-portal-generation)
+  - [5.2. Challenge 2: Reliable Collision Systems](#52-challenge-2-reliable-collision-systems)
+  - [5.3. Summary of Key Collision Parameters](#53-summary-of-key-collision-parameters)
+- [6. Evaluation](#6-evaluation)
+  - [6.1. Qualitative Evaluation](#61-qualitative-evaluation)
+  - [6.2. Quantitative Evaluation (NASA-TLX and SUS)](#62-quantitative-evaluation-nasa-tlx-and-sus)
+  - [6.3. Discussion and Reflection](#63-discussion-and-reflection)
+  - [6.4. Summary](#64-summary)
+  - [6.5. Testing](#65-testing)
+- [7. Sustainability](#7-sustainability)
+  - [7.1. SusAF Results](#71-susaf-results)
+  - [7.2. Green Foundation Patterns](#72-green-foundation-patterns)
+  - [7.3. Sustainability User Stories](#73-sustainability-user-stories)
+- [8. Process](#8-process)
+- [9. Conclusion](#9-conclusion)
+- [10. Contribution Statement](#10-contribution-statement)
+
 ## Project Report
 ### 1.Development Team
 
