@@ -84,6 +84,8 @@ Link to our demo video [Video Demonstration](https://youtu.be/5f1Fr8TCwSo)
 | 4            | Xu Hu        | ty24832@bristol.ac.uk  | xh7210zo |
 | 5            | Wenqi Xue    | qh24128@bristol.ac.uk  | kk0998 |
 | 6            | Hao Jen Shih | qf24044@bristol.ac.uk  | HaoJenShih |
+
+<p><strong>Table 1</strong><br>Team members</p>
 </div>
 
 ## 2.Introduction
@@ -184,6 +186,10 @@ This layered structure allowed us to align design decisions with the expectation
 <p align="center">
   <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/onion_model.png" width="550">
 </p>
+<p align="center">
+  <strong>Figure 1</strong><br>
+  Onion Model
+</p>
 
 ### 3.5.Epics and User Stories
 
@@ -230,7 +236,14 @@ As a casual player, I want a game that has an engaging storyline, so I can conne
 ### 3.6.Use-Cases Breakdown
 
 To systematically represent user–system interactions, we developed a use case diagram illustrating how different player types initiate game functions and receive system responses. This diagram supports design clarity by outlining functional triggers, user roles, and feedback mechanisms, and serves as a reference for further development stages.
-(Use Case Diagram)
+
+<p align="center">
+  <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/Usecase_Diagram.drawio.png" width="550">
+</p>
+<p align="center">
+  <strong>Figure 2</strong><br>
+  Usecase Diagram
+</p>
 
 ### 3.7.Reflection
 
@@ -521,6 +534,10 @@ According to the analysis results of NASA-TLX, the load perception among the thr
 <p align="center">
   <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/NASA_TXL_result.png" width="550">
 </p>
+<p align="center">
+  <strong>Figure 3</strong><br>
+  NASA_TXL Result
+</p>
 
 #### 6.3.2.Usability Issues and Learning Disabilities
 
@@ -550,6 +567,8 @@ The SUS score results indicate that the overall usability does not reach the ave
 | 18           | 35 |
 | 19           | 50 |
 | 20           | 52.5 |
+
+<p><strong>Table 2</strong><br>SUS score results from 20 participants</p>
 </div>
 
 #### 6.3.3.Design Response Effectiveness and Subsequent Planning
@@ -621,6 +640,10 @@ To further embed sustainability into our project, we implemented Sustainability 
 
 <p align="center">
   <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/sustainability_awareness_diagram.png" width="550">
+</p>
+<p align="center">
+  <strong>Figure 4</strong><br>
+  Sustainability Awareness Diagram
 </p>
 
 ## 8.Process 
@@ -699,4 +722,6 @@ Ultimately, Twilight Seeker is not only a technical achievement, but also a conc
 | 4            | Xu Hu        | test engineering | 1.0 |
 | 5            | Wenqi Xue    | back-end developer | 1.0 |
 | 6            | Hao Jen Shih | front-end developer | 1.0 |
+
+<p><strong>Table 3</strong><br>Team roles and contribution proportions</p>
 </div>
