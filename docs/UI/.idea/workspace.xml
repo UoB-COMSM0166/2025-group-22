@@ -1,23 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="ANALYZE_INJECTED_CODE" value="false" />
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4d7a2260-0d24-4d2b-973d-299f4f77eb35" name="更改" comment="">
+      <change afterPath="$PROJECT_DIR$/assets/soundeffect/weapon_switch_1.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/soundtrack/videoBGM.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/videos/afterLevel1.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/videos/afterLevel2.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/videos/afterLevel3.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/videos/afterSample.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/videos/start.mp4" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/CollisionController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/CollisionController.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/GameController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/GameController.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/InputController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/InputController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/LevelController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/LevelController.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/Sketch.js" beforeDir="false" afterPath="$PROJECT_DIR$/core/Sketch.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/UIManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/core/UIManager.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/p5.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/libraries/p5.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/p5.sound.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/libraries/p5.sound.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Bullet.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Bullet.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/DirectionWall.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/DirectionWall.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Enemy.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Enemy.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/Guide.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Guide.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/Item.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Item.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/LevelMaps.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/LevelMaps.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/Maps.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Maps.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/Player.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Player.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Portal.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Portal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Wall.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Wall.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/testEnemy.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/testEnemy.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/testPlayer.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/testPlayer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/StartUI.js" beforeDir="false" afterPath="$PROJECT_DIR$/views/StartUI.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/Crosshair.js" beforeDir="false" afterPath="$PROJECT_DIR$/views/Crosshair.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/GuideUI.js" beforeDir="false" afterPath="$PROJECT_DIR$/views/GuideUI.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/LevelUI.js" beforeDir="false" afterPath="$PROJECT_DIR$/views/LevelUI.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/LoadingUI.js" beforeDir="false" afterPath="$PROJECT_DIR$/views/LoadingUI.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/NameUI.js" beforeDir="false" afterPath="$PROJECT_DIR$/views/NameUI.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/PauseUI.js" beforeDir="false" afterPath="$PROJECT_DIR$/views/PauseUI.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/UI.js" beforeDir="false" afterPath="$PROJECT_DIR$/views/UI.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/WinUI.js" beforeDir="false" afterPath="$PROJECT_DIR$/views/WinUI.js" afterDir="false" />
     </list>
     <list id="889e8c49-3533-435e-b89a-fa7031d8aadb" name="Agnes 进行的更改" comment="" />
     <list id="a54d38f5-487e-4f6b-8608-10ca84cec4aa" name="asus 进行的更改" comment="" />
@@ -34,24 +62,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/Desktop/JAVA2025/Game/new0423/2025-group-22/docs/0413/assets/images/sprite&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "E:/Desktop/JAVA2025/Game/new0511/2025-group-22/docs/UI/assets/videos",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Desktop\JAVA2025\Game\new0511\2025-group-22\docs\UI\assets\videos" />
+      <recent name="E:\Desktop\JAVA2025\Game\new0511\2025-group-22\docs\UI\assets\soundeffect" />
       <recent name="E:\Desktop\JAVA2025\Game\new0423\2025-group-22\docs\0413\assets\images\sprite" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Desktop\JAVA2025\Game\new0511\2025-group-22\docs\UI\assets\soundtrack" />
+      <recent name="E:\Desktop\JAVA2025\Game\new0511\2025-group-22\docs\UI\assets\videos" />
     </key>
   </component>
   <component name="RunManager" selected="JavaScript 调试.index.html (1)">
@@ -90,6 +125,9 @@
       <workItem from="1746401131461" duration="18574000" />
       <workItem from="1746574437322" duration="31258000" />
       <workItem from="1746609953783" duration="1921000" />
+      <workItem from="1746964925768" duration="2014000" />
+      <workItem from="1746967334790" duration="5597000" />
+      <workItem from="1747001206125" duration="16045000" />
     </task>
     <servers />
   </component>

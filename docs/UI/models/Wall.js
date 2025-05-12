@@ -1,11 +1,10 @@
-// 📁 models/Wall.js
 class Wall {
   constructor(x, y, img, type = "solid") {
     this.pos = createVector(x, y);
-    this.img = img;          // [col, row] in tileset
-    this.size = 50;          // tile size
-    this.spriteSize = 64;    // source sprite size
-    this.type = type;        // block type, e.g., "solid"
+    this.img = img;
+    this.size = 50;
+    this.spriteSize = 64;
+    this.type = type;
   }
 
   draw(xOffset = 0, yOffset = 0) {
