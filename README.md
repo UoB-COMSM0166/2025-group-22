@@ -14,39 +14,39 @@ Link to our demo video [Video Demonstration](https://youtu.be/5f1Fr8TCwSo)
 
 ## 📑 Table of Contents
 
-- [1development team](#1development-team)
-- [2introduction](#2-introduction)
-- [3requirements](#3requirements)
-  - [31ideation process](#31ideation-process)
-  - [32paper prototypes](#32paper-prototypes)
-  - [33feasibility studies](#33feasibility-studies)
-  - [34identify stakeholders](#34identify-stakeholders)
-  - [35epics and user stories](#35epics-and-user-stories)
-  - [36use-cases breakdown](#36use-cases-breakdown)
-  - [37reflection](#37reflection)
-- [4design](#4design)
-  - [41initial design](#41initial-design)
-  - [42final design and refactoring](#42final-design-and-refactoring)
-  - [43class and interaction details](#43class-and-interaction-details)
-  - [44gameloop and state transition](#44gameloop-and-state-transition)
-  - [45sound and graphics](#45sound-and-graphics)
-- [5implementation](#5implementation)
-  - [51challenge1 bullet collision detection and portal generation process](#51challenge1-bullet-collision-detection-and-portal-generation-process)
-  - [52challenge2 reliable collision detection systems](#52challenge2-reliable-collision-detection-systems)
-  - [53summary of key collision parameters](#53summary-of-key-collision-parameters)
-- [6evaluation](#6evaluation)
-  - [61qualitative evaluation](#61qualitative-evaluation)
-  - [62quantitative-evaluationnasatlx-and-sus](#62quantitative-evaluationnasatlx-and-sus)
-  - [63discussion and reflection](#63discussion-and-reflection)
-  - [64summary](#64summary)
-  - [65testing](#65testing)
-- [7sustainability](#7sustainability)
-  - [71sustainability analysis framework (susaf) results](#71sustainability-analysis-framework-susaf-results)
-  - [72green foundation implementation patterns](#72green-foundation-implementation-patterns)
-  - [73sustainability user stories and green software foundation patterns](#73sustainability-user-stories-and-green-software-foundation-patterns)
-- [8process](#8process)
-- [9conclusion](#9conclusion)
-- [10contribution statement](#10contribution-statement)
+- [1. development team](#1development-team)
+- [2. introduction](#2-introduction)
+- [3. requirements](#3requirements)
+  - [3.1. ideation process](#31ideation-process)
+  - [3.2. paper prototypes](#32paper-prototypes)
+  - [3.3. feasibility studies](#33feasibility-studies)
+  - [3.4. identify stakeholders](#34identify-stakeholders)
+  - [3.5. epics and user stories](#35epics-and-user-stories)
+  - [3.6. use-cases breakdown](#36use-cases-breakdown)
+  - [3.7. reflection](#37reflection)
+- [4. design](#4design)
+  - [4.1. initial design](#41initial-design)
+  - [4.2. final design and refactoring](#42final-design-and-refactoring)
+  - [4.3. class and interaction details](#43class-and-interaction-details)
+  - [4.4. gameloop and state transition](#44gameloop-and-state-transition)
+  - [4.5. sound and graphics](#45sound-and-graphics)
+- [5. implementation](#5implementation)
+  - [5.1. challenge1 bullet collision detection and portal generation process](#51challenge1-bullet-collision-detection-and-portal-generation-process)
+  - [5.2. challenge2 reliable collision detection systems](#52challenge2-reliable-collision-detection-systems)
+  - [5.3. summary of key collision parameters](#53summary-of-key-collision-parameters)
+- [6. evaluation](#6evaluation)
+  - [6.1. qualitative evaluation](#61qualitative-evaluation)
+  - [6.2. quantitative-evaluationnasatlx-and-sus](#62quantitative-evaluationnasatlx-and-sus)
+  - [6.3. discussion and reflection](#63discussion-and-reflection)
+  - [6.4. summary](#64summary)
+  - [6.5. testing](#65testing)
+- [7. sustainability](#7sustainability)
+  - [7.1. sustainability analysis framework (susaf) results](#71sustainability-analysis-framework-susaf-results)
+  - [7.2. green foundation implementation patterns](#72green-foundation-implementation-patterns)
+  - [7.3. sustainability user stories and green software foundation patterns](#73sustainability-user-stories-and-green-software-foundation-patterns)
+- [8. process](#8process)
+- [9. conclusion](#9conclusion)
+- [10. contribution statement](#10contribution-statement)
 
 
 ## Project Report
@@ -507,13 +507,13 @@ In response to the issues identified in the user experience, the team has implem
 
 This study conducted a comprehensive evaluation of the user experience, focusing on both interface design and level structure, using qualitative and quantitative methods. The findings indicate that while the current system performs reasonably well, there remains room for improvement in usability and operational efficiency. By systematically identifying key issues and implementing targeted refinements, we aim to further smooth the learning curve, enhance overall gameplay quality, and establish a solid foundation for future design iterations.
 
-####　6.5.Testing
+#### 6.5.Testing
 
-#####　6.5.1.White Box Testing
+##### 6.5.1.White Box Testing
 
 We developed a custom JavaScript test setup (similar to Jest) to verify core game logic. Tests focused on internal mechanics—such as gravity, portals, collisions, bullet reflections, and enemy behaviors—with an emphasis on Player, Enemy, and Bullet classes. These components directly affect gameplay, so we tracked changes in position, velocity, state, and interactions following key actions.
 
-#####　Player Mechanics:
+##### Player Mechanics:
 
 Functions such as `jump()`, `moveLeft()`, and interactions like collecting items (heart, key) and using portals and doors.
 
@@ -521,7 +521,7 @@ Collision responses, including injury mechanics, invincibility frames, and telep
 
 State changes like position updates, life count, key inventory, and shooting mechanics.
 
-#####　Enemy Mechanics:
+##### Enemy Mechanics:
 
 Enemy response to collision with walls, such as reversing direction or resetting position.
 
