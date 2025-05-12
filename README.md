@@ -4,7 +4,7 @@
 ## Our Game
 
 <p align="center">
-  <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/image_title.png" width="550">
+  <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/image_title.png" width="900">
 </p>
 
 Link to our game [PLAY HERE](https://uob-comsm0166.github.io/2025-group-22/UI/)
@@ -71,7 +71,7 @@ Link to our demo video [Video Demonstration](https://youtu.be/5f1Fr8TCwSo)
 ## 1. Development Team
 
 <p align="center">
-  <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/Group-22.jpg" width="550">
+  <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/Group-22.jpg" width="900">
 </p>
 
 <div align="center">
@@ -185,7 +185,7 @@ Potential future players who may contribute external perspectives and help shape
 This layered structure allowed us to align design decisions with the expectations of each group, providing a clear foundation for later stages such as testing and refinement.
 
 <p align="center">
-  <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/onion_model.png" width="550">
+  <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/onion_model.png" width="900">
 </p>
 <p align="center">
   <em>Figure 1</em><br>
@@ -239,7 +239,7 @@ As a casual player, I want a game that has an engaging storyline, so I can conne
 To systematically represent user–system interactions, we developed a use case diagram illustrating how different player types initiate game functions and receive system responses. This diagram supports design clarity by outlining functional triggers, user roles, and feedback mechanisms, and serves as a reference for further development stages.
 
 <p align="center">
-  <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/Usecase_Diagram.drawio.png" width="550">
+  <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/Usecase_Diagram.drawio.png" width="900">
 </p>
 <p align="center">
   <em>Figure 2</em><br>
@@ -275,7 +275,7 @@ In the early stage of development, we designed the game’s module architecture 
 Similarly, each UI screen was implemented as a separate class inheriting from a common UI base, allowing consistent rendering and interaction logic. However, logic within the wall-related classes was not well separated at the time, leading to oversized classes and reduced maintainability.
 
 <p align="center">
-  <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/initial_class_diagram.png" width="550">
+  <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/initial_class_diagram.png" width="900">
 </p>
 <p align="center">
   <em>Figure 3</em><br>
@@ -291,7 +291,7 @@ During the Easter holiday, we reorganized the system by introducing clearer modu
 In the new design, we kept the object-oriented structure and added several specific controllers to handle different types of logic separately.
 
 <p align="center">
-  <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/final_class_diagram.png" width="550">
+  <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/final_class_diagram.png" width="900">
 </p>
 <p align="center">
   <em>Figure 4</em><br>
@@ -375,7 +375,7 @@ Guide is an in-game guidance and prompt module. It displays prompt text and anim
 This Game uses the draw() function of p5.js as the main Game Loop. Each frame determines the content and logic execution of the screen update based on the current gameState. The state management of the game adopts a state machine design, controlling the overall process through the global variable gameState. 
 
 <p align="center">
-  <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/sequence_diagram.png" width="550">
+  <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/sequence_diagram.png" width="900">
 </p>
 <p align="center">
   <em>Figure 5</em><br>
@@ -574,7 +574,7 @@ Based on the quantitative analysis results and the overall feedback from users, 
 According to the analysis results of NASA-TLX, the load perception among the three levels shows significant differences, indicating that the current level design has clear distinctions in terms of challenge level and operational burden. This can be regarded as the initial evidence that the game has an "advanced difficulty curve". However, based on qualitative observations and player feedback, the challenge curves of some levels are considered too steep, which may affect the willingness to learn and continue playing.
 
 <p align="center">
-  <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/NASA_TXL_result.png" width="550">
+  <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/NASA_TXL_result.png" width="900">
 </p>
 <p align="center">
   <em>Figure 6</em><br>
@@ -681,7 +681,7 @@ Our game integrates several Green Software Foundation patterns to reduce environ
 To further embed sustainability into our project, we implemented Sustainability User Stories aligned with the Green Software Foundation’s best practices. For example, to reduce energy consumption, we added logic in Sketch.js that lowers the frame rate when the game runs in the background. This conserves device power and prolongs battery life. To optimize resource loading, we tailored the preload() function to load only the assets required for the current scene, minimizing memory usage and load time. Additionally, to educate users, GuideUI.js includes in-game environmental tips, helping players build awareness about conservation. These stories enhance both user experience and ecological responsibility. From a development perspective, we continue to apply GSF patterns such as Efficient Algorithms and Lazy Loading to maintain system efficiency. Looking ahead, we plan to extend these strategies by evaluating our codebase for further energy-saving opportunities, refining the use of events and caching, and continuously testing performance post-optimization. This dual-pronged approach—combining user-centered sustainability goals with technical green software patterns—ensures our game remains environmentally responsible while delivering a high-quality user experience.
 
 <p align="center">
-  <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/sustainability_awareness_diagram.png" width="550">
+  <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/sustainability_awareness_diagram.png" width="900">
 </p>
 <p align="center">
   <em>Figure 7</em><br>
