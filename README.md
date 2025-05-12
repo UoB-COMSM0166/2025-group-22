@@ -623,6 +623,14 @@ This study conducted a comprehensive evaluation of the user experience, focusing
 
 ### 6.5. Testing
 
+<p align="center">
+  <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/image.png" width="900">
+</p>
+<p align="center">
+  <em>Figure 7</em><br>
+  Test Code
+</p>
+
 #### 6.5.1. White Box Testing
 
 We developed a custom JavaScript test setup (similar to Jest) to verify core game logic. Tests focused on internal mechanics—such as gravity, portals, collisions, bullet reflections, and enemy behaviors—with an emphasis on Player, Enemy, and Bullet classes. These components directly affect gameplay, so we tracked changes in position, velocity, state, and interactions following key actions.
@@ -684,7 +692,7 @@ To further embed sustainability into our project, we implemented Sustainability 
   <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/sustainability_awareness_diagram.png" width="900">
 </p>
 <p align="center">
-  <em>Figure 7</em><br>
+  <em>Figure 8</em><br>
   Sustainability Awareness Diagram
 </p>
 
