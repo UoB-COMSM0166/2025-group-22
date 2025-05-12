@@ -157,9 +157,33 @@ Finally, when we further integrated the functions and conducted user tests, we f
 
 ### 9.Conclusion
 
-- 10% ~500 words
+Twilight Seeker is a puzzle game that combines traditional platform-jumping elements with spatial teleportation mechanisms. Starting from a concept that integrates two types of portals, bullet reflections, and dynamic enemies, we successfully created a game that delivers both responsive control and strategic depth. Despite the challenges of time pressure and functional complexity, the team collaborated effectively to complete all core systems and level designs, demonstrating a high level of commitment and execution.
 
-- Reflect on project as a whole. Lessons learned. Reflect on challenges. Future work. 
+In the early stages of the project, we independently designed each game object as separate classes, emphasizing encapsulation and modularity. However, as the number of features increased, this approach led to significant code repetition and management difficulties. In response, we conducted comprehensive refactoring and adopted controller-based architecture that follows the MVC principle. Apart from the two main challenges we faced, the refactoring process was also one of the most painful parts of the project. The difficulty was identifying which parts of the code could be modularized, while making sure that the existing features would not break.
+
+To simplify our code structure, we used inheritance to reuse common logic in related classes. This reduced the repeated code and made the system easier to manage. For more complex features like portals and bullet reflections, we applied vector calculations, collision direction detection, and movement rules to ensure the game behaves in a stable and consistent way.
+
+We adopted agile development practices, including Scrum sprints, daily stand-up meetings, and pair programming, to coordinate our workflow and address issues promptly. Each team member worked on their respective branches and merged through collaborative integration. User testing and questionnaire feedback helped us refine the UI and improve overall user experience.
+
+Throughout the development process, we encountered several technical challenges. One of the most significant was building a precise and reliable bullet collision system. It had to detect contact with reflective and portal-compatible surfaces while identifying directional entry points for proper portal generation. This system evolved through multiple stages—from basic bounding-box detection to triangle-based estimation, and finally to a geometry-based edge detection method that improves accuracy. This issue troubled us for quite some time, as it was one of the core features of our project. We also developed a reliable framework for player collision detection. From realistic gravity handling to responsive enemy contact with immunity frames and smooth item pickup logic, these systems collectively support a controlled gameplay experience.
+
+Through these challenges, we learned valuable lessons—not only in system design and debugging, but also in team communication, rapid iteration, and user-centered thinking. We realized the importance of adaptable architecture, sustainable code practices, and real-world testing in delivering a polished product. This progress helped us grow from individual programmers into collaborative system designers.
+
+For the future, we plan to continue developing Twilight Seeker in the following directions:
+
+#### 1.Cross-platform support: 
+
+Optimize screen scaling and interaction to deliver a mobile-friendly version.
+
+#### 2.Guidance and teaching optimization:
+
+Improve beginner onboarding and test interface revisions using A/B testing.
+
+#### 3.User-generated Content:
+
+Implement a level editor to allow players to create and share custom challenges, extending the game's lifespan and community engagement.
+
+Ultimately, Twilight Seeker is not only a technical achievement, but also a concrete expression of our teamwork, adaptability, and user-oriented design capabilities. This project has not only deepened our technical proficiency but also reinforced the importance of designing with the player at the center. 
 
 ### 10.Contribution Statement
 
