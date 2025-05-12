@@ -71,7 +71,7 @@ Link to our demo video [Video Demonstration](https://youtu.be/5f1Fr8TCwSo)
 ## 1. Development Team
 
 <p align="center">
-  <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/Group-22.jpg" width="900">
+  <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/Group-22.jpg" width="550">
 </p>
 
 <div align="center">
