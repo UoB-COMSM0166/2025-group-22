@@ -85,7 +85,7 @@ Link to our demo video [Video Demonstration](https://youtu.be/5f1Fr8TCwSo)
 | 5            | Wenqi Xue    | qh24128@bristol.ac.uk  | kk0998 |
 | 6            | Hao Jen Shih | qf24044@bristol.ac.uk  | HaoJenShih |
 
-<p><strong>Table 1</strong><br>Team members</p>
+<p><strong>Table 1</strong><br>Team Members</p>
 </div>
 
 ## 2.Introduction
@@ -188,7 +188,7 @@ This layered structure allowed us to align design decisions with the expectation
 </p>
 <p align="center">
   <strong>Figure 1</strong><br>
-  Onion Model
+  Onion Model of the System
 </p>
 
 ### 3.5.Epics and User Stories
@@ -242,7 +242,7 @@ To systematically represent user–system interactions, we developed a use case 
 </p>
 <p align="center">
   <strong>Figure 2</strong><br>
-  Usecase Diagram
+  Use-case Diagram of Game
 </p>
 
 ### 3.7.Reflection
@@ -408,7 +408,8 @@ Item collision detects nearby items within 40 pixels. Using CollisionController.
 | Enemy detection radius   | `40`                | Enemy proximity check                                     | Sufficient to trigger a collision without causing false triggers                             |
 | Item detection radius    | `40`                | Checking proximity to items (potions, keys)               | High tolerance to improve player item pickup experience                                      |
 | Spike danger zone height | `enemy.size / 2`    | Special case for spikes                                   | Only causes damage when the player actually steps on the lower part of the spike             |
- 
+
+<p align="center"><strong>Table 2</strong><br>Key Parameters and Their Roles in Collision Detection</p>
 
 ## 6.Evaluation
 
@@ -568,7 +569,7 @@ The SUS score results indicate that the overall usability does not reach the ave
 | 19           | 50 |
 | 20           | 52.5 |
 
-<p><strong>Table 2</strong><br>SUS score results from 20 participants</p>
+<p><strong>Table 3</strong><br>SUS Score Results from 20 Participants</p>
 </div>
 
 #### 6.3.3.Design Response Effectiveness and Subsequent Planning
@@ -723,5 +724,5 @@ Ultimately, Twilight Seeker is not only a technical achievement, but also a conc
 | 5            | Wenqi Xue    | back-end developer | 1.0 |
 | 6            | Hao Jen Shih | front-end developer | 1.0 |
 
-<p><strong>Table 3</strong><br>Team roles and contribution proportions</p>
+<p><strong>Table 4</strong><br>Team Roles and Contribution Proportions</p>
 </div>
