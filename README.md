@@ -4,7 +4,11 @@
 
 ## Our Game
 
-Link to our game [PLAY HERE](https://uob-comsm0166.github.io/2025-group-22/)
+<p align="center">
+  <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/image_title.png" width="550">
+</p>
+
+Link to our game [PLAY HERE](https://uob-comsm0166.github.io/2025-group-22/UI/)
 
 Link to our demo video [Video Demonstration](https://youtu.be/5f1Fr8TCwSo)
 
