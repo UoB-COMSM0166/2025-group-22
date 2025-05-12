@@ -13,62 +13,62 @@ Link to our demo video [Video Demonstration](https://youtu.be/5f1Fr8TCwSo)
 
 ## Contents
 
-- [1. Development team](#1development-team)
-- [2. Introduction](#2introduction)
-- [3. Requirements](#3requirements)
-  - [3.1. Ideation Process](#31ideation-process)
-  - [3.2. Paper Prototypes](#32paper-prototypes)
-  - [3.3. Feasibility Studies](#33feasibility-studies)
-  - [3.4. Identify Stakeholders](#34identify-stakeholders)
-  - [3.5. Epics and User Stories](#35epics-and-user-stories)
-  - [3.6. Use-cases Breakdown](#36use-cases-breakdown)
-  - [3.7. Reflection](#37reflection)
-- [4. Design](#4design)
-  - [4.1. Initial Design](#41initial-design)
-  - [4.2. Final Design and Refactoring](#42final-design-and-refactoring)
-  - [4.3. Class and Interaction Details](#43class-and-interaction-details)
-  - [4.4. Gameloop and State Transition](#44gameloop-and-state-transition)
-  - [4.5. Sound and Graphics](#45sound-and-graphics)
-- [5. Implementation](#5implementation)
-  - [5.1. Challenge1 Bullet Collision Detection and Portal Generation Process](#51challenge1-bullet-collision-detection-and-portal-generation-process)
+- [1. Development team](#1-development-team)
+- [2. Introduction](#2-introduction)
+- [3. Requirements](#3-requirements)
+  - [3.1. Ideation Process](#31-ideation-process)
+  - [3.2. Paper Prototypes](#32-paper-prototypes)
+  - [3.3. Feasibility Studies](#33-feasibility-studies)
+  - [3.4. Identify Stakeholders](#34-identify-stakeholders)
+  - [3.5. Epics and User Stories](#35-epics-and-user-stories)
+  - [3.6. Use-cases Breakdown](#36-use-cases-breakdown)
+  - [3.7. Reflection](#37-reflection)
+- [4. Design](#4-design)
+  - [4.1. Initial Design](#41-initial-design)
+  - [4.2. Final Design and Refactoring](#42-final-design-and-refactoring)
+  - [4.3. Class and Interaction Details](#43-class-and-interaction-details)
+  - [4.4. Gameloop and State Transition](#44-gameloop-and-state-transition)
+  - [4.5. Sound and Graphics](#45-sound-and-graphics)
+- [5. Implementation](#5-implementation)
+  - [5.1. Challenge1 Bullet Collision Detection and Portal Generation Process](#51-challenge1-bullet-collision-detection-and-portal-generation-process)
     - [5.1.1. Stage 1: Basic Detection and Early Problems](#511-stage-1-basic-detection-and-early-problems)
     - [5.1.2. Stage 2: Trying to Detect Direction](#512-stage-2-trying-to-detect-direction)
     - [5.1.3. Stage 3: Final Optimization for Precise Collision](#513-stage-3-final-optimization-for-precise-collision)
-  - [5.2. Challenge2: Creating Precise and Reliable Collision Detection Systems](#52challenge2-creating-precise-and-reliable-collision-detection-systems)
-    - [5.2.1. Player-Block Collision](#521player-block-collision)
-    - [5.2.2. Player-Enemy Collision](#522player-enemy-collision)
-    - [5.2.3. Player-Item Collision](#523player-item-collision)
-  - [5.3. Summary of Key Collision Parameters](#53summary-of-key-collision-parameters)
-- [6. Evaluation](#6evaluation)
-  - [6.1. Qualitative Evaluation](#61qualitative-evaluation)
-    - [6.1.1. Evaluate the Design and Process](#611evaluate-the-design-and-process)
-    - [6.1.2. Task Content Design](#612task-content-design)
-    - [6.1.3. Summary of the Problem Theme](#613summary-of-the-problem-theme)
-    - [6.1.4. Adjust the Response Measures](#614adjust-the-response-measures)
-  - [6.2. Quantitative Evaluation (NASA-TLX and SUS)](#62quantitative-evaluationnasa-tlx-and-sus)
-    - [6.2.1. Evaluation of Design and Process](#621evaluation-of-design-and-process)
-    - [6.2.2. Statistical Analysis Results](#622statistical-analysis-results)
-    - [6.2.3. Subsequent Improvement Measures](#623subsequent-improvement-measures)
-  - [6.3. Discussion and Reflection](#63discussion-and-reflection)
-    - [6.3.1. Level Experience Differences and Challenge Design](#631level-experience-differences-and-challenge-design)
-    - [6.3.2. Usability Issues and Learning Disabilities](#632usability-issues-and-learning-disabilities)
-    - [6.3.3. Design Response Effectiveness and Subsequent Planning](#633design-response-effectiveness-and-subsequent-planning)
-  - [6.4. Summary](#64summary)
-  - [6.5. Testing](#65testing)
-    - [6.5.1. White Box Testing](#651white-box-testing)
-    - [6.5.2. Black Box Testing](#652black-box-testing)
-- [7. Sustainability](#7sustainability)
-  - [7.1. Sustainability Analysis Framework (SusAF) Results](#71sustainability-analysis-framework-susaf-results)
-  - [7.2. Green Foundation Implementation Patterns](#72green-foundation-implementation-patterns)
-  - [7.3. Sustainability User Stories and Green Software Foundation Patterns](#73sustainability-user-stories-and-green-software-foundation-patterns)
-- [8. Process](#8process)
-- [9. Conclusion](#9conclusion)
-- [10. Contribution Statement](#10contribution-statement)
+  - [5.2. Challenge2: Creating Precise and Reliable Collision Detection Systems](#52-challenge2-creating-precise-and-reliable-collision-detection-systems)
+    - [5.2.1. Player-Block Collision](#521-player-block-collision)
+    - [5.2.2. Player-Enemy Collision](#522-player-enemy-collision)
+    - [5.2.3. Player-Item Collision](#523-player-item-collision)
+  - [5.3. Summary of Key Collision Parameters](#53-summary-of-key-collision-parameters)
+- [6. Evaluation](#6-evaluation)
+  - [6.1. Qualitative Evaluation](#61-qualitative-evaluation)
+    - [6.1.1. Evaluate the Design and Process](#611-evaluate-the-design-and-process)
+    - [6.1.2. Task Content Design](#612-task-content-design)
+    - [6.1.3. Summary of the Problem Theme](#613-summary-of-the-problem-theme)
+    - [6.1.4. Adjust the Response Measures](#614-adjust-the-response-measures)
+  - [6.2. Quantitative Evaluation (NASA-TLX and SUS)](#62-quantitative-evaluationnasa-tlx-and-sus)
+    - [6.2.1. Evaluation of Design and Process](#621-evaluation-of-design-and-process)
+    - [6.2.2. Statistical Analysis Results](#622-statistical-analysis-results)
+    - [6.2.3. Subsequent Improvement Measures](#623-subsequent-improvement-measures)
+  - [6.3. Discussion and Reflection](#63-discussion-and-reflection)
+    - [6.3.1. Level Experience Differences and Challenge Design](#631-level-experience-differences-and-challenge-design)
+    - [6.3.2. Usability Issues and Learning Disabilities](#632-usability-issues-and-learning-disabilities)
+    - [6.3.3. Design Response Effectiveness and Subsequent Planning](#633-design-response-effectiveness-and-subsequent-planning)
+  - [6.4. Summary](#64-summary)
+  - [6.5. Testing](#65-testing)
+    - [6.5.1. White Box Testing](#651-white-box-testing)
+    - [6.5.2. Black Box Testing](#652-black-box-testing)
+- [7. Sustainability](#7-sustainability)
+  - [7.1. Sustainability Analysis Framework (SusAF) Results](#71-sustainability-analysis-framework-susaf-results)
+  - [7.2. Green Foundation Implementation Patterns](#72-green-foundation-implementation-patterns)
+  - [7.3. Sustainability User Stories and Green Software Foundation Patterns](#73-sustainability-user-stories-and-green-software-foundation-patterns)
+- [8. Process](#8-process)
+- [9. Conclusion](#9-conclusion)
+- [10. Contribution Statement](#10-contribution-statement)
 
 
 ## Project Report
 
-## 1.Development Team
+## 1. Development Team
 
 <p align="center">
   <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/Group-22.jpg" width="550">
@@ -88,7 +88,7 @@ Link to our demo video [Video Demonstration](https://youtu.be/5f1Fr8TCwSo)
 <p><strong>Table 1</strong><br>Team Members</p>
 </div>
 
-## 2.Introduction
+## 2. Introduction
 
 Twilight Seeker is a puzzle platformer that combines spatial teleportation with precise control mechanics. Players must strategically use two types of portals to traverse and solve intricately designed mazes. Inspired by two classic games — Super Mario and Portal — we blended the responsive movement of Super Mario with Portal’s portal-based navigation system.
 
@@ -102,9 +102,9 @@ This project is written in JavaScript and utilizes the p5.js library to implemen
 
 We believe that Twilight Seeker can bring an unprecedented experience for players who enjoy thinking strategically and pushing their operational limits.
 
-## 3.Requirements 
+## 3. Requirements 
 
-### 3.1.Ideation process
+### 3.1. Ideation process
 
 In the early stage of our game development, we held a brainstorming meeting to define our direction. Each team members brought one or two inspiring games and shared them in the meeting. The initial inspirations included a variety of mechanics (see table below), providing solutions for our subsequent development.
 
@@ -114,7 +114,7 @@ Although we discussed narrative-driven games like Papers, Please, which emphasiz
 
 We selected Twilight Seeker as one of the two projects. It combines platforming mechanics inspired by Super Mario with Portal-style spatial teleportation, and introduces a reflection wall system that reflects bullets based on entry angles. This feature enhances spatial reasoning and tactical depth. As it aligned with both our learning objectives and gameplay ambitions, we adopted it for full development.
 
-### 3.2.Paper Prototypes
+### 3.2. Paper Prototypes
 
 In the third workshop, we developed paper prototypes for our two games — Twilight Seeker (originally [2D Jumper](https://youtu.be/Vv2zbfhl6WI)) and [Cross Fire](https://youtu.be/X4RS6Jgd0kk) — to help the team and playtesters better understand core mechanics and gameplay.
 
@@ -122,7 +122,7 @@ The paper prototype helped our team clearly visualize game concepts and identify
 
 The paper prototypes also improved communication with non-developers. We received peer feedback and adjusted our designs accordingly. For instance, a question about what counts as a failure led us to refine the enemy system.
 
-### 3.3.Feasibility Studies
+### 3.3. Feasibility Studies
 
 In addition to paper prototype, we evaluated the technical feasibility of core gameplay systems. This included assessing the complexity of portal collisions, post-teleport position correction, and bullet reflection angle calculations within the physics engine.
 
@@ -132,7 +132,7 @@ The portal and bullet systems also brought up practical design questions, especi
 
 During UI and map design, we sketched multiple interface drafts to clarify screen transitions and user interactions. These covered the full flow—from the main menu to the in-game interface and final result screens. This visual planning helped ensure a consistent and coherent user experience.
 
-### 3.4.Identify Stakeholders
+### 3.4. Identify Stakeholders
 
 To support our design process, we identified key stakeholders and analyzed their needs using the Onion Model. Stakeholders were grouped into four layers based on their influence and involvement, from core users to external supporters.
 
@@ -192,7 +192,7 @@ This layered structure allowed us to align design decisions with the expectation
   Onion Model of the System
 </p>
 
-### 3.5.Epics and User Stories
+### 3.5. Epics and User Stories
 
 Despite involving different types of users, players remain our primary focus. Based on the three player types identified earlier, we developed targeted user stories, grouped under two core epics to support efficient development and user-centered design.
 
@@ -234,7 +234,7 @@ As a casual player, I want short levels and the ability to pause at any time, so
 
 As a casual player, I want a game that has an engaging storyline, so I can connect with the main character and enjoy the experience. (Epic 1)
 
-### 3.6.Use-Cases Breakdown
+### 3.6. Use-Cases Breakdown
 
 To systematically represent user–system interactions, we developed a use case diagram illustrating how different player types initiate game functions and receive system responses. This diagram supports design clarity by outlining functional triggers, user roles, and feedback mechanisms, and serves as a reference for further development stages.
 
@@ -246,7 +246,7 @@ To systematically represent user–system interactions, we developed a use case 
   Use-case Diagram of Game
 </p>
 
-### 3.7.Reflection
+### 3.7. Reflection
 
 The analysis of epics and user stories clarified our development direction and shaped the design to reflect the needs of different player types. The two core epics focused on maximizing enjoyment and reducing learning barriers.
 
@@ -266,9 +266,9 @@ The remaining attempts should be clearly marked visually and avoid blocking the 
 
 These design and validation efforts address the core needs of different player types while enhancing overall usability and clarity.
 
-## 4.Design
+## 4. Design
 
-### 4.1.Initial Design
+### 4.1. Initial Design
 
 In the early stage of development, we designed the game’s module architecture based on functional requirements and followed object-oriented principles to separate core elements into individual classes. Key components such as Player, Enemy, Item, and Bullet each encapsulate their own state and behavior for better modularity and reusability.
 
@@ -282,13 +282,29 @@ Similarly, each UI screen was implemented as a separate class inheriting from a 
   Initial Class Diagram
 </p>
 
-### 4.2.Final Design and Refactoring
+### 4.2. Final Design and Refactoring
 
 As the project's functions gradually expanded, we gradually realized that while defining each entity as a separate class gave the system a clear structure, it also introduced a lot of repetitive logic and made it harder to manage.
 
 During the Easter holiday, we reorganized the system by introducing clearer module separation and controller-based logic, gradually moving toward an MVC architecture.
 
 In the new design, we kept the object-oriented structure and added several specific controllers to handle different types of logic separately.
+
+<p align="center">
+  <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/final_class_diagram.png" width="550">
+</p>
+<p align="center">
+  <strong>Figure 4</strong><br>
+  Final Class Diagram
+</p>
+
+<p align="center">
+  <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/sequence_diagram.png" width="550">
+</p>
+<p align="center">
+  <strong>Figure 5</strong><br>
+  Sequence Diagram
+</p>
 
 ##### GameController: 
 
@@ -310,7 +326,7 @@ Most of these controllers use static classes, which makes it easier to call them
 
 In addition, we used inheritance to improve the data model. For example, special walls like Portal and Reflection inherit from DirectionWall, so they can share position and drawing logic. This helped us avoid repeating code and made things easier to maintain.
 
-### 4.3.Class and Interaction Details
+### 4.3. Class and Interaction Details
 
 Our game uses object-oriented programming (OOP) and follows a modular structure based on the MVC architecture. 
 
@@ -362,7 +378,7 @@ The UIManager automatically switches the displayed UI category based on the curr
 
 Guide is an in-game guidance and prompt module. It displays prompt text and animations based on the player's position to guide the player to understand the operation method.
 
-### 4.4.GameLoop and State Transition
+### 4.4. GameLoop and State Transition
 
 This Game uses the draw() function of p5.js as the main Game Loop. Each frame determines the content and logic execution of the screen update based on the current gameState. The state management of the game adopts a state machine design, controlling the overall process through the global variable gameState. 
 
@@ -386,45 +402,45 @@ When gameState === "playing", each frame will execute:
 
 The overall game logic is split through states and managed in combination with controllers to maintain the readability and expandability of the code.
 
-### 4.5.Sound and Graphics
+### 4.5. Sound and Graphics
 
 We define the paths of all sound effects and image resources in the centralized management module and load all images and sounds at once during the preload() stage. Sound effect playback is triggered by events, such as shooting, jumping, injury, etc., each corresponding to a specific audio file and volume control. We use sprites for image resources, combining them with floating animations and parallax effects to make the visuals feel more alive. In terms of screen adaptation, all UIs and images are automatically scaled and rearranged based on canvasWidth.
  
-## 5.Implementation
+## 5. Implementation
 
-### 5.1.Challenge1: Bullet Collision Detection and Portal Generation Process
+### 5.1. Challenge1: Bullet Collision Detection and Portal Generation Process
 
 Bullet collision detection and portal generation form a precise, coordinated system: during flight, the bullet continuously checks block collisions using getBlock and isEnteringAllowed.  On hitting a solid block, it reflects;  on hitting a portal-compatible block, it uses surface normals (getNormal) and position data (getBlockCenter, getEntryDirection) to generate a correctly oriented portal.  This logic, refined through iterations in models/Bullet.js, ensures accurate behavior and consistent portal placement.  However, in models/Bullet.js, this system was not built in one step.  The logic behind bullet collision detection and direction handling went through several iterations and improvements before reaching the final efficient and accurate solution:
 
-#### 5.1.1.Stage 1: Basic Detection and Early Problems
+#### 5.1.1. Stage 1: Basic Detection and Early Problems
 
 Initially, collision detection relied on checking if the bullet's position was inside a block's bounding box. It worked for simple cases—air blocks let the bullet pass; solid blocks destroyed it. However, due to limited refresh rates, bullets sometimes passed through blocks before being detected. Moreover, this method lacked direction awareness, making it unsuitable for features like portals. It was efficient but unreliable in complex situations.
 
-#### 5.1.2.Stage 2: Trying to Detect Direction
+#### 5.1.2. Stage 2: Trying to Detect Direction
 
 To address direction detection, Plan 2 divided each block into four triangles using diagonals. The triangle the bullet entered helped estimate its incoming direction, enabling portal logic. But the method struggled with edge and corner cases, often causing errors. It also introduced extra complexity, making the system harder to maintain despite its improved accuracy.
 
-#### 5.1.3.Stage 3: Final Optimization for Precise Collision
+#### 5.1.3. Stage 3: Final Optimization for Precise Collision
 
 Plan 3 calculates where the bullet's path intersects a block’s edges to identify the first contact side. This geometry-based method offers precise, stable direction detection—even along edges or corners. In rare cases like hitting corners exactly, the bullet is removed to avoid complex logic. This solution is now the most accurate and reliable in the system.
 
-### 5.2.Challenge2: Creating precise and reliable collision detection systems
+### 5.2. Challenge2: Creating precise and reliable collision detection systems
 
 We also encountered the challenge of creating precise and reliable collision detection systems to ensure smooth and realistic player interactions with blocks, enemies, and items while maintaining fairness and control over game mechanics: 
 
-#### 5.2.1.Player-Block Collision
+#### 5.2.1. Player-Block Collision
 
 Player-block collision restricts movement to prevent passing through walls and supports gravity and jump detection. The getBlockClass(offX, offY) function checks block types (e.g., "Wall", "DirectionWall", "Portal"). Horizontal detection uses offsets (5, 25) in moveLeft() and moveRight(), while vertical detection aligns the player during falling and landing with updateGravity(). The onWall() method identifies player states like standing, falling, or hitting their head. The system uses grid alignment (50px/block) and pixel-level detection for realistic movement and to avoid errors.
 
-#### 5.2.2.Player-Enemy Collision
+#### 5.2.2. Player-Enemy Collision
 
 Enemy collision detects when the player is hurt by an enemy. The system uses CollisionController.getCollidingEnemy(this, 40) to check for enemies within 40 pixels. For regular enemies, damage is triggered upon contact, and for "spike" enemies, it checks if the player steps on the lower half. Damage triggers sound effects, reduces health, and sets injured = true. An immunity timer of 120 frames prevents continuous damage, ensuring fairness and control over game pacing.
 
-#### 5.2.3.Player-Item Collision
+#### 5.2.3. Player-Item Collision
 
 Item collision detects nearby items within 40 pixels. Using CollisionController.isTouching(this, "item", 40), items like potions (health restore) and keys (inventory) are picked up. Once collected, items are removed from the map, and their effects are applied (e.g., unlocking doors). The 40-pixel detection range improves pickup fluidity and avoids duplicates, ensuring accurate interactions.
 
-### 5.3.Summary of Key Collision Parameters
+### 5.3. Summary of Key Collision Parameters
 
 | Parameter                | Value               | Usage Scenario                                            | Meaning and Design Purpose                                                                   |
 | ------------------------ | ------------------- | --------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
@@ -436,15 +452,15 @@ Item collision detects nearby items within 40 pixels. Using CollisionController.
 
 <p align="center"><strong>Table 2</strong><br>Key Parameters and Their Roles in Collision Detection</p>
 
-## 6.Evaluation
+## 6. Evaluation
 
-### 6.1.Qualitative Evaluation
+### 6.1. Qualitative Evaluation
 
-#### 6.1.1.Evaluate the design and process
+#### 6.1.1. Evaluate the design and process
 
 To observe user reactions during gameplay, we used the Think Aloud method. Eight participants played three levels each, averaging 35 minutes. Before each session, the facilitator explained the task and encouraged players to verbalize their thoughts. Two observers recorded spoken feedback and noted emotional reactions, especially signs of confusion or frustration.
 
-#### 6.1.2.Task content design
+#### 6.1.2. Task content design
 
 Each participant was asked to complete three main tasks:
 
@@ -456,7 +472,7 @@ Each participant was asked to complete three main tasks:
 
 These tasks were designed to cover the game’s core interactions and structure, so we could see how players understood and responded during actual gameplay.
 
-#### 6.1.3.Summary of the problem theme
+#### 6.1.3. Summary of the problem theme
 
 Based on the analysis of the observation records, the repetitive problems that participants encountered during the game can be summarized into the following three major themes:
 
@@ -503,7 +519,7 @@ Based on the analysis of the observation records, the repetitive problems that p
 
 1.The lack of clear level-passing prompts after completing tasks affects the sense of achievement and continuous motivation.
 
-#### 6.1.4.Adjust the response measures
+#### 6.1.4. Adjust the response measures
 
 Based on the above problems, we have made the following design adjustments:
 
@@ -519,15 +535,15 @@ Based on the above problems, we have made the following design adjustments:
 
 6.Create level-passing animations and visual cues to enable players to clearly identify the completion time points and progress rhythms of each level.
 
-### 6.2.Quantitative evaluation（NASA-TLX and SUS）
+### 6.2. Quantitative evaluation（NASA-TLX and SUS）
 
-#### 6.2.1.Evaluation of Design and Process
+#### 6.2.1. Evaluation of Design and Process
 
 To compare the differences in subjective workload among different levels and evaluate the usability of the overall system, NASA-TLX and SUS questionnaires were conducted in this study. A total of 20 participants (N = 20) were recruited. Each of them experienced three levels in sequence and filled out the Raw NASA-TLX questionnaire after each level. After completing all the levels, the participants filled out the System Usability Scale (SUS) questionnaire for the overall game interface.
 
 To ensure the quality of the data and the understanding of the participants, we briefly explain the game rules before the assessment and avoid interfering with their natural operations during the process. To reduce the burden of the questionnaire, the SUS assessment is uniformly conducted after the completion of the three stages. This study set the significance level at α = 0.05.
 
-#### 6.2.2.Statistical analysis results
+#### 6.2.2. Statistical analysis results
 
 Level Load Difference Analysis (NASA-TLX) conducted paired analysis through the Wilcoxon symbol level test. The subjective load scoring results among the three groups of levels are as follows:
 
@@ -541,7 +557,7 @@ Overall, the comparisons of the three groups of levels all reached statistical s
 
 The overall average score of the System Availability Assessment (SUS) was 59, which was lower than the generally recognized usability benchmark score of 68. This indicates that the overall usability evaluation of the system was low, and users still had doubts about the interface design and operation process.
 
-#### 6.2.3.Subsequent improvement measures
+#### 6.2.3. Subsequent improvement measures
 
 Based on the quantitative analysis results and the overall feedback from users, we further implemented the following improvement designs:
 
@@ -551,9 +567,9 @@ Based on the quantitative analysis results and the overall feedback from users, 
 
 3.In the sample level, add explanatory scenarios, such as demonstrating that although the ground stab can cause damage, it will not block the bullet reflection, to clarify common misunderstandings and operational errors of players.
 
-### 6.3.Discussion and Reflection
+### 6.3. Discussion and Reflection
 
-#### 6.3.1.Level Experience Differences and Challenge Design
+#### 6.3.1. Level Experience Differences and Challenge Design
 
 According to the analysis results of NASA-TLX, the load perception among the three levels shows significant differences, indicating that the current level design has clear distinctions in terms of challenge level and operational burden. This can be regarded as the initial evidence that the game has an "advanced difficulty curve". However, based on qualitative observations and player feedback, the challenge curves of some levels are considered too steep, which may affect the willingness to learn and continue playing.
 
@@ -561,11 +577,11 @@ According to the analysis results of NASA-TLX, the load perception among the thr
   <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/NASA_TXL_result.png" width="550">
 </p>
 <p align="center">
-  <strong>Figure 4</strong><br>
+  <strong>Figure 6</strong><br>
   NASA_TXL Result
 </p>
 
-#### 6.3.2.Usability Issues and Learning Disabilities
+#### 6.3.2. Usability Issues and Learning Disabilities
 
 The SUS score results indicate that the overall usability does not reach the average level. Combined with the common problems during the Think Aloud process, it shows that many players have difficulties in operation understanding, target identification and feedback acquisition, especially in the absence of guidance or explanations. These problems are all directly related to the "learning ability" and "clarity" of the system and may also be important factors affecting the SUS score.
 
@@ -597,17 +613,17 @@ The SUS score results indicate that the overall usability does not reach the ave
 <p><strong>Table 3</strong><br>SUS Score Results from 20 Participants</p>
 </div>
 
-#### 6.3.3.Design Response Effectiveness and Subsequent Planning
+#### 6.3.3. Design Response Effectiveness and Subsequent Planning
 
 In response to the issues identified in the user experience, the team has implemented multiple design optimization measures, including strengthening teaching guidance, adjusting perspective logic, optimizing control design, and increasing positive feedback. These adjustments are expected to help players better understand the game mechanics and controls, thereby improving overall usability and user experience.
 
-### 6.4.Summary
+### 6.4. Summary
 
 This study conducted a comprehensive evaluation of the user experience, focusing on both interface design and level structure, using qualitative and quantitative methods. The findings indicate that while the current system performs reasonably well, there remains room for improvement in usability and operational efficiency. By systematically identifying key issues and implementing targeted refinements, we aim to further smooth the learning curve, enhance overall gameplay quality, and establish a solid foundation for future design iterations.
 
-### 6.5.Testing
+### 6.5. Testing
 
-#### 6.5.1.White Box Testing
+#### 6.5.1. White Box Testing
 
 We developed a custom JavaScript test setup (similar to Jest) to verify core game logic. Tests focused on internal mechanics—such as gravity, portals, collisions, bullet reflections, and enemy behaviors—with an emphasis on Player, Enemy, and Bullet classes. These components directly affect gameplay, so we tracked changes in position, velocity, state, and interactions following key actions.
 
@@ -645,7 +661,7 @@ Assertions using console.assert() for verifying expected behaviors
 
 Manual play sessions were also conducted regularly to identify and rectify bugs not evident from automated tests alone.
 
-#### 6.5.2.Black Box Testing
+#### 6.5.2. Black Box Testing
 
 We also conducted black box testing by simulating gameplay without accessing internal code. This included testing controls, item interactions, enemy behavior, bullet mechanics, and overall functionality across multiple levels from the player’s perspective.
 
@@ -656,11 +672,11 @@ We also conducted black box testing by simulating gameplay without accessing int
 
 The sustainability evaluation of our game using the Sustainability Analysis Framework (SusAF) reveals strong performance across social, individual, environmental, economic, and technical dimensions. Socially, the game promotes user guidance through interfaces like GuideUI.js, supporting better decision-making and reducing waste. The animated LoadingUI.js improves user experience by easing wait anxiety. Educationally, the game fosters critical thinking, enhancing awareness of sustainability issues. On the individual level, it protects user privacy by avoiding data collection and improves autonomy by allowing level choice. It supports lifelong learning and encourages healthier gaming behaviors through reduced waste and better habits. Environmentally, functions like preload() and draw() optimize resources through lazy loading and frame rate control, reducing power consumption. These are complemented by efficient checks like isTouching(), contributing to lower carbon emissions. Economically, user retention is improved through rewarding mechanisms, while modular code design enables cost-effective scalability and potential monetization. Technically, the modular design supports easy maintenance and security, setting a foundation for scalable green software development and promoting adherence to technical standards. Overall, the game balances immediate, enabling, and systemic sustainability impacts effectively.
 
-### 7.2.Green Foundation Implementation Patterns
+### 7.2. Green Foundation Implementation Patterns
 
 Our game integrates several Green Software Foundation patterns to reduce environmental impact while enhancing performance. Efficient Algorithms are applied in CollisionController.js, where optimized methods like getBlockAt() improve performance by minimizing redundant calculations. Lazy Loading is used in Sketch.js to defer non-critical asset loading, reducing memory usage. Caching is evident in Player.js, where getBlockClass() stores computed results to reduce processing load. We also adopted an Event-Driven Architecture in InputController.js by responding to user input via event handlers, which avoids resource-heavy polling. In Bullet.js, we implemented Resource Pooling by reusing bullet instances, thereby saving on object creation and garbage collection. Additionally, Asynchronous Processing is used in Guide.js for smooth animation playback without blocking the main thread, and Minimal Resource Usage is practiced in UI.js, where the draw() function only renders essential UI elements. These patterns collectively ensure that the game operates with lower energy consumption and more efficient use of computing resources. By integrating these green software patterns, we not only reduce our carbon footprint but also establish our codebase as a model for sustainable game development.
 
-### 7.3.Sustainability User Stories and Green Software Foundation Patterns
+### 7.3. Sustainability User Stories and Green Software Foundation Patterns
 
 To further embed sustainability into our project, we implemented Sustainability User Stories aligned with the Green Software Foundation’s best practices. For example, to reduce energy consumption, we added logic in Sketch.js that lowers the frame rate when the game runs in the background. This conserves device power and prolongs battery life. To optimize resource loading, we tailored the preload() function to load only the assets required for the current scene, minimizing memory usage and load time. Additionally, to educate users, GuideUI.js includes in-game environmental tips, helping players build awareness about conservation. These stories enhance both user experience and ecological responsibility. From a development perspective, we continue to apply GSF patterns such as Efficient Algorithms and Lazy Loading to maintain system efficiency. Looking ahead, we plan to extend these strategies by evaluating our codebase for further energy-saving opportunities, refining the use of events and caching, and continuously testing performance post-optimization. This dual-pronged approach—combining user-centered sustainability goals with technical green software patterns—ensures our game remains environmentally responsible while delivering a high-quality user experience.
 
@@ -668,11 +684,11 @@ To further embed sustainability into our project, we implemented Sustainability 
   <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/sustainability_awareness_diagram.png" width="550">
 </p>
 <p align="center">
-  <strong>Figure 5</strong><br>
+  <strong>Figure 7</strong><br>
   Sustainability Awareness Diagram
 </p>
 
-## 8.Process 
+## 8. Process 
 
 To effectively drive project progress, we adopted the agile development methodology and completed three Sprints.
 
@@ -706,7 +722,7 @@ In addition to technical development, we also placed great importance on team co
 
 Finally, when we further integrated the functions and conducted user tests, we found that the original program architecture was not easy to maintain. Therefore, we carried out a systematic refactoring in the third Sprint. This refactoring not only improved the readability and scalability of the program but also laid a more stable foundation for subsequent development.
 
-## 9.Conclusion
+## 9. Conclusion
 
 Twilight Seeker is a puzzle game that combines traditional platform-jumping elements with spatial teleportation mechanisms. Starting from a concept that integrates two types of portals, bullet reflections, and dynamic enemies, we successfully created a game that delivers both responsive control and strategic depth. Despite the challenges of time pressure and functional complexity, the team collaborated effectively to complete all core systems and level designs, demonstrating a high level of commitment and execution.
 
@@ -736,7 +752,7 @@ Implement a level editor to allow players to create and share custom challenges,
 
 Ultimately, Twilight Seeker is not only a technical achievement, but also a concrete expression of our teamwork, adaptability, and user-oriented design capabilities. This project has not only deepened our technical proficiency but also reinforced the importance of designing with the player at the center. 
 
-## 10.Contribution Statement
+## 10. Contribution Statement
 
 <div align="center">
 
