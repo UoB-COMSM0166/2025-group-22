@@ -298,14 +298,6 @@ In the new design, we kept the object-oriented structure and added several speci
   Final Class Diagram
 </p>
 
-<p align="center">
-  <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/sequence_diagram.png" width="550">
-</p>
-<p align="center">
-  <em>Figure 5</em><br>
-  Sequence Diagram
-</p>
-
 ##### GameController: 
 
 Manages overall game state transitions, including starting, pausing, and ending the game, as well as controlling the game timer.
@@ -381,6 +373,14 @@ Guide is an in-game guidance and prompt module. It displays prompt text and anim
 ### 4.4. GameLoop and State Transition
 
 This Game uses the draw() function of p5.js as the main Game Loop. Each frame determines the content and logic execution of the screen update based on the current gameState. The state management of the game adopts a state machine design, controlling the overall process through the global variable gameState. 
+
+<p align="center">
+  <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/sequence_diagram.png" width="550">
+</p>
+<p align="center">
+  <em>Figure 5</em><br>
+  Sequence Diagram
+</p>
 
 #### Example of game state transition
 
