@@ -12,7 +12,7 @@ Link to our game [PLAY HERE](https://uob-comsm0166.github.io/2025-group-22/UI/)
 
 Link to our demo video [Video Demonstration](https://youtu.be/5f1Fr8TCwSo)
 
-## 📑 Table of Contents
+## Contents
 
 - [1. Development team](#1development-team)
 - [2. Introduction](#2introduction)
@@ -179,6 +179,10 @@ Provided early testing, feedback, and observational input during informal play s
 Potential future players who may contribute external perspectives and help shape public reception.
 
 This layered structure allowed us to align design decisions with the expectations of each group, providing a clear foundation for later stages such as testing and refinement.
+
+<p align="center">
+  <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/onion_model.png" width="550">
+</p>
 
 #### 3.5.Epics and User Stories
 
@@ -497,7 +501,7 @@ Overall, the comparisons of the three groups of levels all reached statistical s
 
 The overall average score of the System Availability Assessment (SUS) was 59, which was lower than the generally recognized usability benchmark score of 68. This indicates that the overall usability evaluation of the system was low, and users still had doubts about the interface design and operation process.
 
-#####　6.2.3.Subsequent improvement measures
+##### 6.2.3.Subsequent improvement measures
 
 Based on the quantitative analysis results and the overall feedback from users, we further implemented the following improvement designs:
 
@@ -513,9 +517,39 @@ Based on the quantitative analysis results and the overall feedback from users, 
 
 According to the analysis results of NASA-TLX, the load perception among the three levels shows significant differences, indicating that the current level design has clear distinctions in terms of challenge level and operational burden. This can be regarded as the initial evidence that the game has an "advanced difficulty curve". However, based on qualitative observations and player feedback, the challenge curves of some levels are considered too steep, which may affect the willingness to learn and continue playing.
 
+<p align="center">
+  <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/NASA_TXL_result.png" width="550">
+</p>
+
 ##### 6.3.2.Usability Issues and Learning Disabilities
 
 The SUS score results indicate that the overall usability does not reach the average level. Combined with the common problems during the Think Aloud process, it shows that many players have difficulties in operation understanding, target identification and feedback acquisition, especially in the absence of guidance or explanations. These problems are all directly related to the "learning ability" and "clarity" of the system and may also be important factors affecting the SUS score.
+
+<div align="center">
+
+| Nember | SUS Score         |
+| :---:   | :---:    |
+| 1            | 75 |
+| 2            | 45 |
+| 3            | 82.5 |
+| 4            | 92.5 |
+| 5            | 62.5 |
+| 6            | 65 |
+| 7            | 50 |
+| 8            | 82.5 |
+| 9            | 32.5 |
+| 10           | 70 |
+| 11           | 22.5 |
+| 12           | 47.5 |
+| 13           | 80 |
+| 14           | 50 |
+| 15           | 42.5 |
+| 16           | 50 |
+| 17           | 92.5 |
+| 18           | 35 |
+| 19           | 50 |
+| 20           | 52.5 |
+</div>
 
 ##### 6.3.3.Design Response Effectiveness and Subsequent Planning
 
@@ -533,7 +567,7 @@ We developed a custom JavaScript test setup (similar to Jest) to verify core gam
 
 ##### Player Mechanics:
 
-Functions such as `jump()`, `moveLeft()`, and interactions like collecting items (heart, key) and using portals and doors.
+Functions such as jump(), moveLeft(), and interactions like collecting items (heart, key) and using portals and doors.
 
 Collision responses, including injury mechanics, invincibility frames, and teleportation via portals.
 
@@ -553,15 +587,15 @@ Correct calculation of entry directions to portals and accurate portal placement
 
 ##### Tools and Setup:
 
-Custom test files: `testPlayer.js`, `testEnemy.js`
+Custom test files: testPlayer.js, testEnemy.js
 
-Mock environment setup (`withMockEnv`) for isolated testing
+Mock environment setup (withMockEnv) for isolated testing
 
-Mock versions of `CollisionController`, `LevelController`, and game maps to isolate specific logic tests
+Mock versions of CollisionController, LevelController, and game maps to isolate specific logic tests
 
 Controlled creation of vectors and map data using mock systems
 
-Assertions using `console.assert()` for verifying expected behaviors
+Assertions using console.assert() for verifying expected behaviors
 
 Manual play sessions were also conducted regularly to identify and rectify bugs not evident from automated tests alone.
 
