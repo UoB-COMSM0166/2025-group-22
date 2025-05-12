@@ -628,7 +628,7 @@ This study conducted a comprehensive evaluation of the user experience, focusing
 </p>
 <p align="center">
   <em>Figure 7</em><br>
-  Test Code
+  Test Code Console
 </p>
 
 #### 6.5.1. White Box Testing
