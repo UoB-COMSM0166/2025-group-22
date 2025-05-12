@@ -119,7 +119,7 @@ The outer level consists of Supporters who not directly involved in the developm
 
 Provided early testing, feedback, and observational input during informal play sessions.
 
-###### Broader Audience:
+##### Broader Audience:
 
 Potential future players who may contribute external perspectives and help shape public reception.
 
@@ -128,17 +128,16 @@ This layered structure allowed us to align design decisions with the expectation
 #### 3.5.Epics and User Stories
 
 Despite involving different types of users, players remain our primary focus. Based on the three player types identified earlier, we developed targeted user stories, grouped under two core epics to support efficient development and user-centered design.
-##### Epics
 
-###### Epic 1:
+##### Epic 1:
 
 It offers a diverse and strategic gaming experience, allowing players of different styles to find fulfilling gameplay
 
-###### Epic 2:
+##### Epic 2:
 
 Ensure the accessibility and user-friendliness of game operation, supporting flexible control, clear feedback, and a low learning threshold
 
-###### Speed Runners
+##### Speed Runners
 
 Players who aim to complete the game as quickly as possible by optimizing routes and minimizing downtime.
 
@@ -148,7 +147,7 @@ As a speed runner, I want a game that allows me to skip opening cutscenes, so I 
 
 As a speed runner, I want a game that includes a built-in timer, so I can clearly track how much time I spend on each run. (Epic 1)
 
-###### Puzzle Game Players
+##### Puzzle Game Players
 
 Players who enjoy logical challenges, spatial reasoning, and step-by-step problem-solving.
 
@@ -157,7 +156,8 @@ As a puzzle game player, I want a game that has a progressive difficulty curve, 
 As a puzzle game player, I want a game that allows trial and error, so I don’t have to restart the entire level due to a single mistake. (Epic 2)
 
 As a puzzle game player, I want a well-designed instruction system that supports learning, so I can improve my problem-solving skills as I play. (Epic 2)
-###### Casual Players
+
+##### Casual Players
 
 Players who prefer a relaxed experience with intuitive controls and immersive storytelling.
 
@@ -192,12 +192,109 @@ The remaining attempts should be clearly marked visually and avoid blocking the 
 
 These design and validation efforts address the core needs of different player types while enhancing overall usability and clarity.
 
-
 ### 4.Design
 
-- 15% ~750 words 
-- System architecture. Class diagrams, behavioural diagrams. 
+#### 4.1.Initial Design
 
+In the early stage of development, we designed the game’s module architecture based on functional requirements and followed object-oriented principles to separate core elements into individual classes. Key components such as Player, Enemy, Item, and Bullet each encapsulate their own state and behavior for better modularity and reusability.
+
+Similarly, each UI screen was implemented as a separate class inheriting from a common UI base, allowing consistent rendering and interaction logic. However, logic within the wall-related classes was not well separated at the time, leading to oversized classes and reduced maintainability.
+#### 4.2.Final Design and Refactoring
+
+As the project's functions gradually expanded, we gradually realized that while defining each entity as a separate class gave the system a clear structure, it also introduced a lot of repetitive logic and made it harder to manage.
+
+During the Easter holiday, we reorganized the system by introducing clearer module separation and controller-based logic, gradually moving toward an MVC architecture.
+
+In the new design, we kept the object-oriented structure and added several specific controllers to handle different types of logic separately.
+
+##### GameController: 
+Manages overall game state transitions, including starting, pausing, and ending the game, as well as controlling the game timer.
+
+##### InputController: 
+Responsible for handling keyboard and mouse input behaviors.
+
+##### LevelController:
+Manages level switching, progress storage and unlocking mechanisms.
+
+##### CollisionController:
+Performs collision detection and spatial queries for player, enemy, and environmental interactions.
+
+Most of these controllers use static classes, which makes it easier to call them anywhere in the program and keep the logic more separate.
+
+In addition, we used inheritance to improve the data model. For example, special walls like Portal and Reflection inherit from DirectionWall, so they can share position and drawing logic. This helped us avoid repeating code and made things easier to maintain.
+
+#### 4.3.Class and Interaction Details
+
+Our game uses object-oriented programming (OOP) and follows a modular structure based on the MVC architecture. 
+
+##### Models
+
+This type includes all visible and interactive objects on the field:
+
+##### Player: 
+Responsible for the status management of players (position, health points, bullets, teleportation, etc.) and behavioral logic (movement, jumping, shooting, collision handling).
+
+##### Bullet: 
+Represents the teleportation bullet fired by the player, featuring reflection, direction determination, and portal creation logic.
+
+##### Enemy:
+A unified category for all enemy types, including movement logic.
+
+##### Item:
+Includes all interactive items such as keys, potions, treasure chests, and portals, with floating animations and type recognition.
+
+##### Wall, DirectionWall, Portal:
+Static block types that make up the map, some of which have directionality and collision interactivity. Portal and DirectionWall inherit from Wall and share location and drawing logic.
+
+##### Controller
+
+The controller category is uniformly responsible for the management of game logic and process, and is implemented in a static way to facilitate cross-module calls.
+
+##### GameController:
+Controls game state switching (start, pause, restart, win, game over).
+LevelController: Responsible for level switching, time storage, unlock determination, and progress storage.
+
+##### InputController:
+Manages user input (keyboard and mouse) and converts it into player actions or game control behaviors.
+
+##### CollisionController:
+Encapsulates collision logic, including obtaining blocks, collision type detection.
+User interface category
+
+All screens (such as StartUI, PauseUI, GuideUI, WinUI, etc.) are inherited from the UI parent class, and the buttons and background drawing are uniformly managed.
+
+The UIManager automatically switches the displayed UI category based on the current gameState and provides floating effects and hover judgments.
+
+Guide is an in-game guidance and prompt module. It displays prompt text and animations based on the player's position to guide the player to understand the operation method.
+
+#### 4.4.GameLoop and State Transition
+
+This Game uses the draw() function of p5.js as the main Game Loop. Each frame determines the content and logic execution of the screen update based on the current gameState. The state management of the game adopts a state machine design, controlling the overall process through the global variable gameState. 
+
+##### Example of game state transition
+
+If the player's life drops to zero, gameState will change to "gameOver", and UIManager will load the GameOverUI.
+
+If players success through checkpoints door or treasure chest, by LevelController. NextLevel () trigger switch and progress, eventually converted to "win" state.
+
+The user can switch between the "playing" and "pause" states by pressing the "P" key. Press the M key to show/hide the guide interface.
+
+##### Loop update content
+
+When gameState === "playing", each frame will execute:
+
+1.Background and map drawing (including parallax and animation)
+2.Player position and status update
+3.Bullet drawing and reflection/transmission logic update
+4.Enemy and item updates
+5.Timer and health system
+
+The overall game logic is split through states and managed in combination with controllers to maintain the readability and expandability of the code.
+
+#### 4.5.Sound and Graphics
+
+We define the paths of all sound effects and image resources in the centralized management module and load all images and sounds at once during the preload() stage. Sound effect playback is triggered by events, such as shooting, jumping, injury, etc., each corresponding to a specific audio file and volume control. We use sprites for image resources, combining them with floating animations and parallax effects to make the visuals feel more alive. In terms of screen adaptation, all UIs and images are automatically scaled and rearranged based on canvasWidth.
+ 
 ### 5.Implementation
 
 #### 5.1.Challenge1: Bullet Collision Detection and Portal Generation Process
