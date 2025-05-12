@@ -1,3 +1,5 @@
+# 2025.01.31
+
 ## Paper Prototypes
 In Week3, we created paper prototypes for both games we designed, so that players and everyone in the development team could understand the core gameplay and mechanics of the games. (2D Jumper: https://youtu.be/Vv2zbfhl6WI
   Cross Fire: https://youtu.be/X4RS6Jgd0k) For example in Twilight Seeker, the core portal mechanic, How to create a portal and how to teleport through it. At the same time, it mimics the change of the game screen according to the movement of the player, which is also one of the possible problems that we need to solve during the development process.
