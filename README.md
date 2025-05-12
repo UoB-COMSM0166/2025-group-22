@@ -114,11 +114,12 @@ We selected Twilight Seeker as one of the two projects. It combines platforming 
 
 #### 3.2.Paper Prototypes
 
-In the third workshop, we developed paper prototypes for our two games — Twilight Seeker (originally 2D Jumper) and Cross Fire — to help the team and playtesters better understand core mechanics and gameplay.
+In the third workshop, we developed paper prototypes for our two games — Twilight Seeker (originally [2D Jumper](https://youtu.be/Vv2zbfhl6WI)) and [Cross Fire](https://youtu.be/X4RS6Jgd0k) — to help the team and playtesters better understand core mechanics and gameplay.
 
 The paper prototype helped our team clearly visualize game concepts and identify early design issues. In Twilight Seeker, for example, the decision to make enemies non-attackable was an intentional choice that arose during prototyping discussions.
 
 The paper prototypes also improved communication with non-developers. We received peer feedback and adjusted our designs accordingly. For instance, a question about what counts as a failure led us to refine the enemy system.
+
 #### 3.3.Feasibility Studies
 
 In addition to paper prototype, we evaluated the technical feasibility of core gameplay systems. This included assessing the complexity of portal collisions, post-teleport position correction, and bullet reflection angle calculations within the physics engine.
