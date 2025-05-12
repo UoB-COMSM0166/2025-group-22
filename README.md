@@ -228,7 +228,6 @@ In addition, we used inheritance to improve the data model. For example, special
 Our game uses object-oriented programming (OOP) and follows a modular structure based on the MVC architecture. 
 
 ##### Models
-
 This type includes all visible and interactive objects on the field:
 
 ##### Player: 
@@ -340,13 +339,181 @@ Item collision detects nearby items within 40 pixels. Using CollisionController.
 
 ### 6.Evaluation
 
-- 15% ~750 words
+#### 6.1.Qualitative Evaluation
 
-- One qualitative evaluation (your choice) 
+##### 6.1.1.Evaluate the design and process
 
-- One quantitative evaluation (of your choice) 
+To observe user reactions during gameplay, we used the Think Aloud method. Eight participants played three levels each, averaging 35 minutes. Before each session, the facilitator explained the task and encouraged players to verbalize their thoughts. Two observers recorded spoken feedback and noted emotional reactions, especially signs of confusion or frustration.
 
-- Description of how code was tested.
+##### 6.1.2.Task content design
+
+Each participant was asked to complete three main tasks:
+
+1. Trigger both the reflection and teleportation mechanics at least once.
+
+2. Figure out how to clear each level on their own.
+
+3. Finish all three stages from start to end.
+
+These tasks were designed to cover the game’s core interactions and structure, so we could see how players understood and responded during actual gameplay.
+
+##### 6.1.3.Summary of the problem theme
+
+Based on the analysis of the observation records, the repetitive problems that participants encountered during the game can be summarized into the following three major themes:
+
+##### Assumption of incorrect operation:
+
+1.Many participants mistakenly believed that the space bar could be used for jumping
+
+2.There is an operation function where users confuse the E key with the C key.
+
+##### Difficulties in movement and interaction:
+
+1.Insufficient jumping space makes it impossible to pass through certain areas
+
+2.Some users lose accuracy when jumping due to changes in perspective
+
+3.Some positions cannot be returned to the previous area.
+
+##### The interaction mechanism is unclear:
+
+1.Players didn’t know how many  portals could be used.
+
+2.The reflection path and result were not as expected
+
+3.Some areas were off-screen, making it unclear whether they had been activated or not.
+
+##### Insufficient teaching and instruction:
+
+1.The lack of clear operation guidance makes it difficult for beginners to quickly master the core mechanism
+
+2.The user failed to understand the conditions and rules for the character's death.
+
+##### Vague goals and progress:
+
+1.Some players expressed confusion about the game mechanics and objectives.
+
+2.It is impossible to determine which object can lead to the end of the level.
+
+##### The challenge curve is unbalanced:
+
+1.The overall level design is considered too difficult
+2.Dying too quickly
+
+##### Insufficient feedback mechanism:
+
+1.The lack of clear level-passing prompts after completing tasks affects the sense of achievement and continuous motivation.
+
+##### 6.1.4.Adjust the response measures
+
+Based on the above problems, we have made the following design adjustments:
+
+1.Added a sample level before the game starts to teach basic controls and interactions, helping players grasp the core mechanics early.
+
+2.Cancel the camera offset to prevent unwanted shifts during jumping, helping players maintain a stable and clear view of the scene.
+
+3.Set the jump key to the space bar to match players’ natural expectations
+
+4.Adjust the map design and the intensity of enemy attacks and provide a fallback mechanism at areas prone to mistakes to reduce frustration.
+
+5.Refined bullet reflection logic to use the actual impact point instead of the player’s center, making trajectories more predictable.
+
+6.Create level-passing animations and visual cues to enable players to clearly identify the completion time points and progress rhythms of each level.
+
+#### 6.2.Quantitative evaluation（NASA-TLX and SUS）
+
+##### 6.2.1.Evaluation of Design and Process
+
+To compare the differences in subjective workload among different levels and evaluate the usability of the overall system, NASA-TLX and SUS questionnaires were conducted in this study. A total of 20 participants (N = 20) were recruited. Each of them experienced three levels in sequence and filled out the Raw NASA-TLX questionnaire after each level. After completing all the levels, the participants filled out the System Usability Scale (SUS) questionnaire for the overall game interface.
+
+To ensure the quality of the data and the understanding of the participants, we briefly explain the game rules before the assessment and avoid interfering with their natural operations during the process. To reduce the burden of the questionnaire, the SUS assessment is uniformly conducted after the completion of the three stages. This study set the significance level at α = 0.05.
+
+##### 6.2.2.Statistical analysis results
+
+Level Load Difference Analysis (NASA-TLX) conducted paired analysis through the Wilcoxon symbol level test. The subjective load scoring results among the three groups of levels are as follows:
+
+The first and second levels: W = 31, which is lower than the critical value of 52, achieving statistical significance.
+
+The second and third levels: W = 36.5, which is also lower than the critical value and significant.
+
+The first and third levels: W = 27, which is also below the critical value and significant.
+
+Overall, the comparisons of the three groups of levels all reached statistical significance, indicating that there were substantial differences in the degree of load felt by users among the three levels.
+
+The overall average score of the System Availability Assessment (SUS) was 59, which was lower than the generally recognized usability benchmark score of 68. This indicates that the overall usability evaluation of the system was low, and users still had doubts about the interface design and operation process.
+
+#####　6.2.3.Subsequent improvement measures
+
+Based on the quantitative analysis results and the overall feedback from users, we further implemented the following improvement designs:
+
+1.After entering the game, the camera will automatically and briefly guide players to the main collected items and clearing items to help them quickly identify the location of the mission targets.
+
+2.A new M key quick description function has been added, allowing players to check control methods and command descriptions at any time.
+
+3.In the sample level, add explanatory scenarios, such as demonstrating that although the ground stab can cause damage, it will not block the bullet reflection, to clarify common misunderstandings and operational errors of players.
+
+#### 6.3.Discussion and Reflection
+
+##### 6.3.1.Level Experience Differences and Challenge Design
+
+According to the analysis results of NASA-TLX, the load perception among the three levels shows significant differences, indicating that the current level design has clear distinctions in terms of challenge level and operational burden. This can be regarded as the initial evidence that the game has an "advanced difficulty curve". However, based on qualitative observations and player feedback, the challenge curves of some levels are considered too steep, which may affect the willingness to learn and continue playing.
+
+##### 6.3.2.Usability Issues and Learning Disabilities
+
+The SUS score results indicate that the overall usability does not reach the average level. Combined with the common problems during the Think Aloud process, it shows that many players have difficulties in operation understanding, target identification and feedback acquisition, especially in the absence of guidance or explanations. These problems are all directly related to the "learning ability" and "clarity" of the system and may also be important factors affecting the SUS score.
+
+##### 6.3.3.Design Response Effectiveness and Subsequent Planning
+
+In response to the issues identified in the user experience, the team has implemented multiple design optimization measures, including strengthening teaching guidance, adjusting perspective logic, optimizing control design, and increasing positive feedback. These adjustments are expected to help players better understand the game mechanics and controls, thereby improving overall usability and user experience.
+
+#### 6.4.Summary
+
+This study conducted a comprehensive evaluation of the user experience, focusing on both interface design and level structure, using qualitative and quantitative methods. The findings indicate that while the current system performs reasonably well, there remains room for improvement in usability and operational efficiency. By systematically identifying key issues and implementing targeted refinements, we aim to further smooth the learning curve, enhance overall gameplay quality, and establish a solid foundation for future design iterations.
+
+####　6.5.Testing
+
+#####　6.5.1.White Box Testing
+
+We developed a custom JavaScript test setup (similar to Jest) to verify core game logic. Tests focused on internal mechanics—such as gravity, portals, collisions, bullet reflections, and enemy behaviors—with an emphasis on Player, Enemy, and Bullet classes. These components directly affect gameplay, so we tracked changes in position, velocity, state, and interactions following key actions.
+
+#####　Player Mechanics:
+
+Functions such as `jump()`, `moveLeft()`, and interactions like collecting items (heart, key) and using portals and doors.
+
+Collision responses, including injury mechanics, invincibility frames, and teleportation via portals.
+
+State changes like position updates, life count, key inventory, and shooting mechanics.
+
+#####　Enemy Mechanics:
+
+Enemy response to collision with walls, such as reversing direction or resetting position.
+
+Proper animation and velocity adjustments upon interaction with the environment.
+
+##### Bullet Mechanics:
+
+Bullet reflections on special walls (reflective walls) and accurate destruction upon collision with solid walls or mismatched portals.
+
+Correct calculation of entry directions to portals and accurate portal placements based on bullet interactions.
+
+##### Tools and Setup:
+
+Custom test files: `testPlayer.js`, `testEnemy.js`
+
+Mock environment setup (`withMockEnv`) for isolated testing
+
+Mock versions of `CollisionController`, `LevelController`, and game maps to isolate specific logic tests
+
+Controlled creation of vectors and map data using mock systems
+
+Assertions using `console.assert()` for verifying expected behaviors
+
+Manual play sessions were also conducted regularly to identify and rectify bugs not evident from automated tests alone.
+
+##### 6.5.2.Black Box Testing
+
+We also conducted black box testing by simulating gameplay without accessing internal code. This included testing controls, item interactions, enemy behavior, bullet mechanics, and overall functionality across multiple levels from the player’s perspective.
+
 
 ### 7.Sustainability
 
@@ -357,6 +524,7 @@ The sustainability evaluation of our game using the Sustainability Analysis Fram
 #### 7.2.Green Foundation Implementation Patterns
 
 Our game integrates several Green Software Foundation patterns to reduce environmental impact while enhancing performance. Efficient Algorithms are applied in CollisionController.js, where optimized methods like getBlockAt() improve performance by minimizing redundant calculations. Lazy Loading is used in Sketch.js to defer non-critical asset loading, reducing memory usage. Caching is evident in Player.js, where getBlockClass() stores computed results to reduce processing load. We also adopted an Event-Driven Architecture in InputController.js by responding to user input via event handlers, which avoids resource-heavy polling. In Bullet.js, we implemented Resource Pooling by reusing bullet instances, thereby saving on object creation and garbage collection. Additionally, Asynchronous Processing is used in Guide.js for smooth animation playback without blocking the main thread, and Minimal Resource Usage is practiced in UI.js, where the draw() function only renders essential UI elements. These patterns collectively ensure that the game operates with lower energy consumption and more efficient use of computing resources. By integrating these green software patterns, we not only reduce our carbon footprint but also establish our codebase as a model for sustainable game development.
+
 #### 7.3.Sustainability User Stories and Green Software Foundation Patterns
 
 To further embed sustainability into our project, we implemented Sustainability User Stories aligned with the Green Software Foundation’s best practices. For example, to reduce energy consumption, we added logic in Sketch.js that lowers the frame rate when the game runs in the background. This conserves device power and prolongs battery life. To optimize resource loading, we tailored the preload() function to load only the assets required for the current scene, minimizing memory usage and load time. Additionally, to educate users, GuideUI.js includes in-game environmental tips, helping players build awareness about conservation. These stories enhance both user experience and ecological responsibility. From a development perspective, we continue to apply GSF patterns such as Efficient Algorithms and Lazy Loading to maintain system efficiency. Looking ahead, we plan to extend these strategies by evaluating our codebase for further energy-saving opportunities, refining the use of events and caching, and continuously testing performance post-optimization. This dual-pronged approach—combining user-centered sustainability goals with technical green software patterns—ensures our game remains environmentally responsible while delivering a high-quality user experience.
