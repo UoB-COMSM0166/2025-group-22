@@ -85,7 +85,7 @@ Link to our demo video [Video Demonstration](https://youtu.be/5f1Fr8TCwSo)
 | 5            | Wenqi Xue    | qh24128@bristol.ac.uk  | kk0998 |
 | 6            | Hao Jen Shih | qf24044@bristol.ac.uk  | HaoJenShih |
 
-<p><strong>Table 1</strong><br>Team Members</p>
+<p><em>Table 1</em><br>Team Members</p>
 </div>
 
 ## 2. Introduction
@@ -188,7 +188,7 @@ This layered structure allowed us to align design decisions with the expectation
   <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/onion_model.png" width="550">
 </p>
 <p align="center">
-  <strong>Figure 1</strong><br>
+  <em>Figure 1</em><br>
   Onion Model of the System
 </p>
 
@@ -242,7 +242,7 @@ To systematically represent user–system interactions, we developed a use case 
   <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/Usecase_Diagram.drawio.png" width="550">
 </p>
 <p align="center">
-  <strong>Figure 2</strong><br>
+  <em>Figure 2</em><br>
   Use-case Diagram of Game
 </p>
 
@@ -278,7 +278,7 @@ Similarly, each UI screen was implemented as a separate class inheriting from a 
   <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/initial_class_diagram.png" width="550">
 </p>
 <p align="center">
-  <strong>Figure 3</strong><br>
+  <em>Figure 3</em><br>
   Initial Class Diagram
 </p>
 
@@ -294,7 +294,7 @@ In the new design, we kept the object-oriented structure and added several speci
   <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/final_class_diagram.png" width="550">
 </p>
 <p align="center">
-  <strong>Figure 4</strong><br>
+  <em>Figure 4</em><br>
   Final Class Diagram
 </p>
 
@@ -302,7 +302,7 @@ In the new design, we kept the object-oriented structure and added several speci
   <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/sequence_diagram.png" width="550">
 </p>
 <p align="center">
-  <strong>Figure 5</strong><br>
+  <em>Figure 5</em><br>
   Sequence Diagram
 </p>
 
@@ -450,7 +450,7 @@ Item collision detects nearby items within 40 pixels. Using CollisionController.
 | Item detection radius    | `40`                | Checking proximity to items (potions, keys)               | High tolerance to improve player item pickup experience                                      |
 | Spike danger zone height | `enemy.size / 2`    | Special case for spikes                                   | Only causes damage when the player actually steps on the lower part of the spike             |
 
-<p align="center"><strong>Table 2</strong><br>Key Parameters and Their Roles in Collision Detection</p>
+<p align="center"><em>Table 2</em><br>Key Parameters and Their Roles in Collision Detection</p>
 
 ## 6. Evaluation
 
@@ -577,7 +577,7 @@ According to the analysis results of NASA-TLX, the load perception among the thr
   <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/NASA_TXL_result.png" width="550">
 </p>
 <p align="center">
-  <strong>Figure 6</strong><br>
+  <em>Figure 6</em><br>
   NASA_TXL Result
 </p>
 
@@ -610,7 +610,7 @@ The SUS score results indicate that the overall usability does not reach the ave
 | 19           | 50 |
 | 20           | 52.5 |
 
-<p><strong>Table 3</strong><br>SUS Score Results from 20 Participants</p>
+<p><em>Table 3</em><br>SUS Score Results from 20 Participants</p>
 </div>
 
 #### 6.3.3. Design Response Effectiveness and Subsequent Planning
@@ -684,7 +684,7 @@ To further embed sustainability into our project, we implemented Sustainability 
   <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/sustainability_awareness_diagram.png" width="550">
 </p>
 <p align="center">
-  <strong>Figure 7</strong><br>
+  <em>Figure 7</em><br>
   Sustainability Awareness Diagram
 </p>
 
@@ -765,5 +765,5 @@ Ultimately, Twilight Seeker is not only a technical achievement, but also a conc
 | 5            | Wenqi Xue    | back-end developer | 1.0 |
 | 6            | Hao Jen Shih | front-end developer | 1.0 |
 
-<p><strong>Table 4</strong><br>Team Roles and Contribution Proportions</p>
+<p><em>Table 4</em><br>Team Roles and Contribution Proportions</p>
 </div>
