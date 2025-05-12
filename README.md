@@ -47,8 +47,151 @@ We believe that Twilight Seeker can bring an unprecedented experience for player
 
 ### 3.Requirements 
 
-- 15% ~750 words
-- Use case diagrams, user stories. Early stages design. Ideation process. How did you decide as a team what to develop? 
+#### 3.1.Ideation process
+
+In the early stage of our game development, we held a brainstorming meeting to define our direction. Each team members brought one or two inspiring games and shared them in the meeting. The initial inspirations included a variety of mechanics (see table below), providing solutions for our subsequent development.
+
+When deciding on our direction, we consider two main aspects. First, we wanted to practice key techniques in 2D game development such as movement, collision detection, and item systems—core elements with strong learning value.  Second, we aimed to design something that balances mechanical challenge with strategic thinking, so we leaned toward puzzle-style gameplay.
+
+Although we discussed narrative-driven games like Papers, Please, which emphasize moral decisions and text-based storytelling, we concluded that such designs were less suitable for our timeframe and technical scope. To ensure feasibility while retaining learning and creative value, we evaluated all proposed ideas and finalized our choice through anonymous voting.
+
+We selected Twilight Seeker as one of the two projects. It combines platforming mechanics inspired by Super Mario with Portal-style spatial teleportation, and introduces a reflection wall system that reflects bullets based on entry angles. This feature enhances spatial reasoning and tactical depth. As it aligned with both our learning objectives and gameplay ambitions, we adopted it for full development.
+
+#### 3.2.Paper Prototypes
+
+In the third workshop, we developed paper prototypes for our two games — Twilight Seeker (originally 2D Jumper) and Cross Fire — to help the team and playtesters better understand core mechanics and gameplay.
+
+The paper prototype helped our team clearly visualize game concepts and identify early design issues. In Twilight Seeker, for example, the decision to make enemies non-attackable was an intentional choice that arose during prototyping discussions.
+
+The paper prototypes also improved communication with non-developers. We received peer feedback and adjusted our designs accordingly. For instance, a question about what counts as a failure led us to refine the enemy system.
+#### 3.3.Feasibility Studies
+
+In addition to paper prototype, we evaluated the technical feasibility of core gameplay systems. This included assessing the complexity of portal collisions, post-teleport position correction, and bullet reflection angle calculations within the physics engine.
+
+Accurate bullet reflection required calculating incidence and reflection angles at each impact point using vector math. We also ensured that characters retain velocity and gravity after portal transitions to preserve consistent physics behavior.
+
+The portal and bullet systems also brought up practical design questions, especially around aiming accuracy. We tackled this by adding a simple crosshair to help players target more precisely. We also explored ideas like double teleportation and time-slow zones but dropped them due to time and complexity. As a result, we focused on making bullet reflection and portal mechanics to ensure system stability and a smooth gameplay experience.
+
+During UI and map design, we sketched multiple interface drafts to clarify screen transitions and user interactions. These covered the full flow—from the main menu to the in-game interface and final result screens. This visual planning helped ensure a consistent and coherent user experience.
+
+#### 3.4.Identify Stakeholders
+
+To support our design process, we identified key stakeholders and analyzed their needs using the Onion Model. Stakeholders were grouped into four layers based on their influence and involvement, from core users to external supporters.
+
+Players, as the primary target group of this project, form the core layer. Based on their play styles and motivations, we categorized them into three types:
+
+##### Speed Runners: 
+
+Focused on speed, these players value precision in controls and efficient level layouts.
+
+##### Puzzle Game Players: 
+
+Motivated by problem-solving, these players enjoy logical and spatial challenges and value the satisfaction of gradual discovery.
+##### Casual Players:
+
+Drawn to a relaxed pace, these players value intuitive interactions, appealing visuals, and overall atmosphere.
+
+To meet the needs of players and provide stable and interesting game content, the second level consists of the team members responsible for development, including:
+
+##### Game Developers:
+
+Implement core systems and maintain gameplay logic.
+
+##### Game Designers:
+
+Create levels and mechanics that support challenge and variety.
+
+##### Artists:
+
+Responsible for visual assets, including characters, scenes, and animations.
+
+##### Testers:
+
+Identify bugs and help fine-tune game balance.
+
+##### Project Manager:
+
+Coordinates timelines, task assignment, and team communication.
+
+The outer level consists of Supporters who not directly involved in the development, provide important external feedback and initial testing support, including:
+
+##### Peer and Friends:
+
+Provided early testing, feedback, and observational input during informal play sessions.
+
+###### Broader Audience:
+
+Potential future players who may contribute external perspectives and help shape public reception.
+
+This layered structure allowed us to align design decisions with the expectations of each group, providing a clear foundation for later stages such as testing and refinement.
+
+#### 3.5.Epics and User Stories
+
+Despite involving different types of users, players remain our primary focus. Based on the three player types identified earlier, we developed targeted user stories, grouped under two core epics to support efficient development and user-centered design.
+##### Epics
+
+###### Epic 1:
+
+It offers a diverse and strategic gaming experience, allowing players of different styles to find fulfilling gameplay
+
+###### Epic 2:
+
+Ensure the accessibility and user-friendliness of game operation, supporting flexible control, clear feedback, and a low learning threshold
+
+###### Speed Runners
+
+Players who aim to complete the game as quickly as possible by optimizing routes and minimizing downtime.
+
+As a speed runner, I want a game that offers multiple routes to complete levels, so I can experiment and find the fastest path to victory. (Epic 2)
+
+As a speed runner, I want a game that allows me to skip opening cutscenes, so I can focus on completing the game as quickly as possible. (Epic 2)
+
+As a speed runner, I want a game that includes a built-in timer, so I can clearly track how much time I spend on each run. (Epic 1)
+
+###### Puzzle Game Players
+
+Players who enjoy logical challenges, spatial reasoning, and step-by-step problem-solving.
+
+As a puzzle game player, I want a game that has a progressive difficulty curve, so I can learn the mechanics before tackling more difficult puzzles. (Epic 1)
+
+As a puzzle game player, I want a game that allows trial and error, so I don’t have to restart the entire level due to a single mistake. (Epic 2)
+
+As a puzzle game player, I want a well-designed instruction system that supports learning, so I can improve my problem-solving skills as I play. (Epic 2)
+###### Casual Players
+
+Players who prefer a relaxed experience with intuitive controls and immersive storytelling.
+
+As a casual player, I want intuitive tutorials and visual instruction, so I can quickly understand how to play without reading long instructions. (Epic 2)
+
+As a casual player, I want short levels and the ability to pause at any time, so I can complete stages during short breaks without needing a long, continuous play session. (Epic 2)
+
+As a casual player, I want a game that has an engaging storyline, so I can connect with the main character and enjoy the experience. (Epic 1)
+
+#### 3.6.Use-Cases Breakdown
+
+To systematically represent user–system interactions, we developed a use case diagram illustrating how different player types initiate game functions and receive system responses. This diagram supports design clarity by outlining functional triggers, user roles, and feedback mechanisms, and serves as a reference for further development stages.
+(Use Case Diagram)
+
+#### 3.7.Reflection
+
+The analysis of epics and user stories clarified our development direction and shaped the design to reflect the needs of different player types. The two core epics focused on maximizing enjoyment and reducing learning barriers.
+
+Specific user stories were translated into concrete features: to reduce frustration, we implemented a health system that displays remaining attempts; for speed-oriented players, we added an in-game timer to track completion time.
+
+To confirm these implementations met expectations, we defined clear acceptance criteria for key functions. For example:
+
+##### In-game timer:
+
+It should accurately show the players elapsed time and be placed in the upper-right corner for easy reference by speedrunners
+ (linked to Speed Runner Story 3).
+
+##### Health system:
+
+The remaining attempts should be clearly marked visually and avoid blocking the Player's operation perspective 
+(linked to Puzzle Player Story 2).
+
+These design and validation efforts address the core needs of different player types while enhancing overall usability and clarity.
+
 
 ### 4.Design
 
