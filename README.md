@@ -1,7 +1,6 @@
 # 2025-group-22
 2025 COMSM0166 group 22
 
-
 ## Our Game
 
 <p align="center">
@@ -68,6 +67,7 @@ Link to our demo video [Video Demonstration](https://youtu.be/5f1Fr8TCwSo)
 
 
 ## Project Report
+
 ## 1.Development Team
 
 <p align="center">
@@ -116,7 +116,7 @@ We selected Twilight Seeker as one of the two projects. It combines platforming 
 
 ### 3.2.Paper Prototypes
 
-In the third workshop, we developed paper prototypes for our two games — Twilight Seeker (originally [2D Jumper](https://youtu.be/Vv2zbfhl6WI)) and [Cross Fire](https://youtu.be/X4RS6Jgd0k) — to help the team and playtesters better understand core mechanics and gameplay.
+In the third workshop, we developed paper prototypes for our two games — Twilight Seeker (originally [2D Jumper](https://youtu.be/Vv2zbfhl6WI)) and [Cross Fire](https://youtu.be/X4RS6Jgd0kk) — to help the team and playtesters better understand core mechanics and gameplay.
 
 The paper prototype helped our team clearly visualize game concepts and identify early design issues. In Twilight Seeker, for example, the decision to make enemies non-attackable was an intentional choice that arose during prototyping discussions.
 
@@ -145,6 +145,7 @@ Focused on speed, these players value precision in controls and efficient level 
 #### Puzzle Game Players: 
 
 Motivated by problem-solving, these players enjoy logical and spatial challenges and value the satisfaction of gradual discovery.
+
 #### Casual Players:
 
 Drawn to a relaxed pace, these players value intuitive interactions, appealing visuals, and overall atmosphere.
@@ -272,6 +273,15 @@ These design and validation efforts address the core needs of different player t
 In the early stage of development, we designed the game’s module architecture based on functional requirements and followed object-oriented principles to separate core elements into individual classes. Key components such as Player, Enemy, Item, and Bullet each encapsulate their own state and behavior for better modularity and reusability.
 
 Similarly, each UI screen was implemented as a separate class inheriting from a common UI base, allowing consistent rendering and interaction logic. However, logic within the wall-related classes was not well separated at the time, leading to oversized classes and reduced maintainability.
+
+<p align="center">
+  <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/initial_class_diagram.png" width="550">
+</p>
+<p align="center">
+  <strong>Figure 3</strong><br>
+  Initial Class Diagram
+</p>
+
 ### 4.2.Final Design and Refactoring
 
 As the project's functions gradually expanded, we gradually realized that while defining each entity as a separate class gave the system a clear structure, it also introduced a lot of repetitive logic and made it harder to manage.
@@ -281,15 +291,19 @@ During the Easter holiday, we reorganized the system by introducing clearer modu
 In the new design, we kept the object-oriented structure and added several specific controllers to handle different types of logic separately.
 
 ##### GameController: 
+
 Manages overall game state transitions, including starting, pausing, and ending the game, as well as controlling the game timer.
 
 ##### InputController: 
+
 Responsible for handling keyboard and mouse input behaviors.
 
 ##### LevelController:
+
 Manages level switching, progress storage and unlocking mechanisms.
 
 ##### CollisionController:
+
 Performs collision detection and spatial queries for player, enemy, and environmental interactions.
 
 Most of these controllers use static classes, which makes it easier to call them anywhere in the program and keep the logic more separate.
@@ -301,21 +315,27 @@ In addition, we used inheritance to improve the data model. For example, special
 Our game uses object-oriented programming (OOP) and follows a modular structure based on the MVC architecture. 
 
 #### Models
+
 This type includes all visible and interactive objects on the field:
 
 #### Player: 
+
 Responsible for the status management of players (position, health points, bullets, teleportation, etc.) and behavioral logic (movement, jumping, shooting, collision handling).
 
 #### Bullet: 
+
 Represents the teleportation bullet fired by the player, featuring reflection, direction determination, and portal creation logic.
 
 #### Enemy:
+
 A unified category for all enemy types, including movement logic.
 
 #### Item:
+
 Includes all interactive items such as keys, potions, treasure chests, and portals, with floating animations and type recognition.
 
 #### Wall, DirectionWall, Portal:
+
 Static block types that make up the map, some of which have directionality and collision interactivity. Portal and DirectionWall inherit from Wall and share location and drawing logic.
 
 #### Controller
@@ -324,12 +344,15 @@ The controller category is uniformly responsible for the management of game logi
 
 #### GameController:
 Controls game state switching (start, pause, restart, win, game over).
-LevelController: Responsible for level switching, time storage, unlock determination, and progress storage.
+
+#### LevelController: 
+Responsible for level switching, time storage, unlock determination, and progress storage.
 
 #### InputController:
 Manages user input (keyboard and mouse) and converts it into player actions or game control behaviors.
 
 #### CollisionController:
+
 Encapsulates collision logic, including obtaining blocks, collision type detection.
 User interface category
 
@@ -374,6 +397,7 @@ We define the paths of all sound effects and image resources in the centralized 
 Bullet collision detection and portal generation form a precise, coordinated system: during flight, the bullet continuously checks block collisions using getBlock and isEnteringAllowed.  On hitting a solid block, it reflects;  on hitting a portal-compatible block, it uses surface normals (getNormal) and position data (getBlockCenter, getEntryDirection) to generate a correctly oriented portal.  This logic, refined through iterations in models/Bullet.js, ensures accurate behavior and consistent portal placement.  However, in models/Bullet.js, this system was not built in one step.  The logic behind bullet collision detection and direction handling went through several iterations and improvements before reaching the final efficient and accurate solution:
 
 #### 5.1.1.Stage 1: Basic Detection and Early Problems
+
 Initially, collision detection relied on checking if the bullet's position was inside a block's bounding box. It worked for simple cases—air blocks let the bullet pass; solid blocks destroyed it. However, due to limited refresh rates, bullets sometimes passed through blocks before being detected. Moreover, this method lacked direction awareness, making it unsuitable for features like portals. It was efficient but unreliable in complex situations.
 
 #### 5.1.2.Stage 2: Trying to Detect Direction
@@ -401,6 +425,7 @@ Enemy collision detects when the player is hurt by an enemy. The system uses Col
 Item collision detects nearby items within 40 pixels. Using CollisionController.isTouching(this, "item", 40), items like potions (health restore) and keys (inventory) are picked up. Once collected, items are removed from the map, and their effects are applied (e.g., unlocking doors). The 40-pixel detection range improves pickup fluidity and avoids duplicates, ensuring accurate interactions.
 
 ### 5.3.Summary of Key Collision Parameters
+
 | Parameter                | Value               | Usage Scenario                                            | Meaning and Design Purpose                                                                   |
 | ------------------------ | ------------------- | --------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
 | `this.size`              | `50`                | Player width and height                                   | Standard character size, used as the base for the collision bounding box                     |
@@ -536,7 +561,7 @@ According to the analysis results of NASA-TLX, the load perception among the thr
   <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/NASA_TXL_result.png" width="550">
 </p>
 <p align="center">
-  <strong>Figure 3</strong><br>
+  <strong>Figure 4</strong><br>
   NASA_TXL Result
 </p>
 
@@ -625,9 +650,9 @@ Manual play sessions were also conducted regularly to identify and rectify bugs 
 We also conducted black box testing by simulating gameplay without accessing internal code. This included testing controls, item interactions, enemy behavior, bullet mechanics, and overall functionality across multiple levels from the player’s perspective.
 
 
-## 7.Sustainability
+## 7. Sustainability
 
-### 7.1.Sustainability Analysis Framework (SusAF) Results
+### 7.1. Sustainability Analysis Framework (SusAF) Results
 
 The sustainability evaluation of our game using the Sustainability Analysis Framework (SusAF) reveals strong performance across social, individual, environmental, economic, and technical dimensions. Socially, the game promotes user guidance through interfaces like GuideUI.js, supporting better decision-making and reducing waste. The animated LoadingUI.js improves user experience by easing wait anxiety. Educationally, the game fosters critical thinking, enhancing awareness of sustainability issues. On the individual level, it protects user privacy by avoiding data collection and improves autonomy by allowing level choice. It supports lifelong learning and encourages healthier gaming behaviors through reduced waste and better habits. Environmentally, functions like preload() and draw() optimize resources through lazy loading and frame rate control, reducing power consumption. These are complemented by efficient checks like isTouching(), contributing to lower carbon emissions. Economically, user retention is improved through rewarding mechanisms, while modular code design enables cost-effective scalability and potential monetization. Technically, the modular design supports easy maintenance and security, setting a foundation for scalable green software development and promoting adherence to technical standards. Overall, the game balances immediate, enabling, and systemic sustainability impacts effectively.
 
@@ -643,7 +668,7 @@ To further embed sustainability into our project, we implemented Sustainability 
   <img src="https://github.com/UoB-COMSM0166/2025-group-22/blob/main/images/sustainability_awareness_diagram.png" width="550">
 </p>
 <p align="center">
-  <strong>Figure 4</strong><br>
+  <strong>Figure 5</strong><br>
   Sustainability Awareness Diagram
 </p>
 
